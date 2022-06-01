@@ -3,11 +3,12 @@
 
 Find the NFT Application here: [NFT Gallery](https://sei44-nft-gallery.herokuapp.com/)
 
+
 ## Development Team
-- [Anthony](https://www.linkedin.com/in/anthony-vanoni/)  
-- [Tiffany](https://www.linkedin.com/in/tiffany-lam-8b101724/)  
-- [Tatsiana](https://www.linkedin.com/in/tatsiana-prokharchyk)  
-- [Marianne](https://www.linkedin.com/in/marianne-salamanca-badilla/) 
+- [Anthony](https://www.linkedin.com/in/anthony-vanoni/)
+- [Tiffany](https://www.linkedin.com/in/tiffany-lam-8b101724/)
+- [Tatsiana](https://www.linkedin.com/in/tatsiana-prokharchyk)
+- [Marianne](https://www.linkedin.com/in/marianne-salamanca-badilla/)
 
 ## Features
 #### Login and Sign Up using Django's built in authentication
@@ -33,14 +34,14 @@ Find the NFT Application here: [NFT Gallery](https://sei44-nft-gallery.herokuapp
 ## Technology
 This application uses full CRUD operation and was created using Django, ERD created using [Whimsical](https://whimsical.com/nft-gallery-FoscsCUiVNquLtWP7YJdzM), designed on [Figma](https://www.figma.com/file/LM2YZavOxZiU9QRfAx7KSB/NFT-Marketplace?node-id=0%3A1) and managed using [Trello](https://trello.com/b/FoG6gB4l/nft-application).
 
-- Python  
-- Django  
+- Python
+- Django
 - SQL
 - Amazon AWS Photobucket
 - Materialize CSS
 - Heroku
 
-## Next Steps 
+## Next Steps
 - To be able to transfer NFT ownership from the seller to buyer
 - Include a view count
 - Create a wallet feature where funds will be removed and added
