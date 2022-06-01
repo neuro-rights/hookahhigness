@@ -123,3 +123,7 @@ p #id_bidprice {
 .errorlist li {
     color: #79bedb;
 }
+
+header {
+    margin-bottom: 20px;
+}
