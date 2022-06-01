@@ -15,11 +15,12 @@ footer.page-footer {
     text-align: right;
 }
 
-nav.nav-extended{
+nav.nav-extended {
     background-color: #45A29E;
 }
 
-h1 {
+h1,
+h2 {
     color: #66FCF1;
 }
 
@@ -71,7 +72,7 @@ label {
     font-size: 15px;
 }
 
-nav a:hover{
+nav a:hover {
     color: #fcba03;
 }
 
@@ -86,17 +87,17 @@ li form {
 }
 
 #search {
-    border:none;
-    background-color:transparent;
-    outline:none;
+    border: none;
+    background-color: transparent;
+    outline: none;
 }
 
 label {
     color: white;
 }
 
-.nonft{
-    color:white;
+.nonft {
+    color: white;
 }
 
 #searchbar {
@@ -122,4 +123,3 @@ p #id_bidprice {
 .errorlist li {
     color: #79bedb;
 }
-
