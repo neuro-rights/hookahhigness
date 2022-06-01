@@ -120,6 +120,10 @@ p #id_bidprice {
     color: #c5dbd9;
 }
 
+ul li {
+    color: greenyellow;
+}
+
 .errorlist li {
     color: #79bedb;
 }
