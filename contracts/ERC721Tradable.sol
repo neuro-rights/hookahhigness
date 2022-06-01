@@ -2,12 +2,12 @@
 
 pragma solidity ^0.8.0;
 
-import "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
-import "openzeppelin-solidity/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "openzeppelin-solidity/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "openzeppelin-solidity/contracts/access/Ownable.sol";
-import "openzeppelin-solidity/contracts/utils/math/SafeMath.sol";
-import "openzeppelin-solidity/contracts/utils/Strings.sol";
+import "OpenZeppelin/openzeppelin-contracts@4.6.0/contracts/token/ERC721/ERC721.sol";
+import "OpenZeppelin/openzeppelin-contracts@4.6.0/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "OpenZeppelin/openzeppelin-contracts@4.6.0/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "OpenZeppelin/openzeppelin-contracts@4.6.0/contracts/access/Ownable.sol";
+import "OpenZeppelin/openzeppelin-contracts@4.6.0/contracts/utils/math/SafeMath.sol";
+import "OpenZeppelin/openzeppelin-contracts@4.6.0/contracts/utils/Strings.sol";
 
 import "./common/meta-transactions/ContentMixin.sol";
 import "./common/meta-transactions/NativeMetaTransaction.sol";
@@ -113,7 +113,7 @@ abstract contract ERC721Tradable is
     function isApprovedForAll(address owner, address operator)
         public
         view
-        override
+        override(ERC721, IERC721)
         returns (bool)
     {
         // Whitelist OpenSea proxy contract for easy trading.
