@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% if object %}
-    <h1>EDIT <span class="teal-text">'{{nft.nft_name}}'</span></h1>
-  {% else %}
-    <h1>CREATE NFT</h1>
-  {% endif %}
-  <form action="" method="post">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit!" class="btn">
-  </form>
+{% if object %}
+<h2>EDIT <span class="teal-text">'{{nft.nft_name}}'</span></h2>
+{% else %}
+<h2>CREATE NFT</h2>
+{% endif %}
+<form action="" method="post">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <input type="submit" value="Submit!" class="btn">
+</form>
 {% endblock %}

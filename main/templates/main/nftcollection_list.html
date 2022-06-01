@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>ALL NFT COLLECTIONS</h1>
+<h2>ALL NFT COLLECTIONS</h2>
 
 {% for collection in nftcollection_list %}
 <a href="{% url 'collection_detail' collection.id %}">
