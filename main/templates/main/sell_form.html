@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+
+    <h1>SELL AN NFT</h1>
+  <form action='' method="post">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit!" class="btn">
+  </form>
+<!-- Date Picker -->
+  <script>
+    var dateEl = document.getElementById('id_sale_ends');
+    M.Datepicker.init(dateEl, {
+      format: 'yyyy-mm-dd',
+      defaultDate: new Date(),
+      setDefaultDate: true,
+      autoClose: true
+    });
+  </script>
+{% endblock %}

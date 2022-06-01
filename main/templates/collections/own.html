@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>OWN NFT COLLECTIONS</h1>
+
+{% for collection in collection_list %}
+<a href="{% url 'collection_detail' collection.id %}">
+    <div class="card">
+        <div class="card-content">
+            <h2 class="card-title">{{ collection.name }}</h2>
+            <p><small>{{ collection.description }}</small></p>
+            <p><small>{{ collection.blockchain }}</small></p>
+            <p><small>{{ collection.token_id }}</small></p>
+        </div>
+    </div>
+</a>
+
+{% endfor %} {% endblock %}

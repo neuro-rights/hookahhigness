@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>NFT'S FOR SALE</h1>
+
+{% for nft in nfts_list %}
+{% for sell in nft.sell_set.all %}
+<a href="{% url 'nft_detail' nft.id %}">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-img-container">
+                {% for photo in nft.photo_set.all %}
+                <div class="teal-text">
+                    <h5>FOR SALE</h5>
+                </div>
+                <img class="responsive-img card-panel" src="{{photo.url}}"> {% empty %}
+                <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+                {% endfor %}
+            </div>
+            <h2 class="card-title">{{ nft.nft_name }}</h2>
+            <p><small>{{ nft.token_id }}</small></p>
+            <a href="{% url 'nft_edit' nft.id %}" class="waves-effect waves-light btn-small">EDIT</a>
+        </div>
+    </div>
+</a>
+{% endfor %}{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>DELETE NFT COLLECTION</h1>
+
+<h4 class="header-text">Are you sure you want to delete <span class="teal-text">'{{ nftcollection.name }}'</span>?</h4>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Yes - Delete!" class="btn">
+
+</form>
+{% endblock %}

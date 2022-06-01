@@ -1,0 +1,125 @@
+body {
+    background-color: #1F2833;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: 'Roboto Mono', monospace;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer.page-footer {
+    padding-top: 0;
+    text-align: right;
+}
+
+nav.nav-extended{
+    background-color: #45A29E;
+}
+
+h1 {
+    color: #66FCF1;
+}
+
+.card-title {
+    margin-top: 5px;
+    color: #1F2833;
+}
+
+.card {
+    width: 500px;
+    border-radius: 15px;
+    background-color: #C5C6C7;
+}
+
+.classone,
+.classtwo {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bidcard {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.btn-small {
+    margin-top: 10px;
+}
+
+nav .nav-wrapper {
+    background-color: #0B0C10;
+    height: 100%;
+}
+
+.page-footer {
+    background-color: #45A29E;
+}
+
+nav .brand-logo {
+    font-size: 2.4rem;
+    color: #C5C6C7;
+}
+
+nav ul a {
+    font-size: 1.2rem;
+}
+
+label {
+    font-size: 15px;
+}
+
+nav a:hover{
+    color: #fcba03;
+}
+
+input,
+textarea {
+    color: #fcba03;
+}
+
+li form {
+    display: flex;
+    margin-right: 25px;
+}
+
+#search {
+    border:none;
+    background-color:transparent;
+    outline:none;
+}
+
+label {
+    color: white;
+}
+
+.nonft{
+    color:white;
+}
+
+#searchbar {
+    margin: 0 0 0 45px;
+}
+
+#searchbar::placeholder {
+    color: white;
+}
+
+#welcome {
+    color: #C5C6C7;
+}
+
+p #id_bidprice {
+    color: black;
+}
+
+.header-text {
+    color: #c5dbd9;
+}
+
+.errorlist li {
+    color: #79bedb;
+}
+

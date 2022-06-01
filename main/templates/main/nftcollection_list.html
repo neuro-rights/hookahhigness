@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>ALL NFT COLLECTIONS</h1>
+
+{% for collection in nftcollection_list %}
+<a href="{% url 'collection_detail' collection.id %}">
+    <div class="container teal darken-2">
+        <div class="row">
+            <div class="col s12">
+                <h2>{{ collection.name }}</h2>
+                <p><small>{{ collection.description }}</small></p>
+                <p><small>{{ collection.blockchain }}</small></p>
+                <p><small>{{ collection.token_id }}</small></p>
+            </div>
+        </div>
+    </div>
+</a>
+{% endfor %} {% endblock %}
