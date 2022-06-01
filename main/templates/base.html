@@ -58,15 +58,6 @@
             </div>
         </nav>
     </header>
-    <div class="container-fixed">
-        <ul class="right">
-            <li class="search">
-                <form action="{% url 'search_result' %}" method="get">
-                    <input id=searchbar type="search" placeholder="Search NFTs" name='searched'>
-                    <button id="search" class="material-icons white-text" type="submit">search</button>
-                </form>
-            </li>
-    </div>
     <main class="container">
         {% block content %} {% endblock %}
     </main>
