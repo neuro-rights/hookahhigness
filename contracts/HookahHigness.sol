@@ -4,16 +4,16 @@ pragma solidity ^0.8.0;
 import "./ERC721Tradable.sol";
 
 /**
- * @title MyNFT
- * MyNFT - My NFT contract.
+ * @title HOOKAHHIGNESS
+ * HookahHigness - HookahHigness contract.
  */
-contract HOOKAHHIGNESS is ERC721Tradable {
+contract HookahHigness is ERC721Tradable {
     uint256 public nextTokenId;
     address public admin;
 
     constructor(address _proxyRegistryAddress)
         public
-        ERC721Tradable("HOOKAHHIGNESS", "HH", _proxyRegistryAddress)
+        ERC721Tradable("HookahHigness", "HH", _proxyRegistryAddress)
     {
         admin = msg.sender;
     }
