@@ -5,30 +5,30 @@ from .models import Bid, Purchase, Sell, NFTCollection, Profile
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['user', 'wallet_address', 'wallet_private_key']
+        fields = ["user", "wallet_address", "wallet_private_key"]
         widgets = {
-            'wallet_address': forms.TextInput(attrs={'class': 'form-control'}),
-            'wallet_private_key': forms.TextInput(attrs={'class': 'form-control'})
+            "wallet_address": forms.TextInput(attrs={"class": "form-control"}),
+            "wallet_private_key": forms.TextInput(attrs={"class": "form-control"}),
         }
 
 
 class BidForm(forms.ModelForm):
     class Meta:
         model = Bid
-        fields = ['bid_price']
+        fields = ["bid_price"]
 
 
 class SellForm(forms.ModelForm):
     class Meta:
         model = Sell
-        fields = ['sale_ends', 'min_bid_price']
+        fields = ["sale_ends", "min_bid_price"]
 
 
 class NFTCollectionForm(forms.ModelForm):
     class Meta:
         model = NFTCollection
-        fields = ['name', 'description', 'blockchain']
+        fields = ["name", "description", "blockchain", "metadata_file", "metadata_dir_url"]
 
 
 class FileFieldForm(forms.Form):
-    file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={"multiple": True}))

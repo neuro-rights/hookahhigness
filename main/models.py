@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.signals import request_finished
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
 #
 import random
 import datetime
@@ -17,7 +18,7 @@ class NFT(models.Model):
     #
     id = models.AutoField(primary_key=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    likes = models.ManyToManyField(User, related_name='likes')
+    likes = models.ManyToManyField(User, related_name="likes")
     #
     nft_name = models.CharField(max_length=50)
     token_id = models.IntegerField(default=random_token)
@@ -29,30 +30,35 @@ class NFT(models.Model):
         return self.likes.count()
         form.instance.user = self.request.user
         return super().form_valid(form)
+
     #
     def __str__(self):
         return self.nft_name
+
     #
     def get_absolute_url(self):
-        return reverse('nft_detail', kwargs={'nft_id': self.id})
+        return reverse("nft_detail", kwargs={"nft_id": self.id})
 
 
 class NFTCollection(models.Model):
     #
     id = models.AutoField(primary_key=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    nfts = models.ManyToManyField(NFT, related_name='nfts')
+    token_id = models.IntegerField(default=random_token)
+    nfts = models.ManyToManyField(NFT, related_name="nfts")
     #
     name = models.CharField(max_length=50)
-    token_id = models.IntegerField(default=random_token)
     blockchain = models.CharField(max_length=10)
     description = models.TextField(blank=True)
+    metadata_file = models.FileField(upload_to="collections")
+    metadata_dir_url = models.URLField(max_length=200)
     #
     def __str__(self):
         return self.name
+
     #
     def get_absolute_url(self):
-        return reverse('collection_detail', kwargs={'collection_id': self.id})
+        return reverse("collection_detail", kwargs={"collection_id": self.id})
 
 
 class Bid(models.Model):
@@ -66,9 +72,10 @@ class Bid(models.Model):
     #
     def __str__(self):
         return f"{self.get_bid_price_display()} on {self.date}"
+
     #
     class Meta:
-        ordering = ('-bid_price',)
+        ordering = ("-bid_price",)
 
 
 class Purchase(models.Model):
@@ -107,5 +114,3 @@ class Profile(models.Model):
     #
     def __str__(self):
         return self.wallet_address
-
-

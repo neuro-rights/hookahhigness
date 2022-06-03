@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
 from .models import NFT, NFTCollection, Photo, Sell, Bid, Profile
+from django.core.exceptions import SuspiciousOperation
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
+from django.core import serializers
 
 # Import the login_required decorator
 from django.contrib.auth.decorators import login_required
@@ -18,11 +20,11 @@ import pprint
 import uuid
 
 import requests
+from requests import HTTPError
 import json
 import os
 from pathlib import Path
 import sys
-
 import logging
 
 from .utils.nft import NFTUtils
@@ -32,8 +34,6 @@ from .utils.contract import ContractUtils
 
 @login_required
 def add_photo(request, nft_id):
-    #
-
     # photo-file will be the "name" attribute on the <input type="file">
     photo_file = request.FILES.get("photo-file", None)
     #
@@ -47,51 +47,6 @@ def add_photo(request, nft_id):
             print("An error occurred uploading file to IPFS")
         #
         return redirect("nft_detail", nft_id=nft_id)
-
-
-@login_required
-def add_collection_metadata(request, collection_id):
-    #
-    if not request.collection_metadata_url:
-        print(json.dumps(request, indent=4))
-        exit(1)
-    #
-    metadata = json.loads(request.collection_metadata_url)
-    collection = NFTCollection.objects.get(id=collection_id)
-    #
-    # https://gateway.pinata.cloud/ipfs/QmX232ULoePr7nRBndq5Vj5kSmjAjuhdv5Gks2Uisnc3qc/_metadata.json
-    #
-    for f in metadata:
-        #
-        nft_image_uri = f.image
-        nft_meta_filename = "{}.json".format(Path(f.collection_metadata).stem)
-        nft_meta_dir = Path(request.collection_metadata_url).parents[0]
-        nft_meta_uri = os.path.join(nft_meta_dir, nft_meta_filename)
-        #
-        try:
-            nft = NFT(
-                nft_name="{}_{}".format(collection.name, counter),
-                description=collection.description,
-                blockchain=collection.blockchain,
-                creator_id=request.user.id,
-                metadata_uri=nft_meta_uri,
-            )
-            nft.save()
-            collection.nfts.add(nft)
-            print(nft.id)
-        except Exception as e:
-            print(e)
-        try:
-            photo = Photo(url=nft_image_uri, nft_id=nft.id)
-            photo.save()
-        except Exception as e:
-            print(e)
-    #
-    # paginator = Paginator(keywords, per_page=10)
-    # page_object = paginator.get_page(page)
-    # context = {"page_obj": page_object}
-
-    return render(request, "collections/detail.html", {"collection": collection})
 
 
 @login_required
@@ -139,40 +94,129 @@ def collection_detail(request, collection_id):
 def collection_index(request):
     #
     collections = NFTCollection.objects.all()
-    #
     return render(request, "main/nftcollection_list.html", {"collections": collections})
 
 
 class NFTCollectionCreate(LoginRequiredMixin, CreateView):
     """ """
 
+    form_class = NFTCollectionForm
     model = NFTCollection
-    fields = ["name", "description", "blockchain"]
+    fields = ["name", "description", "blockchain", "metadata_file", "metadata_dir_url"]
     template_name = "main/nftcollection_form.html"
     #
-    def get_success_url(self):
-        return reverse("collection_detail", kwargs={"collection_id": self.object.id})
 
-    #
-    def form_valid(self, form):
-        form.instance.creator = self.request.user
-        return super().form_valid(form)
+    def get(self, request, *args, **kwargs):
+        #
+        form = self.form_class()
+        return render(request, self.template_name, {"form": form})
+
+    def post(self, request, *args, **kwargs):
+        #
+        form = self.form_class(request.POST, request.FILES)
+        if not form.is_valid():
+            return render(request, self.template_name, {"form": form})
+        #
+        collection = form.save(commit=False)
+        collection.creator = request.user
+        collection.save()
+        print(collection.__dict__)
+        #
+        # https://gateway.pinata.cloud/ipfs/QmX232ULoePr7nRBndq5Vj5kSmjAjuhdv5Gks2Uisnc3qc/_metadata.json
+        #
+        counter = 0
+        print("Loading Metadata: ")
+        metadata = json.loads(collection.metadata_file.open("r").read())
+        print("Loaded Metadata: ")
+        for f in metadata:
+            # debug
+            print(counter)
+            if counter > 10:
+                break
+            #
+            nft_image_uri = f["image"]
+            nft_meta_filename = "{}.json".format(Path(nft_image_uri).stem)
+            nft_meta_uri = os.path.join(collection.metadata_dir_url, nft_meta_filename)
+            #
+            try:
+                nft = NFT(
+                    nft_name="{}_{}".format(collection.name, counter),
+                    description=collection.description,
+                    blockchain=collection.blockchain,
+                    creator_id=request.user.id,
+                    metadata_uri=nft_meta_uri,
+                )
+                nft.save()
+                collection.nfts.add(nft)
+                print("Adding new NFT to collection: " + nft.id)
+            except Exception as e:
+                print(e)
+            try:
+                photo = Photo(url=nft_image_uri, nft_id=nft.id)
+                photo.save()
+            except Exception as e:
+                print(e)
+            #
+            counter += 1
+        #
+        # return render(request, "collections/detail.html", {"collection_id": collection.id})
+        return redirect("/collections/all")
 
 
 class NFTCollectionEdit(LoginRequiredMixin, UpdateView):
     """ """
 
     model = NFTCollection
-    fields = ["name", "description", "blockchain"]
+    fields = ["name", "description", "blockchain", "metadata_file", "metadata_dir_url"]
     template_name = "main/nftcollection_form.html"
     #
-    def get_success_url(self):
-        return reverse("collection_detail", kwargs={"collection_id": self.object.id})
 
-    #
-    def form_valid(self, form):
-        form.instance.creator = self.request.user
-        return super().form_valid(form)
+    def get(self, request, *args, **kwargs):
+        #
+        form = self.form_class(self.object.id)
+        return render(request, self.template_name, {"form": form})
+
+    def post(self, request, *args, **kwargs):
+        #
+        form = self.form_class(request.POST)
+        if not form.is_valid():
+            return render(request, self.template_name, {"form": form})
+        #
+        print("Saving Collection: ")
+        collection = form.save()
+        #
+        # https://gateway.pinata.cloud/ipfs/QmX232ULoePr7nRBndq5Vj5kSmjAjuhdv5Gks2Uisnc3qc/_metadata.json
+        #
+        counter = 0
+        print("Loading Metadata: ")
+        metadata = json.loads(collection.metadata_file)
+        print("Loaded Metadata: ")
+        for f in metadata:
+            print(json.dumps(f, indent=4))
+            nft_image_uri = f.image
+            nft_meta_filename = "{}.json".format(Path(nft_image_uri).stem)
+            nft_meta_uri = os.path.join(collection.metadata_dir_url, nft_meta_filename)
+            #
+            try:
+                nft = NFT(
+                    nft_name="{}_{}".format(collection.name, counter),
+                    description=collection.description,
+                    blockchain=collection.blockchain,
+                    creator_id=request.user.id,
+                    metadata_uri=nft_meta_uri,
+                )
+                nft.save()
+                collection.nfts.add(nft)
+                print(nft.id)
+            except Exception as e:
+                print(e)
+            try:
+                photo = Photo(url=nft_image_uri, nft_id=nft.id)
+                photo.save()
+            except Exception as e:
+                print(e)
+        #
+        return reverse("collection_detail", kwargs={"collection_id": self.object.id})
 
 
 class NFTCollectionDelete(LoginRequiredMixin, DeleteView):
