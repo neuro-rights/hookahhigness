@@ -11,7 +11,7 @@
         <div class="card-content">
             <div class="card-img-container">
                 {% for photo in nft.photo_set.all %}
-                <img class="responsive-img card-panel" src="{{photo.url}}"> {% empty %}
+                <img class="responsive-img card-panel" src="{{photo.url}}" loading="lazy"> {% empty %}
                 <div class="card-panel teal-text center-align">No Photos Uploaded</div>
                 {% endfor %}
             </div>
