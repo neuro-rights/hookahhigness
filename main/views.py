@@ -26,13 +26,15 @@ import sys
 import logging
 
 from .utils.nft import NFTUtils
-from .utils.ipfs import IPFSUtils
+
 from .utils.contract import ContractUtils
 
 
 @login_required
 def add_photo(request, nft_id):
     #
+    from .utils.ipfs import IPFSUtils
+
     # photo-file will be the "name" attribute on the <input type="file">
     photo_file = request.FILES.get("photo-file", None)
     #
@@ -57,16 +59,16 @@ def add_collection_metadata(request, collection_id):
     #
     metadata = json.loads(request.collection_metadata_url)
     collection = NFTCollection.objects.get(id=collection_id)
-    counter = 0
-
+    #
     # https://gateway.pinata.cloud/ipfs/QmX232ULoePr7nRBndq5Vj5kSmjAjuhdv5Gks2Uisnc3qc/_metadata.json
     #
     for f in metadata:
+        #
         nft_image_uri = f.image
         nft_meta_filename = "{}.json".format(Path(f.collection_metadata).stem)
         nft_meta_dir = Path(request.collection_metadata_url).parents[0]
         nft_meta_uri = os.path.join(nft_meta_dir, nft_meta_filename)
-
+        #
         try:
             nft = NFT(
                 nft_name="{}_{}".format(collection.name, counter),
@@ -85,7 +87,6 @@ def add_collection_metadata(request, collection_id):
             photo.save()
         except Exception as e:
             print(e)
-        counter += 1
     #
     # paginator = Paginator(keywords, per_page=10)
     # page_object = paginator.get_page(page)
@@ -97,13 +98,12 @@ def add_collection_metadata(request, collection_id):
 @login_required
 def add_nfts(request, collection_id):
     #
+    from .utils.ipfs import IPFSUtils
+
     files = request.FILES.getlist("file_field")
     collection = NFTCollection.objects.get(id=collection_id)
     counter = 0
     ipfsutils = IPFSUtils()
-
-    # https://gateway.pinata.cloud/ipfs/QmX232ULoePr7nRBndq5Vj5kSmjAjuhdv5Gks2Uisnc3qc/_metadata.json
-    # https://gateway.pinata.cloud/ipfs/QmbL4rkkbW5AWG2RdM2PxA9PKnS78GoT7G8CuVQ3g2eg4H/
     #
     for f in files:
         url = ipfsutils.ipfs_upload(f)
