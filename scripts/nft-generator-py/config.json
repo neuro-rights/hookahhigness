@@ -1,0 +1,368 @@
+{
+  "layers": [
+    {
+      "name": "Base",
+      "values": [
+        "HHbase1"
+      ],
+      "trait_path": "./trait-layers/Base",
+      "filename": [
+        "HHbase1"
+      ],
+      "weights": [
+        1
+      ]
+    },
+    {
+      "name": "Beard",
+      "values": [
+        "HHbeard1",
+        "HHbeard2",
+        "HHbeard3",
+        "HHbeard4",
+        "HHbeard5",
+        "HHbeard6",
+        "HHbeard7",
+        "HHbeard8",
+        "HHbeard9",
+        "HHbeard10"
+      ],
+      "trait_path": "./trait-layers/Beard",
+      "filename": [
+        "HHbeard1",
+        "HHbeard2",
+        "HHbeard3",
+        "HHbeard4",
+        "HHbeard5",
+        "HHbeard6",
+        "HHbeard7",
+        "HHbeard8",
+        "HHbeard9",
+        "HHbeard10"
+      ],
+      "weights": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Brows",
+      "values": [
+        "HHbrow1",
+        "HHbrow2",
+        "HHbrow3",
+        "HHbrow4",
+        "HHbrow5",
+        "HHbrow6",
+        "HHbrow7",
+        "HHbrow8",
+        "HHbrow9"
+      ],
+      "trait_path": "./trait-layers/Brows",
+      "filename": [
+        "HHbrow1",
+        "HHbrow2",
+        "HHbrow3",
+        "HHbrow4",
+        "HHbrow5",
+        "HHbrow6",
+        "HHbrow7",
+        "HHbrow8",
+        "HHbrow9"
+      ],
+      "weights": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Glasses",
+      "values": [
+        "HHGlasses1056",
+        "HHGlasses1057",
+        "HHGlasses1058",
+        "HHGlasses1059",
+        "HHGlasses1060",
+        "HHGlasses1061",
+        "HHGlasses1062",
+        "HHGlasses1063",
+        "HHGlasses1064",
+        "HHGlasses1065"
+      ],
+      "trait_path": "./trait-layers/Glasses",
+      "filename": [
+        "HHGlasses1056",
+        "HHGlasses1057",
+        "HHGlasses1058",
+        "HHGlasses1059",
+        "HHGlasses1060",
+        "HHGlasses1061",
+        "HHGlasses1062",
+        "HHGlasses1063",
+        "HHGlasses1064",
+        "HHGlasses1065"
+      ],
+      "weights": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Headwear",
+      "values": [
+        "HHheadwear6264",
+        "HHheadwear6265",
+        "HHheadwear6266",
+        "HHheadwear6267",
+        "HHheadwear6268",
+        "HHheadwear6269",
+        "HHheadwear6270",
+        "HHheadwear6271",
+        "HHheadwear6272",
+        "HHheadwear6273",
+        "HHheadwear6274",
+        "HHheadwear6275",
+        "HHheadwear6276",
+        "HHheadwear6277",
+        "HHheadwear6278",
+        "HHheadwear6279",
+        "HHheadwear6280",
+        "HHheadwear6281",
+        "HHheadwear6282",
+        "HHheadwear6283",
+        "HHheadwear6284",
+        "HHheadwear6285",
+        "HHheadwear6286",
+        "HHheadwear6287",
+        "HHheadwear6288",
+        "HHheadwear6289",
+        "HHheadwear6290",
+        "HHheadwear6291",
+        "HHheadwear6292"
+      ],
+      "trait_path": "./trait-layers/Headwear",
+      "filename": [
+        "HHheadwear6264",
+        "HHheadwear6265",
+        "HHheadwear6266",
+        "HHheadwear6267",
+        "HHheadwear6268",
+        "HHheadwear6269",
+        "HHheadwear6270",
+        "HHheadwear6271",
+        "HHheadwear6272",
+        "HHheadwear6273",
+        "HHheadwear6274",
+        "HHheadwear6275",
+        "HHheadwear6276",
+        "HHheadwear6277",
+        "HHheadwear6278",
+        "HHheadwear6279",
+        "HHheadwear6280",
+        "HHheadwear6281",
+        "HHheadwear6282",
+        "HHheadwear6283",
+        "HHheadwear6284",
+        "HHheadwear6285",
+        "HHheadwear6286",
+        "HHheadwear6287",
+        "HHheadwear6288",
+        "HHheadwear6289",
+        "HHheadwear6290",
+        "HHheadwear6291",
+        "HHheadwear6292"
+      ],
+      "weights": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Mouth",
+      "values": [
+        "HHmouth1"
+      ],
+      "trait_path": "./trait-layers/Mouth",
+      "filename": [
+        "HHmouth1"
+      ],
+      "weights": [
+        1
+      ]
+    },
+    {
+      "name": "Nose",
+      "values": [
+        "HHNose1037",
+        "HHNose1038",
+        "HHNose1039",
+        "HHNose1040",
+        "HHNose1041",
+        "HHNose1042",
+        "HHNose1043",
+        "HHNose1044",
+        "HHNose10377",
+        "HHNose10388",
+        "HHNose10399",
+        "HHNose10400",
+        "HHNose10411",
+        "HHNose10422",
+        "HHNose10433",
+        "HHNose10444"
+      ],
+      "trait_path": "./trait-layers/Nose",
+      "filename": [
+        "HHNose1037",
+        "HHNose1038",
+        "HHNose1039",
+        "HHNose1040",
+        "HHNose1041",
+        "HHNose1042",
+        "HHNose1043",
+        "HHNose1044",
+        "HHNose10377",
+        "HHNose10388",
+        "HHNose10399",
+        "HHNose10400",
+        "HHNose10411",
+        "HHNose10422",
+        "HHNose10433",
+        "HHNose10444"
+      ],
+      "weights": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Shisha",
+      "values": [
+        "HHShisha1045",
+        "HHShisha1046",
+        "HHShisha1047",
+        "HHShisha1048",
+        "HHShisha1049",
+        "HHShisha1050",
+        "HHShisha1051",
+        "HHShisha1052",
+        "HHShisha1053",
+        "HHShisha1054",
+        "HHShisha1055"
+      ],
+      "trait_path": "./trait-layers/Shisha",
+      "filename": [
+        "HHShisha1045",
+        "HHShisha1046",
+        "HHShisha1047",
+        "HHShisha1048",
+        "HHShisha1049",
+        "HHShisha1050",
+        "HHShisha1051",
+        "HHShisha1052",
+        "HHShisha1053",
+        "HHShisha1054",
+        "HHShisha1055"
+      ],
+      "weights": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Skin",
+      "values": [
+        "HHskin1",
+        "HHskin2",
+        "HHskin3"
+      ],
+      "trait_path": "./trait-layers/Skin",
+      "filename": [
+        "HHskin1",
+        "HHskin2",
+        "HHskin3"
+      ],
+      "weights": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "incompatibilities": [],
+  "baseURI": ".",
+  "name": "HH #",
+  "description": "Hookah Higness NFT series."
+}

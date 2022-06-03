@@ -54,6 +54,9 @@ def add_nfts(request, collection_id):
     collection = NFTCollection.objects.get(id=collection_id)
     counter = 0
     ipfsutils = IPFSUtils()
+
+    # https://gateway.pinata.cloud/ipfs/QmX232ULoePr7nRBndq5Vj5kSmjAjuhdv5Gks2Uisnc3qc/_metadata.json
+    # https://gateway.pinata.cloud/ipfs/QmbL4rkkbW5AWG2RdM2PxA9PKnS78GoT7G8CuVQ3g2eg4H
     #
     for f in files:
         url = ipfsutils.ipfs_upload(f)
