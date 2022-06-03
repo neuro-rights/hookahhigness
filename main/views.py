@@ -26,14 +26,13 @@ import sys
 import logging
 
 from .utils.nft import NFTUtils
-
+from .utils.ipfs import IPFSUtils
 from .utils.contract import ContractUtils
 
 
 @login_required
 def add_photo(request, nft_id):
     #
-    from .utils.ipfs import IPFSUtils
 
     # photo-file will be the "name" attribute on the <input type="file">
     photo_file = request.FILES.get("photo-file", None)
@@ -98,8 +97,6 @@ def add_collection_metadata(request, collection_id):
 @login_required
 def add_nfts(request, collection_id):
     #
-    from .utils.ipfs import IPFSUtils
-
     files = request.FILES.getlist("file_field")
     collection = NFTCollection.objects.get(id=collection_id)
     counter = 0
