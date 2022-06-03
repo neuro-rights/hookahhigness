@@ -55,6 +55,9 @@
             <form action="{% url 'add_collection_metadata' collection.id %}" enctype="multipart/form-data"
                 method="POST">
                 {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
                 <input type="text" id="collection_metadata" name="collection_metadata">
                 <br><br>
                 <input type="submit" class="btn" value="NFT Collection Metadata URL">
