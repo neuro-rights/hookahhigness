@@ -87,6 +87,10 @@ def add_collection_metadata(request, collection_id):
             print(e)
         counter += 1
     #
+    # paginator = Paginator(keywords, per_page=10)
+    # page_object = paginator.get_page(page)
+    # context = {"page_obj": page_object}
+
     return render(request, "collections/detail.html", {"collection": collection})
 
 
@@ -184,6 +188,7 @@ class NFTCollectionDelete(LoginRequiredMixin, DeleteView):
 class NFTCollectionList(ListView):
     """ """
 
+    paginate_by = 10
     model = NFTCollection
 
 
@@ -227,6 +232,7 @@ class NFTDelete(LoginRequiredMixin, DeleteView):
 class NFTList(ListView):
     """ """
 
+    paginate_by = 10
     model = NFT
 
 
