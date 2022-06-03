@@ -60,6 +60,15 @@
                 <br><br>
                 <input type="submit" class="btn" value="Bulk Upload NFTS">
             </form>
+            <form action="{% url 'add_collection_metadata' collection.id %}" enctype="multipart/form-data"
+                method="POST">
+                {% csrf_token %}
+                <input type="text" id="collection_metadata" name="collection_metadata" hidden />
+                <input type="submit" />
+                <br><br>
+                <input type="submit" class="btn" value="NFT Collection Metadata URL">
+            </form>
+
             <a href="{% url 'collection_edit' collection.id %}" class="waves-effect waves-light btn-small">Edit</a>
             <a href="{% url 'collection_delete' collection.id %}" class="waves-effect waves-light btn-small">Delete</a>
             {% endif %}

@@ -20,6 +20,7 @@ import uuid
 import requests
 import json
 import os
+from pathlib import Path
 import sys
 
 import logging
@@ -48,6 +49,48 @@ def add_photo(request, nft_id):
 
 
 @login_required
+def add_collection_metadata(request, collection_id):
+    #
+    if not request.collection_metadata_url:
+        print(json.dumps(request, indent=4))
+        exit(1)
+    #
+    metadata = json.loads(request.collection_metadata_url)
+    collection = NFTCollection.objects.get(id=collection_id)
+    counter = 0
+
+    # https://gateway.pinata.cloud/ipfs/QmX232ULoePr7nRBndq5Vj5kSmjAjuhdv5Gks2Uisnc3qc/_metadata.json
+    #
+    for f in metadata:
+        nft_image_uri = f.image
+        nft_meta_filename = "{}.json".format(Path(f.collection_metadata).stem)
+        nft_meta_dir = Path(request.collection_metadata_url).parents[0]
+        nft_meta_uri = os.path.join(nft_meta_dir, nft_meta_filename)
+
+        try:
+            nft = NFT(
+                nft_name="{}_{}".format(collection.name, counter),
+                description=collection.description,
+                blockchain=collection.blockchain,
+                creator_id=request.user.id,
+                metadata_uri=nft_meta_uri,
+            )
+            nft.save()
+            collection.nfts.add(nft)
+            print(nft.id)
+        except Exception as e:
+            print(e)
+        try:
+            photo = Photo(url=nft_image_uri, nft_id=nft.id)
+            photo.save()
+        except Exception as e:
+            print(e)
+        counter += 1
+    #
+    return render(request, "collections/detail.html", {"collection": collection})
+
+
+@login_required
 def add_nfts(request, collection_id):
     #
     files = request.FILES.getlist("file_field")
@@ -56,7 +99,7 @@ def add_nfts(request, collection_id):
     ipfsutils = IPFSUtils()
 
     # https://gateway.pinata.cloud/ipfs/QmX232ULoePr7nRBndq5Vj5kSmjAjuhdv5Gks2Uisnc3qc/_metadata.json
-    # https://gateway.pinata.cloud/ipfs/QmbL4rkkbW5AWG2RdM2PxA9PKnS78GoT7G8CuVQ3g2eg4H
+    # https://gateway.pinata.cloud/ipfs/QmbL4rkkbW5AWG2RdM2PxA9PKnS78GoT7G8CuVQ3g2eg4H/
     #
     for f in files:
         url = ipfsutils.ipfs_upload(f)
