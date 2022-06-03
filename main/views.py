@@ -166,6 +166,7 @@ class NFTCollectionCreate(LoginRequiredMixin, CreateView):
 class NFTCollectionEdit(LoginRequiredMixin, UpdateView):
     """ """
 
+    form_class = NFTCollectionForm
     model = NFTCollection
     fields = ["name", "description", "blockchain", "metadata_file", "metadata_dir_url"]
     template_name = "main/nftcollection_form.html"
@@ -178,22 +179,20 @@ class NFTCollectionEdit(LoginRequiredMixin, UpdateView):
 
     def post(self, request, *args, **kwargs):
         #
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, request.FILES)
         if not form.is_valid():
             return render(request, self.template_name, {"form": form})
         #
-        print("Saving Collection: ")
         collection = form.save()
-        #
-        # https://gateway.pinata.cloud/ipfs/QmX232ULoePr7nRBndq5Vj5kSmjAjuhdv5Gks2Uisnc3qc/_metadata.json
+        # collection.nfts.delete()
+        print(collection.__dict__)
         #
         counter = 0
         print("Loading Metadata: ")
-        metadata = json.loads(collection.metadata_file)
+        metadata = json.loads(collection.metadata_file.open("r").read())
         print("Loaded Metadata: ")
         for f in metadata:
-            print(json.dumps(f, indent=4))
-            nft_image_uri = f.image
+            nft_image_uri = f["image"]
             nft_meta_filename = "{}.json".format(Path(nft_image_uri).stem)
             nft_meta_uri = os.path.join(collection.metadata_dir_url, nft_meta_filename)
             #
@@ -207,7 +206,7 @@ class NFTCollectionEdit(LoginRequiredMixin, UpdateView):
                 )
                 nft.save()
                 collection.nfts.add(nft)
-                print(nft.id)
+                print("Adding new NFT to collection: " + nft.id)
             except Exception as e:
                 print(e)
             try:
@@ -215,8 +214,10 @@ class NFTCollectionEdit(LoginRequiredMixin, UpdateView):
                 photo.save()
             except Exception as e:
                 print(e)
+            #
+            counter += 1
         #
-        return reverse("collection_detail", kwargs={"collection_id": self.object.id})
+        return redirect("/collections/all")
 
 
 class NFTCollectionDelete(LoginRequiredMixin, DeleteView):
