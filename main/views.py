@@ -7,6 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
 from django.core import serializers
+from django.core.paginator import Paginator
 
 # Import the login_required decorator
 from django.contrib.auth.decorators import login_required
@@ -86,15 +87,25 @@ def collection_detail(request, collection_id):
     #
     collection = NFTCollection.objects.get(id=collection_id)
     collection_nfts = collection.nfts.all()
+    paginator = Paginator(collection_nfts, 10)  # Show 10 contacts per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     #
-    return render(request, "collections/detail.html", {"collection": collection, "collection_nfts": collection_nfts})
+    return render(
+        request,
+        "collections/detail.html",
+        {"collection": collection, "collection_nfts": collection_nfts, "page_obj": page_obj},
+    )
 
 
 @login_required
 def collection_index(request):
     #
-    collections = NFTCollection.objects.all()
-    return render(request, "main/nftcollection_list.html", {"collections": collections})
+    collections_list = NFTCollection.objects.all()
+    paginator = Paginator(collections_list, 10)  # Show 10 contacts per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, "main/nftcollection_list.html", {"collections_list": collections_list, "page_obj": page_obj})
 
 
 class NFTCollectionCreate(LoginRequiredMixin, CreateView):
@@ -127,13 +138,8 @@ class NFTCollectionCreate(LoginRequiredMixin, CreateView):
         counter = 0
         print("Loading Metadata: ")
         metadata = json.loads(collection.metadata_file.open("r").read())
-        print("Loaded Metadata: ")
+        print("Loaded Metadata: {}".format(metadata))
         for f in metadata:
-            # debug
-            print(counter)
-            if counter > 10:
-                break
-            #
             nft_image_uri = f["image"]
             nft_meta_filename = "{}.json".format(Path(nft_image_uri).stem)
             nft_meta_uri = os.path.join(collection.metadata_dir_url, nft_meta_filename)
@@ -148,7 +154,7 @@ class NFTCollectionCreate(LoginRequiredMixin, CreateView):
                 )
                 nft.save()
                 collection.nfts.add(nft)
-                print("Adding new NFT to collection: " + nft.id)
+                print("Adding new NFT to collection: {}".format(nft.id))
             except Exception as e:
                 print(e)
             try:
@@ -206,7 +212,7 @@ class NFTCollectionEdit(LoginRequiredMixin, UpdateView):
                 )
                 nft.save()
                 collection.nfts.add(nft)
-                print("Adding new NFT to collection: " + nft.id)
+                print("Adding new NFT to collection: {}".format(nft.id))
             except Exception as e:
                 print(e)
             try:
@@ -308,16 +314,22 @@ def likeview(request, pk):
 def nft_own(request):
     #
     nfts_list = NFT.objects.filter(creator=request.user)
+    paginator = Paginator(nfts_list, 10)  # Show 10 contacts per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     #
-    return render(request, "nfts/own.html", {"nfts_list": nfts_list})
+    return render(request, "nfts/own.html", {"nfts_list": nfts_list, "page_obj": page_obj})
 
 
 @login_required
 def collection_own(request):
     #
-    collection_list = NFTCollection.objects.filter(creator=request.user)
+    collections_list = NFTCollection.objects.filter(creator=request.user)
+    paginator = Paginator(collections_list, 10)  # Show 10 contacts per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     #
-    return render(request, "collections/own.html", {"collection_list": collection_list})
+    return render(request, "collections/own.html", {"collections_list": collections_list, "page_obj": page_obj})
 
 
 def signup(request):
@@ -361,9 +373,9 @@ def settings(request):
 
 def home(request):
     #
-    collections = NFTCollection.objects.all()
+    collections_list = NFTCollection.objects.all()
     nfts_list = NFT.objects.all()
-    return render(request, "home.html", {"collections": collections, "nfts_list": nfts_list})
+    return render(request, "home.html", {"collections_list": collections_list, "nfts_list": nfts_list})
 
 
 def search_result(request):

@@ -56,6 +56,10 @@ class NFTCollection(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def get_random_nft(self):
+        return self.nfts.order_by("?").first()
+
     #
     def get_absolute_url(self):
         return reverse("collection_detail", kwargs={"collection_id": self.id})

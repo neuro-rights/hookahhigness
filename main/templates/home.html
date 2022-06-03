@@ -1,12 +1,58 @@
 {% extends 'base.html' %} {% block content %}
 
-
-
-<div class="collection">
-    {% for collection in collections %}
-    <a href="{% url 'collection_detail' collection.id %}" class="collection-item">{{ collection.name }}</a>
+<ul class="collection">
+    {% for collection in collections_list %}
+    <li class="collection-item avatar">
+        {% for photo in collection_get_random_nft.photo_set.all %}
+        <img src="{{ photo.url }}" alt="" class="circle">
+        {% endfor %}
+        <span class="title">{{ collection.name }}</span>
+        {{ collection.description }}
+        <p>{{ collection.description }}</p>
+        <p>{{ collection.blockchain }}</p>
+        <p>{{ collection.token_id }}</p>
+        <a href="{% url 'collection_detail' collection.id %}" class="secondary-content"><i
+                class="material-icons">grade</i></a>
+    </li>
     {% endfor %}
-</div>
+</ul>
 
+
+{% for nft in collection_nfts %}
+<a href="{% url 'nft_detail' nft.id %}">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-img-container">
+                {% for photo in nft.photo_set.all %}
+                <img class="responsive-img card-panel" src="{{photo.url}}" loading="lazy"> {% empty %}
+                <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+                {% endfor %}
+            </div>
+            <h2 class="card-title">{{ nft.nft_name }}</h2>
+            <p><small>{{ nft.token_id }}</small></p>
+            <a href="{% url 'nft_edit' nft.id %}" class="waves-effect waves-light btn-small">EDIT</a>
+        </div>
+    </div>
+</a>
+
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 
 {% endblock %}
