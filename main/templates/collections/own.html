@@ -2,16 +2,10 @@
 
 <h2>OWN NFT COLLECTIONS</h2>
 
-{% for collection in collection_list %}
-<a href="{% url 'collection_detail' collection.id %}">
-    <div class="card">
-        <div class="card-content">
-            <h2 class="card-title">{{ collection.name }}</h2>
-            <p><small>{{ collection.description }}</small></p>
-            <p><small>{{ collection.blockchain }}</small></p>
-            <p><small>{{ collection.token_id }}</small></p>
-        </div>
-    </div>
-</a>
+<div class="collection">
+    {% for collection in collection_list %}
+    <a href="{% url 'collection_detail' collection.id %}" class="collection-item">{{ collection.name }}</a>
+    {% endfor %}
+</div>
 
 {% endfor %} {% endblock %}
