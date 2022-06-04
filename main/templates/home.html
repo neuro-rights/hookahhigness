@@ -9,8 +9,10 @@
             <div class="row valign-wrapper">
                 <div class="col s12 m8 offset-m2 l6 offset-l3">
                     <div class="col s2">
-                        {% for photo in collection.get_random_nft.photo_set.all %}
+                        {% for nft in collection.get_random_nft_set.all %}
+                        {% for photo in nft.photo_set.all %}
                         <img src="{{ photo.url }}" alt="" class="thumbnail responsive-img">
+                        {% endfor %}
                         {% endfor %}
                     </div>
                     <div class="col s10">
