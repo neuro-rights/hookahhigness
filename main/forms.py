@@ -1,5 +1,5 @@
 from django import forms
-from .models import Bid, Purchase, Sell, NFTCollection, Profile
+from .models import Bid, Purchase, Sell, NFT, NFTCollection, Profile
 
 
 class ProfileForm(forms.ModelForm):
@@ -33,7 +33,7 @@ class NFTCollectionForm(forms.ModelForm):
 class NFTForm(forms.ModelForm):
     class Meta:
         model = NFTCollection
-        fields = ["nft_name", "token_id", "metadata_uri", "blockchain", "description"]
+        fields = ["nft_name", "description", "metadata_uri", "blockchain"]
 
 
 class FileFieldForm(forms.Form):
