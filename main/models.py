@@ -23,7 +23,7 @@ class NFT(models.Model):
     nft_name = models.CharField(max_length=50)
     token_id = models.IntegerField(default=random_token)
     metadata_uri = models.URLField(max_length=200)
-    blockchain = models.CharField(max_length=10)
+    blockchain = models.SelectField(max_length=10)
     description = models.TextField(blank=True)
     #
     def total_likes(self):

@@ -27,13 +27,13 @@ class SellForm(forms.ModelForm):
 class NFTCollectionForm(forms.ModelForm):
     class Meta:
         model = NFTCollection
-        fields = ["name", "description", "blockchain", "metadata_file", "metadata_dir_url"]
+        fields = ["name", "blockchain", "metadata_file", "metadata_dir_url", "description"]
 
 
 class NFTForm(forms.ModelForm):
     class Meta:
         model = NFT
-        fields = ["nft_name", "description", "metadata_uri", "blockchain"]
+        fields = ["nft_name", "metadata_uri", "blockchain", "description"]
 
 
 class FileFieldForm(forms.Form):
