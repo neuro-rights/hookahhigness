@@ -63,11 +63,14 @@
     {% if page_obj %}
     <div class="pagination">
         <span class="step-links">
+
             {% if page_obj.has_previous %}
             <a href="?page=1"><i class="material-icons">first_page</i></a>
             <a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">keyboard_arrow_left</i></a>
             {% endif%}
+
             <span class="current">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
             {% if page_obj.has_next %}
             <a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">keyboard_arrow_right</i></a>
             <a href="?page={{ page_obj.paginator.num_pages }}"><i class="material-icons">last_page</i></a>
@@ -75,8 +78,7 @@
 
             <hr>
             {% for page_number in page_obj.paginator.get_elided_page_range %}
-            {% if page_number == page_obj.paginator.ELLIPSIS %}
-            {{page_number}}
+            {% if page_number == page_obj.paginator.ELLIPSIS %} {{page_number}}
             {% else %}
             <a href="?page={{ page_obj.number }}"
                 class="{% if page_number == page_obj.number %}current{% endif %}">{{page_number}}</a>
