@@ -102,6 +102,11 @@ def add_nfts(request, collection_id):
 
 
 @login_required
+def add_nfts(request, collection_id):
+    pass
+
+
+@login_required
 def collection_detail(request, collection_id):
     #
     collection = NFTCollection.objects.get(id=collection_id)

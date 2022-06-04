@@ -13,6 +13,7 @@ urlpatterns = [
     path("collections/<int:collection_id>/", views.collection_detail, name="collection_detail"),
     path("collections/<int:pk>/edit/", views.NFTCollectionEdit.as_view(), name="collection_edit"),
     path("collections/<int:collection_id>/add_nfts/", views.add_nfts, name="add_nfts"),
+    path("collections/<int:collection_id>/add_raffle/", views.add_raffle, name="add_raffle),
     path("collections/<int:collection_id>/add_collection_metadata/", views.add_nfts, name="add_collection_metadata"),
     path("collections/<int:pk>/delete/", views.NFTCollectionDelete.as_view(), name="collection_delete"),
     path("nfts/create/", views.NFTCreate.as_view(), name="nft_create"),
