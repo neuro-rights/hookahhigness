@@ -8,6 +8,12 @@
 <h2>CREATE NFT COLLECTION</h2>
 {% endif %}
 
+<div class="progress">
+    <div class="determinate" style="width: 0%"></div>
+</div>
+
+{% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
+
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <table>

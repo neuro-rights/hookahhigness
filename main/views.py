@@ -332,6 +332,11 @@ def collection_own(request):
     return render(request, "collections/own.html", {"collections_list": collections_list, "page_obj": page_obj})
 
 
+@login_required
+def opensea(request):
+    pass
+
+
 def signup(request):
     #
     error_message = ""

@@ -29,6 +29,7 @@ urlpatterns = [
     path("like/<int:pk>", views.likeview, name="like_nft"),
     path("bids/<int:bid_id>/accept_bid/", views.accept_bid, name="accept_bid"),
     path("bids/<int:bid_id>/reject_bid/", views.reject_bid, name="reject_bid"),
+    path("opensea/", views.opensea, name="opensea"),
     # path('ajax/transaction_progress', views.transaction_progress, name='transaction_progress'),
     # path('ajax/upload_progress', views.upload_progress, name='upload_progress'),
 ]
