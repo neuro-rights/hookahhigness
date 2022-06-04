@@ -17,8 +17,11 @@
     <input id="submit" type="submit" value="Submit!" class="btn-small red darken-4">
 </form>
 
-<div class="progress">
+<div id="upload_progress" class="progress">
     <div class="determinate red darken-4" style="width: 0%"></div>
+    <div style="width:100%;overflow:auto">
+        <pre>Click submit to initiate upload...</pre>
+    </div>
 </div>
 {% endblock %}
 
