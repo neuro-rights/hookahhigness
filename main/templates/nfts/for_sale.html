@@ -6,17 +6,19 @@
 {% for sell in nft.sell_set.all %}
 <a href="{% url 'nft_detail' nft.id %}">
     <div class="card">
-        <div class="card-stacked">
-            <div class="card-content">
-                <div class="card-img-container">
-                    {% for photo in nft.photo_set.all %}
-                    <img class="responsive-img card-panel" src="{{photo.url}}" loading="lazy"> {% empty %}
-                    <div class="card-panel teal-text center-align">No Photos</div>
-                    {% endfor %}
-                </div>
-                <h2 class="card-title">{{ nft.nft_name }}</h2>
+        <div class="card-content">
+            <div class="card-img-container">
+                {% for photo in nft.photo_set.all %}
+                <img class="responsive-img card-panel" src="{{photo.url}}" loading="lazy"> {% empty %}
+                <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+                {% endfor %}
+                <h3 class="card-title">{{ nft.nft_name }}</h3>
+                <p class="card-title">{{ nft.description }}</p>
                 <p><small>{{ nft.token_id }}</small></p>
             </div>
+        </div>
+        <div class="card-action">
+            <a href="{% url 'nft_edit' nft.id %}" class="waves-effect waves-light btn-small">EDIT</a>
         </div>
     </div>
 </a>
