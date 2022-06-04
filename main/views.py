@@ -89,7 +89,16 @@ def collection_detail(request, collection_id):
     collection_nfts = collection.nfts.all()
     paginator = Paginator(collection_nfts, 10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    #
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        # if page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # if the page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
+    #
     page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page_number)
     #
     return render(
@@ -105,7 +114,16 @@ def collection_index(request):
     collections_list = NFTCollection.objects.all()
     paginator = Paginator(collections_list, 10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    #
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        # if page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # if the page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
+    #
     page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page_number)
     return render(request, "main/nftcollection_list.html", {"collections_list": collections_list, "page_obj": page_obj})
 
@@ -276,7 +294,16 @@ def nft_own(request):
     nfts_list = NFT.objects.filter(creator=request.user)
     paginator = Paginator(nfts_list, 10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    #
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        # if page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # if the page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
+    #
     page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page_number)
     #
     return render(request, "nfts/own.html", {"nfts_list": nfts_list, "page_obj": page_obj})
@@ -288,7 +315,16 @@ def collection_own(request):
     collections_list = NFTCollection.objects.filter(creator=request.user)
     paginator = Paginator(collections_list, 10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    #
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        # if page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # if the page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
+    #
     page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page_number)
     #
     return render(request, "collections/own.html", {"collections_list": collections_list, "page_obj": page_obj})
@@ -343,8 +379,18 @@ def home(request):
     collections_list = NFTCollection.objects.all()
     paginator = Paginator(collections_list, 10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    #
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        # if page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # if the page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
+    #
     page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page_number)
+
     return render(request, "home.html", {"collections_list": collections_list, "page_obj": page_obj})
 
 
@@ -355,7 +401,16 @@ def search_result(request):
         search_result = NFT.objects.filter(nft_name__contains=searched)
         paginator = Paginator(nfts_list, 10)  # Show 10 contacts per page.
         page_number = request.GET.get("page")
-        page_obj = paginator.get_page(page_number)
+        #
+        try:
+            page_obj = paginator.page(page_number)
+        except PageNotAnInteger:
+            # if page is not an integer, deliver the first page
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            # if the page is out of range, deliver the last page
+            page_obj = paginator.page(paginator.num_pages)
+        #
         page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page_number)
         return render(
             request,
@@ -453,6 +508,15 @@ def all_for_sale(request):
     nfts_list = NFT.objects.all()
     paginator = Paginator(nfts_list, 10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    #
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        # if page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # if the page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
+    #
     page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page_number)
     return render(request, "nfts/for_sale.html", {"nfts_list": nfts_list, "page_obj": page_obj})
