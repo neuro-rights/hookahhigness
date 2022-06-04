@@ -10,6 +10,8 @@
         <p>Blockchain: {{ collection.blockchain }}</p>
         <p>Token ID: {{ collection.token_id }}</p>
         {% if collection.creator == request.user %}
+        <a href="{% url 'add_raffle' collection.id %}" class="waves-effect waves-light btn-small cyan darken-4">ADD
+            RAFFLE</a>
         <a href="{% url 'collection_edit' collection.id %}"
             class="waves-effect waves-light btn-small teal darken-4">Edit</a>
         <a href="{% url 'collection_delete' collection.id %}" class="waves-effect waves-light btn-small red">Delete</a>
