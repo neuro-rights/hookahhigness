@@ -87,7 +87,7 @@ def collection_detail(request, collection_id):
     #
     collection = NFTCollection.objects.get(id=collection_id)
     collection_nfts = collection.nfts.all()
-    paginator = Paginator(collection_nfts, 10)  # Show 10 contacts per page.
+    paginator = Paginator(collection_nfts, per_page=10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
     #
     try:
@@ -112,7 +112,7 @@ def collection_detail(request, collection_id):
 def collection_index(request):
     #
     collections_list = NFTCollection.objects.all()
-    paginator = Paginator(collections_list, 10)  # Show 10 contacts per page.
+    paginator = Paginator(collections_list, per_page=10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
     #
     try:
@@ -292,7 +292,7 @@ def likeview(request, pk):
 def nft_own(request):
     #
     nfts_list = NFT.objects.filter(creator=request.user)
-    paginator = Paginator(nfts_list, 10)  # Show 10 contacts per page.
+    paginator = Paginator(nfts_list, per_page=10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
     #
     try:
@@ -313,7 +313,7 @@ def nft_own(request):
 def collection_own(request):
     #
     collections_list = NFTCollection.objects.filter(creator=request.user)
-    paginator = Paginator(collections_list, 10)  # Show 10 contacts per page.
+    paginator = Paginator(collections_list, per_page=10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
     #
     try:
@@ -377,7 +377,7 @@ def settings(request):
 def home(request):
     #
     collections_list = NFTCollection.objects.all()
-    paginator = Paginator(collections_list, 10)  # Show 10 contacts per page.
+    paginator = Paginator(collections_list, per_page=10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
     #
     try:
@@ -399,7 +399,7 @@ def search_result(request):
     if request.method == "GET":
         searched = request.GET["searched"]
         search_result = NFT.objects.filter(nft_name__contains=searched)
-        paginator = Paginator(nfts_list, 10)  # Show 10 contacts per page.
+        paginator = Paginator(nfts_list, per_page=10)  # Show 10 contacts per page.
         page_number = request.GET.get("page")
         #
         try:
@@ -506,7 +506,7 @@ def add_bid(request, nft_id):
 def all_for_sale(request):
     #
     nfts_list = NFT.objects.all()
-    paginator = Paginator(nfts_list, 10)  # Show 10 contacts per page.
+    paginator = Paginator(nfts_list, per_page=10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
     #
     try:
