@@ -67,16 +67,14 @@
             <a href="?page=1"><i class="material-icons">first_page</i></a>
             <a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">keyboard_arrow_left</i></a>
             {% endif%}
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.page_range }}.
-            </span>
+            <span class="current">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
             {% if page_obj.has_next %}
             <a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">keyboard_arrow_right</i></a>
             <a href="?page={{ page_obj.paginator.num_pages }}"><i class="material-icons">last_page</i></a>
             {% endif%}
 
             <hr>
-            {% for page_number in page_obj.paginator.page_range %}
+            {% for page_number in page_obj.paginator.get_elided_page_range %}
             {% if page_number == page_obj.paginator.ELLIPSIS %}
             {{page_number}}
             {% else %}
