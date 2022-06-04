@@ -267,7 +267,7 @@ class NFTDelete(LoginRequiredMixin, DeleteView):
 class NFTList(ListView):
     """ """
 
-    paginate_by = 25
+    # paginate_by = 25
     model = NFT
 
 
