@@ -3,14 +3,10 @@
 {% block content %}
 
 {% if object %}
-<h2>EDIT <span class="teal-text">{{collection.name}}</span></h2>
+<h2>EDIT <span class="teal-text">{{collection.name|upper}}</span></h2>
 {% else %}
 <h2>CREATE NFT COLLECTION</h2>
 {% endif %}
-
-<div class="progress">
-    <div class="determinate" style="width: 100%"></div>
-</div>
 
 {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
 <form action="" method="post" enctype="multipart/form-data">
@@ -20,4 +16,8 @@
     </table>
     <input type="submit" value="Submit!" class="btn">
 </form>
+
+<div class="progress">
+    <div class="determinate" style="width: 100%"></div>
+</div>
 {% endblock %}

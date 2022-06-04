@@ -2,7 +2,8 @@
 
 {% block content %}
 <h2>DELETE NFT COLLECTION</h2>
-<h4 class="header-text">Are you sure you want to delete <span class="teal-text">'{{ nftcollection.name }}'</span>?</h4>
+<h4 class="header-text">Are you sure you want to delete <span class="teal-text">'{{ nftcollection.name|upper }}'</span>?
+</h4>
 
 <form action="" method="POST">
     {% csrf_token %}

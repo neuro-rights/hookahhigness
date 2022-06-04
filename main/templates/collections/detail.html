@@ -1,15 +1,5 @@
 {% extends 'base.html' %}
 
-
-{% block javascript %}
-<script>
-    //init slider
-    $(document).ready(function () {
-        $('.carousel').carousel();
-    });
-</script>
-{% endblock %}
-
 {% block content %} {%load mathfilters%}
 <div class="collection">
     <div class="collection-item">
@@ -25,4 +15,13 @@
         {% endif %}
     </div>
 </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    //init slider
+    $(document).ready(function () {
+        $('.carousel').carousel();
+    });
+</script>
 {% endblock %}

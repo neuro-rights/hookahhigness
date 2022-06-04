@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% block content %}
 
-<h2>ALL {{ collections_list|length }} NFT COLLECTIONS</h2>
+<h4>{{ collections_list|length }} NFT COLLECTIONS</h4>
 
 {% for collection in collections_list %}
 <div class="collection">
     <div class="collection-item">
-        <p>{{collection.name}}</p>
+        <p>{{collection.name|upper}}</p>
         <p>Creator: {{ collection.creator }}</p>
         <p>Blockchain: {{ collection.blockchain }}</p>
         <p>Token ID: {{ collection.token_id }}</p>

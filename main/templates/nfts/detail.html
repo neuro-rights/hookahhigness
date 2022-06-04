@@ -1,53 +1,8 @@
 {% extends 'base.html' %}
 
-
-{% block javascript %}
-<script>
-    $("#accept").click(function () {
-        //
-        var bid_id = $(this).val();
-        //
-        $.ajax({
-            xhr: function () {
-                var xhr = new window.XMLHttpRequest();
-                xhr.upload.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        console.log(percentComplete);
-                        $('#transaction_progress').css({
-                            width: percentComplete * 100 + '%'
-                        });
-                        if (percentComplete === 1) {
-                            $('#transaction_progress').addClass('hide');
-                        }
-                    }
-                }, false);
-                xhr.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        console.log(percentComplete);
-                        $('#transaction_progress').css({
-                            width: percentComplete * 100 + '%'
-                        });
-                    }
-                }, false);
-                return xhr;
-            },
-            type: 'POST',
-            url: "/ajax/transaction_progress",
-            data: { 'bid': bid_id },
-            success: function (data) {
-                console.log("Transaction Complete!")
-            }
-        });
-    });
-</script>
-{% endblock %}
-
-
 {% block content %} {% load mathfilters %}
 
-<h2>{{nft.nft_name}}</h2>
+<h2>{{nft.nft_name|upper}}</h2>
 <div class="bidcard">
     <div class="card">
         <div class="card-content">
@@ -169,4 +124,47 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("#accept").click(function () {
+        //
+        var bid_id = $(this).val();
+        //
+        $.ajax({
+            xhr: function () {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function (evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total;
+                        console.log(percentComplete);
+                        $('#transaction_progress').css({
+                            width: percentComplete * 100 + '%'
+                        });
+                        if (percentComplete === 1) {
+                            $('#transaction_progress').addClass('hide');
+                        }
+                    }
+                }, false);
+                xhr.addEventListener("progress", function (evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total;
+                        console.log(percentComplete);
+                        $('#transaction_progress').css({
+                            width: percentComplete * 100 + '%'
+                        });
+                    }
+                }, false);
+                return xhr;
+            },
+            type: 'POST',
+            url: "/ajax/transaction_progress",
+            data: { 'bid': bid_id },
+            success: function (data) {
+                console.log("Transaction Complete!")
+            }
+        });
+    });
+</script>
 {% endblock %}

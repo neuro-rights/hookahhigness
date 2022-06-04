@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<h2>ALL {{ nft_list|length }} NFT'S</h2>
+<h4>{{ nft_list|length }} NFT'S</h4>
 
 {% for nft in nft_list %}
 <a href="{% url 'nft_detail' nft.id %}">
@@ -10,7 +10,7 @@
                 <div class="card-img-container">
                     {% for photo in nft.photo_set.all %}
                     <img class="responsive-img card-panel" src="{{photo.url}}" loading="lazy"> {% empty %}
-                    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+                    <div class="card-panel teal-text center-align">No Photos</div>
                     {% endfor %}
                 </div>
                 <h2 class="card-title">{{ nft.nft_name }}</h2>
