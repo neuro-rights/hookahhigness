@@ -391,7 +391,7 @@ def home(request):
         # if the page is out of range, deliver the last page
         page_obj = paginator.get_page(paginator.num_pages)
     #
-    page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page_number)
+    # page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page_number)
     #
     return render(request, "home.html", {"collections_list": collections_list, "page_obj": page_obj})
 
