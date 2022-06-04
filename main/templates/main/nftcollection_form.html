@@ -12,7 +12,7 @@
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% for field in form %}
-    <div class="fieldWrapper input-field {% if field.id_for_label == 'id_metadata_file'%}file-input{% endif %}">
+    <div class="fieldWrapper input-field {% if field.id_for_label == 'id_metadata_file'%}file-field{% endif %}">
         {{ field.errors }}
         {{ field.label_tag }} {{ field }}
         {% if field.help_text %}
