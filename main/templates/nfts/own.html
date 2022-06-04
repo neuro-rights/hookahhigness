@@ -2,7 +2,7 @@
 
 <h2>{{ request.user.username }} NFT'S</h2>
 
-<a href="{% url 'nft_create' %}">Create NFT</a>
+<a href="{% url 'nft_create' %}" class="waves-effect waves-light btn-small teal darken-4">Create NFT</a>
 
 {% for nft in nfts_list %}
 <a href="{% url 'nft_detail' nft.id %}">
