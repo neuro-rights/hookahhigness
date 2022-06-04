@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<h2>ALL NFT COLLECTIONS</h2>
+<h2>ALL {{ collections_list|length }} NFT COLLECTIONS</h2>
 
 {% for collection in collections_list %}
 <div class="collection">

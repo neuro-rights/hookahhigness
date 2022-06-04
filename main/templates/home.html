@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
+<h2>ALL {{ collections_list|length }} NFT COLLECTIONS</h2>
+
 <ul class="collection">
     {% for collection in collections_list %}
     <li class="collection-item avatar">
