@@ -5,16 +5,17 @@
 <h2>{{collection.name|upper}}</h2>
 <div class="collection">
     <div class="collection-item">
+        <p>Name: {{collection.name}}</p>
         <p>Creator: {{ collection.creator }}</p>
         <p>Blockchain: {{ collection.blockchain }}</p>
         <p>Token ID: {{ collection.token_id }}</p>
         {% if collection.creator == request.user %}
-        <a href="{% url 'add_raffle' collection.id %}" class="waves-effect waves-light btn-small indigo darken-4">ADD
+        <a href="{% url 'add_raffle' collection.id %}" class="waves-effect waves-light btn-small cyan darken-4">ADD
             RAFFLE</a>
         <a href="{% url 'collection_edit' collection.id %}"
-            class="waves-effect waves-light btn-small teal darken-4">EDIT</a>
+            class="waves-effect waves-light btn-small teal darken-4">Edit</a>
         <a href="{% url 'collection_delete' collection.id %}"
-            class="waves-effect waves-light btn-small red darken-4">DELETE</a>
+            class="waves-effect waves-light btn-small red darken-4">Delete</a>
         {% endif %}
     </div>
 </div>
