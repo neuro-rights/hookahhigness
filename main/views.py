@@ -107,6 +107,11 @@ def add_raffle(request, collection_id):
 
 
 @login_required
+def raffle_detail(request, raffle_id):
+    pass
+
+
+@login_required
 def collection_detail(request, collection_id):
     #
     collection = NFTCollection.objects.get(id=collection_id)
