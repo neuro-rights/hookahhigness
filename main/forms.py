@@ -32,7 +32,7 @@ class NFTCollectionForm(forms.ModelForm):
 
 class NFTForm(forms.ModelForm):
     class Meta:
-        model = NFTCollection
+        model = NFT
         fields = ["nft_name", "description", "metadata_uri", "blockchain"]
 
 
