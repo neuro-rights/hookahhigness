@@ -26,7 +26,7 @@ h2 {
 
 .card-title {
     margin-top: 5px;
-    color: #1F2833;
+    color: #00695c;
 }
 
 .card {
@@ -62,7 +62,7 @@ nav .nav-wrapper {
 }
 
 .page-footer {
-    background-color: #0B0C10;
+    background-color: #00695c;
 }
 
 nav .brand-logo {
@@ -127,7 +127,7 @@ p #id_bidprice {
 }
 
 .collection .collection-item {
-    background-color: #006064;
+    background-color: #00695c;
 }
 
 .collection .collection-item p,
