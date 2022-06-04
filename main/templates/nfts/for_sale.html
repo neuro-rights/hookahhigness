@@ -5,7 +5,7 @@
 {% for nft in nfts_list %}
 {% for sell in nft.sell_set.all %}
 <a href="{% url 'nft_detail' nft.id %}">
-    <div class="card small">
+    <div class="card horizontal">
         <div class="card-content">
             <div class="card-img-container">
                 {% for photo in nft.photo_set.all %}
