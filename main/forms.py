@@ -30,5 +30,11 @@ class NFTCollectionForm(forms.ModelForm):
         fields = ["name", "description", "blockchain", "metadata_file", "metadata_dir_url"]
 
 
+class NFTForm(forms.ModelForm):
+    class Meta:
+        model = NFTCollection
+        fields = ["nft_name", "token_id", "metadata_uri", "blockchain", "description"]
+
+
 class FileFieldForm(forms.Form):
     file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={"multiple": True}))
