@@ -2,6 +2,8 @@
 
 <h2>OWN NFT COLLECTIONS</h2>
 
+<a href="{% url 'collection_create' %}">Create Collection</a>
+
 <div class="collection">
     {% for collection in collections_list %}
     <a href="{% url 'collection_detail' collection.id %}" class="collection-item">{{ collection.name }}</a>

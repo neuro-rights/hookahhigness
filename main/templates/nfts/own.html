@@ -2,6 +2,8 @@
 
 <h2>{{ request.user.username }} NFT'S</h2>
 
+<a href="{% url 'nft_create' %}">Create NFT</a>
+
 {% for nft in nfts_list %}
 <a href="{% url 'nft_detail' nft.id %}">
     <div class="card horizontal">

@@ -120,13 +120,13 @@ p #id_bidprice {
     color: #c5dbd9;
 }
 
+.collection .collection-item {
+    background-color: darkslategray !important;
+}
+
 ul li,
 .helptext {
     color: greenyellow;
-}
-
-.collection-item {
-    background-color: #0B0C10;
 }
 
 .errorlist li {
