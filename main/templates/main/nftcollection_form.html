@@ -14,7 +14,15 @@
     <table>
         {{ form.as_table }}
     </table>
-    <input id="submit" type="submit" value="Submit!" class="btn-small red darken-4">
+    <div class="file-field input-field">
+        <div class="btn">
+            <span>File</span>
+            <input type="file">
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" placeholder="Upload one or more files">
+        </div>
+    </div>
 </form>
 
 <div id="upload_progress" class="progress">
