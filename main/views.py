@@ -102,7 +102,7 @@ def add_nfts(request, collection_id):
 
 
 @login_required
-def add_nfts(request, collection_id):
+def add_raffle(request, collection_id):
     pass
 
 
