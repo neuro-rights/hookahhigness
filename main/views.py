@@ -38,15 +38,15 @@ def get_page_obj(request, list_to_paginate, max_items_per_page):
     page_number = request.GET.get("page")
     #
     try:
-        page_obj = paginator.get_page(page_number)
+        page_obj = paginator.page(page_number)
     except PageNotAnInteger:
         # if page is not an integer, deliver the first page
-        page_obj = paginator.get_page(1)
+        page_obj = paginator.page(1)
     except EmptyPage:
         # if the page is out of range, deliver the last page
-        page_obj = paginator.get_page(paginator.num_pages)
+        page_obj = paginator.page(paginator.num_pages)
     #
-    page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page_number)
+    # page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page_number)
     #
     return page_obj
 
@@ -356,11 +356,7 @@ def search_result(request):
         searched = request.GET["searched"]
         search_result = NFT.objects.filter(nft_name__contains=searched)
         #
-        context = {
-            "searched": searched,
-            "search_result": search_result,
-            "page_obj": get_page_obj(request, search_results, 25),
-        }
+        context = {"searched": searched, "search_result": search_result}
         return render(request, "main/nft_search_result.html", context)
     else:
         return render(request, "main/nft_search_result.html")
