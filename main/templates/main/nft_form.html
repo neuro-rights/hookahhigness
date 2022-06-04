@@ -13,7 +13,7 @@
 <form action="" method="post">
   {% csrf_token %}
   {% for field in form %}
-  <div class="fieldWrapper input-field">
+  <div class="fieldWrapper input-field {% if field.type is 'file' %}file-field{% endif %}">
     {{ field.errors }}
     {{ field.label_tag }} {{ field }}
     {% if field.help_text %}
