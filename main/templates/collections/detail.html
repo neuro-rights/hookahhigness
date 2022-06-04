@@ -13,9 +13,9 @@
 
 {% block content %} {%load mathfilters%}
 
-<h2>{{collection.name}}</h2>
 <div class="collection">
     <div class="collection-item">
+        <p>{{collection.name}}</p>
         <p>Creator: {{ collection.creator }}</p>
         <p>Blockchain: {{ collection.blockchain }}</p>
         <p>Token ID: {{ collection.token_id }}</p>

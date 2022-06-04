@@ -2,9 +2,10 @@
 
 <h2>ALL NFT COLLECTIONS</h2>
 
-<h2>{{collection.name}}</h2>
+{% for collection in collections_list %}
 <div class="collection">
     <div class="collection-item">
+        <p>{{collection.name}}</p>
         <p>Creator: {{ collection.creator }}</p>
         <p>Blockchain: {{ collection.blockchain }}</p>
         <p>Token ID: {{ collection.token_id }}</p>
@@ -16,6 +17,7 @@
         {% endif %}
     </div>
 </div>
+{% endfor %}
 
 <div class="pagination">
     <span class="step-links">
