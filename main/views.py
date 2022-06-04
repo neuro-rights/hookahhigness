@@ -7,7 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
 from django.core import serializers
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Import the login_required decorator
 from django.contrib.auth.decorators import login_required
