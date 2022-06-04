@@ -7,7 +7,7 @@
 
 <form action="" method="POST">
   {% csrf_token %}
-  <input type="submit" value="Yes - Delete!" class="btn">
+  <input type="submit" value="Yes - Delete!" class="btn red">
   <a href="{% url 'nft_detail' nft.id %}">Cancel</a>
 </form>
 {% endblock %}
