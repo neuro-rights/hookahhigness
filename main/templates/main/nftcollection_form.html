@@ -11,9 +11,15 @@
 {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
+    {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
 </form>
 
 <div id="upload_progress" class="progress">
