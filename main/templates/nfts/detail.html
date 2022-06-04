@@ -75,6 +75,8 @@
             <p>Token ID: {{ nft.token_id }}</p>
             <p>Description: {{ nft.description }}</p>
             {% if nft.creator == request.user %}
+        </div>
+        <div class="card-action">
             <a href="{% url 'nft_edit' nft.id %}" class="waves-effect waves-light btn-small">Edit</a>
             <a href="{% url 'nft_delete' nft.id %}" class="waves-effect waves-light btn-small">Delete</a> {% endif %}
         </div>
