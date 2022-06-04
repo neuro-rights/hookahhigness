@@ -35,8 +35,12 @@
 <a href="?page={{ page_obj.page_obj.paginator.num_pages }}">▶️▶️</a>
 {% endif%}
 <hr>
-{% for page_number in page_obj.paginator.page_range %}
+{% for page_number in page_obj.adjusted_elided_pages %}
+{% if page_number == page_obj.paginator.ELLIPSIS %}
+{{page_number}}
+{% else %}
 <a href="?page={{ page_obj.number }}"
     class="{% if page_number == page_obj.number %}current{% endif %}">{{page_number}}</a>
+{% endif %}
 {% endfor %}
 {% endblock %}
