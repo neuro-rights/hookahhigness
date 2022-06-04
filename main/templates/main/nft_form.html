@@ -13,7 +13,7 @@
 <form action="" method="post">
   {% csrf_token %}
   {% for field in form %}
-  <div class="fieldWrapper input-field {{field.widget.input_type}}">
+  <div class="fieldWrapper input-field">
     {{ field.errors }}
     {{ field.label_tag }} {{ field }}
     {% if field.help_text %}
