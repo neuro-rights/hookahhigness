@@ -35,6 +35,12 @@ h2 {
     background-color: #C5C6C7;
 }
 
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
 .classone,
 .classtwo {
     display: flex;
@@ -121,7 +127,12 @@ p #id_bidprice {
 }
 
 .collection .collection-item {
-    background-color: darkslategray !important;
+    background-color: #45A29E;
+}
+
+.collection .collection-item p,
+.collection .collection-item span {
+    color: white;
 }
 
 ul li,

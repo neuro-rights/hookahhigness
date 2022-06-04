@@ -3,39 +3,9 @@
 
 {% block javascript %}
 <script>
-    $("#i_dont_know").change(function () {
-        var files_to_upload = $(this).val();
-        $.ajax({
-            xhr: function () {
-                var xhr = new window.XMLHttpRequest();
-                xhr.upload.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        console.log(percentComplete);
-                        $('#upload_progress').css({
-                            width: percentComplete * 100 + '%'
-                        });
-                        if (percentComplete === 1) {
-                            $('#upload_progress').addClass('hide');
-                        }
-                    }
-                }, false);
-                xhr.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        console.log(percentComplete);
-                        $('#upload_progress').css({
-                            width: percentComplete * 100 + '%'
-                        });
-                    }
-                }, false);
-                return xhr;
-            },
-            type: 'POST',
-            url: "/ajax/upload_progress",
-            data: { 'files': files_to_upload },
-            success: function (data) { }
-        });
+    //init slider
+    $(document).ready(function () {
+        $('.carousel').carousel();
     });
 </script>
 {% endblock %}
@@ -44,39 +14,20 @@
 {% block content %} {%load mathfilters%}
 
 <h2>{{collection.name}}</h2>
-<div class="bidcard">
-    <div class="card">
-        <div class="card-content">
-            <p>Creator: {{ collection.creator }}</p>
-            <p>Blockchain: {{ collection.blockchain }}</p>
-            <p>Token ID: {{ collection.token_id }}</p>
-            <p>Description: {{ collection.description }}</p>
-            {% if collection.creator == request.user %}
-            <a href="{% url 'collection_edit' collection.id %}" class="waves-effect waves-light btn-small">Edit</a>
-            <a href="{% url 'collection_delete' collection.id %}" class="waves-effect waves-light btn-small">Delete</a>
-            {% endif %}
-        </div>
+<div class="collection">
+    <div class="collection-item">
+        <p>Creator: {{ collection.creator }}</p>
+        <p>Blockchain: {{ collection.blockchain }}</p>
+        <p>Token ID: {{ collection.token_id }}</p>
+        {% if collection.creator == request.user %}
+        <a href="{% url 'collection_edit' collection.id %}"
+            class="waves-effect waves-light btn-small teal darken-4">Edit</a>
+        <a href="{% url 'collection_delete' collection.id %}"
+            class="waves-effect waves-light btn-small teal darken-4">Delete</a>
+        {% endif %}
     </div>
 </div>
 
-{% for nft in collection_nfts %}
-<a href="{% url 'nft_detail' nft.id %}">
-    <div class="card">
-        <div class="card-content">
-            <div class="card-img-container">
-                {% for photo in nft.photo_set.all %}
-                <img class="responsive-img card-panel" src="{{photo.url}}" loading="lazy"> {% empty %}
-                <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-                {% endfor %}
-            </div>
-            <h2 class="card-title">{{ nft.nft_name }}</h2>
-            <p><small>{{ nft.token_id }}</small></p>
-            <a href="{% url 'nft_edit' nft.id %}" class="waves-effect waves-light btn-small">EDIT</a>
-        </div>
-    </div>
-</a>
-
-{% endfor %}
 
 <div class="pagination">
     <span class="step-links">
