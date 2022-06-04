@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %} {%load mathfilters%}
+
+<h2>{{collection.name|upper}}</h2>
 <div class="collection">
     <div class="collection-item">
-        <p>{{collection.name}}</p>
         <p>Creator: {{ collection.creator }}</p>
         <p>Blockchain: {{ collection.blockchain }}</p>
         <p>Token ID: {{ collection.token_id }}</p>
@@ -17,6 +18,43 @@
         {% endif %}
     </div>
 </div>
+
+<h2>{{ nft_list|length }} NFT'S</h2>
+<ul class="collection">
+    {% for nft in nft_list %}
+    <li class="collection-item avatar">
+        <a href="{% url 'collection_detail' collection.id %}">
+            {% for photo in nft.photo_set.all %}
+            <div class="row valign-wrapper">
+                <div class="col s12 m8 offset-m2 l6 offset-l3">
+                    <div class="col s2">
+                        <img src="{{ photo.url }}" alt="" class="circle responsive-img">
+                    </div>
+                    {% endfor %}
+                    <div class="col s10">
+                        <span>{{ nft.name }}</span>
+                        <p>{{ nft.description }}</p>
+                        <p>{{ nft.blockchain }}</p>
+                        <p>{{ nft.token_id }}</p>
+                        <p class="secondary-content"><i class="material-icons">grade</i></p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+
+<h2>{{ raffle_list|length }} RAFFLES'S</h2>
+<ul class="collection">
+    {% for raffle in raffle_list %}
+    <li class="collection-item avatar">
+        <a href="{% url 'raffle_detail' raffle.id %}">
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+
 {% endblock %}
 
 {% block javascript %}
