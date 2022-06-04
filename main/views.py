@@ -210,7 +210,7 @@ class NFTCollectionDelete(LoginRequiredMixin, DeleteView):
 class NFTCollectionList(ListView):
     """ """
 
-    paginate_by = 10
+    paginate_by = 25
     model = NFTCollection
 
 
