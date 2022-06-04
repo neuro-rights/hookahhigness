@@ -6,18 +6,18 @@
     {% for collection in collections_list %}
     <li class="collection-item avatar">
         <a href="{% url 'collection_detail' collection.id %}">
-            {% for photo in collection.get_random_nft.photo_set.all %}
             <div class="row valign-wrapper">
                 <div class="col s12 m8 offset-m2 l6 offset-l3">
                     <div class="col s2">
+                        {% for photo in collection.get_random_nft.photo_set.all %}
                         <img src="{{ photo.url }}" alt="" class="thumbnail responsive-img">
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                     <div class="col s10">
-                        <span>{{ collection.name }}</span>
-                        <p>{{ collection.description }}</p>
-                        <p>{{ collection.blockchain }}</p>
-                        <p>{{ collection.token_id }}</p>
+                        <span>Name: {{ collection.name }}</span>
+                        <p>Description: {{ collection.description }}</p>
+                        <p>Blockchain: {{ collection.blockchain }}</p>
+                        <p>Token: {{ collection.token_id }}</p>
                         <p class="secondary-content"><i class="material-icons">grade</i></p>
                     </div>
                 </div>
