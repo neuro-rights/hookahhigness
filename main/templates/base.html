@@ -46,7 +46,7 @@
             </div>
             <ul class="left">
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'for_sale' %}">FOR SALE</a></li>
+                <li><a href="{% url 'for_sale' %}">MARKET</a></li>
             </ul>
             <ul class="right">
                 <li><a href="{% url 'nft_own' %}">Own NFT'S</a></li>
@@ -60,6 +60,29 @@
     <main class="container">
         {% block content %} {% endblock %}
     </main>
+    {% if page_obj %}
+    <div class="container">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">◀️◀️</a>
+        <a href="?page={{ page_obj.previous_page_number }}">◀️</a>
+        {% endif%}
+        <a>{{page_obj.number}} of {{page_obj.paginator.num_pages}}</a>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">▶️</a>
+        <a href="?page={{ page_obj.page_obj.paginator.num_pages }}">▶️▶️</a>
+        {% endif%}
+
+        <hr>
+        {% for page_number in page_obj.adjusted_elided_pages %}
+        {% if page_number == page_obj.paginator.ELLIPSIS %}
+        {{page_number}}
+        {% else %}
+        <a href="?page={{ page_obj.number }}"
+            class="{% if page_number == page_obj.number %}current{% endif %}">{{page_number}}</a>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
     <footer class="page-footer">
         <div class="right">All Rights Reserved, &copy; 2022 NFT Marketplace &nbsp;</div>
     </footer>
