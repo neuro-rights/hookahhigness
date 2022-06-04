@@ -21,7 +21,7 @@
                 {% csrf_token %}
                 <button type="submit" , name="nft_id" , value="{{ post.id }}"
                     class="waves-effect waves-light btn-small">
-                    Like <i class="material-icons">favorite</i></button>
+                    Like <i class="material-icons">like</i></button>
                 <br>
                 {{nft.total_likes}} Likes
             </form>
@@ -124,47 +124,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block javascript %}
-<script>
-    $("#accept").click(function () {
-        //
-        var bid_id = $(this).val();
-        //
-        $.ajax({
-            xhr: function () {
-                var xhr = new window.XMLHttpRequest();
-                xhr.upload.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        console.log(percentComplete);
-                        $('#transaction_progress').css({
-                            width: percentComplete * 100 + '%'
-                        });
-                        if (percentComplete === 1) {
-                            $('#transaction_progress').addClass('hide');
-                        }
-                    }
-                }, false);
-                xhr.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        console.log(percentComplete);
-                        $('#transaction_progress').css({
-                            width: percentComplete * 100 + '%'
-                        });
-                    }
-                }, false);
-                return xhr;
-            },
-            type: 'POST',
-            url: "/ajax/transaction_progress",
-            data: { 'bid': bid_id },
-            success: function (data) {
-                console.log("Transaction Complete!")
-            }
-        });
-    });
-</script>
 {% endblock %}
