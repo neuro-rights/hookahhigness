@@ -374,8 +374,10 @@ def settings(request):
 def home(request):
     #
     collections_list = NFTCollection.objects.all()
-    nfts_list = NFT.objects.all()
-    return render(request, "home.html", {"collections_list": collections_list, "nfts_list": nfts_list})
+    paginator = Paginator(collections_list, 10)  # Show 10 contacts per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, "home.html", {"collections_list": collections_list, "page_obj": page_obj})
 
 
 def search_result(request):
@@ -383,7 +385,14 @@ def search_result(request):
     if request.method == "GET":
         searched = request.GET["searched"]
         search_result = NFT.objects.filter(nft_name__contains=searched)
-        return render(request, "main/nft_search_result.html", {"searched": searched, "search_result": search_result})
+        paginator = Paginator(nfts_list, 10)  # Show 10 contacts per page.
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+        return render(
+            request,
+            "main/nft_search_result.html",
+            {"searched": searched, "search_result": search_result, "page_obj": page_obj},
+        )
     else:
         return render(request, "main/nft_search_result.html")
 
@@ -473,4 +482,7 @@ def add_bid(request, nft_id):
 def all_for_sale(request):
     #
     nfts_list = NFT.objects.all()
-    return render(request, "nfts/for_sale.html", {"nfts_list": nfts_list})
+    paginator = Paginator(nfts_list, 10)  # Show 10 contacts per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, "nfts/for_sale.html", {"nfts_list": nfts_list, "page_obj": page_obj})

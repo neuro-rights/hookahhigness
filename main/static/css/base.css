@@ -125,6 +125,10 @@ ul li,
     color: greenyellow;
 }
 
+.collection-item {
+    background-color: #0B0C10;
+}
+
 .errorlist li {
     color: #79bedb;
 }
