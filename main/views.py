@@ -172,58 +172,16 @@ class NFTCollectionCreate(LoginRequiredMixin, CreateView):
 class NFTCollectionEdit(LoginRequiredMixin, UpdateView):
     """ """
 
-    form_class = NFTCollectionForm
     model = NFTCollection
     fields = ["name", "description", "blockchain", "metadata_file", "metadata_dir_url"]
-    template_name = "main/nftcollection_form.html"
     #
+    def get_success_url(self):
+        return reverse("collection_detail", kwargs={"collection_id": self.object.id})
 
-    def get(self, request, *args, **kwargs):
-        #
-        form = self.form_class(self.object.id)
-        return render(request, self.template_name, {"form": form})
-
-    def post(self, request, *args, **kwargs):
-        #
-        form = self.form_class(request.POST, request.FILES)
-        if not form.is_valid():
-            return render(request, self.template_name, {"form": form})
-        #
-        collection = form.save()
-        # collection.nfts.delete()
-        print(collection.__dict__)
-        #
-        counter = 0
-        print("Loading Metadata: ")
-        metadata = json.loads(collection.metadata_file.open("r").read())
-        print("Loaded Metadata: ")
-        for f in metadata:
-            nft_image_uri = f["image"]
-            nft_meta_filename = "{}.json".format(Path(nft_image_uri).stem)
-            nft_meta_uri = os.path.join(collection.metadata_dir_url, nft_meta_filename)
-            #
-            try:
-                nft = NFT(
-                    nft_name="{}_{}".format(collection.name, counter),
-                    description=collection.description,
-                    blockchain=collection.blockchain,
-                    creator_id=request.user.id,
-                    metadata_uri=nft_meta_uri,
-                )
-                nft.save()
-                collection.nfts.add(nft)
-                print("Adding new NFT to collection: {}".format(nft.id))
-            except Exception as e:
-                print(e)
-            try:
-                photo = Photo(url=nft_image_uri, nft_id=nft.id)
-                photo.save()
-            except Exception as e:
-                print(e)
-            #
-            counter += 1
-        #
-        return redirect("/collections/all")
+    #
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
 
 
 class NFTCollectionDelete(LoginRequiredMixin, DeleteView):
