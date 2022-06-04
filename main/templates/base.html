@@ -73,7 +73,7 @@
         {% endif%}
 
         <hr>
-        {% for page_number in page_obj.adjusted_elided_pages %}
+        {% for page_number in page_obj.paginator.page_range %}
         {% if page_number == page_obj.paginator.ELLIPSIS %}
         {{page_number}}
         {% else %}
