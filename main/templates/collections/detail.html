@@ -27,26 +27,21 @@
         {% endif %}
     </div>
 </div>
+{% endblock %}
 
-
-<div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-        <a href="?page=1">&laquo; first</a>
-        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">next</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
-
-<code id="upload_progress"></code>
-
+{% block pagination %}
+{% if page_obj.has_previous %}
+<a href="?page=1">◀️◀️</a>
+<a href="?page={{ page_obj.previous_page_number }}">◀️</a>
+{% endif%}
+<a>{{page_obj.number}} of {{page_obj.paginator.num_pages}}</a>
+{% if page_obj.has_next %}
+<a href="?page={{ page_obj.next_page_number }}">▶️</a>
+<a href="?page={{ page_obj.page_obj.paginator.num_pages }}">▶️▶️</a>
+{% endif%}
+<hr>
+{% for page_number in page_obj.paginator.page_range %}
+<a href="?page={{ page_obj.number }}"
+    class="{% if page_number == page_obj.number %}current{% endif %}">{{page_number}}</a>
+{% endfor %}
 {% endblock %}
