@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<h4>{{ nft_list|length }} NFT'S</h4>
+<h2>{{ nft_list|length }} NFT'S</h2>
 
 {% for nft in nft_list %}
 <a href="{% url 'nft_detail' nft.id %}">
