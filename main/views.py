@@ -90,6 +90,7 @@ def collection_detail(request, collection_id):
     paginator = Paginator(collection_nfts, 10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page)
     #
     return render(
         request,
@@ -105,6 +106,7 @@ def collection_index(request):
     paginator = Paginator(collections_list, 10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page)
     return render(request, "main/nftcollection_list.html", {"collections_list": collections_list, "page_obj": page_obj})
 
 
@@ -275,6 +277,7 @@ def nft_own(request):
     paginator = Paginator(nfts_list, 10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page)
     #
     return render(request, "nfts/own.html", {"nfts_list": nfts_list, "page_obj": page_obj})
 
@@ -286,6 +289,7 @@ def collection_own(request):
     paginator = Paginator(collections_list, 10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page)
     #
     return render(request, "collections/own.html", {"collections_list": collections_list, "page_obj": page_obj})
 
@@ -340,6 +344,7 @@ def home(request):
     paginator = Paginator(collections_list, 10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page)
     return render(request, "home.html", {"collections_list": collections_list, "page_obj": page_obj})
 
 
@@ -351,6 +356,7 @@ def search_result(request):
         paginator = Paginator(nfts_list, 10)  # Show 10 contacts per page.
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
+        page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page)
         return render(
             request,
             "main/nft_search_result.html",
@@ -448,4 +454,5 @@ def all_for_sale(request):
     paginator = Paginator(nfts_list, 10)  # Show 10 contacts per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    page_obj.adjusted_elided_pages = paginator.get_elided_page_range(page)
     return render(request, "nfts/for_sale.html", {"nfts_list": nfts_list, "page_obj": page_obj})
