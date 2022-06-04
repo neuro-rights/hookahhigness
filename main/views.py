@@ -1,25 +1,27 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView
-from .models import NFT, NFTCollection, Photo, Sell, Bid, Profile
-from django.core.exceptions import SuspiciousOperation
-from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse
-from django.core import serializers
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
 # Import the login_required decorator
 from django.contrib.auth.decorators import login_required
 
 # Import the mixin for class-based views
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
-from .forms import BidForm, SellForm, FileFieldForm, NFTCollectionForm, ProfileForm
 
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import SuspiciousOperation
+from django.core import serializers
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
+from django.urls import reverse
+
+#
+from .forms import BidForm, SellForm, FileFieldForm, NFTCollectionForm, ProfileForm
+from .models import NFT, NFTCollection, Photo, Sell, Bid, Profile
+
+#
 import pprint
 import uuid
-
 import requests
 from requests import HTTPError
 import json
@@ -28,6 +30,7 @@ from pathlib import Path
 import sys
 import logging
 
+#
 from .utils.nft import NFTUtils
 from .utils.ipfs import IPFSUtils
 from .utils.contract import ContractUtils
