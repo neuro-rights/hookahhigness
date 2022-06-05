@@ -78,11 +78,13 @@ label {
     font-size: 15px;
 }
 
-a:hover {
+a:hover,
+button:hover {
     color: #64ffda;
 }
 
-a {
+a,
+button {
     color: whitesmoke;
 }
 
