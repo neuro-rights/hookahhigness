@@ -2,7 +2,7 @@
 
 <h4>{{ collections_list|length }} NFT COLLECTIONS</h4>
 
-{% for collection in collections_list %}
+{% for collection in page_obj %}
 <div class="collection">
     <div class="collection-item">
         <p>{{collection.name|upper}}</p>

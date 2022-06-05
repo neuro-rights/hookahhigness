@@ -20,9 +20,9 @@
     </div>
 </div>
 
-<h2>{{ nft_list|length }} NFT'S</h2>
+<h2>{{ collection.nfts_set.all|length }} NFT'S</h2>
 <ul class="collection">
-    {% for nft in nft_list %}
+    {% for nft in collection.nfts_set.all %}
     <li class="collection-item avatar">
         <a href="{% url 'collection_detail' collection.id %}">
             {% for photo in nft.photo_set.all %}

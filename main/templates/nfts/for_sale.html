@@ -2,7 +2,7 @@
 
 <h2>NFT'S FOR SALE</h2>
 
-{% for nft in nfts_list %}
+{% for nft in page_obj %}
 {% for sell in nft.sell_set.all %}
 <a href="{% url 'nft_detail' nft.id %}">
     <div class="card">

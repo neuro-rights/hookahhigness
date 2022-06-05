@@ -4,7 +4,7 @@
 
 <a href="{% url 'nft_create' %}" class="waves-effect waves-light btn-small teal darken-4">Create NFT</a>
 
-{% for nft in nfts_list %}
+{% for nft in page_obj %}
 <a href="{% url 'nft_detail' nft.id %}">
     <div class="card">
         <div class="card-content">
