@@ -79,7 +79,7 @@ label {
 }
 
 a:hover {
-    color: lawngreen;
+    color: #64ffda;
 }
 
 a {
@@ -88,7 +88,7 @@ a {
 
 input,
 textarea {
-    color: mediumaquamarine;
+    color: #64ffda;
 }
 
 li form {
