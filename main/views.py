@@ -272,7 +272,7 @@ class NFTDelete(LoginRequiredMixin, DeleteView):
 class NFTList(ListView):
     """ """
 
-    # paginate_by = 25
+    paginate_by = 25
     model = NFT
 
 
@@ -307,7 +307,7 @@ def nft_own(request):
     #
     nfts_list = NFT.objects.filter(creator=request.user)
     #
-    context = {"nfts_list": nfts_list}  # , "page_obj": get_page_obj(request, nfts_list, 25)}
+    context = {"nfts_list": nfts_list, "page_obj": get_page_obj(request, nfts_list, 25)}
     return render(request, "nfts/own.html", context)
 
 
