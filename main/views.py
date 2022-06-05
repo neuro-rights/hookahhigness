@@ -219,6 +219,11 @@ class NFTCollectionDelete(LoginRequiredMixin, DeleteView):
     model = NFTCollection
     success_url = "/collections/all"
 
+    def delete(self, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.nfts.all().delete()
+        return super(NFTCollectionDelete, self).delete(*args, **kwargs)
+
 
 class NFTCollectionList(ListView):
     """ """
