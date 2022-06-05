@@ -266,7 +266,7 @@ class NFTDelete(LoginRequiredMixin, DeleteView):
     """ """
 
     model = NFT
-    success_url = "/nfts/"
+    success_url = "/nfts/all"
 
 
 class NFTList(ListView):
