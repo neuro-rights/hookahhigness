@@ -195,7 +195,7 @@ class NFTCollectionCreate(LoginRequiredMixin, CreateView):
             counter += 1
         #
         # return render(request, "collections/detail.html", {"collection_id": collection.id})
-        return redirect("/collections/all")
+        return redirect("/collections/")
 
 
 class NFTCollectionEdit(LoginRequiredMixin, UpdateView):
@@ -217,7 +217,7 @@ class NFTCollectionDelete(LoginRequiredMixin, DeleteView):
     """ """
 
     model = NFTCollection
-    success_url = "/collections/all"
+    success_url = "/collections/"
 
     def delete(self, *args, **kwargs):
         self.object = self.get_object()
