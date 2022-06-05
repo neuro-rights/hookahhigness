@@ -236,7 +236,7 @@ class NFTCreate(LoginRequiredMixin, CreateView):
     """ """
 
     model = NFT
-    fields = ["nft_name", "description"]
+    fields = ["nft_name", "metadata_uri", "blockchain", "description"]
     #
     def get_success_url(self):
         return reverse("nft_detail", kwargs={"nft_id": self.object.id})
@@ -251,7 +251,7 @@ class NFTEdit(LoginRequiredMixin, UpdateView):
     """ """
 
     model = NFT
-    fields = ["nft_name", "description"]
+    fields = ["nft_name", "metadata_uri", "blockchain", "description"]
     #
     def get_success_url(self):
         return reverse("nft_detail", kwargs={"nft_id": self.object.id})
