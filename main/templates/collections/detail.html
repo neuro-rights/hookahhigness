@@ -24,9 +24,9 @@
 <ul class="collection">
     {% for nft in page_obj %}
     <li class="collection-item avatar">
-        <a href="{% url 'collection_detail' collection.id %}">
-            {% for photo in nft.photo_set.all %}
-            <div class="row valign-wrapper">
+        {% for photo in nft.photo_set.all %}
+        <div class="row valign-wrapper">
+            <a href="{% url 'nft_detail' nft.id %}">
                 <div class="col s12 m8 offset-m2 l6 offset-l3">
                     <div class="col s2">
                         <img src="{{ photo.url }}" alt="" class="circle responsive-img">
@@ -40,8 +40,8 @@
                         <p class="secondary-content"><i class="material-icons">favorite</i></p>
                     </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
     </li>
     {% endfor %}
 </ul>
