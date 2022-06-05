@@ -31,7 +31,7 @@ h2 {
 
 .card {
     width: 500px;
-    border-radius: 15px;
+    border-radius: 0;
     background-color: #00695c;
 }
 
@@ -84,7 +84,7 @@ nav a:hover {
 
 input,
 textarea {
-    color: #fcba03;
+    color: mediumaquamarine;
 }
 
 li form {
