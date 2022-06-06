@@ -1,24 +1,74 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %} {% load mathfilters %}
 
-<h2>OWN NFT COLLECTIONS</h2>
-<a href="{% url 'collection_create' %}" class="waves-effect waves-light btn-small teal darken-4">Create Collection</a>
+<h2>{{ page_obj|length }} {{ request.user.username|upper }} NFT COLLECTIONS</h2>
 
-{% for collection in page_obj %}
-<div class="collection">
-    <div class="collection-item">
-        <p>Name: {{collection.name}}</p>
-        <p>Creator: {{ collection.creator }}</p>
-        <p>Blockchain: {{ collection.blockchain }}</p>
-        <p>Token ID: {{ collection.token_id }}</p>
-        {% if collection.creator == request.user %}
-        <a href="{% url 'add_raffle' collection.id %}" class="waves-effect waves-light btn-small cyan darken-4">ADD
-            RAFFLE</a>
-        <a href="{% url 'collection_edit' collection.id %}"
-            class="waves-effect waves-light btn-small teal darken-4">Edit</a>
-        <a href="{% url 'collection_delete' collection.id %}"
-            class="waves-effect waves-light btn-small red darken-4">Delete</a>
-        {% endif %}
-    </div>
-</div>
-{% endfor %}
+<ul class="collection">
+    {% for collection in page_obj %}
+    <li class="collection-item valign-wrapper">
+        <a href="{% url 'collection_detail' collection.id %}">
+            <div class="row" style="box-sizing:border-box;">
+                <div class="col s3" style="padding:20px;">
+                    {% for nft in collection.get_random_nfts %}
+                    {% if forloop.counter0|mod:3 == 0 %}
+                    <div class="row">
+                        {% endif %}
+                        {% for photo in nft.photo_set.all %}
+                        <div class="col s4">
+                            <img src="{{ photo.url }}" alt="" class="thumbnail">
+                        </div>
+                        {% endfor %}
+                        {% if forloop.counter0|mod:3 == 2 or forloop.last %}
+                    </div>{% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col s8" style="padding:20px 50px;">
+                    <div class="row">
+                        <div class="col s4">
+                            <span>Name:</span>
+                        </div>
+                        <div class="col s8">
+                            <span>{{ collection.name }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4">
+                            <p>Total NFT's:</p>
+                        </div>
+                        <div class="col s8">
+                            <p>{{collection.num_nfts}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4">
+                            <p>Blockchain:</p>
+                        </div>
+                        <div class="col s8">
+                            <p>{{ collection.blockchain }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4">
+                            <p>Description:</p>
+                        </div>
+                        <div class="col s8">
+                            <p>{{ collection.description }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4">
+                            <p>Token:</p>
+                        </div>
+                        <div class="col s8">
+                            <p>{{ collection.token_id }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s1" style="padding:20px;">
+                    <p class="secondary-content"><i class="material-icons">grade</i></p>
+                </div>
+            </div>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
