@@ -4,18 +4,66 @@
 
 <h2>{{collection.name|upper}}</h2>
 <div class="collection">
-    <div class="collection-item">
-        <p>Name: {{collection.name}}</p>
-        <p>Creator: {{ collection.creator }}</p>
-        <p>Blockchain: {{ collection.blockchain }}</p>
-        <p>Token ID: {{ collection.token_id }}</p>
+    <div class="collection-item" style="padding: 77px 77px;">
+        <div class="row">
+            <div class="col s10">
+                <div class="row">
+                    <div class="col s4">
+                        <span>Name:</span>
+                    </div>
+                    <div class="col s8">
+                        <span>{{ collection.name }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <p>Total NFT's:</p>
+                    </div>
+                    <div class="col s8">
+                        <p>{{collection.num_nfts}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <p>Blockchain:</p>
+                    </div>
+                    <div class="col s8">
+                        <p>{{ collection.blockchain }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <p>Description:</p>
+                    </div>
+                    <div class="col s8">
+                        <p>{{ collection.description }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <p>Token:</p>
+                    </div>
+                    <div class="col s8">
+                        <p>{{ collection.token_id }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s2">
+                <p class="secondary-content"><i class="material-icons">grade</i></p>
+            </div>
+        </div>
         {% if collection.creator == request.user %}
-        <a href="{% url 'add_raffle' collection.id %}" class="waves-effect waves-light btn-small cyan darken-4">ADD
-            RAFFLE</a>
-        <a href="{% url 'collection_edit' collection.id %}"
-            class="waves-effect waves-light btn-small teal darken-4">Edit</a>
-        <a href="{% url 'collection_delete' collection.id %}"
-            class="waves-effect waves-light btn-small red darken-4">Delete</a>
+        <div class="row">
+            <div class="col s12">
+                <a href="{% url 'add_raffle' collection.id %}"
+                    class="waves-effect waves-light btn-small cyan darken-4">ADD
+                    RAFFLE</a>
+                <a href="{% url 'collection_edit' collection.id %}"
+                    class="waves-effect waves-light btn-small teal darken-4">Edit</a>
+                <a href="{% url 'collection_delete' collection.id %}"
+                    class="waves-effect waves-light btn-small red darken-4">Delete</a>
+            </div>
+        </div>
         {% endif %}
     </div>
 </div>
@@ -23,16 +71,16 @@
 <h2>{{ page_obj|length }} NFT'S</h2>
 <ul class="collection">
     {% for nft in page_obj %}
-    <li class="collection-item">
+    <li class="collection-item" style="padding:25px;">
         {% for photo in nft.photo_set.all %}
-        <div class="row valign-wrapper">
+        <div class="row">
             <a href="{% url 'nft_detail' nft.id %}">
                 <div class="col s12">
                     <div class="row">
                         <div class="col s2">
                             <img src="{{ photo.url }}" alt="" class="thumbnail-big">
                         </div>
-                        <div class="col s9">
+                        <div class="col s9" style="padding-left:50px;">
                             <span>{{ nft.name }}</span>
                             <p>{{ nft.description }}</p>
                             <p>{{ nft.blockchain }}</p>
