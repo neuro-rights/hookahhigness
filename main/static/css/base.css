@@ -143,11 +143,11 @@ p #id_bidprice {
 
 ul li,
 .helptext {
-    color: lawngreen;
+    color: #64ffda;
 }
 
 .errorlist li {
-    color: #79bedb;
+    color: tomato;
 }
 
 .navbar-fixed {

@@ -28,10 +28,11 @@
                 <a href="#"></a>
                 <ul id="nav-mobile" class="right">
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}"> LOG OUT</a></li>
+                    <li><a href="{% url 'settings' %}"><i class="material-icons right">settings</i></a></li>
+                    <li><a href="{% url 'logout' %}"><i class="material-icons right">account_circle</i></a></li>
                     {% else %}
-                    <li><a href="{% url 'signup' %}">SIGN UP</a></li>
-                    <li><a href="{% url 'login' %}">LOG IN</a></li>
+                    <li><a href="{% url 'signup' %}"><i class="material-icons right">add</i></a></li>
+                    <li><a href="{% url 'login' %}"><i class="material-icons right">arrow_forward</i></a></li>
                     {% endif %}
                 </ul>
             </div>
