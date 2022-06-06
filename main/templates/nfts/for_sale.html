@@ -18,6 +18,14 @@
         </div>
         <div class="card-action">
             <a href="{% url 'nft_edit' sell.nft.id %}" class="waves-effect waves-light btn-small teal darken-4">EDIT</a>
+            <small>
+                <span class="new badge blue" data-badge-caption="bids">
+                    {{ sell.nft.bid_set.all|length }}
+                </span>
+                <span class="new badge red" data-badge-caption="{{ sell.nft.blockchain }}">
+                    {{ sell.min_bid_price }}
+                </span>
+            </small>
         </div>
     </div>
 </a>

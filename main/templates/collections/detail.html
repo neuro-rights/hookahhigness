@@ -85,6 +85,14 @@
                             <p>{{ nft.description }}</p>
                             <p>{{ nft.blockchain }}</p>
                             <p>{{ nft.token_id }}</p>
+                            <small>
+                                <span class="new badge blue" data-badge-caption="bids">
+                                    {{ sell.nft.bid_set.all|length }}
+                                </span>
+                                <span class="new badge red" data-badge-caption="{{ sell.nft.blockchain }}">
+                                    {{ sell.min_bid_price }}
+                                </span>
+                            </small>
                         </div>
                         <div class="col s1">
                             <p class="secondary-content"><i class="material-icons">grade</i>{{ nft.total_likes }}</p>
