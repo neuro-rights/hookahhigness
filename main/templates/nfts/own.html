@@ -13,7 +13,7 @@
                 <img class="responsive-img card-panel" src="{{photo.url}}" loading="lazy"> {% empty %}
                 <div class="card-panel teal-text center-align">No Photos Uploaded</div>
                 {% endfor %}
-                <h3 class="card-title">{{ nft.nft_name }}</h3>
+                <h3 class="card-title|upper">{{ nft.nft_name }}</h3>
                 <p class="card-title"><small>{{ nft.description }}</small></p>
                 <p><small>{{ nft.token_id }}</small></p>
             </div>
