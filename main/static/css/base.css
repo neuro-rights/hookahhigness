@@ -10,18 +10,35 @@ main {
     flex: 1 0 auto;
 }
 
-footer.page-footer {
-    padding-top: 0;
-    text-align: right;
+nav.nav-extended {
+    background-color: #00796b;
 }
 
-nav.nav-extended {
-    background-color: #00695c;
+.navbar-fixed {
+    margin-bottom: 77px;
+}
+
+nav .nav-wrapper {
+    background-color: #0B0C10;
+    height: 100%;
+}
+
+nav .brand-logo {
+    font-size: 2.4rem;
+    color: whitesmoke;
+}
+
+nav ul a {
+    font-size: 1.2rem;
+}
+
+label {
+    font-size: 15px;
 }
 
 h1,
 h2 {
-    color: #64ffda;
+    color: whitesmoke;
 }
 
 .card-title {
@@ -54,28 +71,6 @@ h2 {
 
 .btn-small {
     margin-top: 10px;
-}
-
-nav .nav-wrapper {
-    background-color: #0B0C10;
-    height: 100%;
-}
-
-.page-footer {
-    background-color: #00695c;
-}
-
-nav .brand-logo {
-    font-size: 2.4rem;
-    color: whitesmoke;
-}
-
-nav ul a {
-    font-size: 1.2rem;
-}
-
-label {
-    font-size: 15px;
 }
 
 a:hover,
@@ -150,6 +145,8 @@ ul li,
     color: tomato;
 }
 
-.navbar-fixed {
-    margin-bottom: 77px;
+footer.page-footer {
+    padding-top: 0;
+    text-align: right;
+    background-color: #00695c;
 }

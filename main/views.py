@@ -465,6 +465,6 @@ def add_bid(request, nft_id):
 
 def all_for_sale(request):
     #
-    nfts_list = NFT.objects.all()
-    context = {"nfts_list": nfts_list, "page_obj": get_page_obj(request, nfts_list, 25)}
+    sell_list = Sell.objects.all()
+    context = {"page_obj": get_page_obj(request, sell_list, 25)}
     return render(request, "nfts/for_sale.html", context)
