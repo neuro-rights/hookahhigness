@@ -118,7 +118,7 @@ def raffle_detail(request, raffle_id):
 def collection_detail(request, collection_id):
     #
     collection = NFTCollection.objects.get(id=collection_id)
-    collection_nfts = collection.nfts.order_by("total_likes").all()
+    collection_nfts = collection.nfts.order_by("likes").all()
     #
     context = {
         "collection": collection,
@@ -130,7 +130,7 @@ def collection_detail(request, collection_id):
 @login_required
 def collection_index(request):
     #
-    collections_list = NFTCollection.objects.order_by("total_likes").all()
+    collections_list = NFTCollection.objects.order_by("likes").all()
     #
     context = {"page_obj": get_page_obj(request, collections_list, 25)}
     return render(request, "main/nftcollection_list.html", context)
@@ -362,7 +362,7 @@ def settings(request):
 
 def home(request):
     #
-    collections_list = NFTCollection.objects.order_by("total_likes").all()
+    collections_list = NFTCollection.objects.order_by("likes").all()
     context = {"page_obj": get_page_obj(request, collections_list, 25)}
     return render(request, "home.html", context)
 
