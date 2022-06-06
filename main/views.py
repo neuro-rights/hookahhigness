@@ -118,7 +118,7 @@ def raffle_detail(request, raffle_id):
 def collection_detail(request, collection_id):
     #
     collection = NFTCollection.objects.get(id=collection_id)
-    collection_nfts = collection.nfts.order_by("-id").all()
+    collection_nfts = collection.nfts.all()
     #
     context = {
         "collection": collection,
@@ -130,7 +130,7 @@ def collection_detail(request, collection_id):
 @login_required
 def collection_index(request):
     #
-    collections_list = NFTCollection.objects.order_by("-id").all()
+    collections_list = NFTCollection.objects.all()
     #
     context = {"page_obj": get_page_obj(request, collections_list, 25)}
     return render(request, "main/nftcollection_list.html", context)
@@ -313,7 +313,7 @@ def nft_own(request):
 @login_required
 def collection_own(request):
     #
-    collections_list = NFTCollection.objects.order_by("-id").filter(creator=request.user)
+    collections_list = NFTCollection.objects.filter(creator=request.user)
     #
     context = {"page_obj": get_page_obj(request, collections_list, 25)}
     return render(request, "collections/own.html", context)
@@ -362,7 +362,7 @@ def settings(request):
 
 def home(request):
     #
-    collections_list = NFTCollection.objects.order_by("-id").all()
+    collections_list = NFTCollection.objects.all()
     context = {"page_obj": get_page_obj(request, collections_list, 25)}
     return render(request, "home.html", context)
 
@@ -464,6 +464,6 @@ def add_bid(request, nft_id):
 
 def all_for_sale(request):
     #
-    sell_list = Sell.objects.order_by("-id").all()
+    sell_list = Sell.objects.all()
     context = {"page_obj": get_page_obj(request, sell_list, 25)}
     return render(request, "nfts/for_sale.html", context)
