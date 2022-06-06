@@ -36,6 +36,11 @@ label {
     font-size: 15px;
 }
 
+.material-icons {
+    display: inline-flex;
+    vertical-align: top;
+}
+
 h1,
 h2 {
     color: whitesmoke;
