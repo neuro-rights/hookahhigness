@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %} {% load mathfilters %}
 
 <h2>ALL {{ collections_list|length }} NFT COLLECTIONS</h2>
 
@@ -7,23 +7,26 @@
     <li class="collection-item avatar">
         <a href="{% url 'collection_detail' collection.id %}">
             <div class="row">
-                <div class="col s12">
+                <div class="col s3">
+                    {% for nft in collection.get_random_nfts %}
+                    {% if forloop.counter0|mod:3 == 0 %}
                     <div class="row">
-                        {% for nft in collection.get_random_nfts %}
+                        {% endif %}
                         {% for photo in nft.photo_set.all %}
-                        <div class="col s1">
+                        <div class="col s4">
                             <img src="{{ photo.url }}" alt="" class="thumbnail">
                         </div>
                         {% endfor %}
-                        {% endfor %}
-                        <div class="col s9">
-                            <span>Name: {{ collection.name }}</span>
-                            <p>Description: {{ collection.description }}</p>
-                            <p>Blockchain: {{ collection.blockchain }}</p>
-                            <p>Token: {{ collection.token_id }}</p>
-                            <p class="secondary-content"><i class="material-icons">grade</i></p>
-                        </div>
-                    </div>
+                        {% if forloop.counter0|mod:3 == 2 or forloop.last %}
+                    </div>{% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col s9">
+                    <span>Name: {{ collection.name }}</span>
+                    <p>Description: {{ collection.description }}</p>
+                    <p>Blockchain: {{ collection.blockchain }}</p>
+                    <p>Token: {{ collection.token_id }}</p>
+                    <p class="secondary-content"><i class="material-icons">grade</i></p>
                 </div>
             </div>
         </a>

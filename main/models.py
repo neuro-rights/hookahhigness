@@ -62,7 +62,7 @@ class NFTCollection(models.Model):
 
     @property
     def get_random_nfts(self):
-        return self.nfts.order_by("?").all()[:3]
+        return self.nfts.all()[:9][::-1]
 
     #
     def get_absolute_url(self):
