@@ -21,9 +21,13 @@
                 {% csrf_token %}
                 <button type="submit" , name="nft_id" , value="{{ post.id }}"
                     class="waves-effect waves-light btn-small">
-                    Like <i class="material-icons">favorite_border</i></button>
+                    Like <i class="material-icons">favorite</i></button>
                 <br>
-                {{nft.total_likes}} Likes
+                <p class="secondary-content">
+                    {% if nft.total_likes > 0 %}<i class="material-icons">grade</i>
+                    {{ nft.total_likes }}
+                    {% endif %}
+                </p>
             </form>
             <p>Creator: {{ nft.creator }}</p>
             <p>Blockchain: Ethereum</p>

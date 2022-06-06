@@ -16,6 +16,11 @@
                 <h3 class="card-title|upper">{{ nft.nft_name }}</h3>
                 <p class="card-title"><small>{{ nft.description }}</small></p>
                 <p><small>{{ nft.token_id }}</small></p>
+                <p class="secondary-content">
+                    {% if nft.total_likes > 0 %}<i class="material-icons">grade</i>
+                    {{ nft.total_likes }}
+                    {% endif %}
+                </p>
             </div>
         </div>
         <div class="card-action">

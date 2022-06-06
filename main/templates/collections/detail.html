@@ -49,7 +49,11 @@
                 </div>
             </div>
             <div class="col s2">
-                <p class="secondary-content"><i class="material-icons">grade</i>{{ collection.total_likes }}</p>
+                <p class="secondary-content">
+                    {% if collection.total_likes > 0 %}<i class="material-icons">grade</i>
+                    {{ collection.total_likes }}
+                    {% endif %}
+                </p>
             </div>
         </div>
         {% if collection.creator == request.user %}
@@ -87,7 +91,11 @@
                             <p>{{ nft.token_id }}</p>
                         </div>
                         <div class="col s1">
-                            <p class="secondary-content"><i class="material-icons">grade</i>{{ nft.total_likes }}</p>
+                            <p class="secondary-content">
+                                {% if nft.total_likes > 0 %}<i class="material-icons">grade</i>
+                                {{ nft.total_likes }}
+                                {% endif %}
+                            </p>
                         </div>
                     </div>
                 </div>

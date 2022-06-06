@@ -21,7 +21,7 @@
                     </div>{% endif %}
                     {% endfor %}
                 </div>
-                <div class="col s8" style="padding:20px 50px;">
+                <div class="col s7" style="padding:20px 50px;">
                     <div class="row">
                         <div class="col s4">
                             <span>Name:</span>
@@ -63,8 +63,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="col s1" style="padding:20px;">
-                    <p class="secondary-content"><i class="material-icons">grade</i>{{ collection.total_likes }}</p>
+                <div class="col s2" style="padding:20px;">
+                    <p class="secondary-content">
+                        {% if collection.total_likes > 0 %}<i class="material-icons">grade</i>
+                        {{ collection.total_likes }}
+                        {% endif %}
+                    </p>
                 </div>
             </div>
         </a>
