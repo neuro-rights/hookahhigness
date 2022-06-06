@@ -47,7 +47,21 @@
             </div>
             <ul class="left">
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'for_sale' %}">MARKET</a></li>
+                <li>
+                    <a href="{% url 'for_sale' %}">MARKET
+                        <p class="secondary-content">
+                            {% if sells|length > 0 %}
+                            <span class="new badge blue">
+                                <i class="material-icons">grade</i>{{ sells.num_bids }}
+                            </span>
+                            <span class="new badge red">
+                                <i class="material-icons">grade</i>
+                                {{ sells.max_bid }}
+                            </span>
+                            {% endif %}
+                        </p>
+                    </a>
+                </li>
             </ul>
             <ul class="right">
                 <li><a href="{% url 'nft_own' %}">Own NFT'S</a></li>

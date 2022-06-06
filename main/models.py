@@ -114,6 +114,9 @@ class Sell(models.Model):
     sale_ends = models.DateField()
     min_bid_price = models.FloatField()
 
+    def total_bids(self):
+        return self.nft.bid_set.count()
+
 
 class Photo(models.Model):
     #
