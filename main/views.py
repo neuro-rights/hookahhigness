@@ -130,7 +130,7 @@ def collection_detail(request, collection_id):
 @login_required
 def collection_index(request):
     #
-    collections_list = NFTCollection.objects.order_by("likes").all()
+    collections_list = NFTCollection.objects.order_by("-id").all()
     #
     context = {"page_obj": get_page_obj(request, collections_list, 25)}
     return render(request, "main/nftcollection_list.html", context)
@@ -362,7 +362,7 @@ def settings(request):
 
 def home(request):
     #
-    collections_list = NFTCollection.objects.order_by("likes").all()
+    collections_list = NFTCollection.objects.order_by("-id").all()
     context = {"page_obj": get_page_obj(request, collections_list, 25)}
     return render(request, "home.html", context)
 
