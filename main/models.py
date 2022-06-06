@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.core.signals import request_finished
+from django.db.models import Count
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -70,11 +71,7 @@ class NFTCollection(models.Model):
 
     @property
     def total_likes(self):
-        nfts = self.nfts.all()
-        total_likes = 0
-        for nft in nfts:
-            total_likes += nft.total_likes()
-        return total_likes
+        return self.nfts.aggregate(Count("likes"))["likes__count"]
         form.instance.user = self.request.user
         return super().form_valid(form)
 
