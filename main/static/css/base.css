@@ -41,12 +41,23 @@ h2 {
     color: whitesmoke;
 }
 
-img.thumbnail {
+.thumbnail {
     position: relative !important;
     width: 42px;
     height: 42px;
     overflow: hidden;
     left: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 0px;
+}
+
+.thumbnail-big {
+    position: relative !important;
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+    margin: 20px 0;
     display: inline-block;
     vertical-align: middle;
     border-radius: 0px;
