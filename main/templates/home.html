@@ -11,12 +11,12 @@
                     <div class="row">
                         {% for nft in collection.get_random_nfts %}
                         {% for photo in nft.photo_set.all %}
-                        <div class="col s2">
+                        <div class="col s1">
                             <img src="{{ photo.url }}" alt="" class="thumbnail">
                         </div>
                         {% endfor %}
                         {% endfor %}
-                        <div class="col s6">
+                        <div class="col s9">
                             <span>Name: {{ collection.name }}</span>
                             <p>Description: {{ collection.description }}</p>
                             <p>Blockchain: {{ collection.blockchain }}</p>
