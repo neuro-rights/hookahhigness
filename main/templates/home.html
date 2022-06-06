@@ -3,7 +3,7 @@
 <h2>ALL {{ collections_list|length }} NFT COLLECTIONS</h2>
 
 <ul class="collection">
-    {% for collection in collections_list %}
+    {% for collection in page_obj %}
     <li class="collection-item avatar">
         <a href="{% url 'collection_detail' collection.id %}">
             <div class="row valign-wrapper">
