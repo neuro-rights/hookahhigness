@@ -68,6 +68,16 @@ class NFTCollection(models.Model):
     def num_nfts(self):
         return self.nfts.all().count()
 
+    @property
+    def total_likes(self):
+        nfts = self.nfts.all()
+        total_likes = 0
+        for nft in nfts:
+            total_likes += nft.total_likes()
+        return total_likes
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
     #
     def get_absolute_url(self):
         return reverse("collection_detail", kwargs={"collection_id": self.id})
