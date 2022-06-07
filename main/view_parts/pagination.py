@@ -9,6 +9,7 @@ from django.urls import reverse
 
 
 def get_page_obj(request, list_to_paginate, max_items_per_page):
+    #
     paginator = Paginator(list_to_paginate, per_page=max_items_per_page)
     page_number = request.GET.get("page")
     #
