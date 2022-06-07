@@ -81,7 +81,7 @@
             <a href="{% url 'nft_detail' nft.id %}">
                 <div class="col s12">
                     <div class="row">
-                        <div class="col s2">
+                        <div class="col s2 teal darken-4">
                             <img src="{{ photo.url }}" alt="" class="thumbnail-big">
                         </div>
                         <div class="col s9" style="padding-left:50px;">
@@ -116,13 +116,4 @@
     {% endfor %}
 </ul>
 
-{% endblock %}
-
-{% block javascript %}
-<script>
-    //init slider
-    $(document).ready(function () {
-        $('.carousel').carousel();
-    });
-</script>
 {% endblock %}

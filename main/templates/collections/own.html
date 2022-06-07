@@ -4,7 +4,7 @@
 
 <ul class="collection">
     {% for collection in page_obj %}
-    <li class="collection-item valign-wrapper">
+    <li class="collection-item">
         <a href="{% url 'collection_detail' collection.id %}">
             <div class="row" style="box-sizing:border-box;">
                 <div class="col s3" style="padding:20px;">
@@ -72,7 +72,24 @@
                 </div>
             </div>
         </a>
+        <div class="carousel teal darken-4">
+            {% for nft in collection.get_random_nfts %}
+            <a href="{% url 'nft_detail' nft.id %}" class="carousel-item">
+                {% for photo in nft.photo_set.all %}
+                <img class="responsive-img" src="{{photo.url}}" loading="lazy"> {% empty %}
+                {% endfor %}
+            </a>
+            {% endfor %}
+        </div>
     </li>
     {% endfor %}
 </ul>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.carousel').carousel();
+    });
+</script>
 {% endblock %}

@@ -14,11 +14,12 @@
         href="https://fonts.googleapis.com/css2?family=Caladea&family=Hind+Siliguri&family=Roboto+Mono:wght@600&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 
 <body>
-
     <header class="navbar-fixed">
         <nav class="nav-extended">
             <div class="nav-wrapper">
@@ -47,29 +48,53 @@
             </div>
             <ul class="left">
                 {% if user.is_authenticated %}
-                <li>
-                    <a href="{% url 'for_sale' %}">MARKET
-                        <p class="secondary-content">
-                            {% if sells|length > 0 %}
-                            <span class="new badge blue">
-                                <i class="material-icons">grade</i>{{ sells.num_bids }}
-                            </span>
-                            <span class="new badge red">
-                                <i class="material-icons">grade</i>
-                                {{ sells.max_bid }}
-                            </span>
-                            {% endif %}
-                        </p>
-                    </a>
-                </li>
+                <li><a class="dropdown-trigger" href="#" data-target='market'>MARKET</a></li>
             </ul>
             <ul class="right">
-                <li><a href="{% url 'nft_own' %}">Own NFT'S</a></li>
-                <li><a href="{% url 'collection_own' %}">Own Collections</a></li>
-                <li><a href="{% url 'opensea' %}">Opensea</a></li>
+                <li><a class="dropdown-trigger" href="#" data-target='own'>OWN</a></li>
+                <li><a class="dropdown-trigger" href="#" data-target='create'>CREATE</a></li>
+                <li><a href="{% url 'opensea' %}">OPENSEA</a></li>
                 {% endif %}
             </ul>
-            </div>
+            <ul id='market' class='dropdown-content teal darken-4'>
+                <li><a href="{% url 'for_sale' %}">2D</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="#!">3D</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="#!">MUSIC</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="#!">VIDEO</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="#!">DOC</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="{% url 'collection_own' %}">COLLECTION</a></li>
+            </ul>
+            <ul id='own' class='dropdown-content teal darken-4'>
+                <li><a href="{% url 'nft_own' %}">2D</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="#!">3D</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="#!">MUSIC</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="#!">VIDEO</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="#!">DOC</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="{% url 'collection_own' %}">COLLECTION</a></li>
+            </ul>
+            <ul id='create' class='dropdown-content teal darken-4'>
+                <li><a href="{% url 'nft_create' %}">2D</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="#!">3D</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="#!">MUSIC</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="#!">VIDEO</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="#!">DOC</a></li>
+                <li class="divider red darken-4" tabindex="-1"></li>
+                <li><a href="{% url 'collection_create' %}">COLLECTION</a></li>
+            </ul>
         </nav>
     </header>
     <main class="container">
@@ -103,9 +128,9 @@
     <footer class="page-footer">
         <div class="right">All Rights Reserved, &copy; 2022 NFT Marketplace &nbsp;</div>
     </footer>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+        $('.dropdown-trigger').dropdown({ 'constrainWidth': false, 'hover': true });
+    </script>
 
     {% block javascript %} {% endblock %}
 

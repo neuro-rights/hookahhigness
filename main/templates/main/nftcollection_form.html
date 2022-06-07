@@ -32,14 +32,34 @@
             </div>
         </div>
     </form>
-
-    <div id="upload_progress" class="progress">
-        <div class="determinate red darken-4" style="width: 0%"></div>
-        <div style="width:100%;overflow:auto">
-            <pre>Click submit to initiate upload...</pre>
-        </div>
-    </div>
 </div>
+
+<ul class="collapsible">
+    <li>
+        <div class="collapsible-header"><i class="material-icons">filter_drama</i>Submit</div>
+        <div class="collapsible-body">
+            <div class="progress">
+                <div id="upload_progress" class="determinate red darken-4" style="width: 0%"></div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header"><i class="material-icons">place</i>Parse</div>
+        <div class="collapsible-body">
+            <div style="width:100%;overflow:auto">
+                <pre>Parsing...</pre>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header"><i class="material-icons">whatshot</i>Adding to DB</div>
+        <div class="collapsible-body">
+            <div style="width:100%;overflow:auto">
+                <pre>Parsing...</pre>
+            </div>
+        </div>
+    </li>
+</ul>
 {% endblock %}
 
 {% block javascript %}

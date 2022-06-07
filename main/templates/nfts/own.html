@@ -4,30 +4,51 @@
 
 <a href="{% url 'nft_create' %}" class="waves-effect waves-light btn-small teal darken-4">Create NFT</a>
 
-{% for nft in page_obj %}
-<a href="{% url 'nft_detail' nft.id %}">
-    <div class="card">
-        <div class="card-content">
-            <div class="card-img-container">
-                {% for photo in nft.photo_set.all %}
-                <img class="responsive-img card-panel" src="{{photo.url}}" loading="lazy"> {% empty %}
-                <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-                {% endfor %}
-                <h3 class="card-title|upper">{{ nft.nft_name }}</h3>
-                <p class="card-title"><small>{{ nft.description }}</small></p>
-                <p><small>{{ nft.token_id }}</small></p>
-                <p class="secondary-content">
-                    {% if nft.total_likes > 0 %}<i class="material-icons">grade</i>
-                    {{ nft.total_likes }}
-                    {% endif %}
-                </p>
+<div class="carousel">
+    {% for nft in page_obj %}
+    <a href="{% url 'nft_detail' nft.id %}" class="carousel-item">
+        {% for photo in nft.photo_set.all %}
+        <img class="responsive-img" src="{{photo.url}}" loading="lazy"> {% empty %}
+        {% endfor %}
+    </a>
+    {% endfor %}
+</div>
+<div>
+    {% for nft in page_obj %}
+    <a href="{% url 'nft_detail' nft.id %}">
+        <div class="card">
+            <div class="card-content">
+                <div class="card-img-container">
+                    {% for photo in nft.photo_set.all %}
+                    <img class="responsive-img card-panel" src="{{photo.url}}" loading="lazy"> {% empty %}
+                    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+                    {% endfor %}
+                    <h3 class="card-title|upper">{{ nft.nft_name }}</h3>
+                    <p class="card-title"><small>{{ nft.description }}</small></p>
+                    <p><small>{{ nft.token_id }}</small></p>
+                    <p class="secondary-content">
+                        {% if nft.total_likes > 0 %}<i class="material-icons">grade</i>
+                        {{ nft.total_likes }}
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'nft_edit' nft.id %}" class="waves-effect waves-light btn-small teal darken-4">EDIT</a>
+                <a href="{% url 'nft_delete' nft.id %}"
+                    class="waves-effect waves-light btn-small red darken-4">Delete</a>
             </div>
         </div>
-        <div class="card-action">
-            <a href="{% url 'nft_edit' nft.id %}" class="waves-effect waves-light btn-small teal darken-4">EDIT</a>
-            <a href="{% url 'nft_delete' nft.id %}" class="waves-effect waves-light btn-small red darken-4">Delete</a>
-        </div>
-    </div>
-</a>
-{% endfor %}
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.carousel').carousel();
+    });
+</script>
 {% endblock %}
