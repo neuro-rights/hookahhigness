@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import NFT, NFTCollection, Photo, Sell, Bid, Purchase
+from .models import User, Nft, Asset, Auction, Raffle, Bid, Purchase
 
 # Register your models here.
-admin.site.register(NFT)
-admin.site.register(Photo)
-admin.site.register(NFTCollection)
-admin.site.register(Sell)
+admin.site.register(User)
+admin.site.register(Nft)
+admin.site.register(Asset)
+admin.site.register(Auction)
 admin.site.register(Bid)
 admin.site.register(Purchase)
+admin.site.register(Raffle)

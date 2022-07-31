@@ -1,0 +1,133 @@
+{% extends 'base.html' %} {% load materializecss %}
+{% block content %}
+
+<!-- Page Layout here -->
+l
+<div class="row">
+    <div class="col s12 m4 l3">
+        <!-- Note that "m4 l3" was added -->
+        <!-- Grey navigation panel
+
+            This content will be:
+        3-columns-wide on large screens,
+        4-columns-wide on medium screens,
+        12-columns-wide on small screens  -->
+        <ul id="slide-out" class="sidenav">
+            <li>
+                <div class="user-view">
+                    <a href="#user"><img class="circle" src="http://www.gravatar.com/avatar"></a>
+                    <a href="#user"><span class="white-text name">{{ user.username }}</span></a>
+                    <a href="#user"><span class="white-text email">{{ user.email }} </span></a>
+                </div>
+            </li>
+            <li><a href="#user"><i class="material-icons">account_box</i>USER</a></li>
+            <li><a href="#wallet"><i class="material-icons">account_balance_wallet</i>WALLET</a></li>
+            <li><a href="#pinata_ipfs"><i class="material-icons">cloud_circle</i>PINATA IPFS</a></li>
+            <li><a href="#infura_ipfs"><i class="material-icons">cloud_circle</i>INFURA IPFS</a></li>
+            <li><a href="#aws_s3"><i class="material-icons">cloud_upload</i>AMAZON S3</a></li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a href="#opensea"><i class="material-icons">book</i>OPENSEA</a></li>
+            <li><a href="#etherscan"><i class="material-icons">bug_report</i>ETHERSCAN</a></li>
+            <li><a href="#alchemy"><i class="material-icons">border_outer</i>ALCHEMY</a></li>
+        </ul>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+
+    <div class="col s12 m8 l9">
+        <!-- Note that "m8 l9" was added -->
+        <!-- Teal page content
+
+            This content will be:
+        9-columns-wide on large screens,
+        8-columns-wide on medium screens,
+        12-columns-wide on small screens  -->
+
+        {% if messages %}
+        <section>
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        <section id="wallet">
+            <h4>Wallet</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ form.ethereum_wallet_address|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+        <section id="aws_s3">
+            <h4>AWS S3</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ form.aws_s3_bucket|materializecss }}
+                {{ form.aws_s3_region|materializecss }}
+                {{ form.aws_access_key_id_value|materializecss }}
+                {{ form.aws_secret_access_key_value|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+        <section id="pinata_ipfs">
+            <h4>PINATA IPFS (Optional)</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ form.pinata_api_key|materializecss }}
+                {{ form.pinata_api_secret|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+        <section id="infura_ipfs">
+            <h4>INFURA IPFS (Optional)</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ form.infura_ipfs_project_id|materializecss }}
+                {{ form.infura_ipfs_secret_key|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+        <section id="infura_ethereum">
+            <h4>INFURA ETHEREUM (Optional)</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {{ form.infura_ethereum_project_id|materializecss }}
+                {{ form.infura_ethereum_secret_key|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+        <section id="alchemy"></section>
+        <h4>ALCHEMY (Optional)</h4>
+        <form method="post" action="{% url 'profile' %}">
+            {{ form.infura_ethereum_project_id|materializecss }}
+            <input type="submit" class="btn" value="update settings">
+        </form>
+        </section>
+
+        <section id="opensea">
+            <h4>OPENSEA (Optional)</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {{ form.infura_ethereum_project_id|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+        <section id="etherscan">
+            <h4>ETHERSCAN (Optional)</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {{ form.infura_ethereum_project_id|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+    </div>
+</div>
+{% endblock %}

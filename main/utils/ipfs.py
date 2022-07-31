@@ -1,9 +1,14 @@
+import environ
 import ipfshttpclient
 import json
-from typing import Type, Union, Dict, Any, List
+from typing import Type, Union, Dict, Any, List, IO, BinaryIO
 import requests
 import os
 from pathlib import Path
+
+
+env = environ.Env()
+environ.Env.read_env(env.str("ENV_PATH", ".env"))
 
 
 class IPFSUtils:
@@ -72,7 +77,7 @@ class IPFSUtils:
         print(requests.get(url=gateway + result["IpfsHash"]).text)
         print(gateway + result["IpfsHash"])
 
-    def pinJSONToIPFS(self, json_obj: Dict[str, Any], pinata_api_key: str, pinata_secret: str) -> Dict[str, Any]:
+    def pinJSONToIPFS(self, json_obj: Dict[str, Any]) -> Dict[str, Any]:
         """
         Purpose:
             PIN a json obj to IPFS
@@ -84,8 +89,8 @@ class IPFSUtils:
             ipfs json - data from pin
         """
         HEADERS = {
-            "pinata_api_key": pinata_api_key,
-            "pinata_secret_api_key": pinata_secret,
+            "pinata_api_key": os.environ["PINATA_API_KEY"],
+            "pinata_secret_api_key": os.environ["PINATA_API_SECRET"],
         }
 
         ipfs_json = {
@@ -99,12 +104,12 @@ class IPFSUtils:
         response = requests.post(endpoint_uri, headers=HEADERS, json=ipfs_json)
         return response.json()
 
-    def pinContentToIPFS(self, filepath: str, pinata_api_key: str, pinata_secret: str) -> Dict[str, Any]:
+    def pinContentToIPFS(self, image_binary: IO) -> Dict[str, Any]:
         """
         Purpose:
             PIN a file obj to IPFS
         Args:
-            filepath - file path
+            file_binary - open file
             pinata_api_key - pinata api key
             pinata_secret - pinata secret key
         Returns:
@@ -112,25 +117,19 @@ class IPFSUtils:
         """
 
         HEADERS = {
-            "pinata_api_key": pinata_api_key,
-            "pinata_secret_api_key": pinata_secret,
+            "pinata_api_key": os.environ["PINATA_API_KEY"],
+            "pinata_secret_api_key": os.environ["PINATA_API_SECRET"],
         }
-
+        #
         endpoint_uri = "https://api.pinata.cloud/pinning/pinFileToIPFS"
+        #
+        response = requests.post(endpoint_uri, files={"file": (filename, image_binary)}, headers=HEADERS)
+        # response = requests.post(endpoint_uri, data=multipart_form_data, headers=HEADERS)
+        # print(response.text)
+        # print(response.headers)
+        return response.json()
 
-        filename = filepath.split("/")[-1:][0]
-
-        with Path(filepath).open("rb") as fp:
-            image_binary = fp.read()
-            response = requests.post(endpoint_uri, files={"file": (filename, image_binary)}, headers=HEADERS)
-            print(response.json())
-
-            # response = requests.post(endpoint_uri, data=multipart_form_data, headers=HEADERS)
-            # print(response.text)
-            # print(response.headers)
-            return response.json()
-
-    def pinSearch(self, query: str, pinata_api_key: str, pinata_secret: str) -> List[Dict[str, Any]]:
+    def pinSearch(self, query: str) -> List[Dict[str, Any]]:
         """
         Purpose:
             Query pins for data
@@ -144,8 +143,8 @@ class IPFSUtils:
 
         endpoint_uri = f"https://api.pinata.cloud/data/pinList?{query}"
         HEADERS = {
-            "pinata_api_key": pinata_api_key,
-            "pinata_secret_api_key": pinata_secret,
+            "pinata_api_key": os.environ["PINATA_API_KEY"],
+            "pinata_secret_api_key": os.environ["PINATA_API_SECRET"],
         }
         response = requests.get(endpoint_uri, headers=HEADERS).json()
 

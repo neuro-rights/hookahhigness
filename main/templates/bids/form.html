@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {% load materializecss %}
+{% block content %}
+
+{% if object %}
+<h2>EDIT BID<span class="teal-text">{{bid.uuid|upper}}</span></h2>
+{% else %}
+<h2>CREATE BID</h2>
+{% endif %}
+
+<div class="row">
+    <form class="col s12" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|materializecss }}
+        <hr>
+        <div class="row">
+            <div class="col s12">
+                <button class="btn-small waves-effect waves-light teal darken-4" type="submit" name="action"
+                    id="submit">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<ul class="collapsible">
+    <li>
+        <div class="collapsible-header teal darken-4"><i class="material-icons">filter_drama</i>Submit</div>
+        <div class="collapsible-body">
+            <div class="progress">
+                <div id="upload_progress" class="determinate red darken-4" style="width: 0%"></div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header teal darken-4"><i class="material-icons">place</i>Parse</div>
+        <div class="collapsible-body">
+            <div style="width:100%;overflow:auto">
+                <pre>Parsing...</pre>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header teal darken-4"><i class="material-icons">whatshot</i>Adding to DB</div>
+        <div class="collapsible-body">
+            <div style="width:100%;overflow:auto">
+                <pre>Adding to DB...</pre>
+            </div>
+        </div>
+    </li>
+</ul>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("#submit").click(function () {
+        //
+        var bid_id = $(this).val();
+        //
+        $.ajax({
+            xhr: function () {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function (evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total;
+                        console.log(percentComplete);
+                        $("#upload_progress").css({
+                            width: percentComplete * 100 + '%'
+                        });
+                        if (percentComplete === 1) {
+                            $("#upload_progress").addClass('hide');
+                        }
+                    }
+                }, false);
+                xhr.addEventListener("progress", function (evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = evt.loaded / evt.total;
+                        console.log(percentComplete);
+                        $("#upload_progress").css({
+                            width: percentComplete * 100 + '%'
+                        });
+                    }
+                }, false);
+                return xhr;
+            },
+            type: 'POST',
+            url: "/ajax/transaction_progress",
+            data: { 'bid': bid_id },
+            success: function (data) {
+                console.log("Transaction Complete!")
+            }
+        });
+    });
+</script>
+{% endblock %}

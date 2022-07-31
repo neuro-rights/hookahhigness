@@ -1,0 +1,259 @@
+{% extends 'base.html' %} {% load mathfilters %}
+{% block content %}
+
+<!-- Page Layout here -->
+<div class="row">
+    <div class="col s12 m4 l3">
+        <!-- Note that "m4 l3" was added -->
+        <!-- Grey navigation panel
+
+            This content will be:
+        3-columns-wide on large screens,
+        4-columns-wide on medium screens,
+        12-columns-wide on small screens  -->
+    </div>
+
+    <div class="col s12 m8 l9">
+        <!-- Note that "m8 l9" was added -->
+        <!-- Teal page content
+
+            This content will be:
+        9-columns-wide on large screens,
+        8-columns-wide on medium screens,
+        12-columns-wide on small screens  -->
+        <h2>{{asset.name|upper}}</h2>
+        <div class="collection">
+            <div class="collection-item" style="padding: 77px 77px;">
+                <div class="row">
+                    <div class="col s10">
+                        <div class="row">
+                            <div class="col s4">
+                                <span>Name:</span>
+                            </div>
+                            <div class="col s8">
+                                <span>{{ asset.name }}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s4">
+                                <p>Total NFT's:</p>
+                            </div>
+                            <div class="col s8">
+                                <p>{{asset.num_nfts}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s4">
+                                <p>Description:</p>
+                            </div>
+                            <div class="col s8">
+                                <p>{{ asset.description }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s4">
+                                <p>Token:</p>
+                            </div>
+                            <div class="col s8">
+                                <p>{{ asset.token_id }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s2">
+                        <p class="secondary-content">
+                            {% if asset.total_likes > 0 %}<i class="material-icons">grade</i>
+                            {{ asset.total_likes }}
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                {% if asset.creator == request.user %}
+                <div class="row">
+                    <div class="col s12">
+                        <a href="{% url 'add_raffle' asset.id %}"
+                            class="waves-effect waves-light btn-small cyan darken-4">ADD
+                            RAFFLE</a>
+                        <a href="{% url 'asset_edit' asset.id %}"
+                            class="waves-effect waves-light btn-small teal darken-4">Edit</a>
+                        <a href="{% url 'asset_delete' asset.id %}"
+                            class="waves-effect waves-light btn-small red darken-4">Delete</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <h2>{{nft.name|upper}}</h2>
+        <div class="bidcard">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title"></span>
+                    <img class="responsive-img card-panel" src="{{ nft.preview_uri }}" loading="lazy">
+                    {% if nft.creator == request.user %}
+                    <form action="{% url 'add_photo' nft.id %}" enctype="multipart/form-data" method="POST"
+                        class="card-panel">
+                        {% csrf_token %}
+                        <input type="file" name="photo-file">
+                        <br><br>
+                        <input type="submit" class="btn" value="Upload Photo">
+                    </form>
+                    {% endif %}
+                    <form action="{% url 'like_nft' nft.pk %}" method="POST" class="right">
+                        {% csrf_token %}
+                        <button type="submit" , name="nft_id" , value="{{ post.id }}"
+                            class="waves-effect waves-light btn-small">
+                            Like <i class="material-icons">favorite</i></button>
+                        <br>
+                        <p class="secondary-content">
+                            {% if nft.total_likes > 0 %}<i class="material-icons">grade</i>
+                            {{ nft.total_likes }}
+                            {% endif %}
+                        </p>
+                    </form>
+                    <p>Creator: {{ nft.creator }}</p>
+                    <p>Blockchain: Ethereum</p>
+                    <p>Token ID: {{ nft.token_id }}</p>
+                    <p>Description: {{ nft.description }}</p>
+                    {% if nft.creator == request.user %}
+                </div>
+                <div class="card-action">
+                    <a href="{% url 'nft_edit' nft.id %}" class="waves-effect waves-light btn-small">Edit</a>
+                    <a href="{% url 'nft_delete' nft.id %}"
+                        class="waves-effect waves-light btn-small red darken-4">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <table class="striped">
+                        {% for bid in nft.bid_set.all %}
+                        {% if forloop.first %}
+                        <h4>Top Bid: ETH {{ bid.bid_price }}</h4>
+                        {% endif %}
+                        {% endfor %}
+                        {% for sell in nft.sell_set.all %}
+                        <thead>
+                            <tr>
+                                <th>Sale Ends</th>
+                                <th>Min Bid Price</th>
+                                <th>USD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{sell.sale_ends}}</td>
+                                <td>ETH {{sell.min_bid_price}}</td>
+                                <td>${{sell.min_bid_price|mul:2735}}</td>
+                            </tr>
+                            {% empty %}
+                            {% if nft.creator == request.user %}
+                            <div class="sellbutton">
+                                <h3 class="center-align">READY TO SELL YOUR NFT?</h3>
+                                <br>
+                                <div class="center-align">
+                                    <a href="{% url 'sell' nft.id %}"
+                                        class="waves-effect waves-light btn-large pulse">Sell</a>
+                                </div>
+                            </div>
+                            {%else%}
+                            <h3 class="center-align">SORRY! THIS NFT IS NOT FOR SALE ~_~</h3>
+                            {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    {% for sell in nft.sell_set.all %}
+                    <span class="card-title"></span>
+                    <hr>
+                    {% if nft.creator == request.user %}
+                    <div></div>
+                    {%else%}
+                    <form action="{% url 'add_bid' nft.id %}" class='bidprice' method="post">
+                        {% csrf_token %} {{ bid_form.as_p }}
+                        <input type="submit" class="btn pulse" value="Add Bid">
+                    </form>
+                    {% endif %}
+
+                    {% if nft.creator == request.user %}
+                    <table class="striped">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Bidder</th>
+                                <th>Bid</th>
+                                <th>USD</th>
+                                <th>MINT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bid in nft.bid_set.all %}
+                            <tr>
+                                <td>{{ bid.bid_time|date:'m-d H:i' }}</td>
+                                <td>{{ bid.bidder.username }}</td>
+                                <td>ETH {{ bid.bid_price }}</td>
+                                <td>${{ bid.bid_price|mul:2735 }}</td>
+                                <td class="center-align">
+                                    <form action="{% url 'accept_bid' bid.id %}" enctype="multipart/form-data"
+                                        method="POST" class="bidprice">
+                                        {% csrf_token %}
+                                        <button type="submit"
+                                            class="btn-floating btn-small waves-effect waves-light circle green pulse"><i
+                                                class="material-icons">check</i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <h2>{{ page_obj|length }} NFT'S</h2>
+        <ul class="collection">
+            {% for nft in page_obj %}
+            <li class="collection-item" style="padding:25px;">
+                <div class="row">
+                    <a href="{% url 'nft_detail' nft.id %}">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="col s2 teal darken-4">
+                                    <img src="{{ photo.url }}" alt="" class="thumbnail-big">
+                                </div>
+                                <div class="col s9" style="padding-left:50px;">
+                                    <span>{{ nft.name }}</span>
+                                    <p>{{ nft.description }}</p>
+                                    <p>{{ nft.blockchain }}</p>
+                                    <p>{{ nft.token_id }}</p>
+                                </div>
+                                <div class="col s1">
+                                    <p class="secondary-content">
+                                        {% if nft.total_likes > 0 %}<i class="material-icons">grade</i>
+                                        {{ nft.total_likes }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h2>{{ raffle_list|length }} RAFFLES'S</h2>
+        <ul class="collection">
+            {% for raffle in raffle_list %}
+            <li class="collection-item avatar">
+                <a href="{% url 'raffle_detail' raffle.id %}">
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

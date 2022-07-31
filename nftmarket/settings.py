@@ -12,9 +12,15 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import environ
 import os
 import django_heroku
+from django.conf.global_settings import DATE_FORMAT, DATETIME_INPUT_FORMATS
 
 env = environ.Env()
 environ.Env.read_env(env.str("ENV_PATH", ".env"))
+
+AUTH_USER_MODEL = "main.User"
+DATE_FORMAT = "m/d/Y"
+# ISO 8601 datetime format to accept html5 datetime input values
+DATETIME_INPUT_FORMATS += ["%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M"]
 
 from pathlib import Path
 
@@ -47,6 +53,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "mathfilters",
+    "materializecssform",
 ]
 
 MIDDLEWARE = [
@@ -57,6 +64,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "main.middleware.hookahhigness.HookahHignessMiddleware",
 ]
 
 ROOT_URLCONF = "nftmarket.urls"
@@ -127,6 +135,8 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
+
+USE_L10N = True
 
 USE_I18N = True
 

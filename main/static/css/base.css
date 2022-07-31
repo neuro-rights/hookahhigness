@@ -6,6 +6,15 @@ body {
     font-family: 'Roboto Mono', monospace;
 }
 
+.brand-logo {
+    font-size: 2rem;
+    color: teal;
+}
+
+.caret {
+    fill: #64ffda;
+}
+
 main {
     flex: 1 0 auto;
 }
@@ -23,21 +32,41 @@ nav .nav-wrapper {
     height: 100%;
 }
 
-nav .brand-logo {
-    font-size: 2.4rem;
-    color: whitesmoke;
+#nav-mobile li {
+    background-color: #0B0C10;
 }
 
 nav ul a {
     font-size: 1.2rem;
 }
 
+#search {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+#searchbar {
+    margin: 0 0 0 45px;
+}
+
+#searchbar::placeholder {
+    color: whitesmoke;
+}
+
+#welcome {
+    color: #C5C6C7;
+}
+
 label {
     font-size: 15px;
+    color: whitesmoke;
 }
 
 h1,
-h2 {
+h2,
+h3,
+h4 {
     color: whitesmoke;
 }
 
@@ -93,30 +122,8 @@ li form {
     margin-right: 25px;
 }
 
-#search {
-    border: none;
-    background-color: transparent;
-    outline: none;
-}
-
-label {
-    color: whitesmoke;
-}
-
 .nonft {
     color: whitesmoke;
-}
-
-#searchbar {
-    margin: 0 0 0 45px;
-}
-
-#searchbar::placeholder {
-    color: whitesmoke;
-}
-
-#welcome {
-    color: #C5C6C7;
 }
 
 p #id_bidprice {
@@ -136,13 +143,46 @@ p #id_bidprice {
     color: whitesmoke;
 }
 
-ul li,
+.dropdown-content {
+    top: 100% !important;
+    padding-left: 120px;
+}
+
+.dropdown-content a {
+    color: whitesmoke;
+    background-color: #00695c;
+}
+
+.dropdown-content a:hover {
+    color: #64ffda;
+}
+
+.dropdown-content li {
+    color: whitesmoke !important;
+    background-color: #00796b !important;
+}
+
+.dropdown-content li.selected,
+.dropdown-content li:hover {
+    color: #64ffda !important;
+    background-color: #00695c !important;
+}
+
+ul li {
+    background-color: #00796b;
+}
+
 .helptext {
     color: #64ffda;
 }
 
 .errorlist li {
     color: tomato;
+}
+
+.material-icons {
+    display: inline-flex;
+    vertical-align: top;
 }
 
 footer.page-footer {
@@ -171,23 +211,4 @@ footer.page-footer {
     display: inline-block;
     vertical-align: middle;
     border-radius: 0px;
-}
-
-.dropdown-content {
-    top: 100% !important;
-}
-
-.dropdown-content a {
-    color: whitesmoke !important;
-    background-color: #00695c;
-}
-
-.dropdown-content a:hover {
-    color: #64ffda;
-    background-color: #00796b;
-}
-
-.material-icons {
-    display: inline-flex;
-    vertical-align: top;
 }

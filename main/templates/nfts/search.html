@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if searched %}
+<h2>You searched for '{{ searched }}'</h2>
+<hr>
+{% if search_result|length %}
+{% for nft in search_result %}
+<a href="{% url 'nft_detail' nft.uuid %}">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-img-container">
+                <img class="responsive-img card-panel" src="{{ nft.preview_uri }}" loading="lazy">
+            </div>
+            <h2 class="card-title">{{ nft.name }}</h2>
+            <p><small>{{ nft.token_id }}</small></p>
+        </div>
+    </div>
+</a><br />
+{% endfor %}
+{% else %}
+<h2 class="nonft">No NFT's Found :(</h2>
+{% endif %}
+{% else %}
+<h2>Hey! You forgot to enter a NFT name in the search box.</h2>
+{% endif %}
+{% endblock %}

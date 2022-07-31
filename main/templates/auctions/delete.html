@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>DELETE AUCTION</h2>
+<h4 class="header-text">Are you sure you want to delete<span class="teal-text">{{ auction.uuid|upper }}</span> ¿ⓧ_ⓧﮌ
+</h4>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Yes - Delete!" class="btn red darken-4">
+</form>
+{% endblock %}

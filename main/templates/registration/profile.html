@@ -1,0 +1,114 @@
+{% extends 'base.html' %} {% load materializecss %}
+{% block content %}
+
+<!-- Page Layout here -->
+<div class="row">
+
+    <div class="col s12 m8 l9">
+        <!-- Note that "m8 l9" was added -->
+        <!-- Teal page content
+
+            This content will be:
+        9-columns-wide on large screens,
+        8-columns-wide on medium screens,
+        12-columns-wide on small screens  -->
+
+        {% if messages %}
+        <section>
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        <section id="wallet">
+            <h4>Wallet</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ form.ethereum_wallet_address|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+        <section id="aws_s3">
+            <h4>AWS S3</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ form.aws_s3_bucket|materializecss }}
+                {{ form.aws_s3_region|materializecss }}
+                {{ form.aws_access_key_id_value|materializecss }}
+                {{ form.aws_secret_access_key_value|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+        <section id="pinata_ipfs">
+            <h4>PINATA IPFS (Optional)</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ form.pinata_ipfs_api_key|materializecss }}
+                {{ form.pinata_ipfs_api_secret|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+        <section id="infura_ipfs">
+            <h4>INFURA IPFS (Optional)</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ form.infura_ipfs_project_id|materializecss }}
+                {{ form.infura_ipfs_secret_key|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+        <section id="infura_ethereum">
+            <h4>INFURA ETHEREUM (Optional)</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {{ form.infura_ethereum_project_id|materializecss }}
+                {{ form.infura_ethereum_secret_key|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+        <section id="alchemy"></section>
+        <h4>ALCHEMY (Optional)</h4>
+        <form method="post" action="{% url 'profile' %}">
+            {{ form.infura_ethereum_project_id|materializecss }}
+            <input type="submit" class="btn" value="update settings">
+        </form>
+        </section>
+
+        <section id="opensea">
+            <h4>OPENSEA (Optional)</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {{ form.infura_ethereum_project_id|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+        <section id="etherscan">
+            <h4>ETHERSCAN (Optional)</h4>
+            <form method="post" action="{% url 'profile' %}">
+                {{ form.infura_ethereum_project_id|materializecss }}
+                <input type="submit" class="btn" value="update settings">
+            </form>
+        </section>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        let elems = document.querySelectorAll('.sidenav');
+        let instances = M.Sidenav.init(elems);
+        instances.forEach(function (instance) {
+            instance.open();
+        });
+    });
+</script>
+{% endblock %}

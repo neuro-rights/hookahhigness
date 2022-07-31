@@ -1,0 +1,128 @@
+{% extends 'base.html' %} {% load materializecss %}
+{% block content %}
+
+{% if object %}
+<h2>EDIT NFT<span class="teal-text">{{nft.uuid|upper}}</span></h2>
+{% else %}
+<h2>CREATE NFT</h2>
+{% endif %}
+
+<div class="row">
+    <form class="col s12" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|materializecss }}
+        <hr>
+        <div class="row">
+            <div class="col s12">
+                <button class="btn-small waves-effect waves-light teal darken-4" type="submit" name="action"
+                    id="submit">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<ul class="collapsible">
+    <li>
+        <div class="collapsible-header teal darken-4"><i class="material-icons">filter_drama</i>Submit</div>
+        <div class="collapsible-body">
+            <div class="progress">
+                <div id="upload_progress" class="determinate red darken-4" style="width: 0%"></div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header teal darken-4"><i class="material-icons">place</i>Parse</div>
+        <div class="collapsible-body">
+            <div style="width:100%;overflow:auto">
+                <pre>Parsing...</pre>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header teal darken-4"><i class="material-icons">whatshot</i>Adding to DB</div>
+        <div class="collapsible-body">
+            <div style="width:100%;overflow:auto">
+                <pre>Adding to DB...</pre>
+            </div>
+        </div>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block javascript %}
+<script type="text/javascript">
+    /*
+      Function to carry out the actual POST request to S3 using the signed request from the Python app.
+    */
+    function uploadFile(file, s3Data, url) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', s3Data.url);
+        xhr.setRequestHeader('x-amz-acl', 'public-read');
+
+        const postData = new FormData();
+        for (key in s3Data.fields) {
+            postData.append(key, s3Data.fields[key]);
+        }
+        postData.append('file', file);
+
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200 || xhr.status === 204) {
+                    document.getElementById('preview').src = url;
+                    document.getElementById('avatar-url').value = url;
+                }
+                else {
+                    alert('Could not upload file.');
+                }
+            }
+        };
+        xhr.send(postData);
+    }
+
+    /*
+      Function to get the temporary signed request from the Python app.
+      If request successful, continue to upload the file using this signed
+      request.
+    */
+    function getSignedRequest(file) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    uploadFile(file, response.data, response.url);
+                }
+                else {
+                    alert('Could not get signed URL.');
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    /*
+       Function called when file input updated. If there is a file selected, then
+       start upload procedure by asking for a signed request from the app.
+    */
+    function initUpload() {
+        const fileInput = document.getElementById('file-input');
+        const selectedFiles = [...fileInput.files];
+        for (file in selectedFiles) {
+            if (!file) {
+                return alert('No file selected.');
+            }
+            getSignedRequest(file);
+        }
+    }
+
+    /*
+       Bind listeners when the page loads.
+    */
+    (() => {
+        document.getElementById('file-input').onchange = initUpload;
+    })();
+</script>
+{% endblock %}

@@ -1,22 +1,21 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load mathfilters %}
+{% block content %}
 
-{% block content %} {% load mathfilters %}
-
-<h2>{{nft.nft_name|upper}}</h2>
+<h2>{{nft.name|upper}}</h2>
 <div class="bidcard">
     <div class="card">
         <div class="card-content">
-            <span class="card-title"></span> {% for photo in nft.photo_set.all %}
-            <img class="responsive-img card-panel" src="{{photo.url}}" loading="lazy"> {% empty %}
-            <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-            {% if notempty %} <br> {% elif nft.creator == request.user %}
-            <form action="{% url 'add_photo' nft.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+            <span class="card-title"></span>
+            <link rel="preload" class="responsive-img card-panel" href="{{ nft.preview_uri }}" as="image" crossorigin>
+            {% if nft.creator == request.user %}
+            <form action="{% url 'add_photo' nft.uuid %}" enctype="multipart/form-data" method="POST"
+                class="card-panel">
                 {% csrf_token %}
                 <input type="file" name="photo-file">
-                <br><br>
+                <hr>
                 <input type="submit" class="btn" value="Upload Photo">
             </form>
-            {% endif %} {% endfor %}
+            {% endif %}
             <form action="{% url 'like_nft' nft.pk %}" method="POST" class="right">
                 {% csrf_token %}
                 <button type="submit" , name="nft_id" , value="{{ post.id }}"
@@ -36,8 +35,8 @@
             {% if nft.creator == request.user %}
         </div>
         <div class="card-action">
-            <a href="{% url 'nft_edit' nft.id %}" class="waves-effect waves-light btn-small">Edit</a>
-            <a href="{% url 'nft_delete' nft.id %}" class="waves-effect waves-light btn-small red darken-4">Delete</a>
+            <a href="{% url 'nft_edit' nft.uuid %}" class="waves-effect waves-light btn-small">Edit</a>
+            <a href="{% url 'nft_delete' nft.uuid %}" class="waves-effect waves-light btn-small red darken-4">Delete</a>
             {% endif %}
         </div>
     </div>
@@ -67,14 +66,14 @@
                     {% empty %}
                     {% if nft.creator == request.user %}
                     <div class="sellbutton">
-                        <h3 class="center-align">READY TO SELL YOUR NFT?</h3>
+                        <h3 class="center-align">READY TO SELL YOUR NFT? ᕙ(⇀‸↼‶)ᕗ</h3>
                         <br>
                         <div class="center-align">
                             <a href="{% url 'sell' nft.id %}" class="waves-effect waves-light btn-large pulse">Sell</a>
                         </div>
                     </div>
                     {%else%}
-                    <h3 class="center-align">SORRY! THIS NFT IS NOT FOR SALE ~_~</h3>
+                    <h3 class="center-align">SORRY! THIS NFT IS NOT FOR SALE (҂◡_◡)</h3>
                     {% endif %}
                     {% endfor %}
                 </tbody>
@@ -118,18 +117,6 @@
                                     class="btn-floating btn-small waves-effect waves-light circle green pulse"><i
                                         class="material-icons">check</i>
                                 </button>
-                                <!--
-                                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-                                    <div id="modal1" class="modal">
-                                        <div class="modal-content">
-                                        <h4>Modal Header</h4>
-                                        <p>A bunch of text</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                                        </div>
-                                    </div>
-                                -->
                             </form>
                         </td>
                     </tr>

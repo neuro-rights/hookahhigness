@@ -1,40 +1,468 @@
 from django import forms
-from .models import Bid, Purchase, Sell, NFT, NFTCollection, Profile
+from django.contrib.auth.forms import UserCreationForm
+from .models import User, Nft, Asset, Raffle, Auction, Bid, Purchase
+
+from datetime import datetime, timedelta
+from libgravatar import Gravatar
 
 
-class ProfileForm(forms.ModelForm):
+class UserCreateForm(forms.ModelForm):
+    """
+    A form for creating new users.
+    Includes all the required fields, plus a repeated password.
+    """
+
+    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label="Password confirmation", widget=forms.PasswordInput
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(UserCreateForm, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update(
+                {
+                    "class": "input-field",
+                    "placeholder": "{}".format(field)
+                    .replace("_", " ")
+                    .capitalize(),
+                }
+            )
+        #
+        self.fields["password1"].widget.attrs[
+            "placeholder"
+        ] = "please enter your password"
+        self.fields["password2"].widget.attrs[
+            "placeholder"
+        ] = "confirm your password"
+        self.fields["username"].widget.attrs["placeholder"] = "username"
+        self.fields["username"].required = True
+        self.fields["email"].widget.attrs["placeholder"] = "email@domain.tld"
+        self.fields["email"].required = True
+
+        if self.instance.pk:
+            self.fields["username"].required = False
+            self.fields["username"].widget.attrs["readonly"] = True
+            self.fields["email"].required = False
+            self.fields["email"].widget.attrs["readonly"] = True
+
+    def clean_password2(self):
+        # Check that the two password entries match
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise ValidationError("Passwords don't match")
+        return password2
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        self.date_joined = datetime.today()
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
+        user.profile_image_url = Gravatar(user.email).get_image()
+        if commit:
+            user.save()
+        return user
+
     class Meta:
-        model = Profile
-        fields = ["user", "wallet_address", "wallet_private_key"]
+        model = User
+        fields = ["username", "email"]
+
+
+class UserEditForm(forms.ModelForm):
+    """ """
+
+    def __init__(self, *args, **kwargs):
+        super(UserEditForm, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update(
+                {
+                    "class": "input-field",
+                    "placeholder": "{}".format(field)
+                    .replace("_", " ")
+                    .capitalize(),
+                }
+            )
+        self.fields["username"].widget.attrs["placeholder"] = "username"
+        self.fields["email"].widget.attrs["placeholder"] = "email@domain.tld"
+        self.fields["profile_image_url"].widget.attrs[
+            "placeholder"
+        ] = "https://domain.tld/"
+        self.fields["ethereum_wallet_address"].widget.attrs[
+            "placeholder"
+        ] = "0x 40 hex characters"
+        self.fields["ethereum_wallet_private_key"].widget.attrs[
+            "placeholder"
+        ] = "64 hex characters"
+        self.fields["pinata_ipfs_api_key"].widget.attrs[
+            "placeholder"
+        ] = "20 hex characters"
+        self.fields["pinata_ipfs_api_secret"].widget.attrs[
+            "placeholder"
+        ] = "64 hex characters"
+        self.fields["infura_ethereum_project_id"].widget.attrs[
+            "placeholder"
+        ] = "27 characters"
+        self.fields["infura_ethereum_secret_key"].widget.attrs[
+            "placeholder"
+        ] = "32 hex characters"
+        self.fields["aws_s3_bucket"].widget.attrs[
+            "placeholder"
+        ] = "your aws s3 bucket name"
+        self.fields["aws_s3_region"].widget.attrs[
+            "placeholder"
+        ] = "your aws s3 region"
+        self.fields["email"].required = True
+
+        if self.instance.pk:
+            self.fields["username"].required = False
+            self.fields["username"].widget.attrs["readonly"] = True
+            self.fields["email"].required = False
+            self.fields["email"].widget.attrs["readonly"] = True
+
+    def clean_password2(self):
+        # Check that the two password entries match
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise ValidationError("Passwords don't match")
+        return password2
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "email",
+            "profile_image_url",
+            "ethereum_wallet_address",
+            "ethereum_wallet_private_key",
+            "pinata_ipfs_api_key",
+            "pinata_ipfs_api_secret",
+            "infura_ipfs_project_id",
+            "infura_ipfs_secret_key",
+            "infura_ethereum_project_id",
+            "infura_ethereum_secret_key",
+            "aws_s3_bucket",
+            "aws_s3_region",
+            "aws_access_key_id_value",
+            "aws_secret_access_key_value",
+            "etherscan_token",
+        ]
+
+
+class NftForm(forms.ModelForm):
+    """ """
+
+    def __init__(self, request, *args, **kwargs):
+        """Grants access to the request object so that only members of the current user
+        are given as options"""
+        super(NftForm, self).__init__(*args, **kwargs)
+        self.request = request
+
+    def save(self, commit=True):
+        """ """
+        instance = super().save(commit=False)
+        instance.creator = self.request.user
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
+
+    class Meta:
+        """ """
+
+        model = Nft
+        fields = [
+            "nft_type",
+            "name",
+            "description",
+            "uri_asset",
+            "uri_metadata",
+            "uri_preview",
+        ]
         widgets = {
-            "wallet_address": forms.TextInput(attrs={"class": "form-control"}),
-            "wallet_private_key": forms.TextInput(attrs={"class": "form-control"}),
+            "nft_type": forms.Select(attrs={"required": True}),
+        }
+
+
+class AssetFromImagesForm(forms.ModelForm):
+    """ """
+
+    image_files = forms.FileField(
+        widget=forms.ClearableFileInput(attrs={"multiple": True})
+    )
+
+    def __init__(self, request, *args, **kwargs):
+        """Grants access to the request object so that only members of the current user
+        are given as options"""
+        super(AssetFromImagesForm, self).__init__(*args, **kwargs)
+        self.request = request
+
+    def save(self, commit=True):
+        """ """
+        instance = super().save(commit=False)
+        instance.seller = self.request.user
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
+
+    class Meta:
+        """ """
+
+        model = Asset
+        fields = [
+            "asset_type",
+            "name",
+            "description",
+            "status",
+        ]
+        widgets = {
+            "status": forms.Select(attrs={"required": True}),
+            "asset_type": forms.Select(attrs={"required": True}),
+        }
+
+
+class AssetFromNftsForm(forms.ModelForm):
+    """ """
+
+    nfts = forms.ModelMultipleChoiceField(
+        queryset=None, widget=forms.SelectMultiple
+    )
+
+    def __init__(self, request, *args, **kwargs):
+        """Grants access to the request object so that only members of the current user
+        are given as options"""
+        super(AssetFromNftsForm, self).__init__(*args, **kwargs)
+        self.request = request
+        self.fields["nfts"].queryset = Nft.objects.filter(
+            creator=self.request.user
+        )
+
+    def save(self, commit=True):
+        """ """
+        instance = super().save(commit=False)
+        instance.seller = self.request.user
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
+
+    class Meta:
+        """ """
+
+        model = Asset
+        fields = [
+            "nfts",
+            "asset_type",
+            "name",
+            "description",
+            "status",
+        ]
+        widgets = {
+            "status": forms.Select(attrs={"required": True}),
+            "asset_type": forms.Select(attrs={"required": True}),
+        }
+
+
+class AssetFromMetadataURLForm(forms.ModelForm):
+    """ """
+
+    metadata_file = forms.FileField(widget=forms.ClearableFileInput())
+
+    def __init__(self, request, *args, **kwargs):
+        """Grants access to the request object so that only members of the current user
+        are given as options"""
+        super(AssetFromMetadataForm, self).__init__(*args, **kwargs)
+        self.request = request
+
+    def save(self, commit=True):
+        """ """
+        instance = super().save(commit=False)
+        instance.seller = self.request.user
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
+
+    class Meta:
+        """ """
+
+        model = Asset
+        fields = [
+            "asset_type",
+            "name",
+            "description",
+            "metadata_uri",
+            "status",
+        ]
+        widgets = {
+            "status": forms.Select(attrs={"required": True}),
+            "asset_type": forms.Select(attrs={"required": True}),
+        }
+
+
+class AuctionForm(forms.ModelForm):
+    """ """
+
+    assets = forms.ModelMultipleChoiceField(
+        queryset=None, widget=forms.SelectMultiple
+    )
+
+    def __init__(self, request, *args, **kwargs):
+        """Grants access to the request object so that only members of the current user
+        are given as options"""
+        super(AuctionForm, self).__init__(*args, **kwargs)
+        self.request = request
+        self.fields["assets"].queryset = Asset.objects.filter(
+            seller=self.request.user
+        )
+
+    def save(self, commit=True):
+        """ """
+        instance = super().save(commit=False)
+        instance.seller = self.request.user
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
+
+    class Meta:
+        """ """
+
+        model = Auction
+        fields = [
+            "assets",
+            "blockchain",
+            "description",
+            "date_start",
+            "time_start",
+            "date_end",
+            "time_end",
+            "bid_start_value",
+            "status",
+        ]
+        widgets = {
+            "blockchain": forms.Select(),
+            "date_start": forms.TextInput(
+                attrs={"value": datetime.now().strftime("%m / %d / %Y")}
+            ),
+            "time_start": forms.TimeInput(
+                attrs={"value": datetime.now().strftime("%H:%M")}
+            ),
+            "date_end": forms.TextInput(
+                attrs={"value": datetime.now().strftime("%m / %d / %Y")}
+            ),
+            "time_end": forms.TimeInput(
+                attrs={"value": datetime.now().strftime("%H:%M")}
+            ),
+            "status": forms.Select(),
         }
 
 
 class BidForm(forms.ModelForm):
+    """ """
+
+    auction = forms.ModelChoiceField(queryset=None, widget=forms.Select)
+
+    def __init__(self, request, *args, **kwargs):
+        """Grants access to the request object so that only members of the current user
+        are given as options"""
+        super(BidForm, self).__init__(*args, **kwargs)
+        self.request = request
+
+    def save(self, commit=True):
+        """ """
+        instance = super().save(commit=False)
+        instance.buyer = self.request.user
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
+
     class Meta:
+        """ """
+
         model = Bid
-        fields = ["bid_price"]
+        fields = ["auction", "value"]
+        widgets = {"auction": forms.Select(attrs={"required": True})}
 
 
-class SellForm(forms.ModelForm):
+class PurchaseForm(forms.ModelForm):
+    """ """
+
+    def __init__(self, request, *args, **kwargs):
+        """Grants access to the request object so that only members of the current user
+        are given as options"""
+        super(PurchaseForm, self).__init__(*args, **kwargs)
+        self.request = request
+
+    def save(self, commit=True):
+        """ """
+        instance = super().save(commit=False)
+        instance.seller = instance.bid.auction.seller
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
+
     class Meta:
-        model = Sell
-        fields = ["sale_ends", "min_bid_price"]
+        """ """
+
+        model = Purchase
+        fields = ["tx_hash", "tx_token", "status"]
+        widgets = {
+            "status": forms.Select(attrs={"required": True}),
+        }
 
 
-class NFTCollectionForm(forms.ModelForm):
+class RaffleForm(forms.ModelForm):
+    """ """
+
+    asset = forms.ModelChoiceField(queryset=None, widget=forms.Select)
+
+    def __init__(self, request, *args, **kwargs):
+        """Grants access to the request object so that only members of the current user
+        are given as options"""
+        super(RaffleForm, self).__init__(*args, **kwargs)
+        self.request = request
+        self.fields["asset"].queryset = Asset.objects.filter(
+            seller=self.request.user
+        )
+
     class Meta:
-        model = NFTCollection
-        fields = ["name", "blockchain", "metadata_dir_url", "description", "metadata_file"]
+        """ """
 
-
-class NFTForm(forms.ModelForm):
-    class Meta:
-        model = NFT
-        fields = ["nft_name", "metadata_uri", "blockchain", "description"]
+        model = Raffle
+        fields = [
+            "asset",
+            "date_start",
+            "time_start",
+            "date_end",
+            "time_end",
+            "price_entry",
+            "status",
+        ]
+        #
+        widgets = {
+            "asset": forms.Select(attrs={"required": True}),
+            "status": forms.Select(attrs={"required": True}),
+            "date_start": forms.TextInput(
+                attrs={"value": datetime.now().strftime("%m / %d / %Y")}
+            ),
+            "time_start": forms.TimeInput(
+                attrs={"value": datetime.now().strftime("%H:%M")}
+            ),
+            "date_end": forms.TextInput(
+                attrs={"value": datetime.now().strftime("%m / %d / %Y")}
+            ),
+            "time_end": forms.TimeInput(
+                attrs={"value": datetime.now().strftime("%H:%M")}
+            ),
+        }
 
 
 class FileFieldForm(forms.Form):
-    file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={"multiple": True}))
+    file_field = forms.FileField(
+        widget=forms.ClearableFileInput(attrs={"multiple": True})
+    )

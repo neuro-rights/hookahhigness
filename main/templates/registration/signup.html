@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2 class="page-title">SIGN UP</h2>
+{% if user.is_authenticated %}
+<h2 class="page-title">(∩｀-´)⊃━☆ﾟ.*･｡ﾟ - EDIT USER</h2>
+{% else %}
+<h2 class="page-title">♥‿♥ - SIGN UP</h2>
+{% endif %}
 
-{% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
 <form method="post" action="{% url 'signup' %}">
   {% csrf_token %}
   {{ form.as_p }}
