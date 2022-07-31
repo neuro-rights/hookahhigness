@@ -25,7 +25,11 @@
         <nav class="nav-extended">
             <div class="nav-wrapper">
                 <ul class="nav-menu">
-                    <li><a href="/" class="left brand-logo">&nbsp;&nbsp;(っ▀¯▀)つ</a></li>
+                    <li>&nbsp;&nbsp;
+                        <a href="{% url 'market_list' %}" class="left brand-logo">
+                            <i class="material-icons left-align">shop</i>
+                        </a>
+                    </li>
                 </ul>
                 <a href="#"></a>
                 <ul id="nav-mobile" class="right">
@@ -33,9 +37,7 @@
                     <li>{{ user.username }}</li>
                     <li>{{ user.ethereum_wallet_address }}</li>
                     <li>
-                        <a href="{% url 'profile' %}" data-target="slide-out" class="sidenav-trigger">
-                            <i class="material-icons">fingerprint</i>
-                        </a>
+
                     </li>
                     <li>
                         <a href="{% url 'followers' %}"><i class="material-icons right">group</i></a>
@@ -45,7 +47,7 @@
                     </li>
                     {% else %}
                     <li><a href="{% url 'signup' %}"><i class="material-icons right">group_add</i></a></li>
-                    <li><a href="{% url 'login' %}"><i class="material-icons right">lock</i></a></li>
+                    <li><a href="{% url 'login' %}"><i class="material-icons right">fingerprint</i></a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -60,19 +62,16 @@
                 </ul>
             </div>
             {% if user.is_authenticated %}
-            <ul class="left">
-                <li><a href="{% url 'market_list' %}">MARKET</a></li>
-            </ul>
             <ul class="right">
                 <li><a class="dropdown-trigger" href="{% url 'auctions_own_running' %}"
-                        data-target='auctions'>AUCTIONS</a>
+                        data-target='auctions'>Auctions</a>
                 </li>
-                <li><a class="dropdown-trigger" href="{% url 'raffles_own' %}" data-target='raffles'>RAFFLES</a></li>
-                <li><a class="dropdown-trigger" href="{% url 'assets_own' %}" data-target='assets'>ASSETS</a>
+                <li><a class="dropdown-trigger" href="{% url 'raffles_own' %}" data-target='raffles'>Raffles</a></li>
+                <li><a class="dropdown-trigger" href="{% url 'assets_own' %}" data-target='assets'>Assets</a>
                 </li>
                 <li><a class="dropdown-trigger" href="{% url 'nfts_own' %}" data-target='nfts'>NFT's</a></li>
                 {% comment %}
-                <li><a href="{% url 'opensea' %}">OPENSEA</a></li>
+                <li><a href="{% url 'opensea' %}">Opensea</a></li>
                 {% endcomment %}
             </ul>
             <ul id='auctions' class='dropdown-content teal darken-4'>
@@ -121,7 +120,7 @@
     </main>
 
     <footer class="page-footer">
-        <div class="right">All Rights Reserved, &copy; 2022 NFT Marketplace &nbsp; \(ᵔᵕᵔ)/</div>
+        <div class="right">All Rights Reserved, &copy; 2022 NFT Market &nbsp; \(ᵔᵕᵔ)/</div>
     </footer>
     <script src="https://unpkg.com/ipfs-http-client/dist/index.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
