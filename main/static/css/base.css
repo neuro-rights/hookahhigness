@@ -11,6 +11,10 @@ body {
     color: teal;
 }
 
+footer.page-footer {
+    margin-top: 50px;
+}
+
 .select-wrapper .caret {
     fill: #64ffda !important;
     color: #64ffda !important;
