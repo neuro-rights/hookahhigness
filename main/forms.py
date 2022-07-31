@@ -273,7 +273,7 @@ class AssetFromMetadataURLForm(forms.ModelForm):
     def __init__(self, request, *args, **kwargs):
         """Grants access to the request object so that only members of the current user
         are given as options"""
-        super(AssetFromMetadataURLCreate, self).__init__(*args, **kwargs)
+        super(AssetFromMetadataURLForm, self).__init__(*args, **kwargs)
         self.request = request
 
     def save(self, commit=True):
