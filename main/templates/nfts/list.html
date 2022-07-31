@@ -11,7 +11,7 @@
         9-columns-wide on large screens,
         8-columns-wide on medium screens,
         12-columns-wide on small screens  -->
-        <h2>{{ page_obj|length }} NFTS</h2>
+        <h4>{{ page_obj|length }} NFTS</h4>
         {% for obj in page_obj %}
         <a href="{% url 'nft_detail' obj.fields.uuid %}">
             <table class="responsive-table">
