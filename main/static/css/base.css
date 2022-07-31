@@ -17,7 +17,7 @@ body {
 }
 
 #submit {
-    text-align: right !important;
+    float: right !important;
 }
 
 main {

@@ -29,7 +29,7 @@ def auction_detail(request, auction_uuid):
 @login_required
 def auctions_own(request):
     #
-    auctions_own = Auction.objects.filter(seller__user=request.user)
+    auctions_own = Auction.objects.filter(seller=request.user)
     #
     context = {"page_obj": get_page_obj(request, auctions_own, 25)}
     return render(request, "auctions/list.html", context)
