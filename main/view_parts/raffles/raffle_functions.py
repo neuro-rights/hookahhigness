@@ -38,7 +38,7 @@ def raffles_running(request):
 @login_required
 def raffles_own(request):
     #
-    raffles_own = Raffle.objects.filter(asset__seller__user=request.user)
+    raffles_own = Raffle.objects.filter(asset__seller=request.user)
     #
     context = {"page_obj": get_page_obj(request, raffles_own, 25)}
     return render(request, "raffles/list.html", context)
@@ -47,9 +47,7 @@ def raffles_own(request):
 @login_required
 def raffles_own_running(request):
     #
-    raffles_own_running = Raffle.objects.filter(
-        asset__seller__user=request.user
-    )
+    raffles_own_running = Raffle.objects.filter(asset__seller=request.user)
     #
     context = {"page_obj": get_page_obj(request, raffles_own_running, 25)}
     return render(request, "raffles/list.html", context)
@@ -58,9 +56,7 @@ def raffles_own_running(request):
 @login_required
 def raffles_own_scheduled(request):
     #
-    raffles_own_scheduled = Raffle.objects.filter(
-        asset__seller__user=request.user
-    )
+    raffles_own_scheduled = Raffle.objects.filter(asset__seller=request.user)
     #
     context = {"page_obj": get_page_obj(request, raffles_own_scheduled, 25)}
     return render(request, "raffles/list.html", context)
@@ -69,7 +65,7 @@ def raffles_own_scheduled(request):
 @login_required
 def raffles_own_ended(request):
     #
-    raffles_own_ended = Raffle.objects.filter(asset__seller__user=request.user)
+    raffles_own_ended = Raffle.objects.filter(asset__seller=request.user)
     #
     context = {"page_obj": get_page_obj(request, raffles_own_ended, 25)}
     return render(request, "raffles/list.html", context)
