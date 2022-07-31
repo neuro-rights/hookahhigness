@@ -33,8 +33,10 @@
                 -->
                 <ul id="nav-mobile" class="right">
                     {% if user.is_authenticated %}
+                    <!--
                     <li>{{ user.username }}</li>
                     <li>{{ user.ethereum_wallet_address }}</li>
+                    -->
                     <li>
                         <a href="{% url 'market_list' %}"><i class="material-icons right">shop</i></a>
                     </li>
