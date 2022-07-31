@@ -25,7 +25,7 @@ class PurchaseBoughtList(PassArgumentsToForm, ListView):
     # template_name = "purchases/list.html"
     #
     def get_queryset(self):
-        return Purchase.objects.filter(bid__buyer=self.profile)
+        return Purchase.objects.filter(bid__buyer=self.request.user)
 
 
 class PurchaseSoldList(PassArgumentsToForm, ListView):
@@ -36,7 +36,7 @@ class PurchaseSoldList(PassArgumentsToForm, ListView):
     # template_name = "purchases/list.html"
     #
     def get_queryset(self):
-        return Purchase.objects.filter(bid__auction__seller=self.profile)
+        return Purchase.objects.filter(bid__auction__seller=self.request.user)
 
 
 class PurchaseDetailView(PassArgumentsToForm, DetailView):
@@ -45,4 +45,4 @@ class PurchaseDetailView(PassArgumentsToForm, DetailView):
     model = Purchase
     #
     def get_queryset(self):
-        return Purchase.objects.filter(asset__seller=self.profile)
+        return Purchase.objects.filter(asset__seller=self.request.user)

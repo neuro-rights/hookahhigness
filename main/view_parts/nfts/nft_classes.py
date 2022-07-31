@@ -58,12 +58,7 @@ class NftList(LoginRequiredMixin, ListView):
     template_name = "nfts/list.html"
     #
     def get_queryset(self):
-        profile = (
-            Profile.objects.order_by("-id")
-            .filter(user=self.request.user)
-            .first()
-        )
-        return Nft.objects.filter(creator=profile)
+        return Nft.objects.filter(creator=self.request.user)
 
 
 class NftDetailView(LoginRequiredMixin, DetailView):
@@ -72,4 +67,4 @@ class NftDetailView(LoginRequiredMixin, DetailView):
     model = Nft
     #
     def get_queryset(self):
-        return Nft.objects.filter(creator=self.profile)
+        return Nft.objects.filter(creator=self.request.user)

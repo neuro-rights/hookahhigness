@@ -24,8 +24,6 @@ def market_list(request):
 @login_required
 def market_own(request):
     #
-    auctions_own = Auction.objects.order_by("-id").filter(
-        creator__user=request.user
-    )
+    auctions_own = Auction.objects.order_by("-id").filter(creator=request.user)
     context = {"page_obj": get_page_obj(request, auctions_own, 25)}
     return render(request, "auctions/list.html", context)

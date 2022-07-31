@@ -27,7 +27,7 @@ class BidList(PassArgumentsToForm, ListView):
     # template_name = "bids/list.html"
     #
     def get_queryset(self):
-        return Purchase.objects.filter(bidder=self.profile)
+        return Purchase.objects.filter(bidder=self.request.user)
 
 
 class BidDetailView(PassArgumentsToForm, DetailView):

@@ -83,7 +83,7 @@ class AuctionList(PassArgumentsToForm, CreateView):
     template_name = "auctions/list.html"
     #
     def get_queryset(self):
-        return Auction.objects.filter(seller=self.profile)
+        return Auction.objects.filter(seller=self.request.user)
 
 
 class AuctionDetailView(PassArgumentsToForm, DetailView):

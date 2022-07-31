@@ -227,7 +227,7 @@ class AssetList(PassArgumentsToForm, ListView):
     model = Asset
 
     def get_querset(self):
-        return Asset.objects.filter(seller=self.profile)
+        return Asset.objects.filter(seller=self.request.user)
 
 
 class AssetDetailView(PassArgumentsToForm, DetailView):
@@ -236,4 +236,4 @@ class AssetDetailView(PassArgumentsToForm, DetailView):
     model = Asset
 
     def get_querset(self):
-        return Asset.objects.filter(seller=self.profile)
+        return Asset.objects.filter(seller=self.request.user)

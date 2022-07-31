@@ -40,7 +40,7 @@ def assets_list(request):
 @login_required
 def assets_own(request):
     #
-    assets_own = Asset.objects.filter(seller__user=request.user)
+    assets_own = Asset.objects.filter(seller=request.user)
     #
     context = {"page_obj": get_page_obj(request, assets_own, 25)}
     return render(request, "assets/list.html", context)
@@ -54,7 +54,7 @@ def asset_add_raffle(request, auction_id):
 @login_required
 def asset_add_auction(request, auction_id):
     #
-    asset = Asset.objects.filter(creator__user=request.user)
+    asset = Asset.objects.filter(creator=request.user)
     #
     context = {"asset": asset}
     return render(request, "assets/list.html", context)
@@ -63,7 +63,7 @@ def asset_add_auction(request, auction_id):
 @login_required
 def asset_add_metadata(request, auction_id):
     #
-    asset = Asset.objects.filter(creator__user=request.user)
+    asset = Asset.objects.filter(creator=request.user)
     #
     context = {"asset": asset}
     return render(request, "assets/detail.html", context)
