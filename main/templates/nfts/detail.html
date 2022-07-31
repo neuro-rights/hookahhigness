@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load mathfilters %}
 {% block content %}
 
-<h2>{{nft.name|upper}}</h2>
+<h4>{{nft.name|upper}}</h4>
 <div class="bidcard">
     <div class="card">
         <div class="card-content">
@@ -66,14 +66,14 @@
                     {% empty %}
                     {% if nft.creator == request.user %}
                     <div class="sellbutton">
-                        <h3 class="center-align">READY TO SELL YOUR NFT? ᕙ(⇀‸↼‶)ᕗ</h3>
+                        <h4> class="center-align">READY TO SELL YOUR NFT? ᕙ(⇀‸↼‶)ᕗ</h4>
                         <br>
                         <div class="center-align">
                             <a href="{% url 'sell' nft.id %}" class="waves-effect waves-light btn-large pulse">Sell</a>
                         </div>
                     </div>
                     {%else%}
-                    <h3 class="center-align">SORRY! THIS NFT IS NOT FOR SALE (҂◡_◡)</h3>
+                    <h4> class="center-align">SORRY! THIS NFT IS NOT FOR SALE (҂◡_◡)</h4>
                     {% endif %}
                     {% endfor %}
                 </tbody>
