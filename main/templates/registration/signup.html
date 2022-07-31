@@ -2,9 +2,9 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<h2 class="page-title">(∩｀-´)⊃━☆ﾟ.*･｡ﾟ - EDIT USER</h2>
+<h4 class="page-title">(∩｀-´)⊃━☆ﾟ.*･｡ﾟ - EDIT USER</h4>
 {% else %}
-<h2 class="page-title">♥‿♥ - SIGN UP</h2>
+<h4 class="page-title">♥‿♥ - SIGN UP</h4>
 {% endif %}
 
 <form method="post" action="{% url 'signup' %}">
