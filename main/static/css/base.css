@@ -11,8 +11,9 @@ body {
     color: teal;
 }
 
-.caret {
-    fill: #64ffda;
+.select-wrapper .caret {
+    fill: #64ffda !important;
+    color: #64ffda !important;
 }
 
 main {
