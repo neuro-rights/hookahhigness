@@ -16,6 +16,10 @@ body {
     color: #64ffda !important;
 }
 
+#submit {
+    text-align: right !important;
+}
+
 main {
     flex: 1 0 auto;
 }
