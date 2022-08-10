@@ -83,8 +83,7 @@ class UserEditForm(forms.ModelForm):
                     .capitalize(),
                 }
             )
-        self.fields["username"].widget.attrs["placeholder"] = "username"
-        self.fields["email"].widget.attrs["placeholder"] = "email@domain.tld"
+        #
         self.fields["profile_image_url"].widget.attrs[
             "placeholder"
         ] = "https://domain.tld/"
@@ -112,27 +111,17 @@ class UserEditForm(forms.ModelForm):
         self.fields["aws_s3_region"].widget.attrs[
             "placeholder"
         ] = "your aws s3 region"
-        self.fields["email"].required = True
 
-        if self.instance.pk:
-            self.fields["username"].required = False
-            self.fields["username"].widget.attrs["readonly"] = True
-            self.fields["email"].required = False
-            self.fields["email"].widget.attrs["readonly"] = True
-
-    def clean_password2(self):
-        # Check that the two password entries match
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            raise ValidationError("Passwords don't match")
-        return password2
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+        return user
 
     class Meta:
         model = User
         fields = [
-            "username",
-            "email",
             "profile_image_url",
             "ethereum_wallet_address",
             "ethereum_wallet_private_key",

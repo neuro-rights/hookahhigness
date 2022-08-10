@@ -45,7 +45,7 @@ class RaffleEdit(PassArgumentsToForm, UpdateView):
 
     #
     def form_valid(self, form):
-        form.instance.asset.seller = self.profile
+        form.instance.asset.seller = self.request.user
         return super().form_valid(form)
 
 

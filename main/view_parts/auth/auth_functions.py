@@ -27,7 +27,7 @@ def signup(request):
             user = form.save()
             login(request, user)
             messages.success(request, "User created successfully")
-            form = UserEditForm()
+            form = UserEditForm(instance=user)
             context = {"form": form}
             return render(request, "registration/profile.html", context)
     #
@@ -41,14 +41,14 @@ def signup(request):
 def profile(request):
     #
     if request.method == "POST":
-        form = UserEditForm(request.POST)
-        if not form.is_valid():
+        form = UserEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "User upated successfully")
             context = {"form": form}
             return render(request, "registration/profile.html", context)
-        form.save()
-        messages.success(request, "Profile successfully")
     #
-    form = UserEditForm()
+    form = UserEditForm(instance=request.user)
     context = {"form": form}
     return render(request, "registration/profile.html", context)
 
