@@ -181,6 +181,8 @@ class AssetFromImagesForm(forms.ModelForm):
         widget=forms.ClearableFileInput(attrs={"multiple": True})
     )
 
+    print(image_files)
+
     def __init__(self, request, *args, **kwargs):
         """Grants access to the request object so that only members of the current user
         are given as options"""

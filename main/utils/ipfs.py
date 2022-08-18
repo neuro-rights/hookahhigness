@@ -123,7 +123,7 @@ class IPFSUtils:
         #
         endpoint_uri = "https://api.pinata.cloud/pinning/pinFileToIPFS"
         #
-        response = requests.post(endpoint_uri, files={"file": (filename, image_binary)}, headers=HEADERS)
+        response = requests.post(endpoint_uri, files={"file": image_binary}, headers=HEADERS)
         # response = requests.post(endpoint_uri, data=multipart_form_data, headers=HEADERS)
         # print(response.text)
         # print(response.headers)

@@ -26,14 +26,16 @@ import boto3
 S3_BASE_URL = "https://s3.us-east-1.amazonaws.com/"
 BUCKET = "nftmarketgallery"
 
+def add_file(nft_uuid):
+    pass
 
 def add_asset_to_s3(asset_file):
     # photo-file will be the "name" attribute on the <input type="file">
     if asset_file:
         s3 = boto3.client(
             "s3",
-            aws_access_key_id=profile.aws_access_key_id_value,
-            aws_secret_access_key=profile.aws_secret_access_key_value,
+            aws_access_key_id=request.user.aws_access_key_id_value,
+            aws_secret_access_key=request.user.aws_secret_access_key_value,
         )
         # need a unique "key" for S3 / needs image file extension too
         key = (
@@ -64,13 +66,13 @@ class AssetFromImagesCreate(PassArgumentsToForm, CreateView):
     def post(self, request, *args, **kwargs):
         #
         form = self.form_class(
-            request, self.profile, request.POST, request.FILES
+            request, request.POST, request.FILES
         )
         if not form.is_valid():
             return render(request, self.template_name, {"form": form})
         #
         asset = form.save(commit=False)
-        asset.creator = self.profile
+        asset.creator = request.user
         asset.save()
         print(asset.__dict__)
         #
@@ -138,7 +140,7 @@ class AssetFromMetadataURLCreate(PassArgumentsToForm, CreateView):
     def post(self, request, *args, **kwargs):
         #
         form = self.form_class(
-            request, self.profile, request.POST, request.FILES
+            request, request.POST, request.FILES
         )
         if not form.is_valid():
             return render(request, self.template_name, {"form": form})
@@ -201,7 +203,7 @@ class AssetEdit(PassArgumentsToForm, UpdateView):
 
     #
     def form_valid(self, form):
-        # form.instance.seller = self.profile
+        form.instance.seller = request.user
         return super().form_valid(form)
 
 

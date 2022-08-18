@@ -18,41 +18,6 @@ from ...models import Nft
 from ..utils.pagination import *
 
 
-def get_context_data(self, *args, **kwargs):
-    #
-    stuff = get_object_or_404(Nft, id=self.kwargs["pk"])
-    total_likes = stuff.total_likes()
-    context["total_likes"] = total_likes
-    #
-    return context
-
-
-def likeview(request, pk):
-    #
-    nft = get_object_or_404(Nft, pk=pk)
-    nft.likes.add(request.user)
-    #
-    return HttpResponseRedirect(reverse("nft_detail", args=[str(pk)]))
-
-
-@login_required
-def nft_ipfs_upload_asset(asset_file):
-    if asset_file:
-        try:
-            ipfsutils = IPFSUtils()
-            url = ipfsutils.ipfs_upload(asset_file)
-            nft = Nft.objects.get(uuid=nft_uuid)
-            nft.preview_image = url
-            nft.asset_uri = url
-            # TODO
-            # nft.metadata_uri = ""
-            nft.save()
-
-        except:
-            print("An error occurred uploading file to IPFS")
-        #
-        return redirect("nft_detail", uuid=nft_uuid)
-
 
 def search_result(request):
     #
@@ -129,3 +94,69 @@ def nfts_own_doc(request):
     #
     context = {"page_obj": get_page_obj(request, nfts_list, 25)}
     return render(request, "nfts/list_doc.html", context)
+
+
+@login_required
+def nft_add_file(nft_uuid):
+    pass
+
+
+@login_required
+def nft_add_file_to_s3(asset_file):
+    # photo-file will be the "name" attribute on the <input type="file">
+    if asset_file:
+        s3 = boto3.client(
+            "s3",
+            aws_access_key_id=request.user.aws_access_key_id_value,
+            aws_secret_access_key=request.user.aws_secret_access_key_value,
+        )
+        # need a unique "key" for S3 / needs image file extension too
+        key = (
+            uuid.uuid4().hex[:6] + asset_file.name[asset_file.name.rfind(".") :]
+        )
+        # just in case something goes wrong
+        try:
+            s3.upload_fileobj(asset_file, BUCKET, key)
+            # build the full url string
+            url = f"{S3_BASE_URL}/{BUCKET}/{key}"
+            return url
+        except:
+            print("An error occurred uploading file to S3")
+
+def get_context_data(self, *args, **kwargs):
+    #
+    stuff = get_object_or_404(Nft, id=self.kwargs["pk"])
+    total_likes = stuff.total_likes()
+    context["total_likes"] = total_likes
+    #
+    return context
+
+
+def likeview(request, nft_uuid):
+    #
+    nft = get_object_or_404(Nft, uuid=nft_uuid)
+    nft.likes.add(request.user)
+    #
+    return HttpResponseRedirect(reverse("nft_detail", args=[str(uuid)]))
+
+
+@login_required
+def nft_ipfs_upload_asset(asset_file):
+    if asset_file:
+        try:
+            ipfsutils = IPFSUtils()
+            url = ipfsutils.ipfs_upload(asset_file)
+            nft = Nft.objects.get(uuid=nft_uuid)
+            nft.preview_image = url
+            nft.asset_uri = url
+            # TODO
+            # nft.metadata_uri = ""
+            nft.save()
+
+        except:
+            print("An error occurred uploading file to IPFS")
+        #
+        return redirect("nft_detail", uuid=nft_uuid)
+
+def auction_nft(nft_uuid):
+    pass

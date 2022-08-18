@@ -8,15 +8,15 @@
             <span class="card-title"></span>
             <link rel="preload" class="responsive-img card-panel" href="{{ nft.preview_uri }}" as="image" crossorigin>
             {% if nft.creator == request.user %}
-            <form action="{% url 'add_photo' nft.uuid %}" enctype="multipart/form-data" method="POST"
+            <form action="{% url 'nft_add_file' nft.uuid %}" enctype="multipart/form-data" method="POST"
                 class="card-panel">
                 {% csrf_token %}
-                <input type="file" name="photo-file">
+                <input type="file" name="file">
                 <hr>
-                <input type="submit" class="btn" value="Upload Photo">
+                <input type="submit" class="btn" value="Upload File">
             </form>
             {% endif %}
-            <form action="{% url 'like_nft' nft.pk %}" method="POST" class="right">
+            <form action="{% url 'like_nft' nft.uuid %}" method="POST" class="right">
                 {% csrf_token %}
                 <button type="submit" , name="nft_id" , value="{{ post.id }}"
                     class="waves-effect waves-light btn-small">
@@ -65,11 +65,11 @@
                     </tr>
                     {% empty %}
                     {% if nft.creator == request.user %}
-                    <div class="sellbutton">
+                    <div class="auctionbutton">
                         <h4> class="center-align">READY TO SELL YOUR NFT? ᕙ(⇀‸↼‶)ᕗ</h4>
                         <br>
                         <div class="center-align">
-                            <a href="{% url 'sell' nft.id %}" class="waves-effect waves-light btn-large pulse">Sell</a>
+                            <a href="{% url 'auction_nft' nft.uuid %}" class="waves-effect waves-light btn-large pulse">Sell</a>
                         </div>
                     </div>
                     {%else%}

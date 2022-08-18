@@ -24,8 +24,12 @@ urlpatterns = [
         name="nft_delete",
     ),
     path("nft/<uuid:nft_uuid>/edit/", views.NftEdit.as_view(), name="nft_edit"),
+    # Add File to NFT
+    path("nft/<uuid:nft_uuid>/add_file", views.nft_add_file, name="nft_add_file"),
+    # Auction NFT
+    path("nft/<uuid:nft_uuid>/auction_nft", views.nft_add_file, name="auction_nft"),
     # LIKES
-    path("like/<uuid:nft_uuid>", views.likeview, name="like_nft"),
+    path("nft/<uuid:nft_uuid>/like", views.likeview, name="like_nft"),
     # ASSETS
     path("assets/", views.AssetList.as_view(), name="assets_list"),
     path(

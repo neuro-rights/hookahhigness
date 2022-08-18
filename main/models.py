@@ -63,7 +63,7 @@ class User(AbstractUser):
 
     #
     def __str__(self):
-        return self.wallet_address
+        return self.ethereum_wallet_address
 
     """
     def create_profile(sender, **kwargs):
