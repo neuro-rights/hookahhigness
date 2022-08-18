@@ -98,9 +98,9 @@
                         <input type="submit" class="btn" value="Upload Photo">
                     </form>
                     {% endif %}
-                    <form action="{% url 'like_nft' nft.pk %}" method="POST" class="right">
+                    <form action="{% url 'like_asset' asset.uuid %}" method="POST" class="right">
                         {% csrf_token %}
-                        <button type="submit" , name="nft_id" , value="{{ post.id }}"
+                        <button type="submit" , name="asset_uuid" , value="{{ post.uuid }}"
                             class="waves-effect waves-light btn-small">
                             Like <i class="material-icons">favorite</i></button>
                         <br>

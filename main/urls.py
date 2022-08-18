@@ -79,6 +79,8 @@ urlpatterns = [
         views.AssetDelete.as_view(),
         name="asset_delete",
     ),
+    # LIKES
+    path("asset/<uuid:asset_uuid>/like", views.likeview, name="like_asset"),
     # RAFFLE
     path("raffles/", views.raffles_own, name="raffles_own"),
     path("raffles/ended/", views.raffles_own_ended, name="raffles_own_ended"),

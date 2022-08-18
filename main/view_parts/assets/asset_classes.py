@@ -26,30 +26,6 @@ import boto3
 S3_BASE_URL = "https://s3.us-east-1.amazonaws.com/"
 BUCKET = "nftmarketgallery"
 
-def add_file(nft_uuid):
-    pass
-
-def add_asset_to_s3(asset_file):
-    # photo-file will be the "name" attribute on the <input type="file">
-    if asset_file:
-        s3 = boto3.client(
-            "s3",
-            aws_access_key_id=request.user.aws_access_key_id_value,
-            aws_secret_access_key=request.user.aws_secret_access_key_value,
-        )
-        # need a unique "key" for S3 / needs image file extension too
-        key = (
-            uuid.uuid4().hex[:6] + asset_file.name[asset_file.name.rfind(".") :]
-        )
-        # just in case something goes wrong
-        try:
-            s3.upload_fileobj(asset_file, BUCKET, key)
-            # build the full url string
-            url = f"{S3_BASE_URL}/{BUCKET}/{key}"
-            return url
-        except:
-            print("An error occurred uploading file to S3")
-
 
 class AssetFromImagesCreate(PassArgumentsToForm, CreateView):
     """ """
