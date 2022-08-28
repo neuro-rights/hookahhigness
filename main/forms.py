@@ -165,16 +165,13 @@ class NftForm(forms.ModelForm):
             "nft_type",
             "name",
             "description",
-            "uri_asset",
-            "uri_metadata",
-            "uri_preview",
         ]
         widgets = {
             "nft_type": forms.Select(attrs={"required": True}),
         }
 
 
-class AssetFromImagesForm(forms.ModelForm):
+class AssetFromFilesForm(forms.ModelForm):
     """ """
 
     image_files = forms.FileField(

@@ -9,7 +9,7 @@ from django.urls import reverse
 
 #
 from ...forms import (
-    AssetFromImagesForm,
+    AssetFromFilesForm,
     AssetFromNftsForm,
     AssetFromMetadataURLForm,
 )
@@ -30,7 +30,7 @@ BUCKET = "nftmarketgallery"
 class AssetFromImagesCreate(PassArgumentsToForm, CreateView):
     """ """
 
-    form_class = AssetFromImagesForm
+    form_class = AssetFromFilesForm
     model = Asset
     template_name = "assets/form.html"
 
