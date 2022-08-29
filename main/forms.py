@@ -183,7 +183,7 @@ class AssetFromFilesForm(forms.ModelForm):
     def __init__(self, request, *args, **kwargs):
         """Grants access to the request object so that only members of the current user
         are given as options"""
-        super(AssetFromImagesForm, self).__init__(*args, **kwargs)
+        super(AssetFromFilesForm, self).__init__(*args, **kwargs)
         self.request = request
 
     def save(self, commit=True):
@@ -200,10 +200,6 @@ class AssetFromFilesForm(forms.ModelForm):
 
         model = Asset
         fields = [
-            "asset_type",
-            "name",
-            "description",
-            "status",
         ]
         widgets = {
             "status": forms.Select(attrs={"required": True}),
@@ -242,10 +238,6 @@ class AssetFromNftsForm(forms.ModelForm):
         model = Asset
         fields = [
             "nfts",
-            "asset_type",
-            "name",
-            "description",
-            "status",
         ]
         widgets = {
             "status": forms.Select(attrs={"required": True}),
@@ -278,11 +270,7 @@ class AssetFromMetadataURLForm(forms.ModelForm):
 
         model = Asset
         fields = [
-            "asset_type",
-            "name",
-            "description",
             "metadata_uri",
-            "status",
         ]
         widgets = {
             "status": forms.Select(attrs={"required": True}),
