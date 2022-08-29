@@ -19,10 +19,10 @@ from ..utils.pagination import *
 def auction_detail(request, auction_uuid):
     #
     auction = Auction.objects.get(uuid=auction_uuid)
-    bid_form = BidForm()
+    bid_form = BidForm(request)
     #
     return render(
-        request, "nfts/detail.html", {"auction": auction, "bid_form": bid_form}
+        request, "auctions/detail.html", {"auction": auction, "bid_form": bid_form}
     )
 
 

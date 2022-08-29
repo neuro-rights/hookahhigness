@@ -218,7 +218,7 @@ class Auction(models.Model):
     time_end = models.TimeField()
     #
     bid_start_value = models.FloatField()
-    bid_current_value = models.FloatField(blank=True)
+    bid_current_value = models.FloatField(default=0)
     #
     status = models.CharField(
         max_length=32,

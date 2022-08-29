@@ -29,56 +29,7 @@
         <ul class="collection">
             {% for auction in page_obj %}
             <li class="collection-item">
-                <a href="{% url 'auction_detail' auction.auction_uuid %}">
-                    <div class="row" style="box-sizing:border-box;">
-                        <div class="col s3" style="padding:20px;">
-                            {% for nft in auction.get_random_nfts %}
-                            {% if forloop.counter0|mod:3 == 0 %}
-                            <div class="row">
-                                {% endif %}
-                                <div class="col s4">
-                                    <img src="{{ nft.preview_uri }}" alt="" class="thumbnail">
-                                </div>
-                                {% if forloop.counter0|mod:3 == 2 or forloop.last %}
-                            </div>{% endif %}
-                            {% endfor %}
-                        </div>
-                        <div class="col s7" style="padding:20px 50px;">
-                            <div class="row">
-                                <div class="col s4">
-                                    <p>TOTAL ASSETS:</p>
-                                </div>
-                                <div class="col s8">
-                                    <p>{{ auction.assets|length }}</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s4">
-                                    <p>AUCTION Blockchain:</p>
-                                </div>
-                                <div class="col s8">
-                                    <p>{{ auction.blockchain }}</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s4">
-                                    <p>Description:</p>
-                                </div>
-                                <div class="col s8">
-                                    <p>{{ auction.description }}</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s4">
-                                    <p>Token:</p>
-                                </div>
-                                <div class="col s8">
-                                    <p>{{ auction.token_id }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                {{ auction }}
                 <div class="carousel teal darken-4">
                     {% for nft in auction.get_random_nfts %}
                     <a href="{% url 'nft_detail' nft.id %}" class="carousel-item">

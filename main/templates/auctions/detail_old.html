@@ -1,0 +1,132 @@
+{% extends 'base.html' %} {%load mathfilters%}
+{% block content %}
+
+<h2>{{auction.uuid|upper}}</h2>
+<div class="collection">
+    <div class="collection-item" style="padding: 77px;">
+        <div class="row">
+            <div class="col s10">
+                <div class="row">
+                    <div class="col s4">
+                        <span>UUID:</span>
+                    </div>
+                    <div class="col s8">
+                        <span>{{ auction.uuid }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <p>TOTAL ASSETS:</p>
+                    </div>
+                    <div class="col s8">
+                        <p>{{ auction.num_assets }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <p>Description:</p>
+                    </div>
+                    <div class="col s8">
+                        <p>{{ auction.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if auction.creator == request.user %}
+        <div class="row">
+            <div class="col s12">
+                <a href="{% url 'auction_edit' auction.id %}"
+                    class="waves-effect waves-light btn-small teal darken-4">Edit Auction</a>
+                <a href="{% url 'auction_delete' auction.id %}"
+                    class="waves-effect waves-light btn-small red darken-4">Delete Auction</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <h2>{{nft.name|upper}}</h2>
+    <table class="striped">
+        {% for bid in auction.bid_set.all %}
+        {% if forloop.first %}
+        <h4>Top Bid: ETH {{ bid.bid_price }}</h4>
+        {% endif %}
+        {% endfor %}
+        {% for sell in nft.sell_set.all %}
+        <thead>
+            <tr>
+                <th>Sale Ends</th>
+                <th>Min Bid Price</th>
+                <th>USD</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{sell.sale_ends}}</td>
+                <td>ETH {{sell.min_bid_price}}</td>
+                <td>${{sell.min_bid_price|mul:2735}}</td>
+            </tr>
+            {% empty %}
+            {% if nft.creator == request.user %}
+            <div class="sellbutton">
+                <h3 class="center-align">READY TO SELL YOUR NFT?</h3>
+                <br>
+                <div class="center-align">
+                    <a href="{% url 'sell' nft.id %}" class="waves-effect waves-light btn-large pulse">Sell</a>
+                </div>
+            </div>
+            {%else%}
+            <h3 class="center-align">SORRY! THIS NFT IS NOT FOR SALE ~_~</h3>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% for sell in nft.sell_set.all %}
+    <span class="card-title"></span>
+    <hr>
+    {% if nft.creator == request.user %}
+    <div></div>
+    {%else%}
+    <form action="{% url 'add_bid' nft.id %}" class='bidprice' method="post">
+        {% csrf_token %} {{ bid_form.as_p }}
+        <input type="submit" class="btn pulse" value="Add Bid">
+    </form>
+    {% endif %}
+
+    {% if nft.creator == request.user %}
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Bidder</th>
+                <th>Bid</th>
+                <th>USD</th>
+                <th>MINT</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bid in nft.bid_set.all %}
+            <tr>
+                <td>{{ bid.bid_time|date:'m-d H:i' }}</td>
+                <td>{{ bid.bidder.username }}</td>
+                <td>ETH {{ bid.bid_price }}</td>
+                <td>${{ bid.bid_price|mul:2735 }}</td>
+                <td class="center-align">
+                    <form action="{% url 'accept_bid' bid.id %}" enctype="multipart/form-data" method="POST"
+                        class="bidprice">
+                        {% csrf_token %}
+                        <button type="submit"
+                            class="btn-floating btn-small waves-effect waves-light circle green pulse"><i
+                                class="material-icons">check</i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    {% endfor %}
+</div>
+</div>
+{% endblock %}
