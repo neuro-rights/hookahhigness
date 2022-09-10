@@ -25,6 +25,7 @@ parso
 pexpect
 pickleshare
 prompt-toolkit
+psycopg2
 ptyprocess
 Pygments
 traitlets

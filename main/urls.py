@@ -54,7 +54,7 @@ urlpatterns = [
     path("raffle/<uuid:raffle_uuid>/edit/", views.RaffleEdit.as_view(), name="raffle_edit"),
     path("raffle/<uuid:raffle_uuid>/delete/", views.RaffleDelete.as_view(), name="raffle_delete"),
     # MARKET
-    path("market/", views.MarketList.as_view(), name="market_list"),
+    path("market/", views.AuctionList.as_view(), name="auctions_list"),
     path("market/own/", views.auctions_own_running, name="auctions_own_running"),
     # AUCTIONS
     path("auctions/", views.AuctionList.as_view(), name="auctions_list"),
