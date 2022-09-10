@@ -29,7 +29,7 @@ class MarketList(ListView):
         "bid_start_value",
         "status",
     ]
-    template_name = "auctions/list.html"
+    template_name = "market/list.html"
     #
     def get_queryset(self):
         return Auction.objects.all()

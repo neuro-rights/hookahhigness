@@ -16,7 +16,7 @@ from ...forms import NftForm
 from ...models import Nft, User
 
 
-class NftCreate(PassArgumentsToForm, CreateView):
+class NftCreate(LoginRequiredMixin, CreateView):
     """ """
 
     form_class = NftForm
@@ -27,7 +27,7 @@ class NftCreate(PassArgumentsToForm, CreateView):
         return reverse("nft_detail", kwargs={"nft_uuid": self.object.uuid})
 
 
-class NftEdit(PassArgumentsToForm, UpdateView):
+class NftEdit(LoginRequiredMixin, UpdateView):
     """ """
 
     form_class = NftForm
