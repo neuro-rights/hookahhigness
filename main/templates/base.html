@@ -9,19 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hookah Higness NFT Marketplace (⊃｡•́‿•̀｡)⊃</title>
 
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+
     {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Caladea&family=Hind+Siliguri&family=Roboto+Mono:wght@600&display=swap"
-        rel="stylesheet">
     {% endblock css %}
 
-    {% load bootstrap4 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript jquery='full' %}
     {% block extrahead %}
     {% endblock %}
 </head>
@@ -139,7 +137,6 @@
         <div class="right">&copy; 2022 NFT Market &nbsp; \(ᵔᵕᵔ)/</div>
     </footer>
     <script src="https://unpkg.com/ipfs-http-client/dist/index.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript">
