@@ -12,7 +12,7 @@ from ...utils.ipfs import IPFSUtils
 
 #
 from ...forms import BidForm, NftForm
-from ...models import Nft
+from ...models import Asset, Auction, Nft
 
 #
 from ..utils.pagination import *
@@ -158,12 +158,12 @@ def nft_ipfs_upload_asset(asset_file):
         #
         return redirect("nft_detail", uuid=nft_uuid)
 
-def auction_nft(nft_uuid):
+def auction_nft(request, nft_uuid):
     nft = get_object_or_404(Nft, uuid=nft_uuid)
     #
-    asset = Asset.objects.create(asset_type=nft.type, seller=nft.creator, name=nft.name, description=nft.description)
+    asset = Asset.objects.create(asset_type=nft.nft_type, seller=nft.creator, name=nft.name, description=nft.description)
     asset.nfts.add(nft)
-    auction = Auction.objects.create(seller=nft.creator, name=nft.name, description=nft.description)
+    auction = Auction.objects.create(seller=nft.creator, description=nft.description, bid_start_value=0)
     auction.assets.add(asset)
     return HttpResponseRedirect(reverse("auction_detail", args=[str(auction.uuid)]))
     pass
