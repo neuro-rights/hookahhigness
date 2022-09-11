@@ -143,8 +143,9 @@ p #id_bidprice {
     color: #c5dbd9;
 }
 
-.card, .card-panel {
+.card, .card-panel, .form-control {
     background-color: #00695c !important;
+    color: #64ffda !important;
 }
 
 .collection .collection-item {
