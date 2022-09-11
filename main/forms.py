@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 from .models import User, Nft, Asset, Raffle, Auction, Bid, Purchase
 
 from datetime import datetime, timedelta
@@ -166,9 +167,6 @@ class NftForm(forms.ModelForm):
             "name",
             "description",
         ]
-        widgets = {
-            "nft_type": forms.Select(attrs={"required": True}),
-        }
 
 
 class AssetFromFilesForm(forms.ModelForm):
@@ -201,10 +199,6 @@ class AssetFromFilesForm(forms.ModelForm):
         model = Asset
         fields = [
         ]
-        widgets = {
-            "status": forms.Select(attrs={"required": True}),
-            "asset_type": forms.Select(attrs={"required": True}),
-        }
 
 
 class AssetFromNftsForm(forms.ModelForm):
@@ -239,10 +233,6 @@ class AssetFromNftsForm(forms.ModelForm):
         fields = [
             "nfts",
         ]
-        widgets = {
-            "status": forms.Select(attrs={"required": True}),
-            "asset_type": forms.Select(attrs={"required": True}),
-        }
 
 
 class AssetFromMetadataURLForm(forms.ModelForm):
@@ -272,10 +262,6 @@ class AssetFromMetadataURLForm(forms.ModelForm):
         fields = [
             "metadata_uri",
         ]
-        widgets = {
-            "status": forms.Select(attrs={"required": True}),
-            "asset_type": forms.Select(attrs={"required": True}),
-        }
 
 
 class AuctionForm(forms.ModelForm):
@@ -311,28 +297,14 @@ class AuctionForm(forms.ModelForm):
             "assets",
             "blockchain",
             "description",
-            "date_start",
-            "time_start",
-            "date_end",
-            "time_end",
+            "datetime_start",
+            "datetime_end",
             "bid_start_value",
             "status",
         ]
         widgets = {
-            "blockchain": forms.Select(),
-            "date_start": forms.TextInput(
-                attrs={"value": datetime.now().strftime("%m / %d / %Y")}
-            ),
-            "time_start": forms.TimeInput(
-                attrs={"value": datetime.now().strftime("%H:%M")}
-            ),
-            "date_end": forms.TextInput(
-                attrs={"value": datetime.now().strftime("%m / %d / %Y")}
-            ),
-            "time_end": forms.TimeInput(
-                attrs={"value": datetime.now().strftime("%H:%M")}
-            ),
-            "status": forms.Select(),
+            "datetime_start": DateTimePickerInput(),
+            "datetime_end": DateTimePickerInput(),
         }
 
 
@@ -361,7 +333,6 @@ class BidForm(forms.ModelForm):
 
         model = Bid
         fields = ["auction", "value"]
-        widgets = {"auction": forms.Select(attrs={"required": True})}
 
 
 class PurchaseForm(forms.ModelForm):
@@ -387,9 +358,6 @@ class PurchaseForm(forms.ModelForm):
 
         model = Purchase
         fields = ["tx_hash", "tx_token", "status"]
-        widgets = {
-            "status": forms.Select(attrs={"required": True}),
-        }
 
 
 class RaffleForm(forms.ModelForm):
@@ -412,29 +380,15 @@ class RaffleForm(forms.ModelForm):
         model = Raffle
         fields = [
             "asset",
-            "date_start",
-            "time_start",
-            "date_end",
-            "time_end",
+            "datetime_start",
+            "datetime_end",
             "price_entry",
             "status",
         ]
         #
         widgets = {
-            "asset": forms.Select(attrs={"required": True}),
-            "status": forms.Select(attrs={"required": True}),
-            "date_start": forms.TextInput(
-                attrs={"value": datetime.now().strftime("%m / %d / %Y")}
-            ),
-            "time_start": forms.TimeInput(
-                attrs={"value": datetime.now().strftime("%H:%M")}
-            ),
-            "date_end": forms.TextInput(
-                attrs={"value": datetime.now().strftime("%m / %d / %Y")}
-            ),
-            "time_end": forms.TimeInput(
-                attrs={"value": datetime.now().strftime("%H:%M")}
-            ),
+            "datetime_start": DateTimePickerInput(),
+            "datetime_end": DateTimePickerInput()
         }
 
 

@@ -159,4 +159,11 @@ def nft_ipfs_upload_asset(asset_file):
         return redirect("nft_detail", uuid=nft_uuid)
 
 def auction_nft(nft_uuid):
+    nft = get_object_or_404(Nft, uuid=nft_uuid)
+    #
+    asset = Asset.objects.create(asset_type=nft.type, seller=nft.creator, name=nft.name, description=nft.description)
+    asset.nfts.add(nft)
+    auction = Auction.objects.create(seller=nft.creator, name=nft.name, description=nft.description)
+    auction.assets.add(asset)
+    return HttpResponseRedirect(reverse("auction_detail", args=[str(auction.uuid)]))
     pass

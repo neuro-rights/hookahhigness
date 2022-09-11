@@ -18,6 +18,12 @@
         href="https://fonts.googleapis.com/css2?family=Caladea&family=Hind+Siliguri&family=Roboto+Mono:wght@600&display=swap"
         rel="stylesheet">
     {% endblock css %}
+
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% block extrahead %}
+    {% endblock %}
 </head>
 
 <body>
@@ -140,10 +146,8 @@
         $(document).ready(function () {
             $('.dropdown-trigger').dropdown({ 'constrainWidth': false, 'hover': true });
             $('.collapsible').collapsible();
-            $('select').formSelect();
+            //$('select').formSelect();
             $('.carousel').carousel();
-            //$('.datepicker').datepicker({ defaultDate: Date.now(), format: "mm/dd/yyyy" });
-            //$('.timepicker').timepicker();
         });
     </script>
     {% block javascript %} {% endblock %}

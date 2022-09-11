@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.urls import reverse
-
+from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 #
 from ..utils.pagination import *
 from ..utils.form_kwargs import PassArgumentsToForm
@@ -23,6 +23,11 @@ class RaffleCreate(PassArgumentsToForm, CreateView):
     model = Raffle
     template_name = "raffles/form.html"
 
+    def get_form(self):
+        form = super().get_form()
+        form.fields['datetime_start'].widget = DateTimePickerInput()
+        form.fields['datetime_end'].widget = DateTimePickerInput()
+        return form
     #
     def get_success_url(self):
         return reverse(
@@ -37,6 +42,11 @@ class RaffleEdit(PassArgumentsToForm, UpdateView):
     model = Raffle
     template_name = "raffles/form.html"
 
+    def get_form(self):
+        form = super().get_form()
+        form.fields['datetime_start'].widget = DateTimePickerInput()
+        form.fields['datetime_end'].widget = DateTimePickerInput()
+        return form
     #
     def get_success_url(self):
         return reverse(
@@ -66,3 +76,6 @@ class RaffleList(PassArgumentsToForm, ListView):
     #
     def get_queryset(self):
         return Raffle.objects.all()
+
+class RaffleDetailView(PassArgumentsToForm, DetailView):
+    model = Raffle

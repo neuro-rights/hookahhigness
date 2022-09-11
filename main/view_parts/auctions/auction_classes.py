@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.urls import reverse
-
+from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 #
 from ...forms import AuctionForm
 from ...models import Auction
@@ -26,6 +26,12 @@ class AuctionCreate(PassArgumentsToForm, CreateView):
     form_class = AuctionForm
     model = Auction
     template_name = "auctions/form.html"
+
+    def get_form(self):
+        form = super().get_form()
+        form.fields['datetime_start'].widget = DateTimePickerInput()
+        form.fields['datetime_end'].widget = DateTimePickerInput()
+        return form
     #
     def get_success_url(self):
         return reverse(
@@ -39,6 +45,12 @@ class AuctionEdit(PassArgumentsToForm, UpdateView):
     form_class = AuctionForm
     model = Auction
     template_name = "auctions/form.html"
+
+    def get_form(self):
+        form = super().get_form()
+        form.fields['datetime_start'].widget = DateTimePickerInput()
+        form.fields['datetime_end'].widget = DateTimePickerInput()
+        return form
     #
     def get_object(self, queryset=None):
         return Auction.objects.get(uuid=self.kwargs.get("auction_uuid"))
@@ -75,8 +87,8 @@ class AuctionList(PassArgumentsToForm, CreateView):
         "description",
         "assets",
         "blockchain",
-        "time_start",
-        "time_end",
+        "datetime_start",
+        "datetime_end",
         "bid_start_value",
         "status",
     ]

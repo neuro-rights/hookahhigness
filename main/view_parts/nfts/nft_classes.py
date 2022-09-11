@@ -16,7 +16,7 @@ from ...forms import NftForm
 from ...models import Nft, User
 
 
-class NftCreate(LoginRequiredMixin, CreateView):
+class NftCreate(PassArgumentsToForm, CreateView):
     """ """
 
     form_class = NftForm
@@ -27,7 +27,7 @@ class NftCreate(LoginRequiredMixin, CreateView):
         return reverse("nft_detail", kwargs={"nft_uuid": self.object.uuid})
 
 
-class NftEdit(LoginRequiredMixin, UpdateView):
+class NftEdit(PassArgumentsToForm, UpdateView):
     """ """
 
     form_class = NftForm
@@ -42,7 +42,7 @@ class NftEdit(LoginRequiredMixin, UpdateView):
         return reverse("nft_detail", kwargs={"nft_uuid": self.object.uuid})
 
 
-class NftDelete(LoginRequiredMixin, DeleteView):
+class NftDelete(PassArgumentsToForm, DeleteView):
     """ """
 
     model = Nft
@@ -50,7 +50,7 @@ class NftDelete(LoginRequiredMixin, DeleteView):
     template_name = "nfts/delete.html"
 
 
-class NftList(LoginRequiredMixin, ListView):
+class NftList(PassArgumentsToForm, ListView):
     """ """
 
     paginate_by = 25
@@ -61,7 +61,7 @@ class NftList(LoginRequiredMixin, ListView):
         return Nft.objects.filter(creator=self.request.user)
 
 
-class NftDetailView(LoginRequiredMixin, DetailView):
+class NftDetailView(PassArgumentsToForm, DetailView):
     """ """
 
     model = Nft

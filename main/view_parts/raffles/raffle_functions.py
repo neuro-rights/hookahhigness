@@ -75,9 +75,9 @@ def raffles_own_ended(request):
 def raffle_detail(request, raffle_uuid):
     #
     raffle = Raffle.objects.get(uuid=raffle_uuid)
-    raffle_form = RaffleForm(instance=raffle)
-    #
-    return render(request, "raffles/detail.html", {"raffle_form": raffle_form})
+    return render(
+        request, "raffles/detail.html", {"raffle": raffle}
+    )
 
 
 @login_required

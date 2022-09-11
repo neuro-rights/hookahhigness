@@ -6,14 +6,19 @@ from django.core.signals import request_finished
 from django.db.models import Count
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.timezone import now
 
-import datetime
+from datetime import datetime, timedelta
 import random
 import uuid
 
 
 def random_token():
     return int(random.randint(10000, 99999))
+
+
+def now_plus_30():
+    return datetime.now() + timedelta(days = 30)
 
 
 class User(AbstractUser):
@@ -211,11 +216,8 @@ class Auction(models.Model):
     )
     description = models.TextField(blank=True)
     #
-    date_start = models.DateField()
-    date_end = models.DateField()
-    #
-    time_start = models.TimeField()
-    time_end = models.TimeField()
+    datetime_start = models.DateTimeField(default=now)
+    datetime_end = models.DateTimeField(default=now_plus_30)
     #
     bid_start_value = models.FloatField()
     bid_current_value = models.FloatField(default=0)
@@ -245,16 +247,13 @@ class Raffle(models.Model):
     #
     id = models.AutoField(primary_key=True)
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    asset = models.ForeignKey(Asset, on_delete=models.CASCADE)
+    asset = models.ForeignKey(Asset, on_delete=models.CASCADE, null=True, blank=True)
     #
     participants = models.ManyToManyField(User, related_name="participants")
-    winner = models.ForeignKey(User, on_delete=models.CASCADE)
+    winner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     #
-    date_start = models.DateField()
-    date_end = models.DateField()
-    #
-    time_start = models.TimeField()
-    time_end = models.TimeField()
+    datetime_start = models.DateTimeField(default=now)
+    datetime_end = models.DateTimeField(default=now_plus_30)
     #
     price_entry = models.FloatField()
     #
@@ -275,7 +274,7 @@ class Bid(models.Model):
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     buyer = models.ForeignKey(User, on_delete=models.CASCADE)
     auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
-    bid_time = models.DateTimeField(auto_now_add=True)
+    bid_time = models.DateTimeField(auto_now_add=True, editable=False)
     value = models.FloatField()
 
     def __str__(self):
@@ -299,7 +298,7 @@ class Purchase(models.Model):
     bid = models.ForeignKey(Bid, on_delete=models.CASCADE)
     tx_hash = models.CharField(blank=True, max_length=200)
     tx_token = models.CharField(blank=True, max_length=200)
-    purchase_time = models.DateTimeField(auto_now_add=True)
+    purchase_time = models.DateTimeField(auto_now_add=True, editable=False)
     status = models.CharField(
         max_length=32,
         choices=PURCHASE_STATUS,
