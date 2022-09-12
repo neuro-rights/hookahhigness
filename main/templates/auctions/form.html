@@ -8,9 +8,9 @@
 {% block content %}
 
 {% if object %}
-<h4>EDIT AUCTION<span class="teal-text">{{auction.uuid|upper}}</span></h4>
+<h5>EDIT AUCTION: <span class="teal-text">{{auction.uuid|upper}}</span></h5>
 {% else %}
-<h4>CREATE AUCTION</h4>
+<h5>CREATE AUCTION</h5>
 {% endif %}
 
 <div class="row">
