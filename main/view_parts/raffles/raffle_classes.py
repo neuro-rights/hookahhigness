@@ -42,6 +42,9 @@ class RaffleEdit(PassArgumentsToForm, UpdateView):
     model = Raffle
     template_name = "raffles/form.html"
 
+    def get_object(self, queryset=None):
+        return Raffle.objects.get(uuid=self.kwargs.get("raffle_uuid"))
+
     def get_form(self):
         form = super().get_form()
         form.fields['datetime_start'].widget = DateTimePickerInput()

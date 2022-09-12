@@ -15,6 +15,16 @@
                 </div>
             </a>
         </div>
+        {% if raffle.asset.seller == request.user %}
+        <div class="row">
+            <div class="col s12">
+                <a href="{% url 'raffle_edit' raffle.uuid %}"
+                    class="waves-effect waves-light btn-small teal darken-4">Edit Raffle</a>
+                <a href="{% url 'raffle_delete' raffle.uuid %}"
+                    class="waves-effect waves-light btn-small red darken-4">Delete Raffle</a>
+            </div>
+        </div>
+        {% endif %}
     </li>
 </ul>
 {% endblock %}
