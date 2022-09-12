@@ -71,7 +71,7 @@ class AuctionDelete(PassArgumentsToForm, DeleteView):
     """ """
 
     model = Auction
-    success_url = "/market/own"
+    success_url = "/auctions/own"
     template_name = "auction/delete.html"
     #
     def get_object(self, queryset=None):

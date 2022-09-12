@@ -66,6 +66,8 @@ class RaffleDelete(PassArgumentsToForm, DeleteView):
     success_url = "/raffles/"
     template_name = "raffles/delete.html"
 
+    def get_object(self, queryset=None):
+        return Raffle.objects.get(uuid=self.kwargs.get("raffle_uuid"))
 
 class RaffleList(PassArgumentsToForm, ListView):
     """ """

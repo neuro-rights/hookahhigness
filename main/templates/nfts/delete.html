@@ -8,6 +8,6 @@
 <form action="" method="POST">
     {% csrf_token %}
     <input type="submit" value="Yes - Delete!" class="btn red darken-4">
-    <a href="{% url 'nft_detail' nft.nft_uuid %}">Cancel ┬─┬⃰͡ (ᵔᵕᵔ͜ )</a>
+    <a href="{% url 'nft_detail' nft.uuid %}">Cancel ┬─┬⃰͡ (ᵔᵕᵔ͜ )</a>
 </form>
 {% endblock %}

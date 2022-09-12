@@ -42,12 +42,15 @@ class NftEdit(PassArgumentsToForm, UpdateView):
         return reverse("nft_detail", kwargs={"nft_uuid": self.object.uuid})
 
 
-class NftDelete(PassArgumentsToForm, DeleteView):
+class NftDelete(LoginRequiredMixin, DeleteView):
     """ """
 
     model = Nft
-    success_url = "/nfts/own"
+    success_url = "/nfts"
     template_name = "nfts/delete.html"
+
+    def get_object(self, queryset=None):
+        return Nft.objects.get(uuid=self.kwargs.get("nft_uuid"))
 
 
 class NftList(PassArgumentsToForm, ListView):
