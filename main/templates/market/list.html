@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load mathfilters %}
 {% block content %}
 
-<h2>ALL {{ page_obj|length }} AUCTIONS</h2>
+<h5>ALL {{ page_obj|length }} AUCTIONS</h5>
 <ul class="collection">
     {% for auction in page_obj %}
     <li class="collection-item">
