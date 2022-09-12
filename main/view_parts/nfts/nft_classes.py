@@ -35,7 +35,7 @@ class NftEdit(PassArgumentsToForm, UpdateView):
     template_name = "nfts/form.html"
     #
     def get_object(self, queryset=None):
-        return Auction.objects.get(uuid=self.kwargs.get("nft_uuid"))
+        return Nft.objects.get(uuid=self.kwargs.get("nft_uuid"))
 
     #
     def get_success_url(self):

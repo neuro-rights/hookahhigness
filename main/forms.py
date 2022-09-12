@@ -163,9 +163,9 @@ class NftForm(forms.ModelForm):
 
         model = Nft
         fields = [
-            "nft_type",
             "name",
             "description",
+            "nft_type",
         ]
 
 

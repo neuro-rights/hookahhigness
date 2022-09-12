@@ -79,16 +79,13 @@ h4 {
     color: whitesmoke;
 }
 
-.card-title {
-    margin-top: 5px;
-    color: whitesmoke;
+p {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.card {
-    width: 500px;
-    border-radius: 0;
-    background-color: #00695c;
-}
 
 .img-responsive {
     max-width: 100%;
@@ -131,16 +128,19 @@ li form {
     margin-right: 25px;
 }
 
-.nonft {
+.header-text {
+    color: #c5dbd9;
+}
+
+.card-title {
+    margin-top: 5px;
     color: whitesmoke;
 }
 
-p #id_bidprice {
-    color: black;
-}
-
-.header-text {
-    color: #c5dbd9;
+.card {
+    width: 500px;
+    border-radius: 0;
+    background-color: #00695c;
 }
 
 .card, .form-control {
@@ -230,3 +230,12 @@ footer.page-footer {
     vertical-align: middle;
     border-radius: 0px;
 }
+
+.nonft {
+    color: whitesmoke;
+}
+
+p #id_bidprice {
+    color: black;
+}
+

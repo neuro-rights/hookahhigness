@@ -179,7 +179,7 @@ class AssetEdit(PassArgumentsToForm, UpdateView):
 
     #
     def form_valid(self, form):
-        form.instance.seller = request.user
+        form.instance.seller = self.request.user
         return super().form_valid(form)
 
 
