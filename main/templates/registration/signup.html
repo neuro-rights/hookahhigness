@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
+
 {% block content %}
 
 {% if user.is_authenticated %}
@@ -9,7 +11,7 @@
 
 <form method="post" action="{% url 'signup' %}">
   {% csrf_token %}
-  {{ form.as_p }}
+  {% bootstrap_form form layout='horizontal' %}
   <input type="submit" class="btn" value="signup">
 </form>
 {% endblock %}

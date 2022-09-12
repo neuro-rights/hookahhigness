@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
+
 {% block content %}
 
 <h4>⊂(◉‿◉)つ - LOGIN</h4>
 
 <form method="post" action="{% url 'login' %}">
   {% csrf_token %}
-  {{ form.as_p }}
+  {% bootstrap_form form layout='horizontal' %}
   <input type="submit" class="btn" value="login">
   <input type="hidden" name="next" value="{{ next }}">
 </form>
