@@ -26,4 +26,4 @@ def home(request):
     #
     auctions_list = Auction.objects.order_by("-id").all()
     context = {"page_obj": get_page_obj(request, auctions_list, 25)}
-    return render(request, "home.html", context)
+    return render(request, "market/list.html", context)
