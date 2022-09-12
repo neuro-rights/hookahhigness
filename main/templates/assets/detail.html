@@ -67,15 +67,12 @@
                         </p>
                     </div>
                 </div>
-                {% if asset.creator == request.user %}
+                {% if asset.seller == request.user %}
                 <div class="row">
                     <div class="col s12">
-                        <a href="{% url 'add_raffle' asset.id %}"
-                            class="waves-effect waves-light btn-small cyan darken-4">ADD
-                            RAFFLE</a>
-                        <a href="{% url 'asset_edit' asset.id %}"
+                        <a href="{% url 'asset_edit' asset.uuid %}"
                             class="waves-effect waves-light btn-small teal darken-4">Edit</a>
-                        <a href="{% url 'asset_delete' asset.id %}"
+                        <a href="{% url 'asset_delete' asset.uuid %}"
                             class="waves-effect waves-light btn-small red darken-4">Delete</a>
                     </div>
                 </div>

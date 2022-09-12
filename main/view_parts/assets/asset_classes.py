@@ -183,19 +183,15 @@ class AssetEdit(PassArgumentsToForm, UpdateView):
         return super().form_valid(form)
 
 
-class AssetDelete(PassArgumentsToForm, DeleteView):
+class AssetDelete(LoginRequiredMixin, DeleteView):
     """ """
 
     model = Asset
-    success_url = "/assets/"
+    success_url = "/assets/own/"
     template_name = "assets/delete.html"
     #
     def get_object(self, queryset=None):
         return Asset.objects.get(uuid=self.kwargs.get("asset_uuid"))
-
-    def delete(self, *args, **kwargs):
-        self.object = self.get_object()
-        return super(AssetDelete, self).delete(*args, **kwargs)
 
 
 class AssetList(PassArgumentsToForm, ListView):
@@ -203,6 +199,14 @@ class AssetList(PassArgumentsToForm, ListView):
 
     paginate_by = 25
     model = Asset
+    fields = [
+        "name",
+        "description",
+        "seller",
+        "asset_type",
+        "status"
+    ]
+    template_name = "assets/list.html"
 
     def get_querset(self):
         return Asset.objects.filter(seller=self.request.user)

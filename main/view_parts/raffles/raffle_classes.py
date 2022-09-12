@@ -59,11 +59,11 @@ class RaffleEdit(PassArgumentsToForm, UpdateView):
         return super().form_valid(form)
 
 
-class RaffleDelete(PassArgumentsToForm, DeleteView):
+class RaffleDelete(LoginRequiredMixin, DeleteView):
     """ """
 
     model = Raffle
-    success_url = "/raffles/"
+    success_url = "/raffles/own/"
     template_name = "raffles/delete.html"
 
     def get_object(self, queryset=None):

@@ -46,7 +46,7 @@ class NftDelete(LoginRequiredMixin, DeleteView):
     """ """
 
     model = Nft
-    success_url = "/nfts"
+    success_url = "/nfts/own/"
     template_name = "nfts/delete.html"
 
     def get_object(self, queryset=None):

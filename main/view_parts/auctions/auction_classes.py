@@ -67,35 +67,15 @@ class AuctionEdit(PassArgumentsToForm, UpdateView):
         return super().form_valid(form)
 
 
-class AuctionDelete(PassArgumentsToForm, DeleteView):
+class AuctionDelete(LoginRequiredMixin, DeleteView):
     """ """
 
     model = Auction
-    success_url = "/auctions/own"
-    template_name = "auction/delete.html"
+    success_url = "/auctions/own/"
+    template_name = "auctions/delete.html"
     #
     def get_object(self, queryset=None):
         return Auction.objects.get(uuid=self.kwargs.get("auction_uuid"))
-
-
-class AuctionList(PassArgumentsToForm, CreateView):
-    """ """
-
-    paginate_by = 25
-    model = Auction
-    fields = [
-        "description",
-        "assets",
-        "blockchain",
-        "datetime_start",
-        "datetime_end",
-        "bid_start_value",
-        "status",
-    ]
-    template_name = "auctions/list.html"
-    #
-    def get_queryset(self):
-        return Auction.objects.filter(seller=self.request.user)
 
 
 class AuctionDetailView(PassArgumentsToForm, DetailView):

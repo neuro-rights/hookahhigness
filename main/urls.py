@@ -8,7 +8,7 @@ urlpatterns = [
     path("accounts/profile/", views.profile, name="profile"),
     path("accounts/followers/", views.profile, name="followers"),
     # NFTS
-    path("nfts/", views.nfts_own, name="nfts_own"),
+    path("nfts/own", views.nfts_own, name="nfts_own"),
     path("nfts/2d/", views.nfts_own_2d, name="nfts_own_2d"),
     path("nfts/3d/", views.nfts_own_3d, name="nfts_own_3d"),
     path("nfts/music/", views.nfts_own_music, name="nfts_own_music"),
@@ -26,11 +26,10 @@ urlpatterns = [
     # LIKES
     path("nft/<uuid:nft_uuid>/like", views.likeview, name="like_nft"),
     # ASSETS
-    path("assets/", views.AssetList.as_view(), name="assets_list"),
+    path("assets/own/", views.assets_own, name="assets_own"),
     path("asset/create_from_images/", views.AssetFromImagesCreate.as_view(), name="asset_create_from_images"),
     path("asset/create_from_nfts/", views.AssetFromNftsCreate.as_view(), name="asset_create_from_nfts"),
     path("asset/create_from_metadata_url/", views.AssetFromMetadataURLCreate.as_view(), name="asset_create_from_metadata_url"),
-    path("assets/own/", views.assets_own, name="assets_own"),
     path("asset/<uuid:asset_uuid>/", views.asset_detail, name="asset_detail"),
     path("asset/<uuid:asset_uuid>/add_auction/", views.asset_add_auction, name="asset_add_auction"),
     path("asset/<uuid:asset_uuid>/add_nfts/", views.asset_add_nfts, name="asset_add_nfts"),
@@ -41,7 +40,7 @@ urlpatterns = [
     # LIKES
     path("asset/<uuid:asset_uuid>/like", views.likeview, name="like_asset"),
     # RAFFLE
-    path("raffles/", views.raffles_own, name="raffles_own"),
+    path("raffles/own", views.raffles_own, name="raffles_own"),
     path("raffles/ended/", views.raffles_own_ended, name="raffles_own_ended"),
     path("raffles/running/", views.raffles_own_running, name="raffles_own_running"),
     path("raffles/scheduled/", views.raffles_own_scheduled, name="raffles_own_scheduled"),
@@ -53,12 +52,15 @@ urlpatterns = [
     path("raffle/<uuid:raffle_uuid>/edit/", views.RaffleEdit.as_view(), name="raffle_edit"),
     path("raffle/<uuid:raffle_uuid>/delete/", views.RaffleDelete.as_view(), name="raffle_delete"),
     # AUCTIONS
-    path("auctions/", views.AuctionList.as_view(), name="auctions_list"),
+    path("auctions/", views.auctions_running, name="auctions_running"),
+    path("auctions/own/", views.auctions_own, name="auctions_own"),
     path("auctions/ended/", views.auctions_own_ended, name="auctions_own_ended"),
     path("auctions/running/", views.auctions_own_running, name="auctions_own_running"),
     path("auctions/scheduled/", views.auctions_own_scheduled, name="auctions_own_scheduled"),
     path("auction/create/", views.AuctionCreate.as_view(), name="auction_create"),
     path("auction/<uuid:auction_uuid>/", views.auction_detail, name="auction_detail"),
+    path("auction/<uuid:auction_uuid>/edit/", views.AuctionEdit.as_view(), name="auction_edit"),
+    path("auction/<uuid:auction_uuid>/delete/", views.AuctionDelete.as_view(), name="auction_delete"),
     path("auction/<uuid:auction_uuid>/add_assets/", views.auction_add_assets, name="auction_add_assets"),
     path("auction/<uuid:auction_uuid>/add_bid/", views.auction_add_bid, name="auction_add_bid"),
     path("auction/<uuid:auction_uuid>/bids/", views.auction_bids, name="auction_bids"),

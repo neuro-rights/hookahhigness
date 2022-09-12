@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        {% if auction.creator == request.user %}
+        {% if auction.seller == request.user %}
         <div class="row">
             <div class="col s12">
                 <a href="{% url 'auction_edit' auction.uuid %}"
