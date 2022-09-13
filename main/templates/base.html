@@ -9,15 +9,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hookah Higness NFT Marketplace (⊃｡•́‿•̀｡)⊃</title>
 
-    {% load bootstrap4 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript jquery='full' %}
+	<script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
 
-    {% block css %}
+    {% load django_bootstrap5 %}
+    
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
+
+    {% block css %} 
+	<!-- Our project just needs Font Awesome Free's Solid and Brand files -->
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% endblock css %}
 
     {% block extrahead %}
@@ -25,107 +33,107 @@
 </head>
 
 <body>
-    <header class="navbar-fixed">
-        <nav class="nav-extended">
-            <div class="nav-wrapper">
-                <!--
-                <ul class="nav-menu">
-                    <li>
-                        <a href="/" class="brand-logo"><i class="material-icons right">account_balance</i>ヾ(´〇`)ﾉ♪♪♪</a>
-                    </li>
-                </ul>
-                -->
-                <ul id="nav-mobile" class="right">
-                    {% if user.is_authenticated %}
-                    <!--
-                    <li>{{ user.username }}</li>
-                    <li>{{ user.ethereum_wallet_address }}</li>
-                    -->
-                    <li>
-                        <a href="{% url 'home' %}"><i class="material-icons right">shop</i></a>
-                    </li>
-                    <li>
-                        <a href="{% url 'profile' %}"><i class="material-icons right">accessibility</i></a>
-                    </li>
-                    <li>
-                        <a href="{% url 'logout' %}"><i class="material-icons right">exit_to_app</i></a>
-                    </li>
-                    {% else %}
-                    <li>
-                        <a href="{% url 'signup' %}"><i class="material-icons right">group_add</i></a>
-                    </li>
-                    <li>
-                        <a href="{% url 'login' %}"><i class="material-icons right">fingerprint</i></a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-            <!--
-            <div class="container-fixed">
-                <ul class="left">
-                    <li class="search">
-                        <form action="{% url 'search_result' %}" method="get">
-                            <input id=searchbar type="search" placeholder="Search NFTs" name='searched'>
-                            <button id="search" class="material-icons white-text" type="submit">search</button>
+	
+	<nav class="navbar navbar-dark bg-dark text-white">
+		<div class="d-flex container-fluid">
+			<div class="row flex-fill">
+				<div class="col-1">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+				</div>
+				<div class="col">
+					<a class="navbar-brand">NFT Market (⊃｡•́‿•̀｡)⊃</a>
+				</div>
+	
+				{% if user.is_authenticated %}
+				<div class="col ml-auto">
+					<div class="nav-item">{{ user.username }}</div>
+				</div>
+				<div class="col">
+					<div class="nav-item">{{ user.ethereum_wallet_address }}</div>
+				</div>
+				<div class="col-1 nav-item">
+					<a href="{% url 'home' %}" class="nav-link" ><i class="fa fa-cart-shopping"></i></a>
+				</div>
+				<div class="col-1 nav-item">
+					<a href="{% url 'profile' %}" class="nav-link"><i class="fa fa-user-pen"></i></a>
+				</div>
+				<div class="col-1 nav-item">
+					<a href="{% url 'logout' %}" class="nav-link"><i class="fa fa-person-running"></i></a>
+				</div>
+				{% else %}
+				<div class="col-1 ml-auto nav-item">
+					<a href="{% url 'signup' %}" class="nav-link"><i class="fa fa-user-lock"></i></a>
+				</div>
+				<div class="col-1 nav-item">
+					<a href="{% url 'login' %}" class="nav-link"><i class="fa fa-fingerprint"></i></a>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</nav>
+	
+	<nav class="navbar navbar-dark text-white">
+		<div class="collapse navbar-collapse" id="navbarContent">
+            <div class="d-flex container-fluid">
+                <div class="row flex-fill">
+                    <div class="col d-flex justify-content-start">
+                        <form class="form-inline" action="{% url 'search_result' %}" method="get">
+                            <input id="searchbar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button id="search" class="btn btn-outline-success my-2 my-sm-0" type="submit" name="searched">Search</button>
                         </form>
-                    </li>
-                </ul>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="col-sm-auto d-flex justify-content-between">&nbsp;</div>
+                    <div class="col d-flex justify-content-end">
+                        <div class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{% url 'auctions_own_running' %}">Auctions</button>
+                            <div id='auctions' class='dropdown-menu teal darken-4'>
+                                <a class="dropdown-item" href="{% url 'auction_create' %}">NEW</a>
+                                <a class="dropdown-item" href="{% url 'auctions_own_running' %}">RUNNING</a>
+                                <a class="dropdown-item" href="{% url 'auctions_own_scheduled' %}">SCHEDULED</a>
+                                <a class="dropdown-item" href="{% url 'auctions_own_ended' %}">ENDED</a>
+                            </div>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{% url 'raffles_own' %}">Raffles</button>
+                            <div id='raffles' class='dropdown-menu teal darken-4'>
+                                <a class="dropdown-item" href="{% url 'raffle_create' %}">NEW</a>
+                                <a class="dropdown-item" href="{% url 'raffles_own_running' %}">RUNNING</a>
+                                <a class="dropdown-item" href="{% url 'raffles_own_scheduled' %}">SCHEDULED</a>
+                                <a class="dropdown-item" href="{% url 'raffles_own_ended' %}">ENDED</a>
+                            </div>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{% url 'assets_own' %}">Assets</button>
+                            <div id='assets' class='dropdown-menu teal darken-4'>
+                                <a class="dropdown-item" href="{% url 'asset_create_from_images' %}">ASSET FROM IMAGES</a>
+                                <a class="dropdown-item" href="{% url 'asset_create_from_nfts' %}">ASSET FROM NFTS</a>
+                                <a class="dropdown-item" href="{% url 'asset_create_from_metadata_url' %}">ASSET FROM METADATA</a>
+                            </div>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{% url 'nfts_own' %}">NFT's</button>
+                            <div id='nfts' class='dropdown-menu teal darken-4'>
+                                <a class="dropdown-item" href="{% url 'nft_create' %}">NEW</a>
+                                <a class="dropdown-item" href="{% url 'nfts_own_2d' %}">2D</a>
+                                <a class="dropdown-item" href="{% url 'nfts_own_3d' %}">3D</a>
+                                <a class="dropdown-item" href="{% url 'nfts_own_music' %}">MUSIC</a>
+                                <a class="dropdown-item" href="{% url 'nfts_own_video' %}">VIDEO</a>
+                                <a class="dropdown-item" href="{% url 'nfts_own_doc' %}">DOC</a>
+                            </div>
+                        </div>
+                        {% comment %}
+                        <li><a href="{% url 'opensea' %}">Opensea</a></li>
+                        {% endcomment %}
+                    </div>
+                    {% endif %}
+                </div>
             </div>
-            -->
-            {% if user.is_authenticated %}
-            <ul class="right">
-                <li><a class="dropdown-trigger" href="{% url 'auctions_own_running' %}"
-                        data-target='auctions'>Auctions</a>
-                </li>
-                <li><a class="dropdown-trigger" href="{% url 'raffles_own' %}" data-target='raffles'>Raffles</a></li>
-                <li><a class="dropdown-trigger" href="{% url 'assets_own' %}" data-target='assets'>Assets</a>
-                </li>
-                <li><a class="dropdown-trigger" href="{% url 'nfts_own' %}" data-target='nfts'>NFT's</a></li>
-                {% comment %}
-                <li><a href="{% url 'opensea' %}">Opensea</a></li>
-                {% endcomment %}
-            </ul>
-            <ul id='auctions' class='dropdown-content teal darken-4'>
-                <li><a href="{% url 'auction_create' %}">NEW</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'auctions_own_running' %}">RUNNING</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'auctions_own_scheduled' %}">SCHEDULED</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'auctions_own_ended' %}">ENDED</a></li>
-            </ul>
-            <ul id='raffles' class='dropdown-content teal darken-4'>
-                <li><a href="{% url 'raffle_create' %}">NEW</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'raffles_own_running' %}">RUNNING</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'raffles_own_scheduled' %}">SCHEDULED</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'raffles_own_ended' %}">ENDED</a></li>
-            </ul>
-            <ul id='assets' class='dropdown-content teal darken-4'>
-                <li><a href="{% url 'asset_create_from_images' %}">ASSET FROM IMAGES</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'asset_create_from_nfts' %}">ASSET FROM NFTS</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'asset_create_from_metadata_url' %}">ASSET FROM METADATA</a></li>
-            </ul>
-            <ul id='nfts' class='dropdown-content teal darken-4'>
-                <li><a href="{% url 'nft_create' %}">NEW</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'nfts_own_2d' %}">2D</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'nfts_own_3d' %}">3D</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'nfts_own_music' %}">MUSIC</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'nfts_own_video' %}">VIDEO</a></li>
-                <li class="divider teal darken-4" tabindex="-1"></li>
-                <li><a href="{% url 'nfts_own_doc' %}">DOC</a></li>
-            </ul>
-            {% endif %}
-        </nav>
-    </header>
+		</div>
+	</nav>
+
     <main class="container">
         {% block content %} {% endblock %}
     </main>
@@ -134,14 +142,8 @@
         <div class="right">&copy; 2022 NFT Market &nbsp; \(ᵔᵕᵔ)/</div>
     </footer>
     <script src="https://unpkg.com/ipfs-http-client/dist/index.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.dropdown-trigger').dropdown({ 'constrainWidth': false, 'hover': true });
-            $('.collapsible').collapsible();
-            //$('select').formSelect();
-            $('.carousel').carousel();
         });
     </script>
     {% block javascript %} {% endblock %}

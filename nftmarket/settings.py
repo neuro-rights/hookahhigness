@@ -53,8 +53,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "mathfilters",
-    "bootstrap4",
+    "django_bootstrap5",
     "bootstrap_datepicker_plus",
+    "fontawesomefree"
 ]
 
 MIDDLEWARE = [

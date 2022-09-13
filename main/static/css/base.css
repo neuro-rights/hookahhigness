@@ -1,4 +1,5 @@
 body {
+    color: whitesmoke !important;
     background-color: #1F2833 !important;
     display: flex;
     min-height: 100vh;
@@ -28,8 +29,8 @@ main {
     flex: 1 0 auto;
 }
 
-nav.nav-extended {
-    background-color: #00796b;
+.navbar {
+    color: whitesmoke !important;
 }
 
 .navbar-fixed {
