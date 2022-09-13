@@ -88,7 +88,7 @@
                     {% if user.is_authenticated %}
                     <div class="col ml-auto d-flex justify-content-end">
                         <div class="nav-item dropdown">
-                            <button type="button" class="nav-link dropdown-toggle btn btn-success btn-lg" data-bs-toggle="dropdown" href="{% url 'auctions_own_running' %}">Auctions</a>
+                            <a class="nav-link dropdown-toggle btn btn-success btn-lg" data-bs-toggle="dropdown" href="#">Auctions</a>
                             <div id='auctions' class='dropdown-menu'>
                                 <a class="dropdown-item" href="{% url 'auction_create' %}">NEW</a>
                                 <a class="dropdown-item" href="{% url 'auctions_own_running' %}">RUNNING</a>
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <button type="button" class="nav-link dropdown-toggle btn btn-success btn-lg" data-bs-toggle="dropdown" href="{% url 'raffles_own' %}">Raffles</a>
+                            <a class="nav-link dropdown-toggle btn btn-success btn-lg" data-bs-toggle="dropdown" href="#">Raffles</a>
                             <div id='raffles' class='dropdown-menu'>
                                 <a class="dropdown-item" href="{% url 'raffle_create' %}">NEW</a>
                                 <a class="dropdown-item" href="{% url 'raffles_own_running' %}">RUNNING</a>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <button type="button" class="nav-link dropdown-toggle btn btn-success btn-lg" data-bs-toggle="dropdown" href="{% url 'assets_own' %}">Assets</button>
+                            <a class="nav-link dropdown-toggle btn btn-success btn-lg" data-bs-toggle="dropdown" href="#">Assets</a>
                             <div id='assets' class='dropdown-menu'>
                                 <a class="dropdown-item" href="{% url 'asset_create_from_images' %}">ASSET FROM IMAGES</a>
                                 <a class="dropdown-item" href="{% url 'asset_create_from_nfts' %}">ASSET FROM NFTS</a>
@@ -114,7 +114,7 @@
                             </div>
                         </div>
                         <div class="nav-item dropdown">
-                            <button type="button" class="nav-link dropdown-toggle btn btn-success btn-lg" data-bs-toggle="dropdown" href="{% url 'nfts_own' %}">NFT's</button>
+                            <a class="nav-link dropdown-toggle btn btn-success btn-lg" data-bs-toggle="dropdown" href="#">NFT's</a>
                             <div id='nfts' class='dropdown-menu'>
                                 <a class="dropdown-item" href="{% url 'nft_create' %}">NEW</a>
                                 <a class="dropdown-item" href="{% url 'nfts_own_2d' %}">2D</a>
