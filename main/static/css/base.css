@@ -6,3 +6,6 @@ body {
     flex-direction: column;
 }
 
+.nav-link {
+    padding: 0.4em;
+}
