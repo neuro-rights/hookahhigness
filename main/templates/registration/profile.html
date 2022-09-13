@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
+
 {% block content %}
 
 <!-- Page Layout here -->
@@ -26,7 +28,7 @@
         <section>
             <form method="post" action="{% url 'profile' %}">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {% bootstrap_form form layout='horizontal' %}
                 <input type="submit" class="btn" value="update profile">
             </form>
         </section>
