@@ -47,26 +47,26 @@
 				</div>
 	
 				{% if user.is_authenticated %}
-				<div class="col ml-auto">
+				<div class="col ml-auto d-flex justify-content-end">
 					<div class="nav-item">{{ user.username }}</div>
 				</div>
-				<div class="col">
+				<div class="col d-flex justify-content-end">
 					<div class="nav-item">{{ user.ethereum_wallet_address }}</div>
 				</div>
-				<div class="col-1 nav-item">
+				<div class="col-1 d-flex justify-content-end nav-item">
 					<a href="{% url 'home' %}" class="nav-link" ><i class="fa fa-cart-shopping"></i></a>
 				</div>
-				<div class="col-1 nav-item">
+				<div class="col-1 d-flex justify-content-end nav-item">
 					<a href="{% url 'profile' %}" class="nav-link"><i class="fa fa-user-pen"></i></a>
 				</div>
-				<div class="col-1 nav-item">
+				<div class="col-1 d-flex justify-content-end nav-item">
 					<a href="{% url 'logout' %}" class="nav-link"><i class="fa fa-person-running"></i></a>
 				</div>
 				{% else %}
-				<div class="col-1 ml-auto nav-item">
+				<div class="col-1 d-flex justify-content-end ml-auto nav-item">
 					<a href="{% url 'signup' %}" class="nav-link"><i class="fa fa-user-lock"></i></a>
 				</div>
-				<div class="col-1 nav-item">
+				<div class="col-1 d-flex justify-content-end nav-item">
 					<a href="{% url 'login' %}" class="nav-link"><i class="fa fa-fingerprint"></i></a>
 				</div>
 				{% endif %}
@@ -85,11 +85,10 @@
                         </form>
                     </div>
                     {% if user.is_authenticated %}
-                    <div class="col-sm-auto d-flex justify-content-between">&nbsp;</div>
-                    <div class="col d-flex justify-content-end">
+                    <div class="col ml-auto d-flex justify-content-end">
                         <div class="nav-item dropdown">
                             <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{% url 'auctions_own_running' %}">Auctions</button>
-                            <div id='auctions' class='dropdown-menu teal darken-4'>
+                            <div id='auctions' class='dropdown-menu'>
                                 <a class="dropdown-item" href="{% url 'auction_create' %}">NEW</a>
                                 <a class="dropdown-item" href="{% url 'auctions_own_running' %}">RUNNING</a>
                                 <a class="dropdown-item" href="{% url 'auctions_own_scheduled' %}">SCHEDULED</a>
@@ -98,7 +97,7 @@
                         </div>
                         <div class="nav-item dropdown">
                             <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{% url 'raffles_own' %}">Raffles</button>
-                            <div id='raffles' class='dropdown-menu teal darken-4'>
+                            <div id='raffles' class='dropdown-menu'>
                                 <a class="dropdown-item" href="{% url 'raffle_create' %}">NEW</a>
                                 <a class="dropdown-item" href="{% url 'raffles_own_running' %}">RUNNING</a>
                                 <a class="dropdown-item" href="{% url 'raffles_own_scheduled' %}">SCHEDULED</a>
@@ -107,7 +106,7 @@
                         </div>
                         <div class="nav-item dropdown">
                             <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{% url 'assets_own' %}">Assets</button>
-                            <div id='assets' class='dropdown-menu teal darken-4'>
+                            <div id='assets' class='dropdown-menu'>
                                 <a class="dropdown-item" href="{% url 'asset_create_from_images' %}">ASSET FROM IMAGES</a>
                                 <a class="dropdown-item" href="{% url 'asset_create_from_nfts' %}">ASSET FROM NFTS</a>
                                 <a class="dropdown-item" href="{% url 'asset_create_from_metadata_url' %}">ASSET FROM METADATA</a>
@@ -115,7 +114,7 @@
                         </div>
                         <div class="nav-item dropdown">
                             <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{% url 'nfts_own' %}">NFT's</button>
-                            <div id='nfts' class='dropdown-menu teal darken-4'>
+                            <div id='nfts' class='dropdown-menu'>
                                 <a class="dropdown-item" href="{% url 'nft_create' %}">NEW</a>
                                 <a class="dropdown-item" href="{% url 'nfts_own_2d' %}">2D</a>
                                 <a class="dropdown-item" href="{% url 'nfts_own_3d' %}">3D</a>

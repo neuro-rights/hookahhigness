@@ -1,0 +1,244 @@
+body {
+    color: whitesmoke !important;
+    background-color: #1F2833 !important;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.brand-logo {
+    font-size: 2rem;
+    color: teal;
+}
+
+footer.page-footer {
+    margin-top: 50px;
+}
+
+.select-wrapper .caret {
+    fill: #64ffda !important;
+    color: #64ffda !important;
+}
+
+#submit {
+    float: right !important;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.navbar {
+    color: whitesmoke !important;
+}
+
+.navbar-fixed {
+    margin-bottom: 77px;
+}
+
+nav .nav-wrapper {
+    background-color: #0B0C10;
+    height: 100%;
+}
+
+#nav-mobile li {
+    background-color: #0B0C10;
+}
+
+nav ul a {
+    font-size: 1.2rem;
+}
+
+#search {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+#searchbar {
+    margin: 0 0 0 45px;
+}
+
+#searchbar::placeholder {
+    color: whitesmoke;
+}
+
+#welcome {
+    color: #C5C6C7;
+}
+
+label {
+    font-size: 15px;
+    color: whitesmoke;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: whitesmoke;
+}
+
+p {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.classone,
+.classtwo {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bidcard {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.btn-small {
+    margin-top: 10px;
+}
+
+a:hover,
+button:hover {
+    color: #64ffda;
+}
+
+a,
+button {
+    color: whitesmoke;
+}
+
+input,
+textarea {
+    color: #64ffda;
+}
+
+li form {
+    display: flex;
+    margin-right: 25px;
+}
+
+.header-text {
+    color: #c5dbd9;
+}
+
+.card-title {
+    margin-top: 5px;
+    color: whitesmoke;
+}
+
+.card {
+    width: 500px;
+    border-radius: 0;
+    background-color: #00695c;
+}
+
+.card, .form-control {
+    background-color: #00695c !important;
+    color: #64ffda !important;
+}
+
+.card-panel {
+    background-color: #631111 !important;
+}
+
+.collection .collection-item {
+    background-color: #00695c !important;
+}
+
+.collection .collection-item p,
+.collection .collection-item span {
+    color: whitesmoke;
+}
+
+.dropdown-content {
+    top: 100% !important;
+    padding-left: 120px;
+}
+
+.dropdown-content a {
+    color: whitesmoke;
+    background-color: #00695c;
+}
+
+.dropdown-content a:hover {
+    color: #64ffda;
+}
+
+.dropdown-content li {
+    color: whitesmoke !important;
+    background-color: #00796b !important;
+}
+
+.dropdown-content li.selected,
+.dropdown-content li:hover {
+    color: #64ffda !important;
+    background-color: #00695c !important;
+}
+
+ul li {
+    background-color: #00796b;
+}
+
+.helptext {
+    color: #64ffda;
+}
+
+.errorlist li {
+    color: tomato;
+}
+
+.material-icons {
+    display: inline-flex;
+    vertical-align: top;
+}
+
+footer.page-footer {
+    padding-top: 0;
+    text-align: right;
+    background-color: #00695c;
+}
+
+.thumbnail {
+    position: relative !important;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    left: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 0px;
+}
+
+.thumbnail-big {
+    position: relative !important;
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+    margin: 20px 0;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 0px;
+}
+
+.nonft {
+    color: whitesmoke;
+}
+
+p #id_bidprice {
+    color: black;
+}
+
