@@ -74,14 +74,14 @@
 		</div>
 	</nav>
 	
-	<nav class="navbar navbar-dark text-white">
+	<nav class="navbar navbar-dark text-white" style="background-color: #631111;">
 		<div class="collapse navbar-collapse" id="navbarContent">
             <div class="d-flex container-fluid">
                 <div class="row flex-fill">
                     <div class="col d-flex justify-content-start">
-                        <form class="form-inline" action="{% url 'search_result' %}" method="get">
-                            <input id="searchbar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button id="search" class="btn btn-outline-success my-2 my-sm-0" type="submit" name="searched">Search</button>
+                        <form class="form-inline w-100" action="{% url 'search_result' %}" method="get">
+                            <input id="searchbar" class="form-control d-inline-block w-50" type="search" placeholder="Search" aria-label="Search">
+                            <button id="search" class="btn btn-outline-success d-inline-block" type="submit" name="searched">Search</button>
                         </form>
                     </div>
                     {% if user.is_authenticated %}
@@ -134,7 +134,7 @@
 		</div>
 	</nav>
 
-    <main class="container">
+    <main class="container mt-5">
         {% block content %} {% endblock %}
     </main>
 
