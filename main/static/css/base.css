@@ -3,6 +3,9 @@ body {
     background-color: #1F2833 !important;
 }
 
+.navbar {
+    padding: 0 !important;
+}
 #navbarContent {
     background-color: maroon;
 }
