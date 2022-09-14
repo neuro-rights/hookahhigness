@@ -1,9 +1,6 @@
 body {
     color: whitesmoke !important;
     background-color: #1F2833 !important;
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
 }
 
 #navbarContent {
@@ -11,7 +8,7 @@ body {
 }
 
 .nav-link {
-    padding: 0.4em;
+    padding: 0.4em 0.2em;
 }
 
 footer {
