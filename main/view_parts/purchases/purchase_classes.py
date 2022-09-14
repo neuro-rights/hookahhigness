@@ -14,6 +14,7 @@ from ..utils.form_kwargs import PassArgumentsToForm
 
 #
 from ...models import Purchase
+from ...forms import PurchaseForm
 from ...utils.ipfs import IPFSUtils
 
 
@@ -22,7 +23,8 @@ class PurchaseBoughtList(PassArgumentsToForm, ListView):
 
     paginate_by = 25
     model = Purchase
-    # template_name = "purchases/list.html"
+    form_class = PurchaseForm
+    template_name = "purchases/list.html"
     #
     def get_queryset(self):
         return Purchase.objects.filter(bid__buyer=self.request.user)
@@ -33,7 +35,8 @@ class PurchaseSoldList(PassArgumentsToForm, ListView):
 
     paginate_by = 25
     model = Purchase
-    # template_name = "purchases/list.html"
+    form_class = PurchaseForm
+    template_name = "purchases/list.html"
     #
     def get_queryset(self):
         return Purchase.objects.filter(bid__auction__seller=self.request.user)

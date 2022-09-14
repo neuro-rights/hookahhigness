@@ -24,10 +24,11 @@ class BidList(PassArgumentsToForm, ListView):
 
     paginate_by = 25
     model = Bid
-    # template_name = "bids/list.html"
+    form_class = BidForm
+    template_name = "bids/list.html"
     #
     def get_queryset(self):
-        return Purchase.objects.filter(bidder=self.request.user)
+        return Bid.objects.filter(buyer=self.request.user)
 
 
 class BidDetailView(PassArgumentsToForm, DetailView):
@@ -36,4 +37,4 @@ class BidDetailView(PassArgumentsToForm, DetailView):
     model = Bid
     #
     def get_queryset(self):
-        return Purchase.objects.filter(bidder=self.request.user)
+        return Bid.objects.filter(buyer=self.request.user)
