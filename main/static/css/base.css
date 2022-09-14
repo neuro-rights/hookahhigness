@@ -6,6 +6,15 @@ body {
     flex-direction: column;
 }
 
+#navbarContent {
+    background-color: maroon;
+}
+
 .nav-link {
     padding: 0.4em;
+}
+
+footer {
+    text-align: right;
+    background-color: maroon;
 }

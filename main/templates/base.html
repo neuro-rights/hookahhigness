@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <meta charset="UTF-8">
@@ -32,7 +32,7 @@
     {% endblock %}
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
 	
 	<nav class="navbar navbar-dark bg-dark text-white">
 		<div class="d-flex container-fluid">
@@ -58,32 +58,28 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-8 ml-auto d-flex align-items-center justify-content-end nav-item"></div>
+                        <div class="col ml-auto d-flex align-items-center justify-content-end nav-item"></div>
                         <div class="col d-flex align-items-center justify-content-end nav-item">
-                            <a href="{% url 'home' %}" class="nav-link" ><i class="fa fa-cart-shopping"></i></a>
+                            <a href="{% url 'home' %}" class="nav-link" ><i class="fa fa-cart-shopping"></i> home</a>
                         </div>
                         <div class="col d-flex align-items-center justify-content-end nav-item">
-                            <a href="{% url 'profile' %}" class="nav-link"><i class="fa fa-user-pen"></i></a>
+                            <a href="{% url 'profile' %}" class="nav-link"><i class="fa fa-user-pen"></i> settings</a>
                         </div>
                         <div class="col d-flex align-items-center justify-content-end nav-item">
-                            <a href="{% url 'logout' %}" class="nav-link"><i class="fa fa-person-running"></i></a>
+                            <a href="{% url 'logout' %}" class="nav-link"><i class="fa fa-person-running"></i> logout</a>
                         </div>
                     </div>
                 </div>
 				{% else %}
                 <div class="col">
                     <div class="row">
-                        <div class="col ml-auto d-flex align-items-center justify-content-end">
-                            <div class="nav-item">&nbsp;</div>
+                        <div class="col ml-auto d-flex align-items-center justify-content-end nav-item">
+                            <a href="{% url 'signup' %}" class="nav-link"><i class="fa fa-user-lock"></i> signup</a>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-9 ml-auto d-flex align-items-center justify-content-end nav-item"></div>
                         <div class="col d-flex align-items-center justify-content-end nav-item">
-                            <a href="{% url 'signup' %}" class="nav-link"><i class="fa fa-user-lock"></i></a>
-                        </div>
-                        <div class="col d-flex align-items-center justify-content-end nav-item">
-                            <a href="{% url 'login' %}" class="nav-link"><i class="fa fa-fingerprint"></i></a>
+                            <a href="{% url 'login' %}" class="nav-link"><i class="fa fa-fingerprint"></i> login</a>
                         </div>
                     </div>
                 </div>
@@ -92,7 +88,7 @@
 		</div>
 	</nav>
 	
-	<nav class="navbar navbar-dark text-white" style="background-color: #631111;">
+	<nav class="navbar navbar-dark text-white">
 		<div class="collapse navbar-collapse" id="navbarContent">
             <div class="d-flex container-fluid">
                 <div class="row flex-fill">
@@ -155,7 +151,7 @@
         {% block content %} {% endblock %}
     </main>
 
-    <footer class="page-footer">
+    <footer class="footer mt-auto py-3">
         <div class="right">&copy; 2022 NFT Market &nbsp; \(ᵔᵕᵔ)/</div>
     </footer>
     <script src="https://unpkg.com/ipfs-http-client/dist/index.min.js"></script>
