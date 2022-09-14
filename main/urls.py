@@ -65,6 +65,8 @@ urlpatterns = [
     path("auction/<uuid:auction_uuid>/add_bid/", views.auction_add_bid, name="auction_add_bid"),
     path("auction/<uuid:auction_uuid>/bids/", views.auction_bids, name="auction_bids"),
     # BIDS
+    path("bids/made/", views.BidList.as_view(), name="bids_made_list"),
+    path("bids/received/", views.BidList.as_view(), name="bids_received_list"),
     path("bid/<uuid:bid_uuid>/accept/", views.bid_accept, name="bid_accept"),
     # PURCHASES
     path("purchases/bought/", views.PurchaseBoughtList.as_view(), name="purchases_bought_list"),
