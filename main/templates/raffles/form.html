@@ -14,12 +14,12 @@
 {% endif %}
 
 <div class="row mt-5">
-    <form class="col s12" method="post" enctype="multipart/form-data">
+    <form class="col" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form layout='horizontal' %}
         <hr>
         <div class="row">
-            <div class="col s12">
+            <div class="col">
                 <button class="btn-small waves-effect waves-light teal" type="submit" name="action" id="submit">Submit
                     <i class="material-icons right">send</i>
                 </button>
@@ -27,73 +27,11 @@
         </div>
     </form>
 </div>
-<ul class="collapsible">
-    <li>
-        <div class="collapsible-header teal"><i class="material-icons">filter_drama</i>Submit</div>
-        <div class="collapsible-body">
-            <div class="progress">
-                <div id="upload_progress" class="determinate red darken-4" style="width: 0%"></div>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="collapsible-header teal"><i class="material-icons">place</i>Parse</div>
-        <div class="collapsible-body">
-            <div style="width:100%;overflow:auto">
-                <pre>Parsing...</pre>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="collapsible-header teal"><i class="material-icons">whatshot</i>Adding to DB</div>
-        <div class="collapsible-body">
-            <div style="width:100%;overflow:auto">
-                <pre>Adding to DB...</pre>
-            </div>
-        </div>
-    </li>
-</ul>
 {% endblock %}
 
 {% block javascript %}
-<script>
-    $("#submit").click(function () {
-        //
-        var bid_id = $(this).val();
-        //
-        $.ajax({
-            xhr: function () {
-                var xhr = new window.XMLHttpRequest();
-                xhr.upload.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        console.log(percentComplete);
-                        $("#upload_progress").css({
-                            width: percentComplete * 100 + '%'
-                        });
-                        if (percentComplete === 1) {
-                            $("#upload_progress").addClass('hide');
-                        }
-                    }
-                }, false);
-                xhr.addEventListener("progress", function (evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        console.log(percentComplete);
-                        $("#upload_progress").css({
-                            width: percentComplete * 100 + '%'
-                        });
-                    }
-                }, false);
-                return xhr;
-            },
-            type: 'POST',
-            url: "/ajax/transaction_progress",
-            data: { 'bid': bid_id },
-            success: function (data) {
-                console.log("Transaction Complete!")
-            }
-        });
+<script type="text/javascript">
+    $(document).ready(function () {
     });
 </script>
 {% endblock %}

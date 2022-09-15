@@ -3,10 +3,10 @@
 
 <h5>{{raffle.uuid|upper}}</h5>
 <ul class="collection">
-    <li class="collection-item" style="padding:25px;">
+    <li class="collection-item">
         <div class="row">
             <a href="{% url 'raffle_detail' raffle.uuid %}">
-                <div class="col s12">
+                <div class="col">
                     <span>{{ raffle.uuid }}</span>
                     <p>{{ raffle.description|truncatechars:25 }}</p>
                     <p>{{ raffle.participants|length }}</p>
@@ -18,7 +18,7 @@
         </div>
         {% if raffle.asset.seller == request.user %}
         <div class="row">
-            <div class="col s12">
+            <div class="col">
                 <a href="{% url 'raffle_edit' raffle.uuid %}"
                     class="waves-effect waves-light btn-small teal darken-4">Edit Raffle</a>
                 <a href="{% url 'raffle_delete' raffle.uuid %}"

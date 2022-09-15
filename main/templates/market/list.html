@@ -7,36 +7,36 @@
     <li class="collection-item">
         <a href="{% url 'auction_detail' auction.fields.uuid %}">
             <div class="row" style="box-sizing:border-box;">
-                <div class="col s10" style="padding:20px 50px;">
+                <div class="col" style="padding:20px 50px;">
                     <div class="row">
-                        <div class="col s4">
+                        <div class="col">
                             <p>Total ASSETS:</p>
                         </div>
-                        <div class="col s8">
+                        <div class="col">
                             <p>{{ auction.fields.assets|length }}</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s4">
+                        <div class="col">
                             <p>Blockchain:</p>
                         </div>
-                        <div class="col s8">
+                        <div class="col">
                             <p>{{ auction.fields.blockchain }}</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s4">
+                        <div class="col">
                             <p>Description:</p>
                         </div>
-                        <div class="col s8">
+                        <div class="col">
                             <p>{{ auction.fields.description|truncatechars:25 }}</p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s4">
+                        <div class="col">
                             <p>Seller:</p>
                         </div>
-                        <div class="col s8">
+                        <div class="col">
                             <p>{{ auction.fields.seller }}</p>
                         </div>
                     </div>

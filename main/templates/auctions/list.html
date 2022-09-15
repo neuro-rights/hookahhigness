@@ -3,7 +3,7 @@
 
 <!-- Page Layout here -->
 <div class="row">
-    <div class="col s12">
+    <div class="col">
         <!-- Note that "m8 l9" was added -->
         <!-- Teal page content
 
@@ -37,7 +37,6 @@
 {% if page_obj %}
 <div class="container pagination">
     <span class="step-links">
-
         {% if page_obj.has_previous %}
         <a href="?page=1"><i class="material-icons">first_page</i></a>
         <a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">keyboard_arrow_left</i></a>
