@@ -48,7 +48,7 @@ def nfts_own(request):
     nfts_list = Nft.objects.filter(creator=request.user)
     #
     context = {"page_obj": get_page_obj(request, nfts_list, 25)}
-    return render(request, "nfts/list_image.html", context)
+    return render(request, "nfts/list.html", context)
 
 
 @login_required
@@ -57,7 +57,7 @@ def nfts_own_2d(request):
     nfts_list = Nft.objects.filter(creator=request.user, nft_type="2d")
     #
     context = {"page_obj": get_page_obj(request, nfts_list, 25)}
-    return render(request, "nfts/list_image.html", context)
+    return render(request, "nfts/list.html", context)
 
 
 @login_required
@@ -66,7 +66,7 @@ def nfts_own_3d(request):
     nfts_list = Nft.objects.filter(creator=request.user, nft_type="3d")
     #
     context = {"page_obj": get_page_obj(request, nfts_list, 25)}
-    return render(request, "nfts/list_image.html", context)
+    return render(request, "nfts/list.html", context)
 
 
 @login_required
@@ -75,7 +75,7 @@ def nfts_own_music(request):
     nfts_list = Nft.objects.filter(creator=request.user, nft_type="music")
     #
     context = {"page_obj": get_page_obj(request, nfts_list, 25)}
-    return render(request, "nfts/list_music.html", context)
+    return render(request, "nfts/list.html", context)
 
 
 @login_required
@@ -84,7 +84,7 @@ def nfts_own_video(request):
     nfts_list = Nft.objects.filter(creator=request.user, nft_type="video")
     #
     context = {"page_obj": get_page_obj(request, nfts_list, 25)}
-    return render(request, "nfts/list_video.html", context)
+    return render(request, "nfts/list.html", context)
 
 
 @login_required
@@ -93,7 +93,7 @@ def nfts_own_doc(request):
     nfts_list = Nft.objects.filter(creator=request.user, nft_type="doc")
     #
     context = {"page_obj": get_page_obj(request, nfts_list, 25)}
-    return render(request, "nfts/list_doc.html", context)
+    return render(request, "nfts/list.html", context)
 
 
 @login_required
