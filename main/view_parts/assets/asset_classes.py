@@ -213,8 +213,8 @@ class AssetList(PassArgumentsToForm, ListView):
 class AssetListJson(BaseDatatableView):
     model = Asset
     # define the columns that will be returned
-    columns = ['id', 'uuid', 'description']
-    order_columns = ['id', 'uuid', 'description']
+    columns = ['id', 'uuid', 'asset_type', 'seller', 'nfts', 'name', 'description', 'status']
+    order_columns = ['id', 'uuid', 'asset_type', 'seller', 'nfts', 'name', 'description', 'status']
 
     def get_initial_queryset(self):
         return Asset.objects.filter(seller=self.request.user)

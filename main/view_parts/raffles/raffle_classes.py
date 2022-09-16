@@ -87,8 +87,8 @@ class RaffleList(PassArgumentsToForm, ListView):
 
 class RaffleListJson(BaseDatatableView):
     model = Raffle
-    columns = ['id', 'uuid']
-    order_columns = ['id', 'uuid']
+    columns = ['id', 'uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
+    order_columns = ['id', 'uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
 
     def get_initial_queryset(self):
         return Raffle.objects.filter(asset__seller=self.request.user)
