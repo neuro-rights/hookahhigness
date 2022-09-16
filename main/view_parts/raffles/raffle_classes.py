@@ -7,6 +7,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.urls import reverse
 from bootstrap_datepicker_plus.widgets import DateTimePickerInput
+from django_datatables_view.base_datatable_view import BaseDatatableView
+from django.utils.html import escape
 #
 from ..utils.pagination import *
 from ..utils.form_kwargs import PassArgumentsToForm
@@ -55,7 +57,6 @@ class RaffleEdit(PassArgumentsToForm, UpdateView):
         return reverse(
             "raffle_detail", kwargs={"raffle_uuid": self.object.uuid}
         )
-
     #
     def form_valid(self, form):
         form.instance.asset.seller = self.request.user
@@ -72,6 +73,7 @@ class RaffleDelete(LoginRequiredMixin, DeleteView):
     def get_object(self, queryset=None):
         return Raffle.objects.get(uuid=self.kwargs.get("raffle_uuid"))
 
+
 class RaffleList(PassArgumentsToForm, ListView):
     """ """
 
@@ -82,5 +84,20 @@ class RaffleList(PassArgumentsToForm, ListView):
     def get_queryset(self):
         return Raffle.objects.all()
 
+
+class RaffleListJson(BaseDatatableView):
+    model = Raffle
+    columns = ['id', 'uuid']
+    order_columns = ['id', 'uuid']
+
+    def get_initial_queryset(self):
+        return Raffle.objects.filter(asset__seller=self.request.user)
+
+
 class RaffleDetailView(PassArgumentsToForm, DetailView):
     model = Raffle
+    form_class = RaffleForm
+    template_name = "raffles/detail.html"
+
+    def get_object(self, queryset=None):
+        return Raffle.objects.get(uuid=self.kwargs.get("raffle_uuid"))

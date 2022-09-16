@@ -1,4 +1,28 @@
-{% extends 'base.html' %} {% load mathfilters %}
+{% extends 'base.html' %} {%load mathfilters%}
 {% block content %}
 
+{% for instance in bid %}
+    <h5>Bid: {{instance.fields.uuid}}</h5>
+    {% for field, value in instance.fields.items %}
+        <div class="row">
+            <div class="col">
+                {{ field }}
+            </div>
+            <div class="col">
+                {{ value }}
+            </div>
+        </div>
+    {% endfor %}
+    {% if bid.buyer == request.user %}
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'bid_edit' bid.uuid %}"
+                class="waves-effect waves-light btn">Edit</a>
+            <a href="{% url 'bid_delete' bid.uuid %}"
+                class="waves-effect waves-light btn">Delete</a>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}
 {% endblock %}
+

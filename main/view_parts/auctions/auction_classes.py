@@ -7,7 +7,10 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.urls import reverse
 from bootstrap_datepicker_plus.widgets import DateTimePickerInput
-#
+from django.utils.decorators import method_decorator
+from django_datatables_view.base_datatable_view import BaseDatatableView
+from django.utils.html import escape
+
 from ...forms import AuctionForm
 from ...models import Auction
 
@@ -78,5 +81,20 @@ class AuctionDelete(LoginRequiredMixin, DeleteView):
         return Auction.objects.get(uuid=self.kwargs.get("auction_uuid"))
 
 
+class AuctionListJson(BaseDatatableView):
+    model = Auction
+    columns = ['id', 'uuid', 'description']
+    order_columns = ['id', 'uuid', 'description']
+
+    def get_initial_querset(self):
+        return Auction.objects.filter(seller=self.request.user)
+
+
+@method_decorator(login_required, name='dispatch')
 class AuctionDetailView(PassArgumentsToForm, DetailView):
     model = Auction
+    form_class = AuctionForm
+    template_name = "auctions/detail.html"
+
+    def get_object(self, queryset=None):
+        return Auction.objects.get(uuid=self.kwargs.get("auction_uuid"))

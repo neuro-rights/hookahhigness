@@ -9,13 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hookah Higness NFT Marketplace (⊃｡•́‿•̀｡)⊃</title>
 
-	<script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
-
     {% load django_bootstrap5 %}
     
     {# Load CSS and JavaScript #}
     {% bootstrap_css %}
-    {% bootstrap_javascript %}
 
     {# Display django.contrib.messages as Bootstrap alerts #}
     {% bootstrap_messages %}
@@ -25,6 +22,7 @@
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     {% endblock css %}
 
@@ -119,8 +117,8 @@
                                 <div id='auctions' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'auction_create' %}">NEW</a>
                                     <a class="dropdown-item" href="{% url 'auctions_own_running' %}">RUNNING</a>
-                                    <a class="dropdown-item" href="{% url 'auctions_own_scheduled' %}">SCHEDULED</a>
-                                    <a class="dropdown-item" href="{% url 'auctions_own_ended' %}">ENDED</a>
+                                    <a class="dropdown-item" href="{% url 'auctions_own_ended' %}">SCHEDULED</a>
+                                    <a class="dropdown-item" href="{% url 'auctions_own_scheduled' %}">ENDED</a>
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
@@ -135,20 +133,17 @@
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Assets</a>
                                 <div id='assets' class='dropdown-menu dropdown-menu-end'>
-                                    <a class="dropdown-item" href="{% url 'asset_create_from_images' %}">ASSET FROM IMAGES</a>
-                                    <a class="dropdown-item" href="{% url 'asset_create_from_nfts' %}">ASSET FROM NFTS</a>
-                                    <a class="dropdown-item" href="{% url 'asset_create_from_metadata_url' %}">ASSET FROM METADATA</a>
+                                    <a class="dropdown-item" href="{% url 'assets_own' %}">LIST</a>
+                                    <a class="dropdown-item" href="{% url 'asset_create_from_images' %}">FROM IMAGES</a>
+                                    <a class="dropdown-item" href="{% url 'asset_create_from_nfts' %}">FROM NFTS</a>
+                                    <a class="dropdown-item" href="{% url 'asset_create_from_metadata_url' %}">FROM METADATA</a>
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">NFT's</a>
                                 <div id='nfts' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'nft_create' %}">NEW</a>
-                                    <a class="dropdown-item" href="{% url 'nfts_own_2d' %}">2D</a>
-                                    <a class="dropdown-item" href="{% url 'nfts_own_3d' %}">3D</a>
-                                    <a class="dropdown-item" href="{% url 'nfts_own_music' %}">MUSIC</a>
-                                    <a class="dropdown-item" href="{% url 'nfts_own_video' %}">VIDEO</a>
-                                    <a class="dropdown-item" href="{% url 'nfts_own_doc' %}">DOC</a>
+                                    <a class="dropdown-item" href="{% url 'nfts_own' %}">2D</a>
                                 </div>
                             </div>
                         </div>
@@ -169,11 +164,12 @@
     <footer class="footer mt-auto">
         <div class="right">&copy; 2022 NFT Market &nbsp; \(ᵔᵕᵔ)/</div>
     </footer>
+ 
+    {% bootstrap_javascript %}
+    {% block extrajs %}
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
     <script src="https://unpkg.com/ipfs-http-client/dist/index.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-        });
-    </script>
+    {% endblock  %}
     {% block javascript %} {% endblock %}
 </body>
 

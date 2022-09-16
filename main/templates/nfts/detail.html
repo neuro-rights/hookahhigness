@@ -26,6 +26,7 @@
             <a href="{% url 'nft_edit' nft.uuid %}" class="waves-effect waves-light btn-small">Edit</a>
             <a href="{% url 'nft_delete' nft.uuid %}" class="waves-effect waves-light btn-small red darken-4">Delete</a>
             {% endif %}
+            {% comment %}
             <form action="{% url 'like_nft' nft.uuid %}" method="POST" class="right">
                 {% csrf_token %}
                 <button type="submit" , name="nft_id" , value="{{ post.id }}"
@@ -38,6 +39,7 @@
                     {% endif %}
                 </p>
             </form>
+            {% endcomment %}
         </div>
     </div>
 

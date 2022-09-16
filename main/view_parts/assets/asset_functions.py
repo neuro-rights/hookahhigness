@@ -6,9 +6,9 @@ from django.core.exceptions import SuspiciousOperation
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-
+from django.core import serializers
 #
-from ...forms import PurchaseForm
+from ...forms import BidForm, PurchaseForm
 from ...models import User, Asset, Bid, Purchase
 
 #
@@ -18,14 +18,12 @@ from ..utils.pagination import *
 @login_required
 def asset_detail(request, asset_uuid):
     #
-    asset = Asset.objects.get(uuid=asset_uuid)
-    asset_nfts = asset.nfts.order_by("likes").all()
-    #
-    context = {
-        "asset": asset,
-        "page_obj": get_page_obj(request, asset_nfts, 25),
-    }
-    return render(request, "assets/detail.html", context)
+    asset = serializers.serialize("python", Asset.objects.filter(uuid=asset_uuid))
+    bid_form = BidForm(request)
+
+    return render(
+        request, "assets/detail.html", {"asset": asset, "bid_form": bid_form}
+    )
 
 
 @login_required
@@ -98,3 +96,13 @@ def asset_add_nfts(request, asset_uuid):
 
     context = {"asset": asset}
     return render(request, "assets/detail.html", context)
+
+def like_asset(request, asset_uuid):
+    """
+    nft = get_object_or_404(Nft, uuid=nft_uuid)
+    nft.likes.add(request.user)
+    #
+    return HttpResponseRedirect(reverse("nft_detail", args=[str(uuid)]))
+    """
+    pass
+

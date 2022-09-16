@@ -4,6 +4,7 @@ dj-database-url
 Django
 django-bootstrap5
 django-bootstrap-datepicker-plus
+django-datatables-view
 django-environ
 django-heroku
 fontawesomefree
@@ -12,6 +13,7 @@ jmespath
 Pillow>=9.0.1
 psycopg2-binary
 python-dateutil
+pytz
 six
 sqlparse
 urllib3

@@ -169,14 +169,48 @@ class NftForm(forms.ModelForm):
         ]
 
 
+class AssetForm(forms.ModelForm):
+    """ """
+    def __init__(self, request, *args, **kwargs):
+        """Grants access to the request object so that only members of the current user
+        are given as options"""
+        super(AssetForm, self).__init__(*args, **kwargs)
+        self.request = request
+        self.fields["nfts"].queryset = Nft.objects.filter(
+            creator=self.request.user
+        )
+
+    def save(self, commit=True):
+        """ """
+        instance = super().save(commit=False)
+        instance.seller = self.request.user
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
+
+    class Meta:
+        """ """
+
+        model = Asset
+        fields = [
+            "asset_type",
+            "seller",
+            "nfts",
+            "name",
+            "description",
+            "token_id",
+            "metadata_uri",
+            "status"
+        ]
+
+
 class AssetFromFilesForm(forms.ModelForm):
     """ """
 
     image_files = forms.FileField(
         widget=forms.ClearableFileInput(attrs={"multiple": True})
     )
-
-    print(image_files)
 
     def __init__(self, request, *args, **kwargs):
         """Grants access to the request object so that only members of the current user

@@ -6,7 +6,7 @@ from django.core.exceptions import SuspiciousOperation
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-
+from django.core import serializers
 #
 from ...utils.ipfs import IPFSUtils
 
@@ -34,7 +34,7 @@ def search_result(request):
 @login_required
 def nft_detail(request, nft_uuid):
     #
-    nft = Nft.objects.get(uuid=nft_uuid)
+    nft = serializers.serialize("python", Nft.objects.filter(uuid=nft_uuid))
     bid_form = BidForm(request)
     #
     return render(
@@ -132,12 +132,14 @@ def get_context_data(self, *args, **kwargs):
     return context
 
 
-def likeview(request, nft_uuid):
-    #
+def like_nft(request, nft_uuid):
+    """
     nft = get_object_or_404(Nft, uuid=nft_uuid)
     nft.likes.add(request.user)
     #
     return HttpResponseRedirect(reverse("nft_detail", args=[str(uuid)]))
+    """
+    pass
 
 
 @login_required

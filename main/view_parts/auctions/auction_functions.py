@@ -6,7 +6,7 @@ from django.core.exceptions import SuspiciousOperation
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-
+from django.core import serializers
 #
 from ...forms import BidForm
 from ...models import Auction
@@ -18,7 +18,7 @@ from ..utils.pagination import *
 @login_required
 def auction_detail(request, auction_uuid):
     #
-    auction = Auction.objects.get(uuid=auction_uuid)
+    auction = serializers.serialize("python", Auction.objects.filter(uuid=auction_uuid))
     bid_form = BidForm(request)
     #
     return render(

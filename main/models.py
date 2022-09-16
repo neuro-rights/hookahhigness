@@ -65,17 +65,9 @@ class User(AbstractUser):
     #
     class Meta:
         ordering = ["-id"]
-
     #
     def __str__(self):
         return self.ethereum_wallet_address
-
-    """
-    def create_profile(sender, **kwargs):
-        if kwargs["created"]:
-            profile = Profile.objects.create(user=kwargs["instance"])
-    post_save.connect(create_profile, sender=User)
-    """
 
 
 class Nft(models.Model):
@@ -108,23 +100,19 @@ class Nft(models.Model):
 
     class Meta:
         ordering = ["-id"]
-
     #
     @property
     def total_likes(self):
         return self.likes.count()
-
     #
     def __str__(self):
         return self.name
-
     #
     def get_asset_uri(self):
         return self.uri_asset
-
     #
     def get_absolute_url(self):
-        return reverse("nft_detail", kwargs={"nft_uuid": self.id})
+        return reverse("nft_detail", kwargs={"nft_uuid": self.uuid})
 
 
 class Asset(models.Model):
@@ -235,6 +223,8 @@ class Auction(models.Model):
     def total_bids(self):
         return self.bids.count()
 
+    def get_absolute_url(self):
+        return reverse("auction_detail", kwargs={"auction_uuid": self.uuid})
 
 class Raffle(models.Model):
     #
@@ -265,6 +255,9 @@ class Raffle(models.Model):
 
     class Meta:
         ordering = ["-id"]
+    
+    def get_absolute_url(self):
+        return reverse("raffle_detail", kwargs={"raffle_uuid": self.uuid})
 
 
 class Bid(models.Model):
@@ -282,6 +275,9 @@ class Bid(models.Model):
 
     class Meta:
         ordering = ["-value"]
+    
+    def get_absolute_url(self):
+        return reverse("bid_detail", kwargs={"bid_uuid": self.uuid})
 
 
 class Purchase(models.Model):
@@ -304,3 +300,6 @@ class Purchase(models.Model):
         choices=PURCHASE_STATUS,
         default="running",
     )
+    
+    def get_absolute_url(self):
+        return reverse("purchase_detail", kwargs={"purchase_uuid": self.uuid})

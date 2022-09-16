@@ -1,48 +1,29 @@
 {% extends 'base.html' %} {%load mathfilters%}
 {% block content %}
 
-<h5>{{auction.uuid|upper}}</h5>
-<div class="collection">
-    <div class="collection-item" style="padding: 77px;">
+{% for instance in auction %}
+    <h5>Auction: {{instance.fields.uuid}}</h5>
+    {% for field, value in instance.fields.items %}
         <div class="row">
             <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <span>UUID:</span>
-                    </div>
-                    <div class="col">
-                        <span>{{ auction.uuid }}</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <p>TOTAL ASSETS:</p>
-                    </div>
-                    <div class="col">
-                        <p>{{ auction.num_assets }}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <p>Description:</p>
-                    </div>
-                    <div class="col">
-                        <p>{{ auction.description|truncatechars:25 }}</p>
-                    </div>
-                </div>
+                {{ field }}
             </div>
-        </div>
-        {% if auction.seller == request.user %}
-        <div class="row">
             <div class="col">
-                <a href="{% url 'auction_edit' auction.uuid %}"
-                    class="waves-effect waves-light btn-small teal darken-4">Edit Auction</a>
-                <a href="{% url 'auction_delete' auction.uuid %}"
-                    class="waves-effect waves-light btn-small red darken-4">Delete Auction</a>
+                {{ value }}
             </div>
         </div>
-        {% endif %}
+    {% endfor %}
+    {% if auction.seller == request.user %}
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'raffle_edit' raffle.uuid %}"
+                class="waves-effect waves-light btn">Edit</a>
+            <a href="{% url 'raffle_delete' raffle.uuid %}"
+                class="waves-effect waves-light btn">Delete</a>
+        </div>
     </div>
-</div>
-
+    {% endif %}
+{% endfor %}
 {% endblock %}
+
+

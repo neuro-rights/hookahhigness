@@ -8,7 +8,8 @@ urlpatterns = [
     path("accounts/profile/", views.profile, name="profile"),
     path("accounts/followers/", views.profile, name="followers"),
     # NFTS
-    path("nfts/own", views.nfts_own, name="nfts_own"),
+    path("nfts/ajax/", views.NftListJson.as_view(), name="ajax_datatable_nfts"),
+    path("nfts/own/", views.nfts_own, name="nfts_own"),
     path("nfts/2d/", views.nfts_own_2d, name="nfts_own_2d"),
     path("nfts/3d/", views.nfts_own_3d, name="nfts_own_3d"),
     path("nfts/music/", views.nfts_own_music, name="nfts_own_music"),
@@ -24,8 +25,9 @@ urlpatterns = [
     # Add File to NFT
     path("nft/<uuid:nft_uuid>/add_file", views.nft_add_file, name="nft_add_file"),
     # LIKES
-    path("nft/<uuid:nft_uuid>/like", views.likeview, name="like_nft"),
+    path("nft/<uuid:nft_uuid>/like", views.like_nft, name="like_nft"),
     # ASSETS
+    path("assets/ajax/", views.AssetListJson.as_view(), name="ajax_datatable_assets"),
     path("assets/own/", views.assets_own, name="assets_own"),
     path("asset/create_from_images/", views.AssetFromImagesCreate.as_view(), name="asset_create_from_images"),
     path("asset/create_from_nfts/", views.AssetFromNftsCreate.as_view(), name="asset_create_from_nfts"),
@@ -38,9 +40,10 @@ urlpatterns = [
     path("asset/<uuid:asset_uuid>/edit/", views.AssetEdit.as_view(), name="asset_edit"),
     path("asset/<uuid:asset_uuid>/delete/", views.AssetDelete.as_view(), name="asset_delete"),
     # LIKES
-    path("asset/<uuid:asset_uuid>/like", views.likeview, name="like_asset"),
+    path("asset/<uuid:asset_uuid>/like", views.like_asset, name="like_asset"),
     # RAFFLE
-    path("raffles/own", views.raffles_own, name="raffles_own"),
+    path("raffles/ajax/", views.RaffleListJson.as_view(), name="ajax_datatable_raffles"),
+    path("raffles/own/", views.raffles_own, name="raffles_own"),
     path("raffles/ended/", views.raffles_own_ended, name="raffles_own_ended"),
     path("raffles/running/", views.raffles_own_running, name="raffles_own_running"),
     path("raffles/scheduled/", views.raffles_own_scheduled, name="raffles_own_scheduled"),
@@ -52,7 +55,7 @@ urlpatterns = [
     path("raffle/<uuid:raffle_uuid>/edit/", views.RaffleEdit.as_view(), name="raffle_edit"),
     path("raffle/<uuid:raffle_uuid>/delete/", views.RaffleDelete.as_view(), name="raffle_delete"),
     # AUCTIONS
-    path("auctions/", views.auctions_running, name="auctions_running"),
+    path("auctions/ajax/", views.AuctionListJson.as_view(), name="ajax_datatable_auctions"),
     path("auctions/own/", views.auctions_own, name="auctions_own"),
     path("auctions/ended/", views.auctions_own_ended, name="auctions_own_ended"),
     path("auctions/running/", views.auctions_own_running, name="auctions_own_running"),
@@ -65,10 +68,14 @@ urlpatterns = [
     path("auction/<uuid:auction_uuid>/add_bid/", views.auction_add_bid, name="auction_add_bid"),
     path("auction/<uuid:auction_uuid>/bids/", views.auction_bids, name="auction_bids"),
     # BIDS
-    path("bids/made/", views.BidList.as_view(), name="bids_made_list"),
-    path("bids/received/", views.BidList.as_view(), name="bids_received_list"),
+    path("bids/ajax/made/", views.BidListJson.as_view(), name="ajax_datatable_bids_made"),
+    path("bids/ajax/received/", views.BidListJson.as_view(), name="ajax_datatable_bids_received"),
+    path("bids/made/", views.BidMadeList.as_view(), name="bids_made_list"),
+    path("bids/received/", views.BidReceivedList.as_view(), name="bids_received_list"),
     path("bid/<uuid:bid_uuid>/accept/", views.bid_accept, name="bid_accept"),
     # PURCHASES
+    path("purchases/ajax/bought/", views.PurchaseListJson.as_view(), name="ajax_datatable_purchases_bought"),
+    path("purchases/ajax/sold/", views.PurchaseListJson.as_view(), name="ajax_datatable_purchases_sold"),
     path("purchases/bought/", views.PurchaseBoughtList.as_view(), name="purchases_bought_list"),
     path("purchases/sold/", views.PurchaseSoldList.as_view(), name="purchases_sold_list"),
     # OPENSEA

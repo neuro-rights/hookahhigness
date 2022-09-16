@@ -1,31 +1,29 @@
-{% extends 'base.html' %} {% load mathfilters %}
+{% extends 'base.html' %} {%load mathfilters%}
 {% block content %}
 
-<h5>{{raffle.uuid|upper}}</h5>
-<ul class="collection">
-    <li class="collection-item">
-        <div class="row">
-            <a href="{% url 'raffle_detail' raffle.uuid %}">
-                <div class="col">
-                    <span>{{ raffle.uuid }}</span>
-                    <p>{{ raffle.description|truncatechars:25 }}</p>
-                    <p>{{ raffle.participants|length }}</p>
-                    <p>{{ raffle.winner }}</p>
-                    <p>{{ raffle.token_id }}</p>
-                    <p>{{ raffle.status }}</p>
-                </div>
-            </a>
-        </div>
-        {% if raffle.asset.seller == request.user %}
+{% for instance in raffle %}
+    <h5>Raffle: {{instance.fields.uuid}}</h5>
+    {% for field, value in instance.fields.items %}
         <div class="row">
             <div class="col">
-                <a href="{% url 'raffle_edit' raffle.uuid %}"
-                    class="waves-effect waves-light btn-small teal darken-4">Edit Raffle</a>
-                <a href="{% url 'raffle_delete' raffle.uuid %}"
-                    class="waves-effect waves-light btn-small red darken-4">Delete Raffle</a>
+                {{ field }}
+            </div>
+            <div class="col">
+                {{ value }}
             </div>
         </div>
-        {% endif %}
-    </li>
-</ul>
+    {% endfor %}
+    {% if raffle.asset.seller == request.user %}
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'raffle_edit' raffle.uuid %}"
+                class="waves-effect waves-light btn">Edit</a>
+            <a href="{% url 'raffle_delete' raffle.uuid %}"
+                class="waves-effect waves-light btn">Delete</a>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}
 {% endblock %}
+
+

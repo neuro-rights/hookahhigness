@@ -6,9 +6,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView, ListView
 from django.urls import reverse
+from django_datatables_view.base_datatable_view import BaseDatatableView
+from django.utils.html import escape
+
 
 #
 from ...forms import (
+    AssetForm,
     AssetFromFilesForm,
     AssetFromNftsForm,
     AssetFromMetadataURLForm,
@@ -33,11 +37,9 @@ class AssetFromImagesCreate(PassArgumentsToForm, CreateView):
     form_class = AssetFromFilesForm
     model = Asset
     template_name = "assets/form.html"
-
     #
     def get_success_url(self):
         return reverse("asset_detail", kwargs={"asset_uuid": self.object.uuid})
-
     #
     def post(self, request, *args, **kwargs):
         #
@@ -95,7 +97,6 @@ class AssetFromNftsCreate(PassArgumentsToForm, CreateView):
     form_class = AssetFromNftsForm
     model = Asset
     template_name = "assets/form.html"
-
     #
     def get_success_url(self):
         return reverse("asset_detail", kwargs={"asset_uuid": self.object.uuid})
@@ -107,11 +108,9 @@ class AssetFromMetadataURLCreate(PassArgumentsToForm, CreateView):
     form_class = AssetFromMetadataURLForm
     model = Asset
     template_name = "assets/form.html"
-
     #
     def get_success_url(self):
         return reverse("asset_detail", kwargs={"asset_uuid": self.object.uuid})
-
     #
     def post(self, request, *args, **kwargs):
         #
@@ -172,11 +171,9 @@ class AssetEdit(PassArgumentsToForm, UpdateView):
     #
     def get_object(self, queryset=None):
         return Asset.objects.get(uuid=self.kwargs.get("asset_uuid"))
-
     #
     def get_success_url(self):
         return reverse("asset_detail", kwargs={"asset_uuid": self.object.uuid})
-
     #
     def form_valid(self, form):
         form.instance.seller = self.request.user
@@ -212,10 +209,23 @@ class AssetList(PassArgumentsToForm, ListView):
         return Asset.objects.filter(seller=self.request.user)
 
 
+
+class AssetListJson(BaseDatatableView):
+    model = Asset
+    # define the columns that will be returned
+    columns = ['id', 'uuid', 'description']
+    order_columns = ['id', 'uuid', 'description']
+
+    def get_initial_queryset(self):
+        return Asset.objects.filter(seller=self.request.user)
+
+
 class AssetDetailView(PassArgumentsToForm, DetailView):
     """ """
 
     model = Asset
+    form_class = AssetForm
+    template_name = "assets/detail.html"
 
-    def get_querset(self):
-        return Asset.objects.filter(seller=self.request.user)
+    def get_object(self, queryset=None):
+        return Asset.objects.get(uuid=self.kwargs.get("asset_uuid"))
