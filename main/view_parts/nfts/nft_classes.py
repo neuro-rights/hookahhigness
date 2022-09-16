@@ -56,8 +56,8 @@ class NftDelete(LoginRequiredMixin, DeleteView):
 
 class NftListJson(BaseDatatableView):
     model = Nft
-    columns = ['id', 'uuid', 'nft_type', 'creator', 'name', 'description']
-    order_columns = ['id', 'nft_type', 'uuid', 'creator', 'name', 'description']
+    columns = ['id', 'uuid', 'nft_type', 'creator', 'name']
+    order_columns = ['id', 'nft_type', 'uuid', 'creator', 'name']
 
     def get_initial_querset(self):
         return Nft.objects.filter(creator=self.request.user)
