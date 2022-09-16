@@ -46,8 +46,8 @@ class PurchaseSoldList(PassArgumentsToForm, ListView):
 
 class PurchaseListJson(BaseDatatableView):
     model = Purchase
-    columns = ['id', 'uuid', 'bid', 'tx_hash', 'tx_token', 'purchase_time']
-    order_columns = ['id', 'uuid', 'bid', 'tx_hash', 'tx_token', 'purchase_time']
+    columns = ['uuid', 'bid', 'tx_hash', 'tx_token', 'purchase_time']
+    order_columns = ['uuid', 'bid', 'tx_hash', 'tx_token', 'purchase_time']
 
     def get_initial_queryset(self):
         return Purchase.objects.filter(bid__auction__seller=self.request.user)

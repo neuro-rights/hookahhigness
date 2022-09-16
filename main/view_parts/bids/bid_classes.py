@@ -47,8 +47,8 @@ class BidReceivedList(PassArgumentsToForm, ListView):
 
 class BidListJson(BaseDatatableView):
     model = Bid
-    columns = ['id', 'uuid']
-    order_columns = ['id', 'uuid' 'buyer', 'auction', 'bid_time', 'value']
+    columns = ['uuid', 'buyer', 'auction', 'bid_time', 'value']
+    order_columns = ['uuid', 'buyer', 'auction', 'bid_time', 'value']
 
     def get_initial_querset(self):
         return Bid.objects.filter(buyer=self.request.user)
