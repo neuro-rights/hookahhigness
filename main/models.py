@@ -67,7 +67,7 @@ class User(AbstractUser):
         ordering = ["-id"]
     #
     def __str__(self):
-        return self.ethereum_wallet_address
+        return self.username
 
 
 class Nft(models.Model):
