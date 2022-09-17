@@ -105,24 +105,24 @@
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Purchases</a>
                                 <div id='purchases' class='dropdown-menu dropdown-menu-end'>
-                                    <a class="dropdown-item" href="{% url 'purchases_bought_list' %}">LIST BOUGHT</a>
-                                    <a class="dropdown-item" href="{% url 'purchases_sold_list' %}">LIST SOLD</a>
+                                    <a class="dropdown-item" href="{% url 'purchases_bought_list' %}">LIST BOUGHT PURCHASES</a>
+                                    <a class="dropdown-item" href="{% url 'purchases_sold_list' %}">LIST SOLD PURCHASES</a>
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Bids</a>
                                 <div id='auctions' class='dropdown-menu dropdown-menu-end'>
-                                    <a class="dropdown-item" href="{% url 'bids_made_list' %}">LIST MADE</a>
-                                    <a class="dropdown-item" href="{% url 'bids_received_list' %}">LIST RECEIVED</a>
+                                    <a class="dropdown-item" href="{% url 'bids_made_list' %}">LIST MADE BIDS</a>
+                                    <a class="dropdown-item" href="{% url 'bids_received_list' %}">LIST RECEIVED BIDS</a>
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Auctions</a>
                                 <div id='auctions' class='dropdown-menu dropdown-menu-end'>
-                                    <a class="dropdown-item" href="{% url 'auction_create' %}">NEW</a>
-                                    <a class="dropdown-item" href="{% url 'auctions_own_running' %}">LIST RUNNING</a>
-                                    <a class="dropdown-item" href="{% url 'auctions_own_ended' %}">LIST SCHEDULED</a>
-                                    <a class="dropdown-item" href="{% url 'auctions_own_scheduled' %}">LIST ENDED</a>
+                                    <a class="dropdown-item" href="{% url 'auction_create' %}">NEW AUCTION</a>
+                                    <a class="dropdown-item" href="{% url 'auctions_own_running' %}">LIST RUNNING AUCTIONS</a>
+                                    <a class="dropdown-item" href="{% url 'auctions_own_ended' %}">LIST SCHEDULED AUCTIONS</a>
+                                    <a class="dropdown-item" href="{% url 'auctions_own_scheduled' %}">LIST ENDED AUCTIONS</a>
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
@@ -134,22 +134,22 @@
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Raffles</a>
                                 <div id='raffles' class='dropdown-menu dropdown-menu-end'>
-                                    <a class="dropdown-item" href="{% url 'raffle_create' %}">NEW</a>
-                                    <a class="dropdown-item" href="{% url 'raffles_own_running' %}">LIST RUNNING</a>
-                                    <a class="dropdown-item" href="{% url 'raffles_own_scheduled' %}">LIST SCHEDULED</a>
-                                    <a class="dropdown-item" href="{% url 'raffles_own_ended' %}">LIST ENDED</a>
+                                    <a class="dropdown-item" href="{% url 'raffle_create' %}">NEW RAFFLE</a>
+                                    <a class="dropdown-item" href="{% url 'raffles_own_running' %}">LIST RUNNING RAFFLES</a>
+                                    <a class="dropdown-item" href="{% url 'raffles_own_scheduled' %}">LIST SCHEDULED RAFFLES</a>
+                                    <a class="dropdown-item" href="{% url 'raffles_own_ended' %}">LIST ENDED RAFFLES</a>
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Digital Assets</a>
                                 <div id='assets' class='dropdown-menu dropdown-menu-end'>
-                                    <a class="dropdown-item" href="{% url 'asset_create' %}">NEW</a>
-                                    <a class="dropdown-item" href="{% url 'asset_create_from_files' %}">NEW FROM FILES</a>
-                                    <a class="dropdown-item" href="{% url 'asset_create_from_metadata_url' %}">NEW FROM METADATA</a>
+                                    <a class="dropdown-item" href="{% url 'asset_create' %}">NEW ASSET</a>
+                                    <a class="dropdown-item" href="{% url 'asset_create_from_files' %}">NEW ASSETS FROM FILES</a>
+                                    <a class="dropdown-item" href="{% url 'asset_create_from_metadata_url' %}">NEW ASSETS FROM METADATA</a>
                                     {% comment %}
                                     <a class="dropdown-item" href="{% url 'asset_create_from_nfts' %}">NEW FROM NFTS</a>
                                     {% endcomment %}
-                                    <a class="dropdown-item" href="{% url 'assets_own' %}">LIST</a>
+                                    <a class="dropdown-item" href="{% url 'assets_own' %}">LIST ASSETS</a>
                                 </div>
                             </div>
                             {% comment %}
