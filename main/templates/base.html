@@ -14,9 +14,6 @@
     {# Load CSS and JavaScript #}
     {% bootstrap_css %}
 
-    {# Display django.contrib.messages as Bootstrap alerts #}
-    {% bootstrap_messages %}
-
     {% block css %} 
 	<!-- Our project just needs Font Awesome Free's Solid and Brand files -->
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
@@ -25,6 +22,16 @@
     <link href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     {% endblock css %}
+
+    {% block extrajs %}
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+    <script src="https://unpkg.com/ipfs-http-client/dist/index.min.js"></script>
+    {% endblock  %}
+
+    {% bootstrap_javascript %}
+    
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
 
     {% block extrahead %}
     {% endblock %}
@@ -186,11 +193,6 @@
         <div class="right">&copy; 2022 NFT Market &nbsp; \(ᵔᵕᵔ)/</div>
     </footer>
  
-    {% bootstrap_javascript %}
-    {% block extrajs %}
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
-    <script src="https://unpkg.com/ipfs-http-client/dist/index.min.js"></script>
-    {% endblock  %}
     {% block javascript %} {% endblock %}
 </body>
 
