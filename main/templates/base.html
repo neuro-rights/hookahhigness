@@ -141,14 +141,18 @@
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
-                                <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Assets</a>
+                                <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Digital Assets</a>
                                 <div id='assets' class='dropdown-menu dropdown-menu-end'>
-                                    <a class="dropdown-item" href="{% url 'asset_create_from_images' %}">NEW FROM IMAGES</a>
-                                    <a class="dropdown-item" href="{% url 'asset_create_from_nfts' %}">NEW FROM NFTS</a>
+                                    <a class="dropdown-item" href="{% url 'asset_create' %}">NEW</a>
+                                    <a class="dropdown-item" href="{% url 'asset_create_from_files' %}">NEW FROM FILES</a>
                                     <a class="dropdown-item" href="{% url 'asset_create_from_metadata_url' %}">NEW FROM METADATA</a>
+                                    {% comment %}
+                                    <a class="dropdown-item" href="{% url 'asset_create_from_nfts' %}">NEW FROM NFTS</a>
+                                    {% endcomment %}
                                     <a class="dropdown-item" href="{% url 'assets_own' %}">LIST</a>
                                 </div>
                             </div>
+                            {% comment %}
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">NFT's</a>
                                 <div id='nfts' class='dropdown-menu dropdown-menu-end'>
@@ -156,6 +160,7 @@
                                     <a class="dropdown-item" href="{% url 'nfts_own' %}">LIST</a>
                                 </div>
                             </div>
+                            {% endcomment %}
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Opensea</a>
                                 <div id='nfts' class='dropdown-menu dropdown-menu-end'>

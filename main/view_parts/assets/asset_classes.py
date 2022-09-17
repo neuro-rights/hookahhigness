@@ -31,7 +31,7 @@ S3_BASE_URL = "https://s3.us-east-1.amazonaws.com/"
 BUCKET = "nftmarketgallery"
 
 
-class AssetFromImagesCreate(PassArgumentsToForm, CreateView):
+class AssetFromFilesCreate(PassArgumentsToForm, CreateView):
     """ """
 
     form_class = AssetFromFilesForm
@@ -160,6 +160,17 @@ class AssetFromMetadataURLCreate(PassArgumentsToForm, CreateView):
             counter += 1
         #
         return redirect("/assets/own/")
+
+
+class AssetCreate(PassArgumentsToForm, CreateView):
+    """ """
+
+    form_class = AssetForm
+    model = Asset
+    template_name = "assets/form.html"
+    #
+    def get_success_url(self):
+        return reverse("asset_detail", kwargs={"asset_uuid": self.object.uuid})
 
 
 class AssetEdit(PassArgumentsToForm, UpdateView):

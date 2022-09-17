@@ -176,9 +176,11 @@ class AssetForm(forms.ModelForm):
         are given as options"""
         super(AssetForm, self).__init__(*args, **kwargs)
         self.request = request
+        """
         self.fields["nfts"].queryset = Nft.objects.filter(
             creator=self.request.user
         )
+        """
 
     def save(self, commit=True):
         """ """
@@ -195,13 +197,13 @@ class AssetForm(forms.ModelForm):
         model = Asset
         fields = [
             "asset_type",
-            "seller",
-            "nfts",
+            #"seller",
+            #"nfts",
             "name",
             "description",
-            "token_id",
-            "metadata_uri",
-            "status"
+            #"token_id",
+            #"metadata_uri",
+            #"status"
         ]
 
 

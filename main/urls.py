@@ -29,7 +29,8 @@ urlpatterns = [
     # ASSETS
     path("assets/ajax/", views.AssetListJson.as_view(), name="ajax_datatable_assets"),
     path("assets/own/", views.assets_own, name="assets_own"),
-    path("asset/create_from_images/", views.AssetFromImagesCreate.as_view(), name="asset_create_from_images"),
+    path("asset/create/", views.AssetCreate.as_view(), name="asset_create"),
+    path("asset/create_from_files/", views.AssetFromFilesCreate.as_view(), name="asset_create_from_files"),
     path("asset/create_from_nfts/", views.AssetFromNftsCreate.as_view(), name="asset_create_from_nfts"),
     path("asset/create_from_metadata_url/", views.AssetFromMetadataURLCreate.as_view(), name="asset_create_from_metadata_url"),
     path("asset/<uuid:asset_uuid>/", views.asset_detail, name="asset_detail"),
