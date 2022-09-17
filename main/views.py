@@ -36,3 +36,16 @@ def opensea(request):
 
 def tickets(request):
     pass
+
+
+def about(request):
+    pass
+
+
+def help(request):
+    return render(request, 'help/index.html')
+
+def room(request, room_name):
+    return render(request, 'help/room.html', {
+        'room_name': room_name
+    })

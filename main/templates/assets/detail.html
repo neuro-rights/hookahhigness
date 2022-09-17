@@ -16,9 +16,9 @@
     {% if asset.seller == request.user %}
     <div class="row">
         <div class="col">
-            <a href="{% url 'raffle_edit' raffle.uuid %}"
+            <a href="{% url 'asset_edit' asset.uuid %}"
                 class="waves-effect waves-light btn">Edit</a>
-            <a href="{% url 'raffle_delete' raffle.uuid %}"
+            <a href="{% url 'asset_delete' asset.uuid %}"
                 class="waves-effect waves-light btn">Delete</a>
         </div>
     </div>

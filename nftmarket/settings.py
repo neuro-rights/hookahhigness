@@ -45,6 +45,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "channels",
     "main",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -88,7 +89,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "nftmarket.wsgi.application"
-
+ASGI_APPLICATION = "nftmarket.asgi.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

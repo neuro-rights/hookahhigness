@@ -54,37 +54,33 @@
 	
 				{% if user.is_authenticated %}
                 <div class="col">
-                    <div class="row">
+                    <div class="row d-grid gap-3">
                         <div class="col ml-auto d-flex align-items-center justify-content-end">
                             <div class="nav-item">{{ user.username }}</div>
-                        </div>
-                        <div class="col d-flex align-items-center justify-content-end">
+                            &nbsp;&nbsp;
                             <div class="nav-item">{{ user.ethereum_wallet_address }}</div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row d-grip gap-3">
                         <div class="col ml-auto d-flex align-items-center justify-content-end nav-item"></div>
                         <div class="col d-flex align-items-center justify-content-end nav-item">
                             <a href="{% url 'home' %}" class="nav-link" ><i class="fa fa-cart-shopping"></i> home</a>
-                        </div>
-                        <div class="col d-flex align-items-center justify-content-end nav-item">
                             <a href="{% url 'profile' %}" class="nav-link"><i class="fa fa-user-pen"></i> settings</a>
-                        </div>
-                        <div class="col d-flex align-items-center justify-content-end nav-item">
                             <a href="{% url 'logout' %}" class="nav-link"><i class="fa fa-person-running"></i> logout</a>
+                            <a href="{% url 'help' %}" class="nav-link"><i class="fa fa-ambulance"></i> help</a>
                         </div>
                     </div>
                 </div>
 				{% else %}
                 <div class="col">
                     <div class="row">
+                        <div class="col d-flex align-items-center navitem">&nbsp;</div>
+                    </div>
+                    <div class="row d-grid gap-3">
                         <div class="col ml-auto d-flex align-items-center justify-content-end nav-item">
                             <a href="{% url 'signup' %}" class="nav-link"><i class="fa fa-user-lock"></i> signup</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col d-flex align-items-center justify-content-end nav-item">
                             <a href="{% url 'login' %}" class="nav-link"><i class="fa fa-fingerprint"></i> login</a>
+                            <a href="{% url 'about' %}" class="nav-link"><i class="fa fa-question-circle"></i> about</a>
                         </div>
                     </div>
                 </div>
@@ -175,9 +171,6 @@
                                 </div>
                             </div>
                         </div>
-                        {% comment %}
-                        <li><a href="{% url 'opensea' %}">Opensea</a></li>
-                        {% endcomment %}
                     </div>
                     {% endif %}
                 </div>

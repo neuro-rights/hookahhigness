@@ -1,5 +1,6 @@
 asgiref
 boto3
+channels
 dj-database-url
 Django
 django-bootstrap5
