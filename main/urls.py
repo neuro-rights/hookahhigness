@@ -68,18 +68,17 @@ urlpatterns = [
     path("auction/<uuid:auction_uuid>/add_bid/", views.auction_add_bid, name="auction_add_bid"),
     path("auction/<uuid:auction_uuid>/bids/", views.auction_bids, name="auction_bids"),
     # BIDS
-    path("bids/ajax/made/", views.BidListJson.as_view(), name="ajax_datatable_bids_made"),
-    path("bids/ajax/received/", views.BidListJson.as_view(), name="ajax_datatable_bids_received"),
+    path("bids/ajax/made/", views.BidMadeListJson.as_view(), name="ajax_datatable_bids_made"),
+    path("bids/ajax/received/", views.BidReceivedListJson.as_view(), name="ajax_datatable_bids_received"),
     path("bids/made/", views.BidMadeList.as_view(), name="bids_made_list"),
     path("bids/received/", views.BidReceivedList.as_view(), name="bids_received_list"),
     path("bid/<uuid:bid_uuid>/accept/", views.bid_accept, name="bid_accept"),
     # PURCHASES
-    path("purchases/ajax/bought/", views.PurchaseListJson.as_view(), name="ajax_datatable_purchases_bought"),
-    path("purchases/ajax/sold/", views.PurchaseListJson.as_view(), name="ajax_datatable_purchases_sold"),
+    path("purchases/ajax/bought/", views.PurchaseBoughtListJson.as_view(), name="ajax_datatable_purchases_bought"),
+    path("purchases/ajax/sold/", views.PurchaseSoldListJson.as_view(), name="ajax_datatable_purchases_sold"),
     path("purchases/bought/", views.PurchaseBoughtList.as_view(), name="purchases_bought_list"),
     path("purchases/sold/", views.PurchaseSoldList.as_view(), name="purchases_sold_list"),
     # OPENSEA
-    # path("opensea/", views.opensea, name="opensea"),
-    # path('ajax/transaction_progress', views.transaction_progress, name='transaction_progress'),
-    # path('ajax/upload_progress', views.upload_progress, name='upload_progress'),
+    path("opensea/", views.opensea, name="opensea"),
+    path("tickets/", views.tickets, name="tickets"),
 ]

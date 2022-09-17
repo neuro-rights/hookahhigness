@@ -27,7 +27,7 @@ class BidMadeList(PassArgumentsToForm, ListView):
     paginate_by = 25
     model = Bid
     form_class = BidForm
-    template_name = "bids/list.html"
+    template_name = "bids/list_made.html"
     #
     def get_queryset(self):
         return Bid.objects.filter(buyer=self.request.user)
@@ -39,19 +39,28 @@ class BidReceivedList(PassArgumentsToForm, ListView):
     paginate_by = 25
     model = Bid
     form_class = BidForm
-    template_name = "bids/list.html"
+    template_name = "bids/list_received.html"
     #
     def get_queryset(self):
         return Bid.objects.filter(auction__seller=self.request.user)
 
 
-class BidListJson(BaseDatatableView):
+class BidMadeListJson(BaseDatatableView):
     model = Bid
     columns = ['uuid', 'buyer', 'auction', 'bid_time', 'value']
     order_columns = ['uuid', 'buyer', 'auction', 'bid_time', 'value']
 
     def get_initial_querset(self):
         return Bid.objects.filter(buyer=self.request.user)
+
+
+class BidReceivedListJson(BaseDatatableView):
+    model = Bid
+    columns = ['uuid', 'buyer', 'auction', 'bid_time', 'value']
+    order_columns = ['uuid', 'buyer', 'auction', 'bid_time', 'value']
+
+    def get_initial_querset(self):
+        return Bid.objects.filter(auction__seller=self.request.user)
 
 
 class BidDetailView(PassArgumentsToForm, DetailView):

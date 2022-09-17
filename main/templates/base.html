@@ -90,11 +90,15 @@
 		<div class="collapse show navbar-collapse" id="navbarContent">
             <div class="d-flex container-fluid">
                 <div class="row flex-fill">
-                    <div class="col d-flex justify-content-start">
+
+                    {% comment %}
+                    <div class="col-4 d-flex justify-content-start">
                         <form class="form-inline w-100" action="{% url 'search_result' %}" method="get">
-                            <input id="searchbar" class="form-control d-inline-block w-50" type="search" placeholder="Search" aria-label="Search">
+                            <input id="searchbar" class="form-control d-inline-block w-100" type="search" placeholder="Search" aria-label="Search">
                         </form>
                     </div>
+                    {% endcomment %}
+
                     {% if user.is_authenticated %}
                     <div class="col ml-auto d-flex justify-content-end">
                         <div class="row">
@@ -122,6 +126,12 @@
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
+                                <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Tickets</a>
+                                <div id='raffles' class='dropdown-menu dropdown-menu-end'>
+                                    <a class="dropdown-item" href="{% url 'tickets' %}">TODO</a>
+                                </div>
+                            </div>
+                            <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Raffles</a>
                                 <div id='raffles' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'raffle_create' %}">NEW</a>
@@ -144,6 +154,12 @@
                                 <div id='nfts' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'nft_create' %}">NEW</a>
                                     <a class="dropdown-item" href="{% url 'nfts_own' %}">LIST</a>
+                                </div>
+                            </div>
+                            <div class="col nav-item dropdown">
+                                <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Opensea</a>
+                                <div id='nfts' class='dropdown-menu dropdown-menu-end'>
+                                    <a class="dropdown-item" href="{% url 'opensea' %}">TODO</a>
                                 </div>
                             </div>
                         </div>

@@ -22,8 +22,17 @@ from .view_parts.market.market_classes import *
 from .view_parts.market.market_functions import *
 
 
+
 def home(request):
     #
     auctions_list = Auction.objects.order_by("-id").all()
     context = {"page_obj": get_page_obj(request, auctions_list, 25)}
     return render(request, "market/list.html", context)
+
+
+def opensea(request):
+    pass
+
+
+def tickets(request):
+    pass

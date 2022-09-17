@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% load mathfilters %}
+{% block content %}
+
+<div class="table-responsive">
+    <table id="datatable_bids_received" width="100%" class="table table-striped table-bordered dt-responsive compact nowrap">
+        <thead>
+            <tr>
+                <th data-data="uuid">UUID</th>
+                <th data-data="buyer">Buyer</th>
+                <th data-data="auction">Auction</th>
+                <th data-data="bid_time">Bid Time</th>
+                <th data-data="value">Value</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        var oTable = $('#datatable_bids_received').dataTable({
+            // ...
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{% url 'ajax_datatable_bids_received' %}"
+        });
+        // ...
+    });
+</script>
+{% endblock %}

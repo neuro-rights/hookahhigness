@@ -26,7 +26,7 @@ class PurchaseBoughtList(PassArgumentsToForm, ListView):
     paginate_by = 25
     model = Purchase
     form_class = PurchaseForm
-    template_name = "purchases/list.html"
+    template_name = "purchases/list_bought.html"
     #
     def get_queryset(self):
         return Purchase.objects.filter(bid__buyer=self.request.user)
@@ -38,13 +38,22 @@ class PurchaseSoldList(PassArgumentsToForm, ListView):
     paginate_by = 25
     model = Purchase
     form_class = PurchaseForm
-    template_name = "purchases/list.html"
+    template_name = "purchases/list_sold.html"
     #
     def get_queryset(self):
         return Purchase.objects.filter(bid__auction__seller=self.request.user)
 
 
-class PurchaseListJson(BaseDatatableView):
+class PurchaseBoughtListJson(BaseDatatableView):
+    model = Purchase
+    columns = ['uuid', 'bid', 'tx_hash', 'tx_token', 'purchase_time']
+    order_columns = ['uuid', 'bid', 'tx_hash', 'tx_token', 'purchase_time']
+
+    def get_initial_queryset(self):
+        return Purchase.objects.filter(bid__buyer=self.request.user)
+
+
+class PurchaseSoldListJson(BaseDatatableView):
     model = Purchase
     columns = ['uuid', 'bid', 'tx_hash', 'tx_token', 'purchase_time']
     order_columns = ['uuid', 'bid', 'tx_hash', 'tx_token', 'purchase_time']
