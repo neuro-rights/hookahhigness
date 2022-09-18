@@ -131,7 +131,7 @@ class Nft(models.Model):
                     value = None
 
             # only display fields with values and skip some fields entirely
-            if f.editable and value and f.name not in ('id') :
+            if f.editable:
 
                 fields.append(
                   {
@@ -224,7 +224,7 @@ class Asset(models.Model):
                     value = None
 
             # only display fields with values and skip some fields entirely
-            if f.editable and value and f.name not in ('id') :
+            if f.editable:
 
                 fields.append(
                   {
@@ -299,7 +299,7 @@ class Auction(models.Model):
                     value = None
 
             # only display fields with values and skip some fields entirely
-            if f.editable and value and f.name not in ('id') :
+            if f.editable:
 
                 fields.append(
                   {
@@ -361,7 +361,7 @@ class Raffle(models.Model):
                     value = None
 
             # only display fields with values and skip some fields entirely
-            if f.editable and value and f.name not in ('id') :
+            if f.editable:
 
                 fields.append(
                   {
@@ -409,7 +409,7 @@ class Bid(models.Model):
                     value = None
 
             # only display fields with values and skip some fields entirely
-            if f.editable and value and f.name not in ('id') :
+            if f.editable:
 
                 fields.append(
                   {
@@ -462,7 +462,7 @@ class Purchase(models.Model):
                     value = None
 
             # only display fields with values and skip some fields entirely
-            if f.editable and value and f.name not in ('id') :
+            if f.editable:
 
                 fields.append(
                   {

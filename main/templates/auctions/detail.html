@@ -1,14 +1,14 @@
 {% extends 'base.html' %} {%load mathfilters%}
 {% block content %}
 
-<h5>Auction: {{auction.uuid}}</h5>
+<h5 class="mt-5 mb-5">Auction: {{auction.uuid}}</h5>
 {% for field in auction.get_all_fields %}
 <div class="row">
     <div class="col-4">
         {{ field.label }}
     </div>
     <div class="col-8">
-        {{ field.value }}
+        {{ field.value|truncatechars:50 }}
     </div>
 </div>
 {% endfor %}
