@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {%load mathfilters%}
 {% block content %}
 
-<h5 class="mt-5 mb-5">Bid: {{bid.uuid}}</h5>
+<h5 class="mb-5">Bid: {{bid.uuid}}</h5>
 {% for field in bid.get_all_fields %}
 <div class="row">
     <div class="col-4">
