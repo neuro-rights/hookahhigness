@@ -18,7 +18,7 @@ from ..utils.pagination import *
 @login_required
 def asset_detail(request, asset_uuid):
     #
-    asset = serializers.serialize("python", Asset.objects.filter(uuid=asset_uuid))
+    asset = Asset.objects.get(uuid=asset_uuid)
     bid_form = BidForm(request)
 
     return render(

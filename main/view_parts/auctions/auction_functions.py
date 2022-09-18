@@ -18,7 +18,7 @@ from ..utils.pagination import *
 @login_required
 def auction_detail(request, auction_uuid):
     #
-    auction = serializers.serialize("python", Auction.objects.filter(uuid=auction_uuid))
+    auction = Auction.objects.get(uuid=auction_uuid)
     bid_form = BidForm(request)
     #
     return render(

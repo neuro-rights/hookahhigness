@@ -1,29 +1,26 @@
 {% extends 'base.html' %} {%load mathfilters%}
 {% block content %}
 
-{% for instance in raffle %}
-    <h5>Raffle: {{instance.fields.uuid}}</h5>
-    {% for field, value in instance.fields.items %}
-        <div class="row">
-            <div class="col-4">
-                {{ field }}
-            </div>
-            <div class="col-8">
-                {{ value }}
-            </div>
-        </div>
-    {% endfor %}
-    {% if raffle.asset.seller == request.user %}
-    <div class="row">
-        <div class="col">
-            <a href="{% url 'raffle_edit' raffle.uuid %}"
-                class="waves-effect waves-light btn">Edit</a>
-            <a href="{% url 'raffle_delete' raffle.uuid %}"
-                class="waves-effect waves-light btn">Delete</a>
-        </div>
+<h5>Raffle: {{raffle.uuid}}</h5>
+{% for field in raffle.get_all_fields %}
+<div class="row">
+    <div class="col-4">
+        {{ field.label }}
     </div>
-    {% endif %}
+    <div class="col-8">
+        {{ field.value }}
+    </div>
+</div>
 {% endfor %}
+{% if raffle.asset.seller == request.user %}
+<div class="row">
+    <div class="col">
+        <a href="{% url 'raffle_edit' raffle.uuid %}"
+            class="text-white btn">Edit</a>
+        <a href="{% url 'raffle_delete' raffle.uuid %}"
+            class="text-white btn">Delete</a>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
-
 

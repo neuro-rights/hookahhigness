@@ -74,7 +74,7 @@ def raffles_own_ended(request):
 @login_required
 def raffle_detail(request, raffle_uuid):
     #
-    raffle = serializers.serialize("python", Raffle.objects.filter(uuid=raffle_uuid))
+    raffle = Raffle.objects.get(uuid=raffle_uuid)
     return render(
         request, "raffles/detail.html", {"raffle": raffle}
     )
