@@ -34,7 +34,7 @@ def search_result(request):
 @login_required
 def nft_detail(request, nft_uuid):
     #
-    nft = serializers.serialize("python", Nft.objects.filter(uuid=nft_uuid))
+    nft = Nft.objects.get(uuid=nft_uuid)
     bid_form = BidForm(request)
     #
     return render(
@@ -168,4 +168,3 @@ def auction_nft(request, nft_uuid):
     auction = Auction.objects.create(seller=nft.creator, description=nft.description, bid_start_value=0)
     auction.assets.add(asset)
     return HttpResponseRedirect(reverse("auction_detail", args=[str(auction.uuid)]))
-    pass
