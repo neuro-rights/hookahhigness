@@ -176,7 +176,7 @@ class AssetCreate(PassArgumentsToForm, CreateView):
 class AssetEdit(PassArgumentsToForm, UpdateView):
     """ """
 
-    form_class = AssetFromNftsForm
+    form_class = AssetForm
     model = Asset
     template_name = "assets/form.html"
     #
