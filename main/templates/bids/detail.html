@@ -13,12 +13,12 @@
 </div>
 {% endfor %}
 {% if bid.buyer == request.user %}
-<div class="row">
-    <div class="col">
+<div class="row mt-5">
+    <div class="col d-flex justify-content-end">
         <a href="{% url 'bid_edit' bid.uuid %}"
-            class="text-white btn">Edit</a>
+            class="text-white btn btn-success">Edit</a>
         <a href="{% url 'bid_delete' bid.uuid %}"
-            class="text-white btn">Delete</a>
+            class="text-white btn btn-danger">Delete</a>
     </div>
 </div>
 {% endif %}
