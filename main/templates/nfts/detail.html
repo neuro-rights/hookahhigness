@@ -12,7 +12,7 @@
     </div>
 </div>
 {% endfor %}
-{% if nft.seller == request.user %}
+{% if nft.creator == request.user %}
 <div class="row mt-5">
     <div class="col d-flex justify-content-end">
         <a href="{% url 'nft_edit' nft.uuid %}"
