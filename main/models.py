@@ -70,6 +70,42 @@ class User(AbstractUser):
         return self.username
 
 
+def model_decorator(model):
+
+    def get_all_fields(self):
+        """Returns a list of all field names on the instance."""
+        fields = []
+        for f in self._meta.fields:
+
+            fname = f.name        
+            # resolve picklists/choices, with get_xyz_display() function
+            get_choice = 'get_'+fname+'_display'
+            if hasattr(self, get_choice):
+                value = getattr(self, get_choice)()
+            else:
+                try:
+                    value = getattr(self, fname)
+                except AttributeError:
+                    value = None
+
+            # only display fields with values and skip some fields entirely
+            if f.editable:
+
+                fields.append(
+                  {
+                   'label':f.verbose_name, 
+                   'name':f.name, 
+                   'value':value,
+                  }
+                )
+
+        return fields
+
+    model.get_all_fields = get_all_fields
+    return model
+
+
+@model_decorator
 class Nft(models.Model):
     #
     NFT_TYPES = (
@@ -114,35 +150,8 @@ class Nft(models.Model):
     def get_absolute_url(self):
         return reverse("nft_detail", kwargs={"nft_uuid": self.uuid})
 
-    def get_all_fields(self):
-        """Returns a list of all field names on the instance."""
-        fields = []
-        for f in self._meta.fields:
 
-            fname = f.name        
-            # resolve picklists/choices, with get_xyz_display() function
-            get_choice = 'get_'+fname+'_display'
-            if hasattr(self, get_choice):
-                value = getattr(self, get_choice)()
-            else:
-                try:
-                    value = getattr(self, fname)
-                except AttributeError:
-                    value = None
-
-            # only display fields with values and skip some fields entirely
-            if f.editable:
-
-                fields.append(
-                  {
-                   'label':f.verbose_name, 
-                   'name':f.name, 
-                   'value':value,
-                  }
-                )
-
-        return fields
-
+@model_decorator
 class Asset(models.Model):
     #
     ASSET_TYPES = (
@@ -207,35 +216,29 @@ class Asset(models.Model):
     def get_absolute_url(self):
         return reverse("asset_detail", kwargs={"asset_uuid": self.uuid})
 
-    def get_all_fields(self):
-        """Returns a list of all field names on the instance."""
-        fields = []
-        for f in self._meta.fields:
 
-            fname = f.name        
-            # resolve picklists/choices, with get_xyz_display() function
-            get_choice = 'get_'+fname+'_display'
-            if hasattr(self, get_choice):
-                value = getattr(self, get_choice)()
-            else:
-                try:
-                    value = getattr(self, fname)
-                except AttributeError:
-                    value = None
 
-            # only display fields with values and skip some fields entirely
-            if f.editable:
+@model_decorator
+class Bid(models.Model):
+    """ """
 
-                fields.append(
-                  {
-                   'label':f.verbose_name, 
-                   'name':f.name, 
-                   'value':value,
-                  }
-                )
+    id = models.AutoField(primary_key=True)
+    uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
+    bid_time = models.DateTimeField(auto_now_add=True, editable=False)
+    value = models.FloatField()
 
-        return fields
+    def __str__(self):
+        return f"{self.get_value_display()} on {self.bid_time}"
 
+    class Meta:
+        ordering = ["-value"]
+    
+    def get_absolute_url(self):
+        return reverse("bid_detail", kwargs={"bid_uuid": self.uuid})
+
+
+@model_decorator
 class Auction(models.Model):
     #
     AUCTION_STATUS = (
@@ -255,6 +258,7 @@ class Auction(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     #
     assets = models.ManyToManyField(Asset, related_name="assets")
+    bids = models.ManyToManyField(Bid, related_name="bids")
     blockchain = models.CharField(
         max_length=32, choices=BLOCKCHAIN_TYPES, default="Ethereum"
     )
@@ -282,35 +286,10 @@ class Auction(models.Model):
     def get_absolute_url(self):
         return reverse("auction_detail", kwargs={"auction_uuid": self.uuid})
 
-    def get_all_fields(self):
-        """Returns a list of all field names on the instance."""
-        fields = []
-        for f in self._meta.fields:
 
-            fname = f.name        
-            # resolve picklists/choices, with get_xyz_display() function
-            get_choice = 'get_'+fname+'_display'
-            if hasattr(self, get_choice):
-                value = getattr(self, get_choice)()
-            else:
-                try:
-                    value = getattr(self, fname)
-                except AttributeError:
-                    value = None
 
-            # only display fields with values and skip some fields entirely
-            if f.editable:
 
-                fields.append(
-                  {
-                   'label':f.verbose_name, 
-                   'name':f.name, 
-                   'value':value,
-                  }
-                )
-
-        return fields
-
+@model_decorator
 class Raffle(models.Model):
     #
     RAFFLE_STATUS = (
@@ -344,83 +323,8 @@ class Raffle(models.Model):
     def get_absolute_url(self):
         return reverse("raffle_detail", kwargs={"raffle_uuid": self.uuid})
 
-    def get_all_fields(self):
-        """Returns a list of all field names on the instance."""
-        fields = []
-        for f in self._meta.fields:
 
-            fname = f.name        
-            # resolve picklists/choices, with get_xyz_display() function
-            get_choice = 'get_'+fname+'_display'
-            if hasattr(self, get_choice):
-                value = getattr(self, get_choice)()
-            else:
-                try:
-                    value = getattr(self, fname)
-                except AttributeError:
-                    value = None
-
-            # only display fields with values and skip some fields entirely
-            if f.editable:
-
-                fields.append(
-                  {
-                   'label':f.verbose_name, 
-                   'name':f.name, 
-                   'value':value,
-                  }
-                )
-
-        return fields
-
-class Bid(models.Model):
-    """ """
-
-    id = models.AutoField(primary_key=True)
-    uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
-    auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
-    bid_time = models.DateTimeField(auto_now_add=True, editable=False)
-    value = models.FloatField()
-
-    def __str__(self):
-        return f"{self.get_value_display()} on {self.bid_time}"
-
-    class Meta:
-        ordering = ["-value"]
-    
-    def get_absolute_url(self):
-        return reverse("bid_detail", kwargs={"bid_uuid": self.uuid})
-
-    def get_all_fields(self):
-        """Returns a list of all field names on the instance."""
-        fields = []
-        for f in self._meta.fields:
-
-            fname = f.name        
-            # resolve picklists/choices, with get_xyz_display() function
-            get_choice = 'get_'+fname+'_display'
-            if hasattr(self, get_choice):
-                value = getattr(self, get_choice)()
-            else:
-                try:
-                    value = getattr(self, fname)
-                except AttributeError:
-                    value = None
-
-            # only display fields with values and skip some fields entirely
-            if f.editable:
-
-                fields.append(
-                  {
-                   'label':f.verbose_name, 
-                   'name':f.name, 
-                   'value':value,
-                  }
-                )
-
-        return fields
-
+@model_decorator
 class Purchase(models.Model):
     """ """
 
@@ -444,32 +348,4 @@ class Purchase(models.Model):
     
     def get_absolute_url(self):
         return reverse("purchase_detail", kwargs={"purchase_uuid": self.uuid})
-    
-    def get_all_fields(self):
-        """Returns a list of all field names on the instance."""
-        fields = []
-        for f in self._meta.fields:
 
-            fname = f.name        
-            # resolve picklists/choices, with get_xyz_display() function
-            get_choice = 'get_'+fname+'_display'
-            if hasattr(self, get_choice):
-                value = getattr(self, get_choice)()
-            else:
-                try:
-                    value = getattr(self, fname)
-                except AttributeError:
-                    value = None
-
-            # only display fields with values and skip some fields entirely
-            if f.editable:
-
-                fields.append(
-                  {
-                   'label':f.verbose_name, 
-                   'name':f.name, 
-                   'value':value,
-                  }
-                )
-
-        return fields

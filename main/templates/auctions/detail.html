@@ -1,26 +1,130 @@
-{% extends 'base.html' %} {%load mathfilters%}
+{% extends 'base.html' %} {% load mathfilters %}
 {% block content %}
 
-<h5 class="mb-5">Auction: {{auction.uuid}}</h5>
-{% for field in auction.get_all_fields %}
+<h5>{{auction.uuid|upper}}</h5>
 <div class="row">
-    <div class="col-4">
-        {{ field.label }}
+    <div class="col-6">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <span class="card-title"></span>
+                <link rel="preload" class="responsive-img card-panel" href="{{ auction.preview_uri }}" as="image" crossorigin>
+                {% for field in auction.get_all_fields %}
+                <div class="row">
+                    <div class="col-4">
+                        {{ field.label }}
+                    </div>
+                    <div class="col-8">
+                        {{ field.value|truncatechars:50 }}
+                    </div>
+                </div>
+                {% endfor %}
+                {% if auction.seller == request.user %}
+                <div class="card-action">
+                    <a href="{% url 'auction_edit' auction.uuid %}" class="waves-effect waves-light btn-small">Edit</a>
+                    <a href="{% url 'auction_delete' auction.uuid %}" class="waves-effect waves-light btn-small red darken-4">Delete</a>
+                    {% comment %}
+                    <form action="{% url 'like_nft' nft.uuid %}" method="POST" class="right">
+                        {% csrf_token %}
+                        <button type="submit" , name="nft_id" , value="{{ post.id }}"
+                            class="waves-effect waves-light btn-small">
+                            Like <i class="material-icons">favorite</i></button>
+                        <br>
+                        <p class="secondary-content">
+                            {% if nft.total_likes > 0 %}<i class="material-icons">grade</i>
+                            {{ nft.total_likes }}
+                            {% endif %}
+                        </p>
+                    </form>
+                    {% endcomment %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
-    <div class="col-8">
-        {{ field.value|truncatechars:50 }}
-    </div>
-</div>
-{% endfor %}
-{% if auction.seller == request.user %}
-<div class="row mt-5">
-    <div class="col d-flex justify-content-end">
-        <a href="{% url 'auction_edit' auction.uuid %}"
-            class="text-white btn btn-success">Edit</a>
-        <a href="{% url 'auction_delete' auction.uuid %}"
-            class="text-white btn btn-danger">Delete</a>
-    </div>
-</div>
-{% endif %}
-{% endblock %}
+    <div class="col-6">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <table class="striped">
+                    {% for bid in auction.asset.bids_set.all %}
+                    {% if forloop.first %}
+                    <h4>Top Bid: ETH {{ bid.bid_price }}</h4>
+                    {% endif %}
+                    {% endfor %}
+                    <thead>
+                        <tr>
+                            <th>Sale Ends</th>
+                            <th>Min Bid Price</th>
+                            <th>USD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{sell.sale_ends}}</td>
+                            <td>ETH {{sell.min_bid_price}}</td>
+                            <td>${{sell.min_bid_price|mul:2735}}</td>
+                        </tr>
+                        {% if auction.seller == request.user %}
+                        <div class="auctionbutton">
+                            <h4 class="center-align">READY TO SELL YOUR NFT? ᕙ(⇀‸↼‶)ᕗ</h4>
+                            <br>
+                            <div class="center-align">
+                                <a href="{% url 'auction_nft' auction.uuid %}" class="waves-effect waves-light btn-large pulse">Sell</a>
+                            </div>
+                        </div>
+                        {% else %}
+                        <h4 class="center-align">SORRY! THIS NFT IS NOT FOR SALE (҂◡_◡)</h4>
+                        {% endif %}
+                    </tbody>
+                </table>
 
+                {% for sell in nft.sell_set.all %}
+                <span class="card-title"></span>
+                <hr>
+                {% if auction.seller == request.user %}
+                <div></div>
+                {%else%}
+                <form action="{% url 'add_bid' auction.uuid %}" class='bidprice' method="post">
+                    {% csrf_token %} {{ bid_form.as_p }}
+                    <input type="submit" class="btn pulse" value="Add Bid">
+                </form>
+                {% endif %}
+
+                {% if auction.seller == request.user %}
+                <table class="striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Bidder</th>
+                            <th>Bid</th>
+                            <th>USD</th>
+                            <th>MINT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bid in auction.bid_set.all %}
+                        <tr>
+                            <td>{{ bid.bid_time|date:'m-d H:i' }}</td>
+                            <td>{{ bid.buyer }}</td>
+                            <td>ETH {{ bid.bid_price }}</td>
+                            <td>${{ bid.bid_price|mul:2735 }}</td>
+                            <td class="center-align">
+                                <form action="{% url 'accept_bid' bid.id %}" enctype="multipart/form-data" method="POST"
+                                    class="bidprice">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                        class="btn-floating btn-small waves-effect waves-light circle green pulse"><i
+                                            class="material-icons">check</i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

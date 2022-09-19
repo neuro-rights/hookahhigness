@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {%load mathfilters%}
+{% block content %}
+
+<h5 class="mb-5">Auction: {{auction.uuid}}</h5>
+{% for field in auction.get_all_fields %}
+<div class="row">
+    <div class="col-4">
+        {{ field.label }}
+    </div>
+    <div class="col-8">
+        {{ field.value|truncatechars:50 }}
+    </div>
+</div>
+{% endfor %}
+{% if auction.seller == request.user %}
+<div class="row mt-5">
+    <div class="col d-flex justify-content-end">
+        <a href="{% url 'auction_edit' auction.uuid %}"
+            class="text-white btn btn-success">Edit</a>
+        <a href="{% url 'auction_delete' auction.uuid %}"
+            class="text-white btn btn-danger">Delete</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+

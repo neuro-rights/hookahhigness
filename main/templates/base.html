@@ -105,14 +105,18 @@
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Purchases</a>
                                 <div id='purchases' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'purchases_bought_list' %}">LIST BOUGHT PURCHASES</a>
+                                    {% comment %}
                                     <a class="dropdown-item" href="{% url 'purchases_sold_list' %}">LIST SOLD PURCHASES</a>
+                                    {% endcomment %}
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Bids</a>
                                 <div id='auctions' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'bids_made_list' %}">LIST MADE BIDS</a>
+                                    {% comment %}
                                     <a class="dropdown-item" href="{% url 'bids_received_list' %}">LIST RECEIVED BIDS</a>
+                                    {% endcomment %}
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
@@ -124,12 +128,14 @@
                                     <a class="dropdown-item" href="{% url 'auctions_own_scheduled' %}">LIST ENDED AUCTIONS</a>
                                 </div>
                             </div>
+                            {% comment %}
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Tickets</a>
                                 <div id='raffles' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'tickets' %}">TODO</a>
                                 </div>
                             </div>
+                            {% endcomment %}
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Raffles</a>
                                 <div id='raffles' class='dropdown-menu dropdown-menu-end'>
@@ -151,7 +157,6 @@
                                     <a class="dropdown-item" href="{% url 'assets_own' %}">LIST ASSETS</a>
                                 </div>
                             </div>
-                            {% comment %}
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">NFT's</a>
                                 <div id='nfts' class='dropdown-menu dropdown-menu-end'>
@@ -159,13 +164,14 @@
                                     <a class="dropdown-item" href="{% url 'nfts_own' %}">LIST</a>
                                 </div>
                             </div>
-                            {% endcomment %}
+                            {% comment %}
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Opensea</a>
                                 <div id='nfts' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'opensea' %}">TODO</a>
                                 </div>
                             </div>
+                            {% endcomment %}
                         </div>
                     </div>
                     {% endif %}
