@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load mathfilters %}
+{% block content %}
+
+<h5 class="mb-5">Asset: {{nft.uuid}}</h5>
+{% for field in nft.get_all_fields %}
+<div class="row">
+    <div class="col-4">
+        {{ field.label }}
+    </div>
+    <div class="col-8">
+        {{ field.value|truncatechars:50 }}
+    </div>
+</div>
+{% endfor %}
+{% if nft.seller == request.user %}
+<div class="row mt-5">
+    <div class="col d-flex justify-content-end">
+        <a href="{% url 'nft_edit' nft.uuid %}"
+            class="text-white btn btn-success">Edit</a>
+        <a href="{% url 'nft_delete' nft.uuid %}"
+            class="text-white btn btn-danger">Delete</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
