@@ -214,27 +214,6 @@ class Asset(models.Model):
         return reverse("asset_detail", kwargs={"asset_uuid": self.uuid})
 
 
-
-@model_decorator
-class Bid(models.Model):
-    """ """
-
-    id = models.AutoField(primary_key=True)
-    uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
-    bid_time = models.DateTimeField(auto_now_add=True, editable=False)
-    value = models.FloatField()
-
-    def __str__(self):
-        return f"{self.get_value_display()} on {self.bid_time}"
-
-    class Meta:
-        ordering = ["-value"]
-    
-    def get_absolute_url(self):
-        return reverse("bid_detail", kwargs={"bid_uuid": self.uuid})
-
-
 @model_decorator
 class Auction(models.Model):
     #
@@ -253,7 +232,6 @@ class Auction(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     #
     assets = models.ManyToManyField(Asset, related_name="assets")
-    bids = models.ManyToManyField(Bid, related_name="bids")
     blockchain = models.CharField(
         max_length=32, choices=BLOCKCHAIN_TYPES, default="Ethereum"
     )
@@ -274,12 +252,36 @@ class Auction(models.Model):
     class Meta:
         ordering = ["-id"]
 
+    def bids(self):
+        return Bid.objects.filter(auction=self)
+
     @property
     def total_bids(self):
         return self.bids.count()
 
     def get_absolute_url(self):
         return reverse("auction_detail", kwargs={"auction_uuid": self.uuid})
+
+
+@model_decorator
+class Bid(models.Model):
+    """ """
+
+    id = models.AutoField(primary_key=True)
+    uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
+    auction = models.ForeignKey(Auction, blank=True, null=True, on_delete=models.CASCADE)
+    bid_time = models.DateTimeField(auto_now_add=True, editable=False)
+    value = models.FloatField()
+
+    def __str__(self):
+        return f"{self.get_value_display()} on {self.bid_time}"
+
+    class Meta:
+        ordering = ["-value"]
+    
+    def get_absolute_url(self):
+        return reverse("bid_detail", kwargs={"bid_uuid": self.uuid})
 
 
 @model_decorator

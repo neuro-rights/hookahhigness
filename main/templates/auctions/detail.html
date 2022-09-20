@@ -45,7 +45,7 @@
         <div class="card bg-dark">
             <div class="card-body">
                 <table class="striped">
-                    {% for bid in auction.bids_set.all %}
+                    {% for bid in auction.bids %}
                     {% if forloop.first %}
                     <h4>Top Bid: ETH {{ bid.bid_price }}</h4>
                     {% endif %}
@@ -95,14 +95,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for bid in auction.bids_set.all %}
+                        {% for bid in auction.bids %}
                         <tr>
                             <td>{{ bid.bid_time|date:'m-d H:i' }}</td>
                             <td>{{ bid.buyer }}</td>
-                            <td>ETH {{ bid.bid_price }}</td>
-                            <td>${{ bid.bid_price|mul:2735 }}</td>
+                            <td>ETH {{ bid.value }}</td>
+                            <td>${{ bid.value|mul:2735 }}</td>
                             <td class="center-align">
-                                <form action="{% url 'accept_bid' bid.uuid %}" enctype="multipart/form-data" method="POST"
+                                <form action="{% url 'bid_accept' bid.uuid %}" enctype="multipart/form-data" method="POST"
                                     class="bidprice">
                                     {% csrf_token %}
                                     <button type="submit"
