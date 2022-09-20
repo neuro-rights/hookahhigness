@@ -47,7 +47,7 @@
                 <table class="striped">
                     {% for bid in auction.bids %}
                     {% if forloop.first %}
-                    <h4>Top Bid: ETH {{ bid.bid_price }}</h4>
+                    <h4>Top Bid: ETH {{ bid.value }}</h4>
                     {% endif %}
                     {% endfor %}
                     <thead>
