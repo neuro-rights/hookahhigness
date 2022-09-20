@@ -21,6 +21,41 @@ def now_plus_30():
     return datetime.now() + timedelta(days = 30)
 
 
+def model_decorator(model):
+
+    def get_all_fields(self):
+        """Returns a list of all field names on the instance."""
+        fields = []
+        for f in self._meta.fields:
+
+            fname = f.name        
+            # resolve picklists/choices, with get_xyz_display() function
+            get_choice = 'get_'+fname+'_display'
+            if hasattr(self, get_choice):
+                value = getattr(self, get_choice)()
+            else:
+                try:
+                    value = getattr(self, fname)
+                except AttributeError:
+                    value = None
+
+            # only display fields with values and skip some fields entirely
+            if f.editable:
+
+                fields.append(
+                  {
+                   'label':f.verbose_name, 
+                   'name':f.name, 
+                   'value':value,
+                  }
+                )
+
+        return fields
+
+    model.get_all_fields = get_all_fields
+    return model
+
+
 class User(AbstractUser):
     pass
     #
@@ -68,41 +103,6 @@ class User(AbstractUser):
     #
     def __str__(self):
         return self.username
-
-
-def model_decorator(model):
-
-    def get_all_fields(self):
-        """Returns a list of all field names on the instance."""
-        fields = []
-        for f in self._meta.fields:
-
-            fname = f.name        
-            # resolve picklists/choices, with get_xyz_display() function
-            get_choice = 'get_'+fname+'_display'
-            if hasattr(self, get_choice):
-                value = getattr(self, get_choice)()
-            else:
-                try:
-                    value = getattr(self, fname)
-                except AttributeError:
-                    value = None
-
-            # only display fields with values and skip some fields entirely
-            if f.editable:
-
-                fields.append(
-                  {
-                   'label':f.verbose_name, 
-                   'name':f.name, 
-                   'value':value,
-                  }
-                )
-
-        return fields
-
-    model.get_all_fields = get_all_fields
-    return model
 
 
 @model_decorator
@@ -164,10 +164,7 @@ class Asset(models.Model):
     )
     #
     ASSET_STATUS = (
-        ("aborted", "Aborted"),
-        ("scheduled", "Auction Scheduled"),
-        ("running", "Auction in Progress"),
-        ("unsold", "Unsold in Auction"),
+        ("unsold", "Unsold"),
         ("sold", "Sold"),
     )
     #
@@ -242,10 +239,8 @@ class Bid(models.Model):
 class Auction(models.Model):
     #
     AUCTION_STATUS = (
-        ("aborted", "Auction Aborted"),
-        ("scheduled", "Auction Scheduled"),
-        ("started", "Auction in Progress"),
-        ("ended", "Auction Ended"),
+        ("unsold", "Unsold"),
+        ("sold", "Sold"),
     )
     #
     BLOCKCHAIN_TYPES = (
@@ -287,16 +282,12 @@ class Auction(models.Model):
         return reverse("auction_detail", kwargs={"auction_uuid": self.uuid})
 
 
-
-
 @model_decorator
 class Raffle(models.Model):
     #
     RAFFLE_STATUS = (
-        ("aborted", "Raffle Aborted"),
-        ("scheduled", "Raffle Scheduled"),
-        ("started", "Raffle in Progress"),
-        ("ended", "Raffle Ended"),
+        ("not_won", "raffle ended without winners"),
+        ("won", "raffle ended with winners"),
     )
     #
     id = models.AutoField(primary_key=True)
@@ -331,7 +322,7 @@ class Purchase(models.Model):
     PURCHASE_STATUS = (
         ("aborted", "Purchase Aborted"),
         ("running", "Puchase in Progress"),
-        ("complete", "Purchase Scheduled"),
+        ("complete", "Purchase Complete"),
     )
 
     id = models.AutoField(primary_key=True)
