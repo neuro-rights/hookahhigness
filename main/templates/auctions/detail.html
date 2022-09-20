@@ -59,21 +59,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{auction.datetime__ends}}</td>
-                            <td>ETH {{auction.min_bid_price}}</td>
-                            <td>${{sell.min_bid_price|mul:2735}}</td>
+                            <td>{{auction.datetime_end}}</td>
+                            <td>ETH {{auction.bid_current_value}}</td>
+                            <td>${{auction.bid_current_value|mul:2735}}</td>
                         </tr>
-                        {% if auction.seller == request.user %}
-                        <div class="auctionbutton">
-                            <h4 class="center-align">READY TO SELL YOUR NFT? ᕙ(⇀‸↼‶)ᕗ</h4>
-                            <br>
-                            <div class="center-align">
-                                <a href="{% url 'auction_nft' auction.uuid %}" class="waves-effect waves-light btn-large pulse">Sell</a>
-                            </div>
-                        </div>
-                        {% else %}
-                        <h4 class="center-align">SORRY! THIS NFT IS NOT FOR SALE (҂◡_◡)</h4>
-                        {% endif %}
                     </tbody>
                 </table>
 
