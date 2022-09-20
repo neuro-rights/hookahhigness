@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.core import serializers
 #
 from ...forms import BidForm, PurchaseForm
-from ...models import User, Asset, Bid, Purchase
+from ...models import User, Asset, Bid, Auction, Purchase
 
 #
 from ..utils.pagination import *
@@ -45,17 +45,25 @@ def assets_own(request):
 
 
 @login_required
-def asset_add_raffle(request, auction_id):
+def asset_add_raffle(request, auction_uuid):
     pass
 
 
 @login_required
-def asset_add_auction(request, auction_id):
+def asset_add_auction(request, asset_uuid):
     #
-    asset = Asset.objects.filter(creator=request.user)
+    asset = Asset.objects.get(uuid=asset_uuid)
+    auction = Auction(
+            seller=asset.seller,
+            description=asset.description,
+            bid_start_value=0
+    )
+    form = BidForm()
     #
-    context = {"asset": asset}
-    return render(request, "assets/list.html", context)
+    auction.save()
+    auction.assets.add(asset)
+    context = {"auction": auction, "bid_form": form}
+    return render(request, "auctions/detail.html", context)
 
 
 @login_required

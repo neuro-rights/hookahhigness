@@ -1,26 +1,59 @@
 {% extends 'base.html' %} {% load mathfilters %}
 {% block content %}
 
-<h5 class="mb-5">Asset: {{asset.uuid}}</h5>
-{% for field in asset.get_all_fields %}
+<h5>{{asset.uuid|upper}}</h5>
 <div class="row">
-    <div class="col-4">
-        {{ field.label }}
+    <div class="col-6">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <span class="card-title"></span>
+                <link rel="preload" class="responsive-img card-panel" href="{{ asset.preview_uri }}" as="image" crossorigin>
+                {% for field in asset.get_all_fields %}
+                <div class="row">
+                    <div class="col-4">
+                        {{ field.label }}
+                    </div>
+                    <div class="col-8">
+                        {{ field.value|truncatechars:50 }}
+                    </div>
+                </div>
+                {% endfor %}
+                {% if asset.seller == request.user %}
+                <div class="card-action">
+                    <a href="{% url 'asset_edit' asset.uuid %}" class="waves-effect waves-light btn-small">Edit</a>
+                    <a href="{% url 'asset_delete' asset.uuid %}" class="waves-effect waves-light btn-small red darken-4">Delete</a>
+                    {% comment %}
+                    <form action="{% url 'like_nft' nft.uuid %}" method="POST" class="right">
+                        {% csrf_token %}
+                        <button type="submit" , name="nft_id" , value="{{ post.id }}"
+                            class="waves-effect waves-light btn-small">
+                            Like <i class="material-icons">favorite</i></button>
+                        <br>
+                        <p class="secondary-content">
+                            {% if nft.total_likes > 0 %}<i class="material-icons">grade</i>
+                            {{ nft.total_likes }}
+                            {% endif %}
+                        </p>
+                    </form>
+                    {% endcomment %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
-    <div class="col-8">
-        {{ field.value|truncatechars:50 }}
+    <div class="col-6">
+        <div class="card bg-dark">
+            <div class="card-body">
+                {% if asset.seller == request.user %}
+                <div class="sellbutton">
+                <h3 class = "center-align">READY TO AUCTION YOUR ASSET?</h3>
+                <br>   
+                <div class = "center-align">
+                <a href="{% url 'asset_add_auction' asset.uuid %}" class="waves-effect waves-light btn-large">Auction</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
-{% endfor %}
-{% if asset.seller == request.user %}
-<div class="row mt-5">
-    <div class="col d-flex justify-content-end">
-        <a href="{% url 'asset_edit' asset.uuid %}"
-            class="text-white btn btn-success">Edit</a>
-        <a href="{% url 'asset_delete' asset.uuid %}"
-            class="text-white btn btn-danger">Delete</a>
-    </div>
-</div>
-{% endif %}
 {% endblock %}
-

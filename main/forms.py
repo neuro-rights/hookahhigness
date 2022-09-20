@@ -198,12 +198,12 @@ class AssetForm(forms.ModelForm):
         fields = [
             "asset_type",
             #"seller",
-            #"nfts",
+            "nfts",
             "name",
             "description",
             #"token_id",
             #"metadata_uri",
-            #"status"
+            "status"
         ]
 
 
