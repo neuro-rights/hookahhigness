@@ -79,15 +79,20 @@ def auction_add_assets(request, auction_uuid):
 @login_required
 def auction_add_bid(request, auction_uuid):
     #
-    form = BidForm(request.POST)
+    bid_form = BidForm(request)
     auction = Auction.objects.get(uuid=auction_uuid)
     #
-    if not form.is_valid():
-        return redirect("auction_detail", uuid=auction_uuid)
+    if not bid_form.is_valid():
+        #
+        return render(
+            request, "auctions/detail.html", {"auction": auction, "bid_form": bid_form}
+        )
     #
-    new_bid = form.save(commit=False)
+    new_bid = bid_form.save(commit=False)
     if new_bid.value <= auction.current_bid:
-        return redirect("auction_detail", uuid=auction_uuid)
+        return render(
+            request, "auctions/detail.html", {"auction": auction, "bid_form": bid_form}
+        )
     #
     auction.min_bid = new_bid.value
     auction.save()
@@ -96,7 +101,9 @@ def auction_add_bid(request, auction_uuid):
     new_bid.bidder = request.user
     new_bid.save()
     #
-    return redirect("auction_detail", uuid=auction_uuid)
+    return render(
+        request, "auctions/detail.html", {"auction": auction, "bid_form": bid_form}
+    )
 
 
 def auction_bids(request):
