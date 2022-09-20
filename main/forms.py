@@ -307,6 +307,9 @@ class AuctionForm(forms.ModelForm):
         queryset=None, widget=forms.SelectMultiple
     )
 
+    bids = forms.ModelMultipleChoiceField(
+        queryset=None, widget=forms.SelectMultiple
+    )
     def __init__(self, request, *args, **kwargs):
         """Grants access to the request object so that only members of the current user
         are given as options"""
@@ -347,7 +350,7 @@ class AuctionForm(forms.ModelForm):
 class BidForm(forms.ModelForm):
     """ """
 
-    auction = forms.ModelChoiceField(queryset=None, widget=forms.Select)
+    #auction = forms.ModelChoiceField(queryset=None, widget=forms.Select)
 
     def __init__(self, request, *args, **kwargs):
         """Grants access to the request object so that only members of the current user
@@ -368,7 +371,7 @@ class BidForm(forms.ModelForm):
         """ """
 
         model = Bid
-        fields = ["auction", "value"]
+        fields = ["value"]
 
 
 class PurchaseForm(forms.ModelForm):

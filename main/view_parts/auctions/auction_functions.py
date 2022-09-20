@@ -80,7 +80,7 @@ def auction_add_assets(request, auction_uuid):
 def auction_add_bid(request, auction_uuid):
     #
     form = BidForm(request.POST)
-    auction = Auction.objects.select_related("bids").get(uuid=auction_uuid)
+    auction = Auction.objects.get(uuid=auction_uuid)
     #
     if not form.is_valid():
         return redirect("auction_detail", uuid=auction_uuid)
