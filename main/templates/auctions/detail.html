@@ -70,7 +70,7 @@
                 <hr>
                 <form action="{% url 'auction_add_bid' auction.uuid %}" class='bidprice' method="post">
                     {% csrf_token %} {{ bid_form }}
-                    <input type="submit" class="btn pulse" value="Add Bid">
+                    <input type="submit" class="btn text-white" value="Add Bid">
                 </form>
 
                 <table class="striped">
@@ -80,7 +80,9 @@
                             <th>Bidder</th>
                             <th>Bid</th>
                             <th>USD</th>
+                            {% if auction.seller == request.user %}
                             <th>MINT</th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -90,6 +92,7 @@
                             <td>{{ bid.buyer }}</td>
                             <td>ETH {{ bid.value }}</td>
                             <td>${{ bid.value|mul:2735 }}</td>
+                            {% if auction.seller == request.user %}
                             <td class="center-align">
                                 <form action="{% url 'bid_accept' bid.uuid %}" enctype="multipart/form-data" method="POST"
                                     class="bidprice">
@@ -100,6 +103,7 @@
                                     </button>
                                 </form>
                             </td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>
