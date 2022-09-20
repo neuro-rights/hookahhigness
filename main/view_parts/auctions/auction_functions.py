@@ -19,7 +19,7 @@ from ..utils.pagination import *
 def auction_detail(request, auction_uuid):
     #
     auction = Auction.objects.get(uuid=auction_uuid)
-    bid_form = BidForm(request)
+    bid_form = BidForm()
     #
     return render(
         request, "auctions/detail.html", {"auction": auction, "bid_form": bid_form}
@@ -85,13 +85,13 @@ def auction_add_bid(request, auction_uuid):
         logging.basicConfig(filename='mylog.log', level=logging.DEBUG)
         logging.debug('request.method=POST')
         form = BidForm(request.POST)
-        new_bid = form.save(commit=False)
         logging.debug('errors=%s', form.errors)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
             auction = Auction.objects.get(uuid=auction_uuid)
-            if float(request.POST["value"]) <= auction.bid_current_value:
+            new_bid = form.save(commit=False)
+            if new_bid.value <= auction.bid_current_value:
                 return render(
                     request, "auctions/detail.html", {"auction": auction, "bid_form": form}
                 )

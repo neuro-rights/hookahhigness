@@ -346,29 +346,6 @@ class AuctionForm(forms.ModelForm):
 
 class BidForm(forms.ModelForm):
     """ """
-
-    def __init__(self, request, *args, **kwargs):
-        """Grants access to the request object so that only members of the current user
-        are given as options"""
-        super(BidForm, self).__init__(*args, **kwargs)
-        self.request = request
-
-    def save(self, commit=True):
-        """ """
-        instance = super().save(commit=False)
-        if commit:
-            instance.save()
-            self.save_m2m()
-        return instance
-    
-    def is_valid(self):
- 
-        # run the parent validation first
-        valid = super(BidForm, self).is_valid()
-        # we're done now if not valid
-        print(self._errors)
-        return True
-
     class Meta:
         """ """
         model = Bid
