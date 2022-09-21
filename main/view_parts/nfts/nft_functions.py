@@ -1,3 +1,7 @@
+import boto3
+import uuid
+
+
 # Import the login_required decorator
 from django.contrib.auth.decorators import login_required
 
@@ -31,14 +35,32 @@ def search_result(request):
         return render(request, "nfts/search.html")
 
 
+def get_context_data(self, *args, **kwargs):
+    #
+    stuff = get_object_or_404(Nft, id=self.kwargs["pk"])
+    total_likes = stuff.total_likes()
+    context["total_likes"] = total_likes
+    #
+    return context
+
+
+def like_nft(request, nft_uuid):
+    """
+    nft = get_object_or_404(Nft, uuid=nft_uuid)
+    nft.likes.add(request.user)
+    #
+    return HttpResponseRedirect(reverse("nft_detail", args=[str(uuid)]))
+    """
+    pass
+
+
 @login_required
 def nft_detail(request, nft_uuid):
     #
     nft = Nft.objects.get(uuid=nft_uuid)
-    bid_form = BidForm(request)
     #
     return render(
-        request, "nfts/detail.html", {"nft": nft, "bid_form": bid_form}
+        request, "nfts/detail.html", {"nft": nft}
     )
 
 
@@ -96,50 +118,53 @@ def nfts_own_doc(request):
     return render(request, "nfts/list.html", context)
 
 
+def nft_add_auction(request, nft_uuid):
+    nft = get_object_or_404(Nft, uuid=nft_uuid)
+    #
+    asset = Asset.objects.create(asset_type=nft.nft_type, seller=nft.creator, name=nft.name, description=nft.description)
+    asset.nfts.add(nft)
+    auction = Auction.objects.create(seller=nft.creator, description=nft.description, bid_start_value=0)
+    auction.assets.add(asset)
+    return HttpResponseRedirect(reverse("auction_detail", args=[str(auction.uuid)]))
+
+
 @login_required
 def nft_add_file(nft_uuid):
     pass
 
 
 @login_required
-def nft_add_file_to_s3(asset_file):
+def nft_add_file_to_s3(request, nft_uuid):
+    """ """
+
+    nft_file = request.FILES.get('photo-file', None)
+
+    S3_BASE_URL = 'https://s3.'+request.user.aws_s3_region+'.amazonaws.com/'
+    BUCKET = request.user.aws_s3_bucket
+
     # photo-file will be the "name" attribute on the <input type="file">
-    if asset_file:
+    if nft_file:
+
         s3 = boto3.client(
             "s3",
             aws_access_key_id=request.user.aws_access_key_id_value,
             aws_secret_access_key=request.user.aws_secret_access_key_value,
         )
         # need a unique "key" for S3 / needs image file extension too
-        key = (
-            uuid.uuid4().hex[:6] + asset_file.name[asset_file.name.rfind(".") :]
-        )
+        key = uuid.uuid4().hex[:6] + nft_file.name[nft_file.name.rfind('.'):]
         # just in case something goes wrong
         try:
-            s3.upload_fileobj(asset_file, BUCKET, key)
+            s3.upload_fileobj(nft_file, request.user.aws_s3_bucket, key)
             # build the full url string
             url = f"{S3_BASE_URL}/{BUCKET}/{key}"
-            return url
+            nft = Nft.objects.get(uuid=nft_uuid)
+            nft.uri_preview = url
+            nft.save()
+            return render(
+                request, "nfts/detail.html", {"nft": nft}
+            )
         except:
             print("An error occurred uploading file to S3")
-
-def get_context_data(self, *args, **kwargs):
-    #
-    stuff = get_object_or_404(Nft, id=self.kwargs["pk"])
-    total_likes = stuff.total_likes()
-    context["total_likes"] = total_likes
-    #
-    return context
-
-
-def like_nft(request, nft_uuid):
-    """
-    nft = get_object_or_404(Nft, uuid=nft_uuid)
-    nft.likes.add(request.user)
-    #
-    return HttpResponseRedirect(reverse("nft_detail", args=[str(uuid)]))
-    """
-    pass
 
 
 @login_required
@@ -160,11 +185,3 @@ def nft_ipfs_upload_asset(asset_file):
         #
         return redirect("nft_detail", uuid=nft_uuid)
 
-def nft_add_auction(request, nft_uuid):
-    nft = get_object_or_404(Nft, uuid=nft_uuid)
-    #
-    asset = Asset.objects.create(asset_type=nft.nft_type, seller=nft.creator, name=nft.name, description=nft.description)
-    asset.nfts.add(nft)
-    auction = Auction.objects.create(seller=nft.creator, description=nft.description, bid_start_value=0)
-    auction.assets.add(asset)
-    return HttpResponseRedirect(reverse("auction_detail", args=[str(auction.uuid)]))

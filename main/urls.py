@@ -26,7 +26,7 @@ urlpatterns = [
     # Auction NFT
     path("nft/<uuid:nft_uuid>/add_auction", views.nft_add_auction, name="nft_add_auction"),
     # Add File to NFT
-    path("nft/<uuid:nft_uuid>/add_file", views.nft_add_file, name="nft_add_file"),
+    path("nft/<uuid:nft_uuid>/nft_add_file_to_s3", views.nft_add_file_to_s3, name="nft_add_file_to_s3"),
     # LIKES
     path("nft/<uuid:nft_uuid>/like", views.like_nft, name="like_nft"),
     # ASSETS

@@ -8,6 +8,12 @@
             <div class="card-body">
                 <span class="card-title"></span>
                 <link rel="preload" class="responsive-img card-panel" href="{{ nft.preview_uri }}" as="image" crossorigin>
+                <form action="{% url 'nft_add_file_to_s3' nft.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
+                    {% csrf_token %}
+                    <input type="file" name="photo-file">
+                    <br><br>
+                    <input type="submit" class="btn" value="Upload File">
+                </form>
                 {% for field in nft.get_all_fields %}
                 <div class="row">
                     <div class="col-4">
