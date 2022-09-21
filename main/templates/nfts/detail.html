@@ -7,7 +7,20 @@
         <div class="card bg-dark">
             <div class="card-body">
                 <span class="card-title"></span>
-                <link rel="preload" class="responsive-img card-panel" href="{{ nft.preview_uri }}" as="image" crossorigin>
+                <link rel="preload" class="responsive-img card-panel" href="{{ nft.uri_preview }}" as="image" crossorigin>
+                {% if nft.nft_type == 'audio' %}
+                <audio controls>
+                    <source src="{{ nft.uri_preview }}" type="audio/mp3">
+                </audio>
+                {% elif nft.nft_type == 'video' %}
+                <video width="100%" controls>
+                    <source src="{{ nft.uri_preview }}" type="video/mp4">
+                </video> 
+                {% elif nft.nft_type == 'image' %}
+                <img width="100%" align="center"  src="{{ nft.uri_preview }}"/>
+                {% else %}
+                <a href="{{ nft.uri_preview }}">File link</a>
+                {% endif %}
                 <form action="{% url 'nft_add_file_to_s3' nft.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
                     {% csrf_token %}
                     <input type="file" name="photo-file">

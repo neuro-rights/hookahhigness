@@ -109,8 +109,7 @@ class User(AbstractUser):
 class Nft(models.Model):
     #
     NFT_TYPES = (
-        ("2d", "2D Image"),
-        ("3d", "3D Image"),
+        ("image", "Image File"),
         ("audio", "Audio File"),
         ("video", "Video File"),
         ("file", "Generic File"),
