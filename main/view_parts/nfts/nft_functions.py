@@ -154,7 +154,7 @@ def nft_add_file_to_s3(request, nft_uuid):
         key = uuid.uuid4().hex[:6] + nft_file.name[nft_file.name.rfind('.'):]
         # just in case something goes wrong
         try:
-            s3.upload_fileobj(nft_file, request.user.aws_s3_bucket, key)
+            s3.upload_fileobj(nft_file, request.user.aws_s3_bucket, key, ExtraArgs={'ACL': 'public-read'})
             # build the full url string
             url = f"{S3_BASE_URL}/{BUCKET}/{key}"
             nft = Nft.objects.get(uuid=nft_uuid)
