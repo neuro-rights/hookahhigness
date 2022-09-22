@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>DELETE NFT COLLECTION</h2>
+<h2>DELETE ASSET</h2>
 <h4 class="header-text">Are you sure you want to delete <span class="teal-text">'{{ asset.name|upper }}'</span> ¿ⓧ_ⓧﮌ
 </h4>
 
 <form action="" method="POST">
     {% csrf_token %}
-    <input type="submit" value="Yes - Delete!" class="btn red darken-4">
+    <input type="submit" value="Yes - Delete!" class="btn text-white">
+    <a class="text-white" href="{% url 'asset_detail' asset.uuid %}">Cancel ┬─┬⃰͡ (ᵔᵕᵔ͜ )</a>
 </form>
 {% endblock %}

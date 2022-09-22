@@ -154,8 +154,7 @@ class Nft(models.Model):
 class Asset(models.Model):
     #
     ASSET_TYPES = (
-        ("2d", "2D Images"),
-        ("3d", "3D Images"),
+        ("image", "Image File"),
         ("audio", "Audio Files"),
         ("video", "Video Files"),
         ("file", "Generic Files"),
@@ -181,6 +180,7 @@ class Asset(models.Model):
     token_id = models.IntegerField(default=random_token)
     #
     metadata_uri = models.URLField(max_length=200)
+    uri_preview = models.URLField(max_length=200)
     #
     status = models.CharField(
         max_length=32, choices=ASSET_STATUS, default="unsold"
@@ -242,6 +242,8 @@ class Auction(models.Model):
     bid_start_value = models.FloatField()
     bid_current_value = models.FloatField(default=0)
     #
+    uri_preview = models.URLField(max_length=200)
+
     status = models.CharField(
         max_length=32,
         choices=AUCTION_STATUS,

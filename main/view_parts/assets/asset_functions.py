@@ -56,7 +56,8 @@ def asset_add_auction(request, asset_uuid):
     auction = Auction(
             seller=asset.seller,
             description=asset.description,
-            bid_start_value=0
+            bid_start_value=0,
+            uri_preview=asset.uri_preview
     )
     form = BidForm()
     #

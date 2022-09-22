@@ -121,16 +121,23 @@ def nfts_own_doc(request):
 def nft_add_auction(request, nft_uuid):
     nft = get_object_or_404(Nft, uuid=nft_uuid)
     #
-    asset = Asset.objects.create(asset_type=nft.nft_type, seller=nft.creator, name=nft.name, description=nft.description)
+    asset = Asset.objects.create(
+            asset_type=nft.nft_type, 
+            seller=nft.creator, 
+            name=nft.name, 
+            description=nft.description, 
+            uri_preview=nft.uri_preview
+    )
+    
     asset.nfts.add(nft)
-    auction = Auction.objects.create(seller=nft.creator, description=nft.description, bid_start_value=0)
+    auction = Auction.objects.create(
+            seller=nft.creator, 
+            description=nft.description, 
+            bid_start_value=0, 
+            uri_preview=nft.uri_preview
+    )
     auction.assets.add(asset)
     return HttpResponseRedirect(reverse("auction_detail", args=[str(auction.uuid)]))
-
-
-@login_required
-def nft_add_file(nft_uuid):
-    pass
 
 
 @login_required
