@@ -38,7 +38,7 @@ def auctions_own(request):
 @login_required
 def auctions_running(request):
     #
-    auctions_running = Auction.objects.all()
+    auctions_running = Auction.objects.filter(status='running')
     #
     context = {"page_obj": get_page_obj(request, auctions_running, 25)}
     return render(request, "auctions/list.html", context)
@@ -47,7 +47,7 @@ def auctions_running(request):
 @login_required
 def auctions_own_running(request):
     #
-    auctions_own_running = Auction.objects.all()
+    auctions_own_running = Auction.objects.filter(seller=request.user, status='running')
     #
     context = {"page_obj": get_page_obj(request, auctions_own_running, 25)}
     return render(request, "auctions/list.html", context)
@@ -56,7 +56,7 @@ def auctions_own_running(request):
 @login_required
 def auctions_own_scheduled(request):
     #
-    auctions_own_scheduled = Auction.objects.all()
+    auctions_own_scheduled = Auction.objects.filter(seller=request.user, status='scheduled')
     #
     context = {"page_obj": get_page_obj(request, auctions_own_scheduled, 25)}
     return render(request, "auctions/list.html", context)
@@ -65,7 +65,7 @@ def auctions_own_scheduled(request):
 @login_required
 def auctions_own_ended(request):
     #
-    auctions_own_ended = Auction.objects.all()
+    auctions_own_ended = Auction.objects.filter(seller=request.user, status='ended')
     #
     context = {"page_obj": get_page_obj(request, auctions_own_ended, 25)}
     return render(request, "auctions/list.html", context)
