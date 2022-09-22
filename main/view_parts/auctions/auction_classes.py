@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta, time
+
 # Import the mixin for class-based views
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import SuspiciousOperation
@@ -81,13 +83,31 @@ class AuctionDelete(LoginRequiredMixin, DeleteView):
         return Auction.objects.get(uuid=self.kwargs.get("auction_uuid"))
 
 
-class AuctionListJson(BaseDatatableView):
-    model = Auction
+class AuctionOwnRunningListJson(BaseDatatableView):
     columns = ['uuid', 'seller', 'assets', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
     order_columns = ['uuid', 'seller', 'assets', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
 
-    def get_initial_querset(self):
-        return Auction.objects.filter(seller=self.request.user)
+    def get_initial_queryset(self):
+        now = datetime.now()
+        return Auction.objects.filter(seller=self.request.user, datetime_start__lte=now, datetime_end__gte=now)
+
+
+class AuctionOwnScheduledListJson(BaseDatatableView):
+    columns = ['uuid', 'seller', 'assets', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
+    order_columns = ['uuid', 'seller', 'assets', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
+
+    def get_initial_queryset(self):
+        now = datetime.now()
+        return Auction.objects.filter(seller=self.request.user, datetime_start__gt=now)
+
+
+class AuctionOwnEndedListJson(BaseDatatableView):
+    columns = ['uuid', 'seller', 'assets', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
+    order_columns = ['uuid', 'seller', 'assets', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
+
+    def get_initial_queryset(self):
+        now = datetime.now()
+        return Auction.objects.filter(seller=self.request.user, datetime_end__lt=now)
 
 
 @method_decorator(login_required, name='dispatch')

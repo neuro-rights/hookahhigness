@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% load mathfilters %}
+{% block content %}
+
+<div class="table-responsive">
+    <table id="datatable_auctions" width="100%" class="table table-striped table-bordered dt-responsive compact text-light">
+        <thead>
+            <tr>
+                <th data-data="uuid">UUID</th>
+                <th data-data="seller">Seller</th>
+                <th data-data="assets">Assets</th>
+                <th data-data="blockchain">Blockchain</th>
+                <th data-data="datetime_start">Date Time Start</th>
+                <th data-data="datetime_end">Date Time End</th>
+                <th data-data="bid_start_value">Start Bid</th>
+                <th data-data="bid_current_value">Current Bid</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        var oTable = $('#datatable_auctions').dataTable({
+            // ...
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{% url 'ajax_datatable_auctions_ended' %}"
+        });
+        // ...
+    });
+</script>
+{% endblock %}

@@ -123,9 +123,9 @@
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Auctions</a>
                                 <div id='auctions' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'auction_create' %}">NEW AUCTION</a>
+                                    <a class="dropdown-item" href="{% url 'auctions_own_scheduled' %}">LIST SCHEDULED AUCTIONS</a>
                                     <a class="dropdown-item" href="{% url 'auctions_own_running' %}">LIST RUNNING AUCTIONS</a>
-                                    <a class="dropdown-item" href="{% url 'auctions_own_ended' %}">LIST SCHEDULED AUCTIONS</a>
-                                    <a class="dropdown-item" href="{% url 'auctions_own_scheduled' %}">LIST ENDED AUCTIONS</a>
+                                    <a class="dropdown-item" href="{% url 'auctions_own_ended' %}">LIST ENDED AUCTIONS</a>
                                 </div>
                             </div>
                             {% comment %}

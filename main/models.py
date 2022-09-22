@@ -247,7 +247,7 @@ class Auction(models.Model):
     status = models.CharField(
         max_length=32,
         choices=AUCTION_STATUS,
-        default="scheduled",
+        default="unsold",
     )
 
     class Meta:
