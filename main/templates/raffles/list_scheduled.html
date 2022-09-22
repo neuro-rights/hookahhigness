@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% load mathfilters %}
+{% block content %}
+
+<div class="table-responsive">
+    <table id="datatable_raffles" width="100%" class="table table-striped table-bordered dt-responsive compact text-light">
+        <thead>
+            <tr>
+                <th data-data="uuid">UUID</th>
+                <th data-data="asset">Asset</th>
+                <th data-data="participants">Participants</th>
+                <th data-data="winner">Winner</th>
+                <th data-data="datetime_start">Datetime End</th>
+                <th data-data="datetime_end">Datetime Start</th>
+                <th data-data="participants">Participants</th>
+                <th data-data="status">Status</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        var oTable = $('#datatable_raffles').dataTable({
+            // ...
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{% url 'ajax_datatable_raffles_scheduled' %}"
+        });
+        // ...
+    });
+</script>
+{% endblock %}

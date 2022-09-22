@@ -110,15 +110,15 @@
                                     {% endcomment %}
                                 </div>
                             </div>
+                            {% comment %}
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Bids</a>
                                 <div id='auctions' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'bids_made_list' %}">LIST MADE BIDS</a>
-                                    {% comment %}
                                     <a class="dropdown-item" href="{% url 'bids_received_list' %}">LIST RECEIVED BIDS</a>
-                                    {% endcomment %}
                                 </div>
                             </div>
+                            {% endcomment %}
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Auctions</a>
                                 <div id='auctions' class='dropdown-menu dropdown-menu-end'>

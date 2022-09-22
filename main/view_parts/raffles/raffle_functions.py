@@ -27,48 +27,21 @@ import logging
 
 
 @login_required
-def raffles_running(request):
-    #
-    raffles_running = Raffle.objects.all()
-    #
-    context = {"page_obj": get_page_obj(request, raffles_running, 25)}
-    return render(request, "raffles/list.html", context)
-
-
-@login_required
-def raffles_own(request):
-    #
-    raffles_own = Raffle.objects.filter(asset__seller=request.user)
-    #
-    context = {"page_obj": get_page_obj(request, raffles_own, 25)}
-    return render(request, "raffles/list.html", context)
-
-
-@login_required
 def raffles_own_running(request):
     #
-    raffles_own_running = Raffle.objects.filter(asset__seller=request.user)
-    #
-    context = {"page_obj": get_page_obj(request, raffles_own_running, 25)}
-    return render(request, "raffles/list.html", context)
+    return render(request, "raffles/list_running.html")
 
 
 @login_required
 def raffles_own_scheduled(request):
     #
-    raffles_own_scheduled = Raffle.objects.filter(asset__seller=request.user)
-    #
-    context = {"page_obj": get_page_obj(request, raffles_own_scheduled, 25)}
-    return render(request, "raffles/list.html", context)
+    return render(request, "raffles/list_scheduled.html")
 
 
 @login_required
 def raffles_own_ended(request):
     #
-    raffles_own_ended = Raffle.objects.filter(asset__seller=request.user)
-    #
-    context = {"page_obj": get_page_obj(request, raffles_own_ended, 25)}
-    return render(request, "raffles/list.html", context)
+    return render(request, "raffles/list_ended.html")
 
 
 @login_required

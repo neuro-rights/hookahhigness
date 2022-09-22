@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta, time
+
 # Import the mixin for class-based views
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import SuspiciousOperation
@@ -85,13 +87,31 @@ class RaffleList(PassArgumentsToForm, ListView):
         return Raffle.objects.all()
 
 
-class RaffleListJson(BaseDatatableView):
-    model = Raffle
+class RaffleOwnRunningListJson(BaseDatatableView):
     columns = ['uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
     order_columns = ['uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
 
     def get_initial_queryset(self):
-        return Raffle.objects.filter(asset__seller=self.request.user)
+        now = datetime.now()
+        return Raffle.objects.filter(asset__seller=self.request.user, datetime_start__lte=now, datetime_end__gte=now)
+
+
+class RaffleOwnScheduledListJson(BaseDatatableView):
+    columns = ['uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
+    order_columns = ['uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
+
+    def get_initial_queryset(self):
+        now = datetime.now()
+        return Raffle.objects.filter(asset__seller=self.request.user, datetime_start__gt=now)
+
+
+class RaffleOwnEndedListJson(BaseDatatableView):
+    columns = ['uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
+    order_columns = ['uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
+
+    def get_initial_queryset(self):
+        now = datetime.now()
+        return Raffle.objects.filter(asset__seller=self.request.user, datetime_end__lt=now)
 
 
 class RaffleDetailView(PassArgumentsToForm, DetailView):
