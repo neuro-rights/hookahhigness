@@ -78,6 +78,9 @@ def auction_add_assets(request, auction_uuid):
 
 @login_required
 def auction_add_bid(request, auction_uuid):
+    """ """
+
+    auction = Auction.objects.get(uuid=auction_uuid)
      # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -89,7 +92,6 @@ def auction_add_bid(request, auction_uuid):
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
-            auction = Auction.objects.get(uuid=auction_uuid)
             new_bid = form.save(commit=False)
             if new_bid.value <= auction.bid_current_value:
                 return render(
