@@ -37,4 +37,5 @@ traitlets
 urllib3
 vyper
 wcwidth
+web3
 whitenoise
