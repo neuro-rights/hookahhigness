@@ -1,3 +1,5 @@
 from brownie import *
-import loggingdef main():
+import logging
+
+def main():
     t = accounts[0].deploy(ERC721)
