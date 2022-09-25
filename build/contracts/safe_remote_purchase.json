@@ -105,7 +105,7 @@
               "id": "uint256",
               "lineno": 18,
               "node_id": 7,
-              "src": "710:7:8"
+              "src": "710:7:14"
             }
           ],
           "ast_type": "Call",
@@ -120,13 +120,13 @@
             "id": "public",
             "lineno": 18,
             "node_id": 5,
-            "src": "703:6:8"
+            "src": "703:6:14"
           },
           "keyword": null,
           "keywords": [],
           "lineno": 18,
           "node_id": 4,
-          "src": "703:15:8"
+          "src": "703:15:14"
         },
         "ast_type": "VariableDecl",
         "col_offset": 0,
@@ -137,7 +137,7 @@
         "is_public": true,
         "lineno": 18,
         "node_id": 1,
-        "src": "696:22:8",
+        "src": "696:22:14",
         "target": {
           "ast_type": "Name",
           "col_offset": 0,
@@ -146,7 +146,7 @@
           "id": "value",
           "lineno": 18,
           "node_id": 2,
-          "src": "696:5:8"
+          "src": "696:5:14"
         },
         "value": null
       },
@@ -161,7 +161,7 @@
               "id": "address",
               "lineno": 19,
               "node_id": 15,
-              "src": "753:7:8"
+              "src": "753:7:14"
             }
           ],
           "ast_type": "Call",
@@ -176,13 +176,13 @@
             "id": "public",
             "lineno": 19,
             "node_id": 13,
-            "src": "746:6:8"
+            "src": "746:6:14"
           },
           "keyword": null,
           "keywords": [],
           "lineno": 19,
           "node_id": 12,
-          "src": "746:15:8"
+          "src": "746:15:14"
         },
         "ast_type": "VariableDecl",
         "col_offset": 0,
@@ -193,7 +193,7 @@
         "is_public": true,
         "lineno": 19,
         "node_id": 9,
-        "src": "738:23:8",
+        "src": "738:23:14",
         "target": {
           "ast_type": "Name",
           "col_offset": 0,
@@ -202,7 +202,7 @@
           "id": "seller",
           "lineno": 19,
           "node_id": 10,
-          "src": "738:6:8"
+          "src": "738:6:14"
         },
         "value": null
       },
@@ -217,7 +217,7 @@
               "id": "address",
               "lineno": 20,
               "node_id": 23,
-              "src": "776:7:8"
+              "src": "776:7:14"
             }
           ],
           "ast_type": "Call",
@@ -232,13 +232,13 @@
             "id": "public",
             "lineno": 20,
             "node_id": 21,
-            "src": "769:6:8"
+            "src": "769:6:14"
           },
           "keyword": null,
           "keywords": [],
           "lineno": 20,
           "node_id": 20,
-          "src": "769:15:8"
+          "src": "769:15:14"
         },
         "ast_type": "VariableDecl",
         "col_offset": 0,
@@ -249,7 +249,7 @@
         "is_public": true,
         "lineno": 20,
         "node_id": 17,
-        "src": "762:22:8",
+        "src": "762:22:14",
         "target": {
           "ast_type": "Name",
           "col_offset": 0,
@@ -258,7 +258,7 @@
           "id": "buyer",
           "lineno": 20,
           "node_id": 18,
-          "src": "762:5:8"
+          "src": "762:5:14"
         },
         "value": null
       },
@@ -273,7 +273,7 @@
               "id": "bool",
               "lineno": 21,
               "node_id": 31,
-              "src": "802:4:8"
+              "src": "802:4:14"
             }
           ],
           "ast_type": "Call",
@@ -288,13 +288,13 @@
             "id": "public",
             "lineno": 21,
             "node_id": 29,
-            "src": "795:6:8"
+            "src": "795:6:14"
           },
           "keyword": null,
           "keywords": [],
           "lineno": 21,
           "node_id": 28,
-          "src": "795:12:8"
+          "src": "795:12:14"
         },
         "ast_type": "VariableDecl",
         "col_offset": 0,
@@ -305,7 +305,7 @@
         "is_public": true,
         "lineno": 21,
         "node_id": 25,
-        "src": "785:22:8",
+        "src": "785:22:14",
         "target": {
           "ast_type": "Name",
           "col_offset": 0,
@@ -314,7 +314,7 @@
           "id": "unlocked",
           "lineno": 21,
           "node_id": 26,
-          "src": "785:8:8"
+          "src": "785:8:14"
         },
         "value": null
       },
@@ -329,7 +329,7 @@
               "id": "bool",
               "lineno": 22,
               "node_id": 39,
-              "src": "822:4:8"
+              "src": "822:4:14"
             }
           ],
           "ast_type": "Call",
@@ -344,13 +344,13 @@
             "id": "public",
             "lineno": 22,
             "node_id": 37,
-            "src": "815:6:8"
+            "src": "815:6:14"
           },
           "keyword": null,
           "keywords": [],
           "lineno": 22,
           "node_id": 36,
-          "src": "815:12:8"
+          "src": "815:12:14"
         },
         "ast_type": "VariableDecl",
         "col_offset": 0,
@@ -361,7 +361,7 @@
         "is_public": true,
         "lineno": 22,
         "node_id": 33,
-        "src": "808:19:8",
+        "src": "808:19:14",
         "target": {
           "ast_type": "Name",
           "col_offset": 0,
@@ -370,7 +370,7 @@
           "id": "ended",
           "lineno": 22,
           "node_id": 34,
-          "src": "808:5:8"
+          "src": "808:5:14"
         },
         "value": null
       },
@@ -385,7 +385,7 @@
           "end_lineno": 26,
           "lineno": 26,
           "node_id": 42,
-          "src": "848:3:8"
+          "src": "848:3:14"
         },
         "ast_type": "FunctionDef",
         "body": [
@@ -397,7 +397,7 @@
             "lineno": 27,
             "msg": null,
             "node_id": 43,
-            "src": "868:27:8",
+            "src": "868:27:14",
             "test": {
               "ast_type": "Compare",
               "col_offset": 11,
@@ -416,7 +416,7 @@
                   "end_lineno": 27,
                   "lineno": 27,
                   "node_id": 46,
-                  "src": "876:9:8",
+                  "src": "876:9:14",
                   "value": {
                     "ast_type": "Name",
                     "col_offset": 12,
@@ -425,7 +425,7 @@
                     "id": "msg",
                     "lineno": 27,
                     "node_id": 47,
-                    "src": "876:3:8"
+                    "src": "876:3:14"
                   }
                 },
                 "lineno": 27,
@@ -437,7 +437,7 @@
                   "end_lineno": 27,
                   "lineno": 27,
                   "node_id": 50,
-                  "src": "876:13:8"
+                  "src": "876:13:14"
                 },
                 "right": {
                   "ast_type": "Int",
@@ -446,10 +446,10 @@
                   "end_lineno": 27,
                   "lineno": 27,
                   "node_id": 51,
-                  "src": "888:1:8",
+                  "src": "888:1:14",
                   "value": 2
                 },
-                "src": "876:13:8"
+                "src": "876:13:14"
               },
               "lineno": 27,
               "node_id": 44,
@@ -460,7 +460,7 @@
                 "end_lineno": 27,
                 "lineno": 27,
                 "node_id": 168,
-                "src": "875:20:8"
+                "src": "875:20:14"
               },
               "right": {
                 "ast_type": "Int",
@@ -469,10 +469,10 @@
                 "end_lineno": 27,
                 "lineno": 27,
                 "node_id": 53,
-                "src": "894:1:8",
+                "src": "894:1:14",
                 "value": 0
               },
-              "src": "875:20:8"
+              "src": "875:20:14"
             }
           },
           {
@@ -482,7 +482,7 @@
             "end_lineno": 28,
             "lineno": 28,
             "node_id": 54,
-            "src": "900:26:8",
+            "src": "900:26:14",
             "target": {
               "ast_type": "Attribute",
               "attr": "value",
@@ -491,7 +491,7 @@
               "end_lineno": 28,
               "lineno": 28,
               "node_id": 55,
-              "src": "900:10:8",
+              "src": "900:10:14",
               "value": {
                 "ast_type": "Name",
                 "col_offset": 4,
@@ -500,7 +500,7 @@
                 "id": "self",
                 "lineno": 28,
                 "node_id": 56,
-                "src": "900:4:8"
+                "src": "900:4:14"
               }
             },
             "value": {
@@ -516,7 +516,7 @@
                 "end_lineno": 28,
                 "lineno": 28,
                 "node_id": 60,
-                "src": "913:9:8",
+                "src": "913:9:14",
                 "value": {
                   "ast_type": "Name",
                   "col_offset": 17,
@@ -525,7 +525,7 @@
                   "id": "msg",
                   "lineno": 28,
                   "node_id": 61,
-                  "src": "913:3:8"
+                  "src": "913:3:14"
                 }
               },
               "lineno": 28,
@@ -537,7 +537,7 @@
                 "end_lineno": 28,
                 "lineno": 28,
                 "node_id": 64,
-                "src": "913:13:8"
+                "src": "913:13:14"
               },
               "right": {
                 "ast_type": "Int",
@@ -546,10 +546,10 @@
                 "end_lineno": 28,
                 "lineno": 28,
                 "node_id": 65,
-                "src": "925:1:8",
+                "src": "925:1:14",
                 "value": 2
               },
-              "src": "913:13:8"
+              "src": "913:13:14"
             }
           },
           {
@@ -559,7 +559,7 @@
             "end_lineno": 30,
             "lineno": 30,
             "node_id": 66,
-            "src": "1044:24:8",
+            "src": "1044:24:14",
             "target": {
               "ast_type": "Attribute",
               "attr": "seller",
@@ -568,7 +568,7 @@
               "end_lineno": 30,
               "lineno": 30,
               "node_id": 67,
-              "src": "1044:11:8",
+              "src": "1044:11:14",
               "value": {
                 "ast_type": "Name",
                 "col_offset": 4,
@@ -577,7 +577,7 @@
                 "id": "self",
                 "lineno": 30,
                 "node_id": 68,
-                "src": "1044:4:8"
+                "src": "1044:4:14"
               }
             },
             "value": {
@@ -588,7 +588,7 @@
               "end_lineno": 30,
               "lineno": 30,
               "node_id": 71,
-              "src": "1058:10:8",
+              "src": "1058:10:14",
               "value": {
                 "ast_type": "Name",
                 "col_offset": 18,
@@ -597,7 +597,7 @@
                 "id": "msg",
                 "lineno": 30,
                 "node_id": 72,
-                "src": "1058:3:8"
+                "src": "1058:3:14"
               }
             }
           },
@@ -608,7 +608,7 @@
             "end_lineno": 31,
             "lineno": 31,
             "node_id": 75,
-            "src": "1073:20:8",
+            "src": "1073:20:14",
             "target": {
               "ast_type": "Attribute",
               "attr": "unlocked",
@@ -617,7 +617,7 @@
               "end_lineno": 31,
               "lineno": 31,
               "node_id": 76,
-              "src": "1073:13:8",
+              "src": "1073:13:14",
               "value": {
                 "ast_type": "Name",
                 "col_offset": 4,
@@ -626,7 +626,7 @@
                 "id": "self",
                 "lineno": 31,
                 "node_id": 77,
-                "src": "1073:4:8"
+                "src": "1073:4:14"
               }
             },
             "value": {
@@ -636,7 +636,7 @@
               "end_lineno": 31,
               "lineno": 31,
               "node_id": 80,
-              "src": "1089:4:8",
+              "src": "1089:4:14",
               "value": true
             }
           }
@@ -651,7 +651,7 @@
             "id": "external",
             "lineno": 24,
             "node_id": 81,
-            "src": "830:8:8"
+            "src": "830:8:14"
           },
           {
             "ast_type": "Name",
@@ -661,7 +661,7 @@
             "id": "payable",
             "lineno": 25,
             "node_id": 83,
-            "src": "840:7:8"
+            "src": "840:7:14"
           }
         ],
         "doc_string": null,
@@ -672,7 +672,7 @@
         "node_id": 41,
         "pos": null,
         "returns": null,
-        "src": "848:245:8"
+        "src": "848:245:14"
       },
       {
         "args": {
@@ -685,7 +685,7 @@
           "end_lineno": 34,
           "lineno": 34,
           "node_id": 86,
-          "src": "1105:3:8"
+          "src": "1105:3:14"
         },
         "ast_type": "FunctionDef",
         "body": [
@@ -697,7 +697,7 @@
             "lineno": 35,
             "msg": null,
             "node_id": 87,
-            "src": "1122:20:8",
+            "src": "1122:20:14",
             "test": {
               "ast_type": "Attribute",
               "attr": "unlocked",
@@ -706,7 +706,7 @@
               "end_lineno": 35,
               "lineno": 35,
               "node_id": 88,
-              "src": "1129:13:8",
+              "src": "1129:13:14",
               "value": {
                 "ast_type": "Name",
                 "col_offset": 11,
@@ -715,7 +715,7 @@
                 "id": "self",
                 "lineno": 35,
                 "node_id": 89,
-                "src": "1129:4:8"
+                "src": "1129:4:14"
               }
             }
           },
@@ -727,7 +727,7 @@
             "lineno": 36,
             "msg": null,
             "node_id": 92,
-            "src": "1182:32:8",
+            "src": "1182:32:14",
             "test": {
               "ast_type": "Compare",
               "col_offset": 11,
@@ -741,7 +741,7 @@
                 "end_lineno": 36,
                 "lineno": 36,
                 "node_id": 94,
-                "src": "1189:10:8",
+                "src": "1189:10:14",
                 "value": {
                   "ast_type": "Name",
                   "col_offset": 11,
@@ -750,7 +750,7 @@
                   "id": "msg",
                   "lineno": 36,
                   "node_id": 95,
-                  "src": "1189:3:8"
+                  "src": "1189:3:14"
                 }
               },
               "lineno": 36,
@@ -762,7 +762,7 @@
                 "end_lineno": 36,
                 "lineno": 36,
                 "node_id": 168,
-                "src": "1189:25:8"
+                "src": "1189:25:14"
               },
               "right": {
                 "ast_type": "Attribute",
@@ -772,7 +772,7 @@
                 "end_lineno": 36,
                 "lineno": 36,
                 "node_id": 99,
-                "src": "1203:11:8",
+                "src": "1203:11:14",
                 "value": {
                   "ast_type": "Name",
                   "col_offset": 25,
@@ -781,10 +781,10 @@
                   "id": "self",
                   "lineno": 36,
                   "node_id": 100,
-                  "src": "1203:4:8"
+                  "src": "1203:4:14"
                 }
               },
-              "src": "1189:25:8"
+              "src": "1189:25:14"
             }
           },
           {
@@ -794,7 +794,7 @@
             "end_lineno": 38,
             "lineno": 38,
             "node_id": 103,
-            "src": "1307:25:8",
+            "src": "1307:25:14",
             "value": {
               "args": [
                 {
@@ -805,7 +805,7 @@
                   "end_lineno": 38,
                   "lineno": 38,
                   "node_id": 107,
-                  "src": "1320:11:8",
+                  "src": "1320:11:14",
                   "value": {
                     "ast_type": "Name",
                     "col_offset": 17,
@@ -814,7 +814,7 @@
                     "id": "self",
                     "lineno": 38,
                     "node_id": 108,
-                    "src": "1320:4:8"
+                    "src": "1320:4:14"
                   }
                 }
               ],
@@ -830,13 +830,13 @@
                 "id": "selfdestruct",
                 "lineno": 38,
                 "node_id": 105,
-                "src": "1307:12:8"
+                "src": "1307:12:14"
               },
               "keyword": null,
               "keywords": [],
               "lineno": 38,
               "node_id": 104,
-              "src": "1307:25:8"
+              "src": "1307:25:14"
             }
           }
         ],
@@ -850,7 +850,7 @@
             "id": "external",
             "lineno": 33,
             "node_id": 111,
-            "src": "1096:8:8"
+            "src": "1096:8:14"
           }
         ],
         "doc_string": null,
@@ -861,7 +861,7 @@
         "node_id": 85,
         "pos": null,
         "returns": null,
-        "src": "1105:227:8"
+        "src": "1105:227:14"
       },
       {
         "args": {
@@ -874,7 +874,7 @@
           "end_lineno": 42,
           "lineno": 42,
           "node_id": 114,
-          "src": "1400:3:8"
+          "src": "1400:3:14"
         },
         "ast_type": "FunctionDef",
         "body": [
@@ -886,7 +886,7 @@
             "lineno": 43,
             "msg": null,
             "node_id": 115,
-            "src": "1420:20:8",
+            "src": "1420:20:14",
             "test": {
               "ast_type": "Attribute",
               "attr": "unlocked",
@@ -895,7 +895,7 @@
               "end_lineno": 43,
               "lineno": 43,
               "node_id": 116,
-              "src": "1427:13:8",
+              "src": "1427:13:14",
               "value": {
                 "ast_type": "Name",
                 "col_offset": 11,
@@ -904,7 +904,7 @@
                 "id": "self",
                 "lineno": 43,
                 "node_id": 117,
-                "src": "1427:4:8"
+                "src": "1427:4:14"
               }
             }
           },
@@ -916,7 +916,7 @@
             "lineno": 45,
             "msg": null,
             "node_id": 120,
-            "src": "1534:36:8",
+            "src": "1534:36:14",
             "test": {
               "ast_type": "Compare",
               "col_offset": 11,
@@ -930,7 +930,7 @@
                 "end_lineno": 45,
                 "lineno": 45,
                 "node_id": 122,
-                "src": "1541:9:8",
+                "src": "1541:9:14",
                 "value": {
                   "ast_type": "Name",
                   "col_offset": 11,
@@ -939,7 +939,7 @@
                   "id": "msg",
                   "lineno": 45,
                   "node_id": 123,
-                  "src": "1541:3:8"
+                  "src": "1541:3:14"
                 }
               },
               "lineno": 45,
@@ -951,7 +951,7 @@
                 "end_lineno": 45,
                 "lineno": 45,
                 "node_id": 168,
-                "src": "1541:29:8"
+                "src": "1541:29:14"
               },
               "right": {
                 "ast_type": "BinOp",
@@ -965,7 +965,7 @@
                   "end_lineno": 45,
                   "lineno": 45,
                   "node_id": 128,
-                  "src": "1555:1:8",
+                  "src": "1555:1:14",
                   "value": 2
                 },
                 "lineno": 45,
@@ -977,7 +977,7 @@
                   "end_lineno": 45,
                   "lineno": 45,
                   "node_id": 129,
-                  "src": "1555:14:8"
+                  "src": "1555:14:14"
                 },
                 "right": {
                   "ast_type": "Attribute",
@@ -987,7 +987,7 @@
                   "end_lineno": 45,
                   "lineno": 45,
                   "node_id": 130,
-                  "src": "1559:10:8",
+                  "src": "1559:10:14",
                   "value": {
                     "ast_type": "Name",
                     "col_offset": 29,
@@ -996,12 +996,12 @@
                     "id": "self",
                     "lineno": 45,
                     "node_id": 131,
-                    "src": "1559:4:8"
+                    "src": "1559:4:14"
                   }
                 },
-                "src": "1555:14:8"
+                "src": "1555:14:14"
               },
-              "src": "1541:29:8"
+              "src": "1541:29:14"
             }
           },
           {
@@ -1011,7 +1011,7 @@
             "end_lineno": 46,
             "lineno": 46,
             "node_id": 134,
-            "src": "1611:23:8",
+            "src": "1611:23:14",
             "target": {
               "ast_type": "Attribute",
               "attr": "buyer",
@@ -1020,7 +1020,7 @@
               "end_lineno": 46,
               "lineno": 46,
               "node_id": 135,
-              "src": "1611:10:8",
+              "src": "1611:10:14",
               "value": {
                 "ast_type": "Name",
                 "col_offset": 4,
@@ -1029,7 +1029,7 @@
                 "id": "self",
                 "lineno": 46,
                 "node_id": 136,
-                "src": "1611:4:8"
+                "src": "1611:4:14"
               }
             },
             "value": {
@@ -1040,7 +1040,7 @@
               "end_lineno": 46,
               "lineno": 46,
               "node_id": 139,
-              "src": "1624:10:8",
+              "src": "1624:10:14",
               "value": {
                 "ast_type": "Name",
                 "col_offset": 17,
@@ -1049,7 +1049,7 @@
                 "id": "msg",
                 "lineno": 46,
                 "node_id": 140,
-                "src": "1624:3:8"
+                "src": "1624:3:14"
               }
             }
           },
@@ -1060,7 +1060,7 @@
             "end_lineno": 47,
             "lineno": 47,
             "node_id": 143,
-            "src": "1639:21:8",
+            "src": "1639:21:14",
             "target": {
               "ast_type": "Attribute",
               "attr": "unlocked",
@@ -1069,7 +1069,7 @@
               "end_lineno": 47,
               "lineno": 47,
               "node_id": 144,
-              "src": "1639:13:8",
+              "src": "1639:13:14",
               "value": {
                 "ast_type": "Name",
                 "col_offset": 4,
@@ -1078,7 +1078,7 @@
                 "id": "self",
                 "lineno": 47,
                 "node_id": 145,
-                "src": "1639:4:8"
+                "src": "1639:4:14"
               }
             },
             "value": {
@@ -1088,7 +1088,7 @@
               "end_lineno": 47,
               "lineno": 47,
               "node_id": 148,
-              "src": "1655:5:8",
+              "src": "1655:5:14",
               "value": false
             }
           }
@@ -1103,7 +1103,7 @@
             "id": "external",
             "lineno": 40,
             "node_id": 149,
-            "src": "1382:8:8"
+            "src": "1382:8:14"
           },
           {
             "ast_type": "Name",
@@ -1113,7 +1113,7 @@
             "id": "payable",
             "lineno": 41,
             "node_id": 151,
-            "src": "1392:7:8"
+            "src": "1392:7:14"
           }
         ],
         "doc_string": null,
@@ -1124,7 +1124,7 @@
         "node_id": 113,
         "pos": null,
         "returns": null,
-        "src": "1400:260:8"
+        "src": "1400:260:14"
       },
       {
         "args": {
@@ -1137,7 +1137,7 @@
           "end_lineno": 50,
           "lineno": 50,
           "node_id": 154,
-          "src": "1672:3:8"
+          "src": "1672:3:14"
         },
         "ast_type": "FunctionDef",
         "body": [
@@ -1149,7 +1149,7 @@
             "lineno": 52,
             "msg": null,
             "node_id": 155,
-            "src": "1712:24:8",
+            "src": "1712:24:14",
             "test": {
               "ast_type": "UnaryOp",
               "col_offset": 11,
@@ -1164,7 +1164,7 @@
                 "end_lineno": 52,
                 "lineno": 52,
                 "node_id": 175,
-                "src": "1719:17:8"
+                "src": "1719:17:14"
               },
               "operand": {
                 "ast_type": "Attribute",
@@ -1174,7 +1174,7 @@
                 "end_lineno": 52,
                 "lineno": 52,
                 "node_id": 158,
-                "src": "1723:13:8",
+                "src": "1723:13:14",
                 "value": {
                   "ast_type": "Name",
                   "col_offset": 15,
@@ -1183,10 +1183,10 @@
                   "id": "self",
                   "lineno": 52,
                   "node_id": 159,
-                  "src": "1723:4:8"
+                  "src": "1723:4:14"
                 }
               },
-              "src": "1719:17:8"
+              "src": "1719:17:14"
             }
           },
           {
@@ -1197,7 +1197,7 @@
             "lineno": 54,
             "msg": null,
             "node_id": 162,
-            "src": "1845:31:8",
+            "src": "1845:31:14",
             "test": {
               "ast_type": "Compare",
               "col_offset": 11,
@@ -1211,7 +1211,7 @@
                 "end_lineno": 54,
                 "lineno": 54,
                 "node_id": 164,
-                "src": "1852:10:8",
+                "src": "1852:10:14",
                 "value": {
                   "ast_type": "Name",
                   "col_offset": 11,
@@ -1220,7 +1220,7 @@
                   "id": "msg",
                   "lineno": 54,
                   "node_id": 165,
-                  "src": "1852:3:8"
+                  "src": "1852:3:14"
                 }
               },
               "lineno": 54,
@@ -1232,7 +1232,7 @@
                 "end_lineno": 54,
                 "lineno": 54,
                 "node_id": 168,
-                "src": "1852:24:8"
+                "src": "1852:24:14"
               },
               "right": {
                 "ast_type": "Attribute",
@@ -1242,7 +1242,7 @@
                 "end_lineno": 54,
                 "lineno": 54,
                 "node_id": 169,
-                "src": "1866:10:8",
+                "src": "1866:10:14",
                 "value": {
                   "ast_type": "Name",
                   "col_offset": 25,
@@ -1251,10 +1251,10 @@
                   "id": "self",
                   "lineno": 54,
                   "node_id": 170,
-                  "src": "1866:4:8"
+                  "src": "1866:4:14"
                 }
               },
-              "src": "1852:24:8"
+              "src": "1852:24:14"
             }
           },
           {
@@ -1265,7 +1265,7 @@
             "lineno": 55,
             "msg": null,
             "node_id": 173,
-            "src": "1881:21:8",
+            "src": "1881:21:14",
             "test": {
               "ast_type": "UnaryOp",
               "col_offset": 11,
@@ -1280,7 +1280,7 @@
                 "end_lineno": 55,
                 "lineno": 55,
                 "node_id": 175,
-                "src": "1888:14:8"
+                "src": "1888:14:14"
               },
               "operand": {
                 "ast_type": "Attribute",
@@ -1290,7 +1290,7 @@
                 "end_lineno": 55,
                 "lineno": 55,
                 "node_id": 176,
-                "src": "1892:10:8",
+                "src": "1892:10:14",
                 "value": {
                   "ast_type": "Name",
                   "col_offset": 15,
@@ -1299,10 +1299,10 @@
                   "id": "self",
                   "lineno": 55,
                   "node_id": 177,
-                  "src": "1892:4:8"
+                  "src": "1892:4:14"
                 }
               },
-              "src": "1888:14:8"
+              "src": "1888:14:14"
             }
           },
           {
@@ -1312,7 +1312,7 @@
             "end_lineno": 58,
             "lineno": 58,
             "node_id": 180,
-            "src": "1925:17:8",
+            "src": "1925:17:14",
             "target": {
               "ast_type": "Attribute",
               "attr": "ended",
@@ -1321,7 +1321,7 @@
               "end_lineno": 58,
               "lineno": 58,
               "node_id": 181,
-              "src": "1925:10:8",
+              "src": "1925:10:14",
               "value": {
                 "ast_type": "Name",
                 "col_offset": 4,
@@ -1330,7 +1330,7 @@
                 "id": "self",
                 "lineno": 58,
                 "node_id": 182,
-                "src": "1925:4:8"
+                "src": "1925:4:14"
               }
             },
             "value": {
@@ -1340,7 +1340,7 @@
               "end_lineno": 58,
               "lineno": 58,
               "node_id": 185,
-              "src": "1938:4:8",
+              "src": "1938:4:14",
               "value": true
             }
           },
@@ -1351,7 +1351,7 @@
             "end_lineno": 61,
             "lineno": 61,
             "node_id": 186,
-            "src": "1969:28:8",
+            "src": "1969:28:14",
             "value": {
               "args": [
                 {
@@ -1362,7 +1362,7 @@
                   "end_lineno": 61,
                   "lineno": 61,
                   "node_id": 190,
-                  "src": "1974:10:8",
+                  "src": "1974:10:14",
                   "value": {
                     "ast_type": "Name",
                     "col_offset": 9,
@@ -1371,7 +1371,7 @@
                     "id": "self",
                     "lineno": 61,
                     "node_id": 191,
-                    "src": "1974:4:8"
+                    "src": "1974:4:14"
                   }
                 },
                 {
@@ -1382,7 +1382,7 @@
                   "end_lineno": 61,
                   "lineno": 61,
                   "node_id": 194,
-                  "src": "1986:10:8",
+                  "src": "1986:10:14",
                   "value": {
                     "ast_type": "Name",
                     "col_offset": 21,
@@ -1391,7 +1391,7 @@
                     "id": "self",
                     "lineno": 61,
                     "node_id": 195,
-                    "src": "1986:4:8"
+                    "src": "1986:4:14"
                   }
                 }
               ],
@@ -1407,13 +1407,13 @@
                 "id": "send",
                 "lineno": 61,
                 "node_id": 188,
-                "src": "1969:4:8"
+                "src": "1969:4:14"
               },
               "keyword": null,
               "keywords": [],
               "lineno": 61,
               "node_id": 187,
-              "src": "1969:28:8"
+              "src": "1969:28:14"
             }
           },
           {
@@ -1423,7 +1423,7 @@
             "end_lineno": 62,
             "lineno": 62,
             "node_id": 198,
-            "src": "2054:25:8",
+            "src": "2054:25:14",
             "value": {
               "args": [
                 {
@@ -1434,7 +1434,7 @@
                   "end_lineno": 62,
                   "lineno": 62,
                   "node_id": 202,
-                  "src": "2067:11:8",
+                  "src": "2067:11:14",
                   "value": {
                     "ast_type": "Name",
                     "col_offset": 17,
@@ -1443,7 +1443,7 @@
                     "id": "self",
                     "lineno": 62,
                     "node_id": 203,
-                    "src": "2067:4:8"
+                    "src": "2067:4:14"
                   }
                 }
               ],
@@ -1459,13 +1459,13 @@
                 "id": "selfdestruct",
                 "lineno": 62,
                 "node_id": 200,
-                "src": "2054:12:8"
+                "src": "2054:12:14"
               },
               "keyword": null,
               "keywords": [],
               "lineno": 62,
               "node_id": 199,
-              "src": "2054:25:8"
+              "src": "2054:25:14"
             }
           }
         ],
@@ -1479,7 +1479,7 @@
             "id": "external",
             "lineno": 49,
             "node_id": 206,
-            "src": "1663:8:8"
+            "src": "1663:8:14"
           }
         ],
         "doc_string": null,
@@ -1490,7 +1490,7 @@
         "node_id": 153,
         "pos": null,
         "returns": null,
-        "src": "1672:407:8"
+        "src": "1672:407:14"
       }
     ],
     "col_offset": 0,
@@ -1500,7 +1500,7 @@
     "lineno": 1,
     "name": "contracts/safe_remote_purchase.vy",
     "node_id": 0,
-    "src": "0:2079:8"
+    "src": "0:2079:14"
   },
   "bytecode": "0x346001811690506101b057348060011c905060005533600155600160035561018061002f61000039610180610000f36003361161000c57610168565b60003560e01c6364edfbf08118610051576004361861016e576003541561016e576000548060011b818160011c1861016e579050341861016e57336002556000600355005b3461016e576335a063b48118610080576004361861016e576003541561016e57600154331861016e57600154ff005b6383a6deb581186100cb576004361861016e5760035461016e57600254331861016e5760045461016e57600160045560006000600060006000546002546000f11561016e57600154ff005b633fa4f24581186100ea576004361861016e5760005460405260206040f35b6308551a538118610109576004361861016e5760015460405260206040f35b637150d8ae8118610128576004361861016e5760025460405260206040f35b636a5e26508118610147576004361861016e5760035460405260206040f35b6312fa6feb8118610166576004361861016e5760045460405260206040f35b505b60006000fd5b600080fda165767970657283000306000b005b600080fd",
   "bytecodeSha1": "659c73fbde4b9ad1005cf9ddac2b77a13672d13e",
@@ -1620,7 +1620,7 @@
   },
   "dependencies": [],
   "deployedBytecode": "0x6003361161000c57610168565b60003560e01c6364edfbf08118610051576004361861016e576003541561016e576000548060011b818160011c1861016e579050341861016e57336002556000600355005b3461016e576335a063b48118610080576004361861016e576003541561016e57600154331861016e57600154ff005b6383a6deb581186100cb576004361861016e5760035461016e57600254331861016e5760045461016e57600160045560006000600060006000546002546000f11561016e57600154ff005b633fa4f24581186100ea576004361861016e5760005460405260206040f35b6308551a538118610109576004361861016e5760015460405260206040f35b637150d8ae8118610128576004361861016e5760025460405260206040f35b636a5e26508118610147576004361861016e5760035460405260206040f35b6312fa6feb8118610166576004361861016e5760045460405260206040f35b505b60006000fd5b600080fda165767970657283000306000b",
-  "deployedSourceMap": "-1:-1:8:-;;;;:::-;;:::-;:::-;;;;;;;;;:::-;;;;;:::-;1427:13;-1:-1;1420:20;;:::-;1559:10;1555:14;;-1:-1;;1555:14;-1:-1;;;;;:::-;1555:14;;1541:9;:29;1534:36;:::-;1624:10;1611;-1:-1;1655:5;1639:13;-1:-1;;:::-;;;:::-;;;;;:::-;;;;;:::-;1129:13;-1:-1;1122:20;;:::-;1203:11;1189:25;:10;:25;1182:32;:::-;1320:11;-1:-1;;;:::-;;;;;:::-;;;;;:::-;1723:13;-1:-1;1712:24;:::-;1866:10;1852:24;:10;:24;1845:31;:::-;1892:10;-1:-1;1881:21;:::-;1938:4;1925:10;-1:-1;;;;;1986:10;-1:-1;1974:10;-1:-1;;;1969:28;;:::-;2067:11;-1:-1;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;:::-;;;;:::-;;;",
+  "deployedSourceMap": "-1:-1:14:-;;;;:::-;;:::-;:::-;;;;;;;;;:::-;;;;;:::-;1427:13;-1:-1;1420:20;;:::-;1559:10;1555:14;;-1:-1;;1555:14;-1:-1;;;;;:::-;1555:14;;1541:9;:29;1534:36;:::-;1624:10;1611;-1:-1;1655:5;1639:13;-1:-1;;:::-;;;:::-;;;;;:::-;;;;;:::-;1129:13;-1:-1;1122:20;;:::-;1203:11;1189:25;:10;:25;1182:32;:::-;1320:11;-1:-1;;;:::-;;;;;:::-;;;;;:::-;1723:13;-1:-1;1712:24;:::-;1866:10;1852:24;:10;:24;1845:31;:::-;1892:10;-1:-1;1881:21;:::-;1938:4;1925:10;-1:-1;;;;;1986:10;-1:-1;1974:10;-1:-1;;;1969:28;;:::-;2067:11;-1:-1;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;:::-;;;;:::-;;;",
   "language": "Vyper",
   "natspec": {
     "methods": {}

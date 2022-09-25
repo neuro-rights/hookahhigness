@@ -1,0 +1,2813 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "random_words",
+          "type": "uint256[1]"
+        }
+      ],
+      "name": "ReturnedRandomness",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_subscription_id",
+          "type": "uint64"
+        },
+        {
+          "name": "_vrf_coordinator_address",
+          "type": "address"
+        },
+        {
+          "name": "_key_hash",
+          "type": "bytes32"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "request_random_words",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "requestId",
+          "type": "uint256"
+        },
+        {
+          "name": "randomWords",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "rawFulfillRandomWords",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "vrf_coordinator",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "arg0",
+          "type": "uint256"
+        }
+      ],
+      "name": "random_words",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "allSourcePaths": {
+    "0": "contracts/VRFConsumerV2.vy"
+  },
+  "ast": {
+    "ast_type": "Module",
+    "body": [
+      {
+        "alias": "VRFCoordinatorV2",
+        "ast_type": "Import",
+        "col_offset": 0,
+        "end_col_offset": 54,
+        "end_lineno": 3,
+        "lineno": 3,
+        "name": "interfaces.VRFCoordinatorV2",
+        "node_id": 1,
+        "src": "49:54:6"
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 20,
+              "end_col_offset": 26,
+              "end_lineno": 5,
+              "id": "uint32",
+              "lineno": 5,
+              "node_id": 9,
+              "src": "125:6:6"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 11,
+          "end_col_offset": 27,
+          "end_lineno": 5,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 11,
+            "end_col_offset": 19,
+            "end_lineno": 5,
+            "id": "constant",
+            "lineno": 5,
+            "node_id": 7,
+            "src": "116:8:6"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 5,
+          "node_id": 6,
+          "src": "116:16:6"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 31,
+        "end_lineno": 5,
+        "is_constant": true,
+        "is_immutable": false,
+        "is_public": false,
+        "lineno": 5,
+        "node_id": 3,
+        "src": "105:31:6",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 9,
+          "end_lineno": 5,
+          "id": "NUM_WORDS",
+          "lineno": 5,
+          "node_id": 4,
+          "src": "105:9:6"
+        },
+        "value": {
+          "ast_type": "Int",
+          "col_offset": 30,
+          "end_col_offset": 31,
+          "end_lineno": 5,
+          "lineno": 5,
+          "node_id": 11,
+          "src": "135:1:6",
+          "value": 1
+        }
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 25,
+              "end_col_offset": 32,
+              "end_lineno": 6,
+              "id": "uint256",
+              "lineno": 6,
+              "node_id": 18,
+              "src": "162:7:6"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 16,
+          "end_col_offset": 33,
+          "end_lineno": 6,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 16,
+            "end_col_offset": 24,
+            "end_lineno": 6,
+            "id": "constant",
+            "lineno": 6,
+            "node_id": 16,
+            "src": "153:8:6"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 6,
+          "node_id": 15,
+          "src": "153:17:6"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 38,
+        "end_lineno": 6,
+        "is_constant": true,
+        "is_immutable": false,
+        "is_public": false,
+        "lineno": 6,
+        "node_id": 12,
+        "src": "137:38:6",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 14,
+          "end_lineno": 6,
+          "id": "MAX_ARRAY_SIZE",
+          "lineno": 6,
+          "node_id": 13,
+          "src": "137:14:6"
+        },
+        "value": {
+          "ast_type": "Int",
+          "col_offset": 36,
+          "end_col_offset": 38,
+          "end_lineno": 6,
+          "lineno": 6,
+          "node_id": 20,
+          "src": "173:2:6",
+          "value": 10
+        }
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 32,
+              "end_col_offset": 38,
+              "end_lineno": 7,
+              "id": "uint16",
+              "lineno": 7,
+              "node_id": 27,
+              "src": "208:6:6"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 23,
+          "end_col_offset": 39,
+          "end_lineno": 7,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 23,
+            "end_col_offset": 31,
+            "end_lineno": 7,
+            "id": "constant",
+            "lineno": 7,
+            "node_id": 25,
+            "src": "199:8:6"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 7,
+          "node_id": 24,
+          "src": "199:16:6"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 43,
+        "end_lineno": 7,
+        "is_constant": true,
+        "is_immutable": false,
+        "is_public": false,
+        "lineno": 7,
+        "node_id": 21,
+        "src": "176:43:6",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 21,
+          "end_lineno": 7,
+          "id": "REQUEST_CONFIRMATIONS",
+          "lineno": 7,
+          "node_id": 22,
+          "src": "176:21:6"
+        },
+        "value": {
+          "ast_type": "Int",
+          "col_offset": 42,
+          "end_col_offset": 43,
+          "end_lineno": 7,
+          "lineno": 7,
+          "node_id": 29,
+          "src": "218:1:6",
+          "value": 3
+        }
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 29,
+              "end_col_offset": 35,
+              "end_lineno": 8,
+              "id": "uint32",
+              "lineno": 8,
+              "node_id": 36,
+              "src": "249:6:6"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 20,
+          "end_col_offset": 36,
+          "end_lineno": 8,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 20,
+            "end_col_offset": 28,
+            "end_lineno": 8,
+            "id": "constant",
+            "lineno": 8,
+            "node_id": 34,
+            "src": "240:8:6"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 8,
+          "node_id": 33,
+          "src": "240:16:6"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 45,
+        "end_lineno": 8,
+        "is_constant": true,
+        "is_immutable": false,
+        "is_public": false,
+        "lineno": 8,
+        "node_id": 30,
+        "src": "220:45:6",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 18,
+          "end_lineno": 8,
+          "id": "CALLBACK_GAS_LIMIT",
+          "lineno": 8,
+          "node_id": 31,
+          "src": "220:18:6"
+        },
+        "value": {
+          "ast_type": "Int",
+          "col_offset": 39,
+          "end_col_offset": 45,
+          "end_lineno": 8,
+          "lineno": 8,
+          "node_id": 38,
+          "src": "259:6:6",
+          "value": 100000
+        }
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 24,
+              "end_col_offset": 40,
+              "end_lineno": 10,
+              "id": "VRFCoordinatorV2",
+              "lineno": 10,
+              "node_id": 45,
+              "src": "291:16:6"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 17,
+          "end_col_offset": 41,
+          "end_lineno": 10,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 17,
+            "end_col_offset": 23,
+            "end_lineno": 10,
+            "id": "public",
+            "lineno": 10,
+            "node_id": 43,
+            "src": "284:6:6"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 10,
+          "node_id": 42,
+          "src": "284:24:6"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 41,
+        "end_lineno": 10,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": true,
+        "lineno": 10,
+        "node_id": 39,
+        "src": "267:41:6",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 15,
+          "end_lineno": 10,
+          "id": "vrf_coordinator",
+          "lineno": 10,
+          "node_id": 40,
+          "src": "267:15:6"
+        },
+        "value": null
+      },
+      {
+        "annotation": {
+          "ast_type": "Name",
+          "col_offset": 17,
+          "end_col_offset": 23,
+          "end_lineno": 11,
+          "id": "uint64",
+          "lineno": 11,
+          "node_id": 50,
+          "src": "326:6:6"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 23,
+        "end_lineno": 11,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": false,
+        "lineno": 11,
+        "node_id": 47,
+        "src": "309:23:6",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 15,
+          "end_lineno": 11,
+          "id": "subscription_id",
+          "lineno": 11,
+          "node_id": 48,
+          "src": "309:15:6"
+        },
+        "value": null
+      },
+      {
+        "annotation": {
+          "ast_type": "Name",
+          "col_offset": 10,
+          "end_col_offset": 17,
+          "end_lineno": 12,
+          "id": "bytes32",
+          "lineno": 12,
+          "node_id": 55,
+          "src": "343:7:6"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 17,
+        "end_lineno": 12,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": false,
+        "lineno": 12,
+        "node_id": 52,
+        "src": "333:17:6",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 8,
+          "end_lineno": 12,
+          "id": "key_hash",
+          "lineno": 12,
+          "node_id": 53,
+          "src": "333:8:6"
+        },
+        "value": null
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Subscript",
+              "col_offset": 21,
+              "end_col_offset": 39,
+              "end_lineno": 13,
+              "lineno": 13,
+              "node_id": 63,
+              "slice": {
+                "ast_type": "Index",
+                "col_offset": 21,
+                "end_col_offset": 39,
+                "end_lineno": 13,
+                "lineno": 13,
+                "node_id": 69,
+                "src": "372:18:6",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 29,
+                  "end_col_offset": 38,
+                  "end_lineno": 13,
+                  "id": "NUM_WORDS",
+                  "lineno": 13,
+                  "node_id": 66,
+                  "src": "380:9:6"
+                }
+              },
+              "src": "372:18:6",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 21,
+                "end_col_offset": 28,
+                "end_lineno": 13,
+                "id": "uint256",
+                "lineno": 13,
+                "node_id": 64,
+                "src": "372:7:6"
+              }
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 14,
+          "end_col_offset": 40,
+          "end_lineno": 13,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 14,
+            "end_col_offset": 20,
+            "end_lineno": 13,
+            "id": "public",
+            "lineno": 13,
+            "node_id": 61,
+            "src": "365:6:6"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 13,
+          "node_id": 60,
+          "src": "365:26:6"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 40,
+        "end_lineno": 13,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": true,
+        "lineno": 13,
+        "node_id": 57,
+        "src": "351:40:6",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 12,
+          "end_lineno": 13,
+          "id": "random_words",
+          "lineno": 13,
+          "node_id": 58,
+          "src": "351:12:6"
+        },
+        "value": null
+      },
+      {
+        "ast_type": "EventDef",
+        "body": [
+          {
+            "annotation": {
+              "ast_type": "Subscript",
+              "col_offset": 18,
+              "end_col_offset": 36,
+              "end_lineno": 16,
+              "lineno": 16,
+              "node_id": 74,
+              "slice": {
+                "ast_type": "Index",
+                "col_offset": 18,
+                "end_col_offset": 36,
+                "end_lineno": 16,
+                "lineno": 16,
+                "node_id": 80,
+                "src": "437:18:6",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 26,
+                  "end_col_offset": 35,
+                  "end_lineno": 16,
+                  "id": "NUM_WORDS",
+                  "lineno": 16,
+                  "node_id": 77,
+                  "src": "445:9:6"
+                }
+              },
+              "src": "437:18:6",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 18,
+                "end_col_offset": 25,
+                "end_lineno": 16,
+                "id": "uint256",
+                "lineno": 16,
+                "node_id": 75,
+                "src": "437:7:6"
+              }
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 4,
+            "end_col_offset": 36,
+            "end_lineno": 16,
+            "lineno": 16,
+            "node_id": 71,
+            "simple": 1,
+            "src": "423:32:6",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 4,
+              "end_col_offset": 16,
+              "end_lineno": 16,
+              "id": "random_words",
+              "lineno": 16,
+              "node_id": 72,
+              "src": "423:12:6"
+            },
+            "value": null
+          }
+        ],
+        "col_offset": 0,
+        "end_col_offset": 36,
+        "end_lineno": 16,
+        "lineno": 15,
+        "name": "ReturnedRandomness",
+        "node_id": 70,
+        "src": "393:62:6"
+      },
+      {
+        "args": {
+          "args": [
+            {
+              "annotation": {
+                "ast_type": "Name",
+                "col_offset": 31,
+                "end_col_offset": 37,
+                "end_lineno": 19,
+                "id": "uint64",
+                "lineno": 19,
+                "node_id": 84,
+                "src": "498:6:6"
+              },
+              "arg": "_subscription_id",
+              "ast_type": "arg",
+              "col_offset": 13,
+              "end_col_offset": 37,
+              "end_lineno": 19,
+              "lineno": 19,
+              "node_id": 83,
+              "src": "480:24:6"
+            },
+            {
+              "annotation": {
+                "ast_type": "Name",
+                "col_offset": 65,
+                "end_col_offset": 72,
+                "end_lineno": 19,
+                "id": "address",
+                "lineno": 19,
+                "node_id": 87,
+                "src": "532:7:6"
+              },
+              "arg": "_vrf_coordinator_address",
+              "ast_type": "arg",
+              "col_offset": 39,
+              "end_col_offset": 72,
+              "end_lineno": 19,
+              "lineno": 19,
+              "node_id": 86,
+              "src": "506:33:6"
+            },
+            {
+              "annotation": {
+                "ast_type": "Name",
+                "col_offset": 85,
+                "end_col_offset": 92,
+                "end_lineno": 19,
+                "id": "bytes32",
+                "lineno": 19,
+                "node_id": 90,
+                "src": "552:7:6"
+              },
+              "arg": "_key_hash",
+              "ast_type": "arg",
+              "col_offset": 74,
+              "end_col_offset": 92,
+              "end_lineno": 19,
+              "lineno": 19,
+              "node_id": 89,
+              "src": "541:18:6"
+            }
+          ],
+          "ast_type": "arguments",
+          "col_offset": 13,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 92,
+          "end_lineno": 19,
+          "lineno": 19,
+          "node_id": 82,
+          "src": "480:79:6"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 69,
+            "end_lineno": 20,
+            "lineno": 20,
+            "node_id": 92,
+            "src": "566:65:6",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "vrf_coordinator",
+              "col_offset": 4,
+              "end_col_offset": 24,
+              "end_lineno": 20,
+              "lineno": 20,
+              "node_id": 93,
+              "src": "566:20:6",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 20,
+                "id": "self",
+                "lineno": 20,
+                "node_id": 94,
+                "src": "566:4:6"
+              }
+            },
+            "value": {
+              "args": [
+                {
+                  "ast_type": "Name",
+                  "col_offset": 44,
+                  "end_col_offset": 68,
+                  "end_lineno": 20,
+                  "id": "_vrf_coordinator_address",
+                  "lineno": 20,
+                  "node_id": 100,
+                  "src": "606:24:6"
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 27,
+              "end_col_offset": 69,
+              "end_lineno": 20,
+              "func": {
+                "ast_type": "Name",
+                "col_offset": 27,
+                "end_col_offset": 43,
+                "end_lineno": 20,
+                "id": "VRFCoordinatorV2",
+                "lineno": 20,
+                "node_id": 98,
+                "src": "589:16:6"
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 20,
+              "node_id": 97,
+              "src": "589:42:6"
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 43,
+            "end_lineno": 21,
+            "lineno": 21,
+            "node_id": 102,
+            "src": "636:39:6",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "subscription_id",
+              "col_offset": 4,
+              "end_col_offset": 24,
+              "end_lineno": 21,
+              "lineno": 21,
+              "node_id": 103,
+              "src": "636:20:6",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 21,
+                "id": "self",
+                "lineno": 21,
+                "node_id": 104,
+                "src": "636:4:6"
+              }
+            },
+            "value": {
+              "ast_type": "Name",
+              "col_offset": 27,
+              "end_col_offset": 43,
+              "end_lineno": 21,
+              "id": "_subscription_id",
+              "lineno": 21,
+              "node_id": 107,
+              "src": "659:16:6"
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 29,
+            "end_lineno": 22,
+            "lineno": 22,
+            "node_id": 109,
+            "src": "680:25:6",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "key_hash",
+              "col_offset": 4,
+              "end_col_offset": 17,
+              "end_lineno": 22,
+              "lineno": 22,
+              "node_id": 110,
+              "src": "680:13:6",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 22,
+                "id": "self",
+                "lineno": 22,
+                "node_id": 111,
+                "src": "680:4:6"
+              }
+            },
+            "value": {
+              "ast_type": "Name",
+              "col_offset": 20,
+              "end_col_offset": 29,
+              "end_lineno": 22,
+              "id": "_key_hash",
+              "lineno": 22,
+              "node_id": 114,
+              "src": "696:9:6"
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 18,
+            "id": "external",
+            "lineno": 18,
+            "node_id": 116,
+            "src": "458:8:6"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 29,
+        "end_lineno": 22,
+        "lineno": 19,
+        "name": "__init__",
+        "node_id": 81,
+        "pos": null,
+        "returns": null,
+        "src": "467:238:6"
+      },
+      {
+        "args": {
+          "args": [],
+          "ast_type": "arguments",
+          "col_offset": 0,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 3,
+          "end_lineno": 25,
+          "lineno": 25,
+          "node_id": 119,
+          "src": "717:3:6"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "ast_type": "Expr",
+            "col_offset": 4,
+            "end_col_offset": 5,
+            "end_lineno": 32,
+            "lineno": 26,
+            "node_id": 120,
+            "src": "749:176:6",
+            "value": {
+              "args": [
+                {
+                  "ast_type": "Attribute",
+                  "attr": "key_hash",
+                  "col_offset": 8,
+                  "end_col_offset": 21,
+                  "end_lineno": 27,
+                  "lineno": 27,
+                  "node_id": 128,
+                  "src": "798:13:6",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 8,
+                    "end_col_offset": 12,
+                    "end_lineno": 27,
+                    "id": "self",
+                    "lineno": 27,
+                    "node_id": 129,
+                    "src": "798:4:6"
+                  }
+                },
+                {
+                  "ast_type": "Attribute",
+                  "attr": "subscription_id",
+                  "col_offset": 8,
+                  "end_col_offset": 28,
+                  "end_lineno": 28,
+                  "lineno": 28,
+                  "node_id": 132,
+                  "src": "821:20:6",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 8,
+                    "end_col_offset": 12,
+                    "end_lineno": 28,
+                    "id": "self",
+                    "lineno": 28,
+                    "node_id": 133,
+                    "src": "821:4:6"
+                  }
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 8,
+                  "end_col_offset": 29,
+                  "end_lineno": 29,
+                  "id": "REQUEST_CONFIRMATIONS",
+                  "lineno": 29,
+                  "node_id": 136,
+                  "src": "851:21:6"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 8,
+                  "end_col_offset": 26,
+                  "end_lineno": 30,
+                  "id": "CALLBACK_GAS_LIMIT",
+                  "lineno": 30,
+                  "node_id": 138,
+                  "src": "882:18:6"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 8,
+                  "end_col_offset": 17,
+                  "end_lineno": 31,
+                  "id": "NUM_WORDS",
+                  "lineno": 31,
+                  "node_id": 140,
+                  "src": "910:9:6"
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 4,
+              "end_col_offset": 5,
+              "end_lineno": 32,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "requestRandomWords",
+                "col_offset": 4,
+                "end_col_offset": 43,
+                "end_lineno": 26,
+                "lineno": 26,
+                "node_id": 122,
+                "src": "749:39:6",
+                "value": {
+                  "ast_type": "Attribute",
+                  "attr": "vrf_coordinator",
+                  "col_offset": 4,
+                  "end_col_offset": 24,
+                  "end_lineno": 26,
+                  "lineno": 26,
+                  "node_id": 123,
+                  "src": "749:20:6",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 4,
+                    "end_col_offset": 8,
+                    "end_lineno": 26,
+                    "id": "self",
+                    "lineno": 26,
+                    "node_id": 124,
+                    "src": "749:4:6"
+                  }
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 26,
+              "node_id": 121,
+              "src": "749:176:6"
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 24,
+            "id": "external",
+            "lineno": 24,
+            "node_id": 142,
+            "src": "708:8:6"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 5,
+        "end_lineno": 32,
+        "lineno": 25,
+        "name": "request_random_words",
+        "node_id": 118,
+        "pos": null,
+        "returns": null,
+        "src": "717:208:6"
+      },
+      {
+        "args": {
+          "args": [
+            {
+              "annotation": {
+                "ast_type": "Name",
+                "col_offset": 35,
+                "end_col_offset": 42,
+                "end_lineno": 35,
+                "id": "uint256",
+                "lineno": 35,
+                "node_id": 147,
+                "src": "972:7:6"
+              },
+              "arg": "request_id",
+              "ast_type": "arg",
+              "col_offset": 23,
+              "end_col_offset": 42,
+              "end_lineno": 35,
+              "lineno": 35,
+              "node_id": 146,
+              "src": "960:19:6"
+            },
+            {
+              "annotation": {
+                "ast_type": "Subscript",
+                "col_offset": 59,
+                "end_col_offset": 92,
+                "end_lineno": 35,
+                "lineno": 35,
+                "node_id": 150,
+                "slice": {
+                  "ast_type": "Index",
+                  "col_offset": 59,
+                  "end_col_offset": 92,
+                  "end_lineno": 35,
+                  "lineno": 35,
+                  "node_id": 160,
+                  "src": "996:33:6",
+                  "value": {
+                    "ast_type": "Tuple",
+                    "col_offset": 68,
+                    "elements": [
+                      {
+                        "ast_type": "Name",
+                        "col_offset": 68,
+                        "end_col_offset": 75,
+                        "end_lineno": 35,
+                        "id": "uint256",
+                        "lineno": 35,
+                        "node_id": 154,
+                        "src": "1005:7:6"
+                      },
+                      {
+                        "ast_type": "Name",
+                        "col_offset": 77,
+                        "end_col_offset": 91,
+                        "end_lineno": 35,
+                        "id": "MAX_ARRAY_SIZE",
+                        "lineno": 35,
+                        "node_id": 156,
+                        "src": "1014:14:6"
+                      }
+                    ],
+                    "end_col_offset": 91,
+                    "end_lineno": 35,
+                    "lineno": 35,
+                    "node_id": 153,
+                    "src": "1005:23:6"
+                  }
+                },
+                "src": "996:33:6",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 59,
+                  "end_col_offset": 67,
+                  "end_lineno": 35,
+                  "id": "DynArray",
+                  "lineno": 35,
+                  "node_id": 151,
+                  "src": "996:8:6"
+                }
+              },
+              "arg": "_random_words",
+              "ast_type": "arg",
+              "col_offset": 44,
+              "end_col_offset": 92,
+              "end_lineno": 35,
+              "lineno": 35,
+              "node_id": 149,
+              "src": "981:48:6"
+            }
+          ],
+          "ast_type": "arguments",
+          "col_offset": 23,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 92,
+          "end_lineno": 35,
+          "lineno": 35,
+          "node_id": 145,
+          "src": "960:69:6"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 42,
+            "end_lineno": 36,
+            "lineno": 36,
+            "node_id": 161,
+            "src": "1036:38:6",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "random_words",
+              "col_offset": 4,
+              "end_col_offset": 21,
+              "end_lineno": 36,
+              "lineno": 36,
+              "node_id": 162,
+              "src": "1036:17:6",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 36,
+                "id": "self",
+                "lineno": 36,
+                "node_id": 163,
+                "src": "1036:4:6"
+              }
+            },
+            "value": {
+              "ast_type": "List",
+              "col_offset": 24,
+              "elements": [
+                {
+                  "ast_type": "Subscript",
+                  "col_offset": 25,
+                  "end_col_offset": 41,
+                  "end_lineno": 36,
+                  "lineno": 36,
+                  "node_id": 167,
+                  "slice": {
+                    "ast_type": "Index",
+                    "col_offset": 25,
+                    "end_col_offset": 41,
+                    "end_lineno": 36,
+                    "lineno": 36,
+                    "node_id": 172,
+                    "src": "1057:16:6",
+                    "value": {
+                      "ast_type": "Int",
+                      "col_offset": 39,
+                      "end_col_offset": 40,
+                      "end_lineno": 36,
+                      "lineno": 36,
+                      "node_id": 170,
+                      "src": "1071:1:6",
+                      "value": 0
+                    }
+                  },
+                  "src": "1057:16:6",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 25,
+                    "end_col_offset": 38,
+                    "end_lineno": 36,
+                    "id": "_random_words",
+                    "lineno": 36,
+                    "node_id": 168,
+                    "src": "1057:13:6"
+                  }
+                }
+              ],
+              "end_col_offset": 42,
+              "end_lineno": 36,
+              "lineno": 36,
+              "node_id": 166,
+              "src": "1056:18:6"
+            }
+          },
+          {
+            "ast_type": "Log",
+            "col_offset": 4,
+            "end_col_offset": 45,
+            "end_lineno": 37,
+            "lineno": 37,
+            "node_id": 175,
+            "src": "1079:41:6",
+            "value": {
+              "args": [
+                {
+                  "ast_type": "Attribute",
+                  "attr": "random_words",
+                  "col_offset": 27,
+                  "end_col_offset": 44,
+                  "end_lineno": 37,
+                  "lineno": 37,
+                  "node_id": 179,
+                  "src": "1102:17:6",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 27,
+                    "end_col_offset": 31,
+                    "end_lineno": 37,
+                    "id": "self",
+                    "lineno": 37,
+                    "node_id": 180,
+                    "src": "1102:4:6"
+                  }
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 8,
+              "end_col_offset": 45,
+              "end_lineno": 37,
+              "func": {
+                "ast_type": "Name",
+                "col_offset": 8,
+                "end_col_offset": 26,
+                "end_lineno": 37,
+                "id": "ReturnedRandomness",
+                "lineno": 37,
+                "node_id": 177,
+                "src": "1083:18:6"
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 37,
+              "node_id": 176,
+              "src": "1083:37:6"
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 34,
+            "id": "internal",
+            "lineno": 34,
+            "node_id": 183,
+            "src": "928:8:6"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 45,
+        "end_lineno": 37,
+        "lineno": 35,
+        "name": "fulfillRandomWords",
+        "node_id": 144,
+        "pos": null,
+        "returns": null,
+        "src": "937:183:6"
+      },
+      {
+        "args": {
+          "args": [
+            {
+              "annotation": {
+                "ast_type": "Name",
+                "col_offset": 37,
+                "end_col_offset": 44,
+                "end_lineno": 45,
+                "id": "uint256",
+                "lineno": 45,
+                "node_id": 188,
+                "src": "1517:7:6"
+              },
+              "arg": "requestId",
+              "ast_type": "arg",
+              "col_offset": 26,
+              "end_col_offset": 44,
+              "end_lineno": 45,
+              "lineno": 45,
+              "node_id": 187,
+              "src": "1506:18:6"
+            },
+            {
+              "annotation": {
+                "ast_type": "Subscript",
+                "col_offset": 59,
+                "end_col_offset": 92,
+                "end_lineno": 45,
+                "lineno": 45,
+                "node_id": 191,
+                "slice": {
+                  "ast_type": "Index",
+                  "col_offset": 59,
+                  "end_col_offset": 92,
+                  "end_lineno": 45,
+                  "lineno": 45,
+                  "node_id": 201,
+                  "src": "1539:33:6",
+                  "value": {
+                    "ast_type": "Tuple",
+                    "col_offset": 68,
+                    "elements": [
+                      {
+                        "ast_type": "Name",
+                        "col_offset": 68,
+                        "end_col_offset": 75,
+                        "end_lineno": 45,
+                        "id": "uint256",
+                        "lineno": 45,
+                        "node_id": 195,
+                        "src": "1548:7:6"
+                      },
+                      {
+                        "ast_type": "Name",
+                        "col_offset": 77,
+                        "end_col_offset": 91,
+                        "end_lineno": 45,
+                        "id": "MAX_ARRAY_SIZE",
+                        "lineno": 45,
+                        "node_id": 197,
+                        "src": "1557:14:6"
+                      }
+                    ],
+                    "end_col_offset": 91,
+                    "end_lineno": 45,
+                    "lineno": 45,
+                    "node_id": 194,
+                    "src": "1548:23:6"
+                  }
+                },
+                "src": "1539:33:6",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 59,
+                  "end_col_offset": 67,
+                  "end_lineno": 45,
+                  "id": "DynArray",
+                  "lineno": 45,
+                  "node_id": 192,
+                  "src": "1539:8:6"
+                }
+              },
+              "arg": "randomWords",
+              "ast_type": "arg",
+              "col_offset": 46,
+              "end_col_offset": 92,
+              "end_lineno": 45,
+              "lineno": 45,
+              "node_id": 190,
+              "src": "1526:46:6"
+            }
+          ],
+          "ast_type": "arguments",
+          "col_offset": 26,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 92,
+          "end_lineno": 45,
+          "lineno": 45,
+          "node_id": 186,
+          "src": "1506:66:6"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "ast_type": "Assert",
+            "col_offset": 4,
+            "end_col_offset": 86,
+            "end_lineno": 46,
+            "lineno": 46,
+            "msg": {
+              "ast_type": "Str",
+              "col_offset": 55,
+              "end_col_offset": 86,
+              "end_lineno": 46,
+              "lineno": 46,
+              "node_id": 215,
+              "src": "1630:31:6",
+              "value": "Only coordinator can fulfill!"
+            },
+            "node_id": 202,
+            "src": "1579:82:6",
+            "test": {
+              "ast_type": "Compare",
+              "col_offset": 11,
+              "end_col_offset": 53,
+              "end_lineno": 46,
+              "left": {
+                "ast_type": "Attribute",
+                "attr": "sender",
+                "col_offset": 11,
+                "end_col_offset": 21,
+                "end_lineno": 46,
+                "lineno": 46,
+                "node_id": 204,
+                "src": "1586:10:6",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 11,
+                  "end_col_offset": 14,
+                  "end_lineno": 46,
+                  "id": "msg",
+                  "lineno": 46,
+                  "node_id": 205,
+                  "src": "1586:3:6"
+                }
+              },
+              "lineno": 46,
+              "node_id": 203,
+              "op": {
+                "ast_type": "Eq",
+                "col_offset": 11,
+                "end_col_offset": 53,
+                "end_lineno": 46,
+                "lineno": 46,
+                "node_id": 208,
+                "src": "1586:42:6"
+              },
+              "right": {
+                "ast_type": "Attribute",
+                "attr": "address",
+                "col_offset": 25,
+                "end_col_offset": 53,
+                "end_lineno": 46,
+                "lineno": 46,
+                "node_id": 209,
+                "src": "1600:28:6",
+                "value": {
+                  "ast_type": "Attribute",
+                  "attr": "vrf_coordinator",
+                  "col_offset": 25,
+                  "end_col_offset": 45,
+                  "end_lineno": 46,
+                  "lineno": 46,
+                  "node_id": 210,
+                  "src": "1600:20:6",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 25,
+                    "end_col_offset": 29,
+                    "end_lineno": 46,
+                    "id": "self",
+                    "lineno": 46,
+                    "node_id": 211,
+                    "src": "1600:4:6"
+                  }
+                }
+              },
+              "src": "1586:42:6"
+            }
+          },
+          {
+            "ast_type": "Expr",
+            "col_offset": 4,
+            "end_col_offset": 51,
+            "end_lineno": 47,
+            "lineno": 47,
+            "node_id": 216,
+            "src": "1666:47:6",
+            "value": {
+              "args": [
+                {
+                  "ast_type": "Name",
+                  "col_offset": 28,
+                  "end_col_offset": 37,
+                  "end_lineno": 47,
+                  "id": "requestId",
+                  "lineno": 47,
+                  "node_id": 222,
+                  "src": "1690:9:6"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 39,
+                  "end_col_offset": 50,
+                  "end_lineno": 47,
+                  "id": "randomWords",
+                  "lineno": 47,
+                  "node_id": 224,
+                  "src": "1701:11:6"
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 4,
+              "end_col_offset": 51,
+              "end_lineno": 47,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "fulfillRandomWords",
+                "col_offset": 4,
+                "end_col_offset": 27,
+                "end_lineno": 47,
+                "lineno": 47,
+                "node_id": 218,
+                "src": "1666:23:6",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 4,
+                  "end_col_offset": 8,
+                  "end_lineno": 47,
+                  "id": "self",
+                  "lineno": 47,
+                  "node_id": 219,
+                  "src": "1666:4:6"
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 47,
+              "node_id": 217,
+              "src": "1666:47:6"
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 44,
+            "id": "external",
+            "lineno": 44,
+            "node_id": 226,
+            "src": "1471:8:6"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 51,
+        "end_lineno": 47,
+        "lineno": 45,
+        "name": "rawFulfillRandomWords",
+        "node_id": 185,
+        "pos": null,
+        "returns": null,
+        "src": "1480:233:6"
+      }
+    ],
+    "col_offset": 0,
+    "doc_string": null,
+    "end_col_offset": 51,
+    "end_lineno": 47,
+    "lineno": 1,
+    "name": "contracts/VRFConsumerV2.vy",
+    "node_id": 0,
+    "src": "0:1713:6"
+  },
+  "bytecode": "0x60206102586000396000518060401c6102535760405260206102786000396000518060a01c61025357606052346102535760605160005560405160015560206102986000396000516002556101f661005c610000396101f6610000f36003361161000c5761019a565b60003560e01c346101e457632fe6643b811861007c57600436186101e457600054635d3b1d30604052600254606052600154608052600360a052620186a060c052600160e0526020604060a4605c6000855af161006e573d600060003e3d6000fd5b60203d106101e45760405050005b631fe543e3811861015157606436106101e457602435600401600a8135116101e4578035806101e052602082018160051b8082610200375050505060005433181561012757601d610340527f4f6e6c7920636f6f7264696e61746f722063616e2066756c66696c6c210000006103605261034050610340518061036001601f826000031636823750506308c379a061030052602061032052601f19601f61034051011660440161031cfd5b6004356040526101e051806060528060051b8060808261020060045afa50505061014f6101a0565b005b63795b26a5811861017057600436186101e45760005460405260206040f35b633203314e811861019857602436186101e457600435806101e4576003015460405260206040f35b505b60006000fd5b606051156101e457600060051b608001516003557f64a971aaf69011ea3896ebe92d55ecd50f45fbd843221fc2895728c44e95b3806003546101c05260206101c0a1565b600080fda165767970657283000306000b005b600080fd",
+  "bytecodeSha1": "d59d20f2620b138bc2184c0a46b6f628a2cfdfbb",
+  "compiler": {
+    "evm_version": "istanbul",
+    "version": "0.3.6"
+  },
+  "contractName": "VRFConsumerV2",
+  "coverageMap": {
+    "branches": {
+      "0": {
+        "VRFConsumerV2.rawFulfillRandomWords": {
+          "2": [
+            1579,
+            1661,
+            true
+          ]
+        }
+      }
+    },
+    "statements": {
+      "0": {
+        "VRFConsumerV2.fulfillRandomWords": {
+          "4": [
+            1036,
+            1074
+          ],
+          "5": [
+            1079,
+            1120
+          ]
+        },
+        "VRFConsumerV2.rawFulfillRandomWords": {
+          "1": [
+            1579,
+            1661
+          ],
+          "3": [
+            1666,
+            1713
+          ]
+        },
+        "VRFConsumerV2.request_random_words": {
+          "0": [
+            749,
+            925
+          ]
+        }
+      }
+    }
+  },
+  "dependencies": [
+    "VRFCoordinatorV2"
+  ],
+  "deployedBytecode": "0x6003361161000c5761019a565b60003560e01c346101e457632fe6643b811861007c57600436186101e457600054635d3b1d30604052600254606052600154608052600360a052620186a060c052600160e0526020604060a4605c6000855af161006e573d600060003e3d6000fd5b60203d106101e45760405050005b631fe543e3811861015157606436106101e457602435600401600a8135116101e4578035806101e052602082018160051b8082610200375050505060005433181561012757601d610340527f4f6e6c7920636f6f7264696e61746f722063616e2066756c66696c6c210000006103605261034050610340518061036001601f826000031636823750506308c379a061030052602061032052601f19601f61034051011660440161031cfd5b6004356040526101e051806060528060051b8060808261020060045afa50505061014f6101a0565b005b63795b26a5811861017057600436186101e45760005460405260206040f35b633203314e811861019857602436186101e457600435806101e4576003015460405260206040f35b505b60006000fd5b606051156101e457600060051b608001516003557f64a971aaf69011ea3896ebe92d55ecd50f45fbd843221fc2895728c44e95b3806003546101c05260206101c0a1565b600080fda165767970657283000306000b",
+  "deployedSourceMap": "-1:-1:6:-;;;;:::-;;:::-;:::-;;;;;;;:::-;;;;;:::-;;;;;:::-;749:20;:176;-1:-1;;;798:13;-1:-1;;;821:20;-1:-1;;;851:21;-1:-1;;882:18;-1:-1;;910:9;-1:-1;;;;;;;749:176;-1:-1;;;:::-;;;;;;;;:::-;;;;;:::-;;749:176;-1:-1;;:::-;;;;;:::-;;;;;:::-;;;;1526:46;-1:-1;1526:46;-1:-1;;;:::-;1526:46;-1:-1;;;;;1526:46;-1:-1;;;;;;;;;;;1526:46;1600:28;1586:42;:10;:42;;1579:82;:::-;-1:-1;;1630:31;-1:-1;;1630:31;;1579:82;-1:-1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1579:82::-;1690:9;-1:-1;;;1701:11;-1:-1;;;;;;;;;;;;;;;;1666:47;-1:-1;1666:47;:::i;-1:-1::-;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;;:::-;;:::-;;;;937:183::-;1057:13;-1:-1;;;:::-;1071:1;-1:-1;1057:16;;;-1:-1;;;1079:41;-1:-1;;;;;1079:41;;-1:-1::-;:::-;;;",
+  "language": "Vyper",
+  "natspec": {
+    "methods": {}
+  },
+  "offset": [
+    0,
+    1715
+  ],
+  "opcodes": "PUSH1 0x3 CALLDATASIZE GT PUSH2 0x0C JUMPI PUSH2 0x19A JUMP JUMPDEST PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR CALLVALUE PUSH2 0x1E4 JUMPI PUSH4 0x2FE6643B DUP2 XOR PUSH2 0x07C JUMPI PUSH1 0x4 CALLDATASIZE XOR PUSH2 0x1E4 JUMPI PUSH1 0x0 SLOAD PUSH4 0x5D3B1D30 PUSH1 0x40 MSTORE PUSH1 0x2 SLOAD PUSH1 0x60 MSTORE PUSH1 0x1 SLOAD PUSH1 0x80 MSTORE PUSH1 0x3 PUSH1 0xA0 MSTORE PUSH3 0x186A0 PUSH1 0xC0 MSTORE PUSH1 0x1 PUSH1 0xE0 MSTORE PUSH1 0x20 PUSH1 0x40 PUSH1 0xA4 PUSH1 0x5C PUSH1 0x0 DUP6 GAS CALL PUSH2 0x06E JUMPI RETURNDATASIZE PUSH1 0x0 PUSH1 0x0 RETURNDATACOPY RETURNDATASIZE PUSH1 0x0 REVERT JUMPDEST PUSH1 0x20 RETURNDATASIZE LT PUSH2 0x1E4 JUMPI PUSH1 0x40 POP POP STOP JUMPDEST PUSH4 0x1FE543E3 DUP2 XOR PUSH2 0x151 JUMPI PUSH1 0x64 CALLDATASIZE LT PUSH2 0x1E4 JUMPI PUSH1 0x24 CALLDATALOAD PUSH1 0x4 ADD PUSH1 0xA DUP2 CALLDATALOAD GT PUSH2 0x1E4 JUMPI DUP1 CALLDATALOAD DUP1 PUSH2 0x1E0 MSTORE PUSH1 0x20 DUP3 ADD DUP2 PUSH1 0x5 SHL DUP1 DUP3 PUSH2 0x20 CALLDATACOPY POP POP POP POP PUSH1 0x0 SLOAD CALLER XOR ISZERO PUSH2 0x127 JUMPI PUSH1 0x1D PUSH2 0x340 MSTORE PUSH32 0x4F6E6C7920636F6F7264696E61746F722063616E2066756C66696C6C21000 PUSH2 0x360 MSTORE PUSH2 0x340 POP PUSH2 0x340 MLOAD DUP1 PUSH2 0x360 ADD PUSH1 0x1F DUP3 PUSH1 0x0 SUB AND CALLDATASIZE DUP3 CALLDATACOPY POP POP PUSH4 0x8C379A0 PUSH2 0x30 MSTORE PUSH1 0x20 PUSH2 0x320 MSTORE PUSH1 0x1F NOT PUSH1 0x1F PUSH2 0x340 MLOAD ADD AND PUSH1 0x44 ADD PUSH2 0x31C REVERT JUMPDEST PUSH1 0x4 CALLDATALOAD PUSH1 0x40 MSTORE PUSH2 0x1E0 MLOAD DUP1 PUSH1 0x60 MSTORE DUP1 PUSH1 0x5 SHL DUP1 PUSH1 0x80 DUP3 PUSH2 0x20 PUSH1 0x4 GAS STATICCALL POP POP POP PUSH2 0x14F PUSH2 0x1A0 JUMP JUMPDEST STOP JUMPDEST PUSH4 0x795B26A5 DUP2 XOR PUSH2 0x170 JUMPI PUSH1 0x4 CALLDATASIZE XOR PUSH2 0x1E4 JUMPI PUSH1 0x0 SLOAD PUSH1 0x40 MSTORE PUSH1 0x20 PUSH1 0x40 RETURN JUMPDEST PUSH4 0x323314E DUP2 XOR PUSH2 0x198 JUMPI PUSH1 0x24 CALLDATASIZE XOR PUSH2 0x1E4 JUMPI PUSH1 0x4 CALLDATALOAD DUP1 PUSH2 0x1E4 JUMPI PUSH1 0x3 ADD SLOAD PUSH1 0x40 MSTORE PUSH1 0x20 PUSH1 0x40 RETURN JUMPDEST POP JUMPDEST PUSH1 0x0 PUSH1 0x0 REVERT JUMPDEST PUSH1 0x60 MLOAD ISZERO PUSH2 0x1E4 JUMPI PUSH1 0x0 PUSH1 0x5 SHL PUSH1 0x80 ADD MLOAD PUSH1 0x3 SSTORE PUSH32 0x64A971AAF69011EA3896EBE92D55ECD5F45FBD843221FC2895728C44E95B380 PUSH1 0x3 SLOAD PUSH2 0x1C0 MSTORE PUSH1 0x20 PUSH2 0x1C0 LOG1 JUMP JUMPDEST PUSH1 0x0 DUP1 REVERT LOG1 PUSH6 0x767970657283 STOP SUB MOD STOP SIGNEXTEND",
+  "pcMap": {
+    "0": {
+      "offset": [
+        0,
+        1713
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x3"
+    },
+    "2": {
+      "op": "CALLDATASIZE"
+    },
+    "3": {
+      "op": "GT"
+    },
+    "4": {
+      "op": "PUSH2",
+      "value": "0x0C"
+    },
+    "7": {
+      "op": "JUMPI"
+    },
+    "8": {
+      "op": "PUSH2",
+      "value": "0x19A"
+    },
+    "11": {
+      "op": "JUMP"
+    },
+    "12": {
+      "op": "JUMPDEST"
+    },
+    "13": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "15": {
+      "op": "CALLDATALOAD"
+    },
+    "16": {
+      "op": "PUSH1",
+      "value": "0xE0"
+    },
+    "18": {
+      "op": "SHR"
+    },
+    "19": {
+      "op": "CALLVALUE"
+    },
+    "20": {
+      "op": "PUSH2",
+      "value": "0x1E4"
+    },
+    "23": {
+      "op": "JUMPI"
+    },
+    "24": {
+      "op": "PUSH4",
+      "value": "0x2FE6643B"
+    },
+    "29": {
+      "op": "DUP2"
+    },
+    "30": {
+      "op": "XOR"
+    },
+    "31": {
+      "op": "PUSH2",
+      "value": "0x07C"
+    },
+    "34": {
+      "op": "JUMPI"
+    },
+    "35": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "37": {
+      "op": "CALLDATASIZE"
+    },
+    "38": {
+      "op": "XOR"
+    },
+    "39": {
+      "op": "PUSH2",
+      "value": "0x1E4"
+    },
+    "42": {
+      "op": "JUMPI"
+    },
+    "43": {
+      "fn": "VRFConsumerV2.request_random_words",
+      "offset": [
+        749,
+        769
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 0,
+      "value": "0x0"
+    },
+    "45": {
+      "fn": "VRFConsumerV2.request_random_words",
+      "offset": [
+        749,
+        925
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "46": {
+      "op": "PUSH4",
+      "value": "0x5D3B1D30"
+    },
+    "51": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "53": {
+      "op": "MSTORE"
+    },
+    "54": {
+      "fn": "VRFConsumerV2.request_random_words",
+      "offset": [
+        798,
+        811
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x2"
+    },
+    "56": {
+      "op": "SLOAD"
+    },
+    "57": {
+      "op": "PUSH1",
+      "value": "0x60"
+    },
+    "59": {
+      "op": "MSTORE"
+    },
+    "60": {
+      "fn": "VRFConsumerV2.request_random_words",
+      "offset": [
+        821,
+        841
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x1"
+    },
+    "62": {
+      "op": "SLOAD"
+    },
+    "63": {
+      "op": "PUSH1",
+      "value": "0x80"
+    },
+    "65": {
+      "op": "MSTORE"
+    },
+    "66": {
+      "fn": "VRFConsumerV2.request_random_words",
+      "offset": [
+        851,
+        872
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x3"
+    },
+    "68": {
+      "op": "PUSH1",
+      "value": "0xA0"
+    },
+    "70": {
+      "op": "MSTORE"
+    },
+    "71": {
+      "fn": "VRFConsumerV2.request_random_words",
+      "offset": [
+        882,
+        900
+      ],
+      "op": "PUSH3",
+      "path": "0",
+      "value": "0x186A0"
+    },
+    "75": {
+      "op": "PUSH1",
+      "value": "0xC0"
+    },
+    "77": {
+      "op": "MSTORE"
+    },
+    "78": {
+      "fn": "VRFConsumerV2.request_random_words",
+      "offset": [
+        910,
+        919
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x1"
+    },
+    "80": {
+      "op": "PUSH1",
+      "value": "0xE0"
+    },
+    "82": {
+      "op": "MSTORE"
+    },
+    "83": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "85": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "87": {
+      "op": "PUSH1",
+      "value": "0xA4"
+    },
+    "89": {
+      "op": "PUSH1",
+      "value": "0x5C"
+    },
+    "91": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "93": {
+      "fn": "VRFConsumerV2.request_random_words",
+      "offset": [
+        749,
+        925
+      ],
+      "op": "DUP6",
+      "path": "0"
+    },
+    "94": {
+      "op": "GAS"
+    },
+    "95": {
+      "op": "CALL"
+    },
+    "96": {
+      "op": "PUSH2",
+      "value": "0x06E"
+    },
+    "99": {
+      "op": "JUMPI"
+    },
+    "100": {
+      "op": "RETURNDATASIZE"
+    },
+    "101": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "103": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "105": {
+      "op": "RETURNDATACOPY"
+    },
+    "106": {
+      "op": "RETURNDATASIZE"
+    },
+    "107": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "109": {
+      "op": "REVERT"
+    },
+    "110": {
+      "op": "JUMPDEST"
+    },
+    "111": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "113": {
+      "op": "RETURNDATASIZE"
+    },
+    "114": {
+      "op": "LT"
+    },
+    "115": {
+      "op": "PUSH2",
+      "value": "0x1E4"
+    },
+    "118": {
+      "op": "JUMPI"
+    },
+    "119": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "121": {
+      "fn": "VRFConsumerV2.request_random_words",
+      "offset": [
+        749,
+        925
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "122": {
+      "op": "POP"
+    },
+    "123": {
+      "op": "STOP"
+    },
+    "124": {
+      "op": "JUMPDEST"
+    },
+    "125": {
+      "op": "PUSH4",
+      "value": "0x1FE543E3"
+    },
+    "130": {
+      "op": "DUP2"
+    },
+    "131": {
+      "op": "XOR"
+    },
+    "132": {
+      "op": "PUSH2",
+      "value": "0x151"
+    },
+    "135": {
+      "op": "JUMPI"
+    },
+    "136": {
+      "op": "PUSH1",
+      "value": "0x64"
+    },
+    "138": {
+      "op": "CALLDATASIZE"
+    },
+    "139": {
+      "op": "LT"
+    },
+    "140": {
+      "op": "PUSH2",
+      "value": "0x1E4"
+    },
+    "143": {
+      "op": "JUMPI"
+    },
+    "144": {
+      "op": "PUSH1",
+      "value": "0x24"
+    },
+    "146": {
+      "op": "CALLDATALOAD"
+    },
+    "147": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "149": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1526,
+        1572
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "150": {
+      "op": "PUSH1",
+      "value": "0xA"
+    },
+    "152": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1526,
+        1572
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "153": {
+      "op": "CALLDATALOAD"
+    },
+    "154": {
+      "op": "GT"
+    },
+    "155": {
+      "op": "PUSH2",
+      "value": "0x1E4"
+    },
+    "158": {
+      "op": "JUMPI"
+    },
+    "159": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1526,
+        1572
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "160": {
+      "op": "CALLDATALOAD"
+    },
+    "161": {
+      "op": "DUP1"
+    },
+    "162": {
+      "op": "PUSH2",
+      "value": "0x1E0"
+    },
+    "165": {
+      "op": "MSTORE"
+    },
+    "166": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "168": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1526,
+        1572
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "169": {
+      "op": "ADD"
+    },
+    "170": {
+      "op": "DUP2"
+    },
+    "171": {
+      "op": "PUSH1",
+      "value": "0x5"
+    },
+    "173": {
+      "op": "SHL"
+    },
+    "174": {
+      "op": "DUP1"
+    },
+    "175": {
+      "op": "DUP3"
+    },
+    "176": {
+      "op": "PUSH2",
+      "value": "0x20"
+    },
+    "179": {
+      "op": "CALLDATACOPY"
+    },
+    "180": {
+      "op": "POP"
+    },
+    "181": {
+      "op": "POP"
+    },
+    "182": {
+      "op": "POP"
+    },
+    "183": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1526,
+        1572
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "184": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1600,
+        1628
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 1,
+      "value": "0x0"
+    },
+    "186": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1586,
+        1628
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "187": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1586,
+        1596
+      ],
+      "op": "CALLER",
+      "path": "0"
+    },
+    "188": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1586,
+        1628
+      ],
+      "op": "XOR",
+      "path": "0"
+    },
+    "189": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1586,
+        1628
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "190": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1579,
+        1661
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x127"
+    },
+    "193": {
+      "branch": 2,
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1579,
+        1661
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "194": {
+      "op": "PUSH1",
+      "value": "0x1D"
+    },
+    "196": {
+      "op": "PUSH2",
+      "value": "0x340"
+    },
+    "199": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1630,
+        1661
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "200": {
+      "op": "PUSH32",
+      "value": "0x4F6E6C7920636F6F7264696E61746F722063616E2066756C66696C6C21000"
+    },
+    "233": {
+      "op": "PUSH2",
+      "value": "0x360"
+    },
+    "236": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1630,
+        1661
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "237": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1630,
+        1661
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x340"
+    },
+    "240": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1579,
+        1661
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "241": {
+      "op": "PUSH2",
+      "value": "0x340"
+    },
+    "244": {
+      "op": "MLOAD"
+    },
+    "245": {
+      "op": "DUP1"
+    },
+    "246": {
+      "op": "PUSH2",
+      "value": "0x360"
+    },
+    "249": {
+      "op": "ADD"
+    },
+    "250": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "252": {
+      "op": "DUP3"
+    },
+    "253": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "255": {
+      "op": "SUB"
+    },
+    "256": {
+      "op": "AND"
+    },
+    "257": {
+      "op": "CALLDATASIZE"
+    },
+    "258": {
+      "op": "DUP3"
+    },
+    "259": {
+      "op": "CALLDATACOPY"
+    },
+    "260": {
+      "op": "POP"
+    },
+    "261": {
+      "op": "POP"
+    },
+    "262": {
+      "op": "PUSH4",
+      "value": "0x8C379A0"
+    },
+    "267": {
+      "op": "PUSH2",
+      "value": "0x30"
+    },
+    "270": {
+      "op": "MSTORE"
+    },
+    "271": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "273": {
+      "op": "PUSH2",
+      "value": "0x320"
+    },
+    "276": {
+      "op": "MSTORE"
+    },
+    "277": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "279": {
+      "op": "NOT"
+    },
+    "280": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "282": {
+      "op": "PUSH2",
+      "value": "0x340"
+    },
+    "285": {
+      "op": "MLOAD"
+    },
+    "286": {
+      "op": "ADD"
+    },
+    "287": {
+      "op": "AND"
+    },
+    "288": {
+      "op": "PUSH1",
+      "value": "0x44"
+    },
+    "290": {
+      "op": "ADD"
+    },
+    "291": {
+      "op": "PUSH2",
+      "value": "0x31C"
+    },
+    "294": {
+      "op": "REVERT"
+    },
+    "295": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1579,
+        1661
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "296": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1690,
+        1699
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 3,
+      "value": "0x4"
+    },
+    "298": {
+      "op": "CALLDATALOAD"
+    },
+    "299": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "301": {
+      "op": "MSTORE"
+    },
+    "302": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1701,
+        1712
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x1E0"
+    },
+    "305": {
+      "op": "MLOAD"
+    },
+    "306": {
+      "op": "DUP1"
+    },
+    "307": {
+      "op": "PUSH1",
+      "value": "0x60"
+    },
+    "309": {
+      "op": "MSTORE"
+    },
+    "310": {
+      "op": "DUP1"
+    },
+    "311": {
+      "op": "PUSH1",
+      "value": "0x5"
+    },
+    "313": {
+      "op": "SHL"
+    },
+    "314": {
+      "op": "DUP1"
+    },
+    "315": {
+      "op": "PUSH1",
+      "value": "0x80"
+    },
+    "317": {
+      "op": "DUP3"
+    },
+    "318": {
+      "op": "PUSH2",
+      "value": "0x20"
+    },
+    "321": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "323": {
+      "op": "GAS"
+    },
+    "324": {
+      "op": "STATICCALL"
+    },
+    "325": {
+      "op": "POP"
+    },
+    "326": {
+      "op": "POP"
+    },
+    "327": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1666,
+        1713
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "328": {
+      "op": "PUSH2",
+      "value": "0x14F"
+    },
+    "331": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "offset": [
+        1666,
+        1713
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x1A0"
+    },
+    "334": {
+      "fn": "VRFConsumerV2.rawFulfillRandomWords",
+      "jump": "i",
+      "offset": [
+        1666,
+        1713
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "335": {
+      "op": "JUMPDEST"
+    },
+    "336": {
+      "op": "STOP"
+    },
+    "337": {
+      "op": "JUMPDEST"
+    },
+    "338": {
+      "op": "PUSH4",
+      "value": "0x795B26A5"
+    },
+    "343": {
+      "op": "DUP2"
+    },
+    "344": {
+      "op": "XOR"
+    },
+    "345": {
+      "op": "PUSH2",
+      "value": "0x170"
+    },
+    "348": {
+      "op": "JUMPI"
+    },
+    "349": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "351": {
+      "op": "CALLDATASIZE"
+    },
+    "352": {
+      "op": "XOR"
+    },
+    "353": {
+      "op": "PUSH2",
+      "value": "0x1E4"
+    },
+    "356": {
+      "op": "JUMPI"
+    },
+    "357": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "359": {
+      "op": "SLOAD"
+    },
+    "360": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "362": {
+      "op": "MSTORE"
+    },
+    "363": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "365": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "367": {
+      "op": "RETURN"
+    },
+    "368": {
+      "op": "JUMPDEST"
+    },
+    "369": {
+      "op": "PUSH4",
+      "value": "0x323314E"
+    },
+    "374": {
+      "op": "DUP2"
+    },
+    "375": {
+      "op": "XOR"
+    },
+    "376": {
+      "op": "PUSH2",
+      "value": "0x198"
+    },
+    "379": {
+      "op": "JUMPI"
+    },
+    "380": {
+      "op": "PUSH1",
+      "value": "0x24"
+    },
+    "382": {
+      "op": "CALLDATASIZE"
+    },
+    "383": {
+      "op": "XOR"
+    },
+    "384": {
+      "op": "PUSH2",
+      "value": "0x1E4"
+    },
+    "387": {
+      "op": "JUMPI"
+    },
+    "388": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "390": {
+      "op": "CALLDATALOAD"
+    },
+    "391": {
+      "op": "DUP1"
+    },
+    "392": {
+      "op": "PUSH2",
+      "value": "0x1E4"
+    },
+    "395": {
+      "op": "JUMPI"
+    },
+    "396": {
+      "op": "PUSH1",
+      "value": "0x3"
+    },
+    "398": {
+      "op": "ADD"
+    },
+    "399": {
+      "op": "SLOAD"
+    },
+    "400": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "402": {
+      "op": "MSTORE"
+    },
+    "403": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "405": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "407": {
+      "op": "RETURN"
+    },
+    "408": {
+      "op": "JUMPDEST"
+    },
+    "409": {
+      "op": "POP"
+    },
+    "410": {
+      "op": "JUMPDEST"
+    },
+    "411": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "413": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "415": {
+      "op": "REVERT"
+    },
+    "416": {
+      "fn": "VRFConsumerV2.fulfillRandomWords",
+      "offset": [
+        937,
+        1120
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "417": {
+      "fn": "VRFConsumerV2.fulfillRandomWords",
+      "offset": [
+        1057,
+        1070
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 4,
+      "value": "0x60"
+    },
+    "419": {
+      "op": "MLOAD"
+    },
+    "420": {
+      "op": "ISZERO"
+    },
+    "421": {
+      "op": "PUSH2",
+      "value": "0x1E4"
+    },
+    "424": {
+      "op": "JUMPI"
+    },
+    "425": {
+      "fn": "VRFConsumerV2.fulfillRandomWords",
+      "offset": [
+        1071,
+        1072
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "427": {
+      "op": "PUSH1",
+      "value": "0x5"
+    },
+    "429": {
+      "fn": "VRFConsumerV2.fulfillRandomWords",
+      "offset": [
+        1057,
+        1073
+      ],
+      "op": "SHL",
+      "path": "0"
+    },
+    "430": {
+      "fn": "VRFConsumerV2.fulfillRandomWords",
+      "offset": [
+        1057,
+        1073
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x80"
+    },
+    "432": {
+      "fn": "VRFConsumerV2.fulfillRandomWords",
+      "offset": [
+        1057,
+        1073
+      ],
+      "op": "ADD",
+      "path": "0"
+    },
+    "433": {
+      "op": "MLOAD"
+    },
+    "434": {
+      "op": "PUSH1",
+      "value": "0x3"
+    },
+    "436": {
+      "op": "SSTORE"
+    },
+    "437": {
+      "fn": "VRFConsumerV2.fulfillRandomWords",
+      "offset": [
+        1079,
+        1120
+      ],
+      "op": "PUSH32",
+      "path": "0",
+      "statement": 5,
+      "value": "0x64A971AAF69011EA3896EBE92D55ECD5F45FBD843221FC2895728C44E95B380"
+    },
+    "470": {
+      "op": "PUSH1",
+      "value": "0x3"
+    },
+    "472": {
+      "op": "SLOAD"
+    },
+    "473": {
+      "op": "PUSH2",
+      "value": "0x1C0"
+    },
+    "476": {
+      "op": "MSTORE"
+    },
+    "477": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "479": {
+      "fn": "VRFConsumerV2.fulfillRandomWords",
+      "offset": [
+        1079,
+        1120
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x1C0"
+    },
+    "482": {
+      "fn": "VRFConsumerV2.fulfillRandomWords",
+      "offset": [
+        1079,
+        1120
+      ],
+      "op": "LOG1",
+      "path": "0"
+    },
+    "483": {
+      "op": "JUMP"
+    },
+    "484": {
+      "op": "JUMPDEST"
+    },
+    "485": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "487": {
+      "op": "DUP1"
+    },
+    "488": {
+      "op": "REVERT"
+    }
+  },
+  "sha1": "bee1498b19bfee20ab9769158db896c59743f5f7",
+  "source": "# SPDX-License-Identifier: MIT\n# @version ^0.3.3\nimport interfaces.VRFCoordinatorV2 as VRFCoordinatorV2\n\nNUM_WORDS: constant(uint32) = 1\nMAX_ARRAY_SIZE: constant(uint256) = 10\nREQUEST_CONFIRMATIONS: constant(uint16) = 3\nCALLBACK_GAS_LIMIT: constant(uint32) = 100000\n\nvrf_coordinator: public(VRFCoordinatorV2)\nsubscription_id: uint64\nkey_hash: bytes32\nrandom_words: public(uint256[NUM_WORDS])\n\nevent ReturnedRandomness:\n    random_words: uint256[NUM_WORDS]\n\n@external\ndef __init__(_subscription_id: uint64, _vrf_coordinator_address: address, _key_hash: bytes32):\n    self.vrf_coordinator = VRFCoordinatorV2(_vrf_coordinator_address)\n    self.subscription_id = _subscription_id\n    self.key_hash = _key_hash\n\n@external\ndef request_random_words():\n    self.vrf_coordinator.requestRandomWords(\n        self.key_hash,\n        self.subscription_id,\n        REQUEST_CONFIRMATIONS,\n        CALLBACK_GAS_LIMIT,\n        NUM_WORDS\n    )\n\n@internal\ndef fulfillRandomWords(request_id: uint256, _random_words: DynArray[uint256, MAX_ARRAY_SIZE]):\n    self.random_words = [_random_words[0]]\n    log ReturnedRandomness(self.random_words)\n\n# In solidity, this is the equivalent of inheriting the VRFConsumerBaseV2\n# Vyper doesn't have inheritance, so we just add the function here\n# Also, we need to use `DynArray` so our function selector is the same as the one Chainlink VRF is looking for:\n# Function Signature: rawFulfillRandomWords(uint256,uint256[])\n# Function selector: 0x1fe543e3\n@external\ndef rawFulfillRandomWords(requestId: uint256, randomWords: DynArray[uint256, MAX_ARRAY_SIZE]):\n    assert msg.sender == self.vrf_coordinator.address, \"Only coordinator can fulfill!\"\n    self.fulfillRandomWords(requestId, randomWords)\n\n",
+  "sourceMap": "",
+  "sourcePath": "contracts/VRFConsumerV2.vy",
+  "type": "contract"
+}

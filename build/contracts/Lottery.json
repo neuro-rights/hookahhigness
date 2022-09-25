@@ -1,0 +1,7613 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "name": "_priceFeed",
+          "type": "address"
+        },
+        {
+          "name": "_VRFConsumer_address",
+          "type": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "startLottery",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "enter",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "endLottery",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "calculatingWinner",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getWinner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "priceFeed",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "usdEntryFee",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "arg0",
+          "type": "uint256"
+        }
+      ],
+      "name": "players",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "VRFConsumer",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "randomNumber",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "winner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "allSourcePaths": {
+    "0": "contracts/Lottery.vy"
+  },
+  "ast": {
+    "ast_type": "Module",
+    "body": [
+      {
+        "ast_type": "InterfaceDef",
+        "body": [
+          {
+            "args": {
+              "args": [],
+              "ast_type": "arguments",
+              "col_offset": 4,
+              "default": null,
+              "defaults": [],
+              "end_col_offset": 7,
+              "end_lineno": 4,
+              "lineno": 4,
+              "node_id": 3,
+              "src": "55:3:4"
+            },
+            "ast_type": "FunctionDef",
+            "body": [
+              {
+                "ast_type": "Expr",
+                "col_offset": 71,
+                "end_col_offset": 75,
+                "end_lineno": 4,
+                "lineno": 4,
+                "node_id": 4,
+                "src": "122:4:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 71,
+                  "end_col_offset": 75,
+                  "end_lineno": 4,
+                  "id": "view",
+                  "lineno": 4,
+                  "node_id": 5,
+                  "src": "122:4:4"
+                }
+              }
+            ],
+            "col_offset": 4,
+            "decorator_list": [],
+            "doc_string": null,
+            "end_col_offset": 75,
+            "end_lineno": 4,
+            "lineno": 4,
+            "name": "latestRoundData",
+            "node_id": 2,
+            "pos": null,
+            "returns": {
+              "ast_type": "Tuple",
+              "col_offset": 29,
+              "elements": [
+                {
+                  "ast_type": "Name",
+                  "col_offset": 30,
+                  "end_col_offset": 36,
+                  "end_lineno": 4,
+                  "id": "int256",
+                  "lineno": 4,
+                  "node_id": 8,
+                  "src": "81:6:4"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 38,
+                  "end_col_offset": 44,
+                  "end_lineno": 4,
+                  "id": "int256",
+                  "lineno": 4,
+                  "node_id": 10,
+                  "src": "89:6:4"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 45,
+                  "end_col_offset": 52,
+                  "end_lineno": 4,
+                  "id": "uint256",
+                  "lineno": 4,
+                  "node_id": 12,
+                  "src": "96:7:4"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 53,
+                  "end_col_offset": 60,
+                  "end_lineno": 4,
+                  "id": "uint256",
+                  "lineno": 4,
+                  "node_id": 14,
+                  "src": "104:7:4"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 61,
+                  "end_col_offset": 67,
+                  "end_lineno": 4,
+                  "id": "int256",
+                  "lineno": 4,
+                  "node_id": 16,
+                  "src": "112:6:4"
+                }
+              ],
+              "end_col_offset": 68,
+              "end_lineno": 4,
+              "lineno": 4,
+              "node_id": 7,
+              "src": "80:39:4"
+            },
+            "src": "55:71:4"
+          }
+        ],
+        "col_offset": 0,
+        "end_col_offset": 75,
+        "end_lineno": 4,
+        "lineno": 3,
+        "name": "AggregatorV3Interface",
+        "node_id": 1,
+        "src": "18:108:4"
+      },
+      {
+        "ast_type": "InterfaceDef",
+        "body": [
+          {
+            "args": {
+              "args": [],
+              "ast_type": "arguments",
+              "col_offset": 4,
+              "default": null,
+              "defaults": [],
+              "end_col_offset": 7,
+              "end_lineno": 7,
+              "lineno": 7,
+              "node_id": 21,
+              "src": "165:3:4"
+            },
+            "ast_type": "FunctionDef",
+            "body": [
+              {
+                "ast_type": "Expr",
+                "col_offset": 27,
+                "end_col_offset": 34,
+                "end_lineno": 7,
+                "lineno": 7,
+                "node_id": 22,
+                "src": "188:7:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 27,
+                  "end_col_offset": 34,
+                  "end_lineno": 7,
+                  "id": "payable",
+                  "lineno": 7,
+                  "node_id": 23,
+                  "src": "188:7:4"
+                }
+              }
+            ],
+            "col_offset": 4,
+            "decorator_list": [],
+            "doc_string": null,
+            "end_col_offset": 34,
+            "end_lineno": 7,
+            "lineno": 7,
+            "name": "getRandomNumber",
+            "node_id": 20,
+            "pos": null,
+            "returns": null,
+            "src": "165:30:4"
+          },
+          {
+            "args": {
+              "args": [],
+              "ast_type": "arguments",
+              "col_offset": 4,
+              "default": null,
+              "defaults": [],
+              "end_col_offset": 7,
+              "end_lineno": 8,
+              "lineno": 8,
+              "node_id": 26,
+              "src": "200:3:4"
+            },
+            "ast_type": "FunctionDef",
+            "body": [
+              {
+                "ast_type": "Expr",
+                "col_offset": 41,
+                "end_col_offset": 45,
+                "end_lineno": 8,
+                "lineno": 8,
+                "node_id": 27,
+                "src": "237:4:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 41,
+                  "end_col_offset": 45,
+                  "end_lineno": 8,
+                  "id": "view",
+                  "lineno": 8,
+                  "node_id": 28,
+                  "src": "237:4:4"
+                }
+              }
+            ],
+            "col_offset": 4,
+            "decorator_list": [],
+            "doc_string": null,
+            "end_col_offset": 45,
+            "end_lineno": 8,
+            "lineno": 8,
+            "name": "returnRandomNumber",
+            "node_id": 25,
+            "pos": null,
+            "returns": {
+              "ast_type": "Name",
+              "col_offset": 32,
+              "end_col_offset": 39,
+              "end_lineno": 8,
+              "id": "uint256",
+              "lineno": 8,
+              "node_id": 30,
+              "src": "228:7:4"
+            },
+            "src": "200:41:4"
+          }
+        ],
+        "col_offset": 0,
+        "end_col_offset": 45,
+        "end_lineno": 8,
+        "lineno": 6,
+        "name": "VRFConsumerInterface",
+        "node_id": 19,
+        "src": "129:112:4"
+      },
+      {
+        "annotation": {
+          "ast_type": "Name",
+          "col_offset": 7,
+          "end_col_offset": 14,
+          "end_lineno": 11,
+          "id": "address",
+          "lineno": 11,
+          "node_id": 35,
+          "src": "255:7:4"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 14,
+        "end_lineno": 11,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": false,
+        "lineno": 11,
+        "node_id": 32,
+        "src": "248:14:4",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 5,
+          "end_lineno": 11,
+          "id": "owner",
+          "lineno": 11,
+          "node_id": 33,
+          "src": "248:5:4"
+        },
+        "value": null
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 18,
+              "end_col_offset": 39,
+              "end_lineno": 12,
+              "id": "AggregatorV3Interface",
+              "lineno": 12,
+              "node_id": 43,
+              "src": "281:21:4"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 11,
+          "end_col_offset": 40,
+          "end_lineno": 12,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 11,
+            "end_col_offset": 17,
+            "end_lineno": 12,
+            "id": "public",
+            "lineno": 12,
+            "node_id": 41,
+            "src": "274:6:4"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 12,
+          "node_id": 40,
+          "src": "274:29:4"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 40,
+        "end_lineno": 12,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": true,
+        "lineno": 12,
+        "node_id": 37,
+        "src": "263:40:4",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 9,
+          "end_lineno": 12,
+          "id": "priceFeed",
+          "lineno": 12,
+          "node_id": 38,
+          "src": "263:9:4"
+        },
+        "value": null
+      },
+      {
+        "annotation": {
+          "ast_type": "Name",
+          "col_offset": 15,
+          "end_col_offset": 22,
+          "end_lineno": 13,
+          "id": "uint256",
+          "lineno": 13,
+          "node_id": 48,
+          "src": "319:7:4"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 22,
+        "end_lineno": 13,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": false,
+        "lineno": 13,
+        "node_id": 45,
+        "src": "304:22:4",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 13,
+          "end_lineno": 13,
+          "id": "Lottery_State",
+          "lineno": 13,
+          "node_id": 46,
+          "src": "304:13:4"
+        },
+        "value": null
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 20,
+              "end_col_offset": 27,
+              "end_lineno": 14,
+              "id": "uint256",
+              "lineno": 14,
+              "node_id": 56,
+              "src": "391:7:4"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 13,
+          "end_col_offset": 28,
+          "end_lineno": 14,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 13,
+            "end_col_offset": 19,
+            "end_lineno": 14,
+            "id": "public",
+            "lineno": 14,
+            "node_id": 54,
+            "src": "384:6:4"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 14,
+          "node_id": 53,
+          "src": "384:15:4"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 28,
+        "end_lineno": 14,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": true,
+        "lineno": 14,
+        "node_id": 50,
+        "src": "371:28:4",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 11,
+          "end_lineno": 14,
+          "id": "usdEntryFee",
+          "lineno": 14,
+          "node_id": 51,
+          "src": "371:11:4"
+        },
+        "value": null
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Subscript",
+              "col_offset": 16,
+              "end_col_offset": 40,
+              "end_lineno": 15,
+              "lineno": 15,
+              "node_id": 64,
+              "slice": {
+                "ast_type": "Index",
+                "col_offset": 16,
+                "end_col_offset": 40,
+                "end_lineno": 15,
+                "lineno": 15,
+                "node_id": 74,
+                "src": "416:24:4",
+                "value": {
+                  "ast_type": "Tuple",
+                  "col_offset": 24,
+                  "elements": [
+                    {
+                      "ast_type": "Name",
+                      "col_offset": 24,
+                      "end_col_offset": 31,
+                      "end_lineno": 15,
+                      "id": "uint256",
+                      "lineno": 15,
+                      "node_id": 68,
+                      "src": "424:7:4"
+                    },
+                    {
+                      "ast_type": "Name",
+                      "col_offset": 32,
+                      "end_col_offset": 39,
+                      "end_lineno": 15,
+                      "id": "address",
+                      "lineno": 15,
+                      "node_id": 70,
+                      "src": "432:7:4"
+                    }
+                  ],
+                  "end_col_offset": 39,
+                  "end_lineno": 15,
+                  "lineno": 15,
+                  "node_id": 67,
+                  "src": "424:15:4"
+                }
+              },
+              "src": "416:24:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 16,
+                "end_col_offset": 23,
+                "end_lineno": 15,
+                "id": "HashMap",
+                "lineno": 15,
+                "node_id": 65,
+                "src": "416:7:4"
+              }
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 9,
+          "end_col_offset": 41,
+          "end_lineno": 15,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 9,
+            "end_col_offset": 15,
+            "end_lineno": 15,
+            "id": "public",
+            "lineno": 15,
+            "node_id": 62,
+            "src": "409:6:4"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 15,
+          "node_id": 61,
+          "src": "409:32:4"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 41,
+        "end_lineno": 15,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": true,
+        "lineno": 15,
+        "node_id": 58,
+        "src": "400:41:4",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 7,
+          "end_lineno": 15,
+          "id": "players",
+          "lineno": 15,
+          "node_id": 59,
+          "src": "400:7:4"
+        },
+        "value": null
+      },
+      {
+        "annotation": {
+          "ast_type": "Name",
+          "col_offset": 7,
+          "end_col_offset": 14,
+          "end_lineno": 16,
+          "id": "uint256",
+          "lineno": 16,
+          "node_id": 78,
+          "src": "449:7:4"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 14,
+        "end_lineno": 16,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": false,
+        "lineno": 16,
+        "node_id": 75,
+        "src": "442:14:4",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 5,
+          "end_lineno": 16,
+          "id": "Count",
+          "lineno": 16,
+          "node_id": 76,
+          "src": "442:5:4"
+        },
+        "value": null
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 20,
+              "end_col_offset": 40,
+              "end_lineno": 17,
+              "id": "VRFConsumerInterface",
+              "lineno": 17,
+              "node_id": 86,
+              "src": "477:20:4"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 13,
+          "end_col_offset": 41,
+          "end_lineno": 17,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 13,
+            "end_col_offset": 19,
+            "end_lineno": 17,
+            "id": "public",
+            "lineno": 17,
+            "node_id": 84,
+            "src": "470:6:4"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 17,
+          "node_id": 83,
+          "src": "470:28:4"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 41,
+        "end_lineno": 17,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": true,
+        "lineno": 17,
+        "node_id": 80,
+        "src": "457:41:4",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 11,
+          "end_lineno": 17,
+          "id": "VRFConsumer",
+          "lineno": 17,
+          "node_id": 81,
+          "src": "457:11:4"
+        },
+        "value": null
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 21,
+              "end_col_offset": 28,
+              "end_lineno": 18,
+              "id": "uint256",
+              "lineno": 18,
+              "node_id": 94,
+              "src": "520:7:4"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 14,
+          "end_col_offset": 29,
+          "end_lineno": 18,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 14,
+            "end_col_offset": 20,
+            "end_lineno": 18,
+            "id": "public",
+            "lineno": 18,
+            "node_id": 92,
+            "src": "513:6:4"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 18,
+          "node_id": 91,
+          "src": "513:15:4"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 29,
+        "end_lineno": 18,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": true,
+        "lineno": 18,
+        "node_id": 88,
+        "src": "499:29:4",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 12,
+          "end_lineno": 18,
+          "id": "randomNumber",
+          "lineno": 18,
+          "node_id": 89,
+          "src": "499:12:4"
+        },
+        "value": null
+      },
+      {
+        "annotation": {
+          "args": [
+            {
+              "ast_type": "Name",
+              "col_offset": 15,
+              "end_col_offset": 22,
+              "end_lineno": 19,
+              "id": "address",
+              "lineno": 19,
+              "node_id": 102,
+              "src": "544:7:4"
+            }
+          ],
+          "ast_type": "Call",
+          "col_offset": 8,
+          "end_col_offset": 23,
+          "end_lineno": 19,
+          "func": {
+            "ast_type": "Name",
+            "col_offset": 8,
+            "end_col_offset": 14,
+            "end_lineno": 19,
+            "id": "public",
+            "lineno": 19,
+            "node_id": 100,
+            "src": "537:6:4"
+          },
+          "keyword": null,
+          "keywords": [],
+          "lineno": 19,
+          "node_id": 99,
+          "src": "537:15:4"
+        },
+        "ast_type": "VariableDecl",
+        "col_offset": 0,
+        "end_col_offset": 23,
+        "end_lineno": 19,
+        "is_constant": false,
+        "is_immutable": false,
+        "is_public": true,
+        "lineno": 19,
+        "node_id": 96,
+        "src": "529:23:4",
+        "target": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "end_col_offset": 6,
+          "end_lineno": 19,
+          "id": "winner",
+          "lineno": 19,
+          "node_id": 97,
+          "src": "529:6:4"
+        },
+        "value": null
+      },
+      {
+        "args": {
+          "args": [
+            {
+              "annotation": {
+                "ast_type": "Name",
+                "col_offset": 25,
+                "end_col_offset": 32,
+                "end_lineno": 22,
+                "id": "address",
+                "lineno": 22,
+                "node_id": 107,
+                "src": "589:7:4"
+              },
+              "arg": "_priceFeed",
+              "ast_type": "arg",
+              "col_offset": 13,
+              "end_col_offset": 32,
+              "end_lineno": 22,
+              "lineno": 22,
+              "node_id": 106,
+              "src": "577:19:4"
+            },
+            {
+              "annotation": {
+                "ast_type": "Name",
+                "col_offset": 56,
+                "end_col_offset": 63,
+                "end_lineno": 22,
+                "id": "address",
+                "lineno": 22,
+                "node_id": 110,
+                "src": "620:7:4"
+              },
+              "arg": "_VRFConsumer_address",
+              "ast_type": "arg",
+              "col_offset": 34,
+              "end_col_offset": 63,
+              "end_lineno": 22,
+              "lineno": 22,
+              "node_id": 109,
+              "src": "598:29:4"
+            }
+          ],
+          "ast_type": "arguments",
+          "col_offset": 13,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 63,
+          "end_lineno": 22,
+          "lineno": 22,
+          "node_id": 105,
+          "src": "577:50:4"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 27,
+            "end_lineno": 23,
+            "lineno": 23,
+            "node_id": 112,
+            "src": "634:23:4",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "owner",
+              "col_offset": 4,
+              "end_col_offset": 14,
+              "end_lineno": 23,
+              "lineno": 23,
+              "node_id": 113,
+              "src": "634:10:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 23,
+                "id": "self",
+                "lineno": 23,
+                "node_id": 114,
+                "src": "634:4:4"
+              }
+            },
+            "value": {
+              "ast_type": "Attribute",
+              "attr": "sender",
+              "col_offset": 17,
+              "end_col_offset": 27,
+              "end_lineno": 23,
+              "lineno": 23,
+              "node_id": 117,
+              "src": "647:10:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 17,
+                "end_col_offset": 20,
+                "end_lineno": 23,
+                "id": "msg",
+                "lineno": 23,
+                "node_id": 118,
+                "src": "647:3:4"
+              }
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 26,
+            "end_lineno": 24,
+            "lineno": 24,
+            "node_id": 121,
+            "src": "662:22:4",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "Lottery_State",
+              "col_offset": 4,
+              "end_col_offset": 22,
+              "end_lineno": 24,
+              "lineno": 24,
+              "node_id": 122,
+              "src": "662:18:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 24,
+                "id": "self",
+                "lineno": 24,
+                "node_id": 123,
+                "src": "662:4:4"
+              }
+            },
+            "value": {
+              "ast_type": "Int",
+              "col_offset": 25,
+              "end_col_offset": 26,
+              "end_lineno": 24,
+              "lineno": 24,
+              "node_id": 126,
+              "src": "683:1:4",
+              "value": 0
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 54,
+            "end_lineno": 25,
+            "lineno": 25,
+            "node_id": 127,
+            "src": "734:50:4",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "priceFeed",
+              "col_offset": 4,
+              "end_col_offset": 18,
+              "end_lineno": 25,
+              "lineno": 25,
+              "node_id": 128,
+              "src": "734:14:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 25,
+                "id": "self",
+                "lineno": 25,
+                "node_id": 129,
+                "src": "734:4:4"
+              }
+            },
+            "value": {
+              "args": [
+                {
+                  "ast_type": "Name",
+                  "col_offset": 43,
+                  "end_col_offset": 53,
+                  "end_lineno": 25,
+                  "id": "_priceFeed",
+                  "lineno": 25,
+                  "node_id": 135,
+                  "src": "773:10:4"
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 21,
+              "end_col_offset": 54,
+              "end_lineno": 25,
+              "func": {
+                "ast_type": "Name",
+                "col_offset": 21,
+                "end_col_offset": 42,
+                "end_lineno": 25,
+                "id": "AggregatorV3Interface",
+                "lineno": 25,
+                "node_id": 133,
+                "src": "751:21:4"
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 25,
+              "node_id": 132,
+              "src": "751:33:4"
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 32,
+            "end_lineno": 26,
+            "lineno": 26,
+            "node_id": 137,
+            "src": "789:28:4",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "usdEntryFee",
+              "col_offset": 4,
+              "end_col_offset": 20,
+              "end_lineno": 26,
+              "lineno": 26,
+              "node_id": 138,
+              "src": "789:16:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 26,
+                "id": "self",
+                "lineno": 26,
+                "node_id": 139,
+                "src": "789:4:4"
+              }
+            },
+            "value": {
+              "ast_type": "BinOp",
+              "col_offset": 23,
+              "end_col_offset": 32,
+              "end_lineno": 26,
+              "left": {
+                "ast_type": "Int",
+                "col_offset": 23,
+                "end_col_offset": 25,
+                "end_lineno": 26,
+                "lineno": 26,
+                "node_id": 143,
+                "src": "808:2:4",
+                "value": 50
+              },
+              "lineno": 26,
+              "node_id": 142,
+              "op": {
+                "ast_type": "Mult",
+                "col_offset": 23,
+                "end_col_offset": 32,
+                "end_lineno": 26,
+                "lineno": 26,
+                "node_id": 260,
+                "src": "808:9:4"
+              },
+              "right": {
+                "ast_type": "BinOp",
+                "col_offset": 26,
+                "end_col_offset": 32,
+                "end_lineno": 26,
+                "left": {
+                  "ast_type": "Int",
+                  "col_offset": 26,
+                  "end_col_offset": 28,
+                  "end_lineno": 26,
+                  "lineno": 26,
+                  "node_id": 146,
+                  "src": "811:2:4",
+                  "value": 10
+                },
+                "lineno": 26,
+                "node_id": 145,
+                "op": {
+                  "ast_type": "Pow",
+                  "col_offset": 26,
+                  "end_col_offset": 32,
+                  "end_lineno": 26,
+                  "lineno": 26,
+                  "node_id": 147,
+                  "src": "811:6:4"
+                },
+                "right": {
+                  "ast_type": "Int",
+                  "col_offset": 30,
+                  "end_col_offset": 32,
+                  "end_lineno": 26,
+                  "lineno": 26,
+                  "node_id": 148,
+                  "src": "815:2:4",
+                  "value": 18
+                },
+                "src": "811:6:4"
+              },
+              "src": "808:9:4"
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 65,
+            "end_lineno": 27,
+            "lineno": 27,
+            "node_id": 149,
+            "src": "822:61:4",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "VRFConsumer",
+              "col_offset": 4,
+              "end_col_offset": 20,
+              "end_lineno": 27,
+              "lineno": 27,
+              "node_id": 150,
+              "src": "822:16:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 27,
+                "id": "self",
+                "lineno": 27,
+                "node_id": 151,
+                "src": "822:4:4"
+              }
+            },
+            "value": {
+              "args": [
+                {
+                  "ast_type": "Name",
+                  "col_offset": 44,
+                  "end_col_offset": 64,
+                  "end_lineno": 27,
+                  "id": "_VRFConsumer_address",
+                  "lineno": 27,
+                  "node_id": 157,
+                  "src": "862:20:4"
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 23,
+              "end_col_offset": 65,
+              "end_lineno": 27,
+              "func": {
+                "ast_type": "Name",
+                "col_offset": 23,
+                "end_col_offset": 43,
+                "end_lineno": 27,
+                "id": "VRFConsumerInterface",
+                "lineno": 27,
+                "node_id": 155,
+                "src": "841:20:4"
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 27,
+              "node_id": 154,
+              "src": "841:42:4"
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 21,
+            "id": "external",
+            "lineno": 21,
+            "node_id": 159,
+            "src": "555:8:4"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 65,
+        "end_lineno": 27,
+        "lineno": 22,
+        "name": "__init__",
+        "node_id": 104,
+        "pos": null,
+        "returns": null,
+        "src": "564:319:4"
+      },
+      {
+        "args": {
+          "args": [],
+          "ast_type": "arguments",
+          "col_offset": 0,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 3,
+          "end_lineno": 32,
+          "lineno": 32,
+          "node_id": 162,
+          "src": "906:3:4"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "annotation": {
+              "ast_type": "Name",
+              "col_offset": 7,
+              "end_col_offset": 13,
+              "end_lineno": 33,
+              "id": "int256",
+              "lineno": 33,
+              "node_id": 166,
+              "src": "940:6:4"
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 4,
+            "end_col_offset": 17,
+            "end_lineno": 33,
+            "lineno": 33,
+            "node_id": 163,
+            "simple": 1,
+            "src": "937:13:4",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 4,
+              "end_col_offset": 5,
+              "end_lineno": 33,
+              "id": "a",
+              "lineno": 33,
+              "node_id": 164,
+              "src": "937:1:4"
+            },
+            "value": {
+              "ast_type": "Int",
+              "col_offset": 16,
+              "end_col_offset": 17,
+              "end_lineno": 33,
+              "lineno": 33,
+              "node_id": 168,
+              "src": "949:1:4",
+              "value": 0
+            }
+          },
+          {
+            "annotation": {
+              "ast_type": "Name",
+              "col_offset": 11,
+              "end_col_offset": 17,
+              "end_lineno": 34,
+              "id": "int256",
+              "lineno": 34,
+              "node_id": 172,
+              "src": "962:6:4"
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 4,
+            "end_col_offset": 21,
+            "end_lineno": 34,
+            "lineno": 34,
+            "node_id": 169,
+            "simple": 1,
+            "src": "955:17:4",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 4,
+              "end_col_offset": 9,
+              "end_lineno": 34,
+              "id": "price",
+              "lineno": 34,
+              "node_id": 170,
+              "src": "955:5:4"
+            },
+            "value": {
+              "ast_type": "Int",
+              "col_offset": 20,
+              "end_col_offset": 21,
+              "end_lineno": 34,
+              "lineno": 34,
+              "node_id": 174,
+              "src": "971:1:4",
+              "value": 0
+            }
+          },
+          {
+            "annotation": {
+              "ast_type": "Name",
+              "col_offset": 7,
+              "end_col_offset": 14,
+              "end_lineno": 35,
+              "id": "uint256",
+              "lineno": 35,
+              "node_id": 178,
+              "src": "980:7:4"
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 4,
+            "end_col_offset": 18,
+            "end_lineno": 35,
+            "lineno": 35,
+            "node_id": 175,
+            "simple": 1,
+            "src": "977:14:4",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 4,
+              "end_col_offset": 5,
+              "end_lineno": 35,
+              "id": "b",
+              "lineno": 35,
+              "node_id": 176,
+              "src": "977:1:4"
+            },
+            "value": {
+              "ast_type": "Int",
+              "col_offset": 17,
+              "end_col_offset": 18,
+              "end_lineno": 35,
+              "lineno": 35,
+              "node_id": 180,
+              "src": "990:1:4",
+              "value": 0
+            }
+          },
+          {
+            "annotation": {
+              "ast_type": "Name",
+              "col_offset": 7,
+              "end_col_offset": 14,
+              "end_lineno": 36,
+              "id": "uint256",
+              "lineno": 36,
+              "node_id": 184,
+              "src": "999:7:4"
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 4,
+            "end_col_offset": 18,
+            "end_lineno": 36,
+            "lineno": 36,
+            "node_id": 181,
+            "simple": 1,
+            "src": "996:14:4",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 4,
+              "end_col_offset": 5,
+              "end_lineno": 36,
+              "id": "c",
+              "lineno": 36,
+              "node_id": 182,
+              "src": "996:1:4"
+            },
+            "value": {
+              "ast_type": "Int",
+              "col_offset": 17,
+              "end_col_offset": 18,
+              "end_lineno": 36,
+              "lineno": 36,
+              "node_id": 186,
+              "src": "1009:1:4",
+              "value": 0
+            }
+          },
+          {
+            "annotation": {
+              "ast_type": "Name",
+              "col_offset": 7,
+              "end_col_offset": 13,
+              "end_lineno": 37,
+              "id": "int256",
+              "lineno": 37,
+              "node_id": 190,
+              "src": "1018:6:4"
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 4,
+            "end_col_offset": 17,
+            "end_lineno": 37,
+            "lineno": 37,
+            "node_id": 187,
+            "simple": 1,
+            "src": "1015:13:4",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 4,
+              "end_col_offset": 5,
+              "end_lineno": 37,
+              "id": "d",
+              "lineno": 37,
+              "node_id": 188,
+              "src": "1015:1:4"
+            },
+            "value": {
+              "ast_type": "Int",
+              "col_offset": 16,
+              "end_col_offset": 17,
+              "end_lineno": 37,
+              "lineno": 37,
+              "node_id": 192,
+              "src": "1027:1:4",
+              "value": 0
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 54,
+            "end_lineno": 38,
+            "lineno": 38,
+            "node_id": 193,
+            "src": "1033:50:4",
+            "target": {
+              "ast_type": "Tuple",
+              "col_offset": 4,
+              "elements": [
+                {
+                  "ast_type": "Name",
+                  "col_offset": 5,
+                  "end_col_offset": 6,
+                  "end_lineno": 38,
+                  "id": "a",
+                  "lineno": 38,
+                  "node_id": 195,
+                  "src": "1034:1:4"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 7,
+                  "end_col_offset": 12,
+                  "end_lineno": 38,
+                  "id": "price",
+                  "lineno": 38,
+                  "node_id": 197,
+                  "src": "1036:5:4"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 13,
+                  "end_col_offset": 14,
+                  "end_lineno": 38,
+                  "id": "b",
+                  "lineno": 38,
+                  "node_id": 199,
+                  "src": "1042:1:4"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 15,
+                  "end_col_offset": 16,
+                  "end_lineno": 38,
+                  "id": "c",
+                  "lineno": 38,
+                  "node_id": 201,
+                  "src": "1044:1:4"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 17,
+                  "end_col_offset": 18,
+                  "end_lineno": 38,
+                  "id": "d",
+                  "lineno": 38,
+                  "node_id": 203,
+                  "src": "1046:1:4"
+                }
+              ],
+              "end_col_offset": 19,
+              "end_lineno": 38,
+              "lineno": 38,
+              "node_id": 194,
+              "src": "1033:15:4"
+            },
+            "value": {
+              "args": [],
+              "ast_type": "Call",
+              "col_offset": 22,
+              "end_col_offset": 54,
+              "end_lineno": 38,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "latestRoundData",
+                "col_offset": 22,
+                "end_col_offset": 52,
+                "end_lineno": 38,
+                "lineno": 38,
+                "node_id": 207,
+                "src": "1051:30:4",
+                "value": {
+                  "ast_type": "Attribute",
+                  "attr": "priceFeed",
+                  "col_offset": 22,
+                  "end_col_offset": 36,
+                  "end_lineno": 38,
+                  "lineno": 38,
+                  "node_id": 208,
+                  "src": "1051:14:4",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 22,
+                    "end_col_offset": 26,
+                    "end_lineno": 38,
+                    "id": "self",
+                    "lineno": 38,
+                    "node_id": 209,
+                    "src": "1051:4:4"
+                  }
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 38,
+              "node_id": 206,
+              "src": "1051:32:4"
+            }
+          },
+          {
+            "ast_type": "Return",
+            "col_offset": 4,
+            "end_col_offset": 32,
+            "end_lineno": 39,
+            "lineno": 39,
+            "node_id": 213,
+            "src": "1089:28:4",
+            "value": {
+              "ast_type": "BinOp",
+              "col_offset": 12,
+              "end_col_offset": 31,
+              "end_lineno": 39,
+              "left": {
+                "ast_type": "Name",
+                "col_offset": 12,
+                "end_col_offset": 17,
+                "end_lineno": 39,
+                "id": "price",
+                "lineno": 39,
+                "node_id": 215,
+                "src": "1097:5:4"
+              },
+              "lineno": 39,
+              "node_id": 214,
+              "op": {
+                "ast_type": "Mult",
+                "col_offset": 12,
+                "end_col_offset": 31,
+                "end_lineno": 39,
+                "lineno": 39,
+                "node_id": 260,
+                "src": "1097:19:4"
+              },
+              "right": {
+                "ast_type": "Int",
+                "col_offset": 20,
+                "end_col_offset": 31,
+                "end_lineno": 39,
+                "lineno": 39,
+                "node_id": 218,
+                "src": "1105:11:4",
+                "value": 10000000000
+              },
+              "src": "1097:19:4"
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 5,
+            "end_lineno": 30,
+            "id": "view",
+            "lineno": 30,
+            "node_id": 219,
+            "src": "891:4:4"
+          },
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 31,
+            "id": "internal",
+            "lineno": 31,
+            "node_id": 221,
+            "src": "897:8:4"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 32,
+        "end_lineno": 39,
+        "lineno": 32,
+        "name": "_getPrice",
+        "node_id": 161,
+        "pos": null,
+        "returns": {
+          "ast_type": "Name",
+          "col_offset": 19,
+          "end_col_offset": 25,
+          "end_lineno": 32,
+          "id": "int256",
+          "lineno": 32,
+          "node_id": 223,
+          "src": "925:6:4"
+        },
+        "src": "906:211:4"
+      },
+      {
+        "args": {
+          "args": [],
+          "ast_type": "arguments",
+          "col_offset": 0,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 3,
+          "end_lineno": 43,
+          "lineno": 43,
+          "node_id": 226,
+          "src": "1135:3:4"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "annotation": {
+              "ast_type": "Name",
+              "col_offset": 11,
+              "end_col_offset": 17,
+              "end_lineno": 44,
+              "id": "int256",
+              "lineno": 44,
+              "node_id": 230,
+              "src": "1180:6:4"
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 4,
+            "end_col_offset": 36,
+            "end_lineno": 44,
+            "lineno": 44,
+            "node_id": 227,
+            "simple": 1,
+            "src": "1173:32:4",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 4,
+              "end_col_offset": 9,
+              "end_lineno": 44,
+              "id": "price",
+              "lineno": 44,
+              "node_id": 228,
+              "src": "1173:5:4"
+            },
+            "value": {
+              "args": [],
+              "ast_type": "Call",
+              "col_offset": 20,
+              "end_col_offset": 36,
+              "end_lineno": 44,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "_getPrice",
+                "col_offset": 20,
+                "end_col_offset": 34,
+                "end_lineno": 44,
+                "lineno": 44,
+                "node_id": 233,
+                "src": "1189:14:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 20,
+                  "end_col_offset": 24,
+                  "end_lineno": 44,
+                  "id": "self",
+                  "lineno": 44,
+                  "node_id": 234,
+                  "src": "1189:4:4"
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 44,
+              "node_id": 232,
+              "src": "1189:16:4"
+            }
+          },
+          {
+            "annotation": {
+              "ast_type": "Name",
+              "col_offset": 14,
+              "end_col_offset": 21,
+              "end_lineno": 45,
+              "id": "uint256",
+              "lineno": 45,
+              "node_id": 240,
+              "src": "1220:7:4"
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 4,
+            "end_col_offset": 46,
+            "end_lineno": 45,
+            "lineno": 45,
+            "node_id": 237,
+            "simple": 1,
+            "src": "1210:42:4",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 4,
+              "end_col_offset": 12,
+              "end_lineno": 45,
+              "id": "ethPrice",
+              "lineno": 45,
+              "node_id": 238,
+              "src": "1210:8:4"
+            },
+            "value": {
+              "args": [
+                {
+                  "ast_type": "Name",
+                  "col_offset": 32,
+                  "end_col_offset": 37,
+                  "end_lineno": 45,
+                  "id": "price",
+                  "lineno": 45,
+                  "node_id": 245,
+                  "src": "1238:5:4"
+                },
+                {
+                  "ast_type": "Name",
+                  "col_offset": 38,
+                  "end_col_offset": 45,
+                  "end_lineno": 45,
+                  "id": "uint256",
+                  "lineno": 45,
+                  "node_id": 247,
+                  "src": "1244:7:4"
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 24,
+              "end_col_offset": 46,
+              "end_lineno": 45,
+              "func": {
+                "ast_type": "Name",
+                "col_offset": 24,
+                "end_col_offset": 31,
+                "end_lineno": 45,
+                "id": "convert",
+                "lineno": 45,
+                "node_id": 243,
+                "src": "1230:7:4"
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 45,
+              "node_id": 242,
+              "src": "1230:22:4"
+            }
+          },
+          {
+            "annotation": {
+              "ast_type": "Name",
+              "col_offset": 17,
+              "end_col_offset": 24,
+              "end_lineno": 46,
+              "id": "uint256",
+              "lineno": 46,
+              "node_id": 252,
+              "src": "1270:7:4"
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 4,
+            "end_col_offset": 78,
+            "end_lineno": 46,
+            "lineno": 46,
+            "node_id": 249,
+            "simple": 1,
+            "src": "1257:74:4",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 4,
+              "end_col_offset": 15,
+              "end_lineno": 46,
+              "id": "costToEnter",
+              "lineno": 46,
+              "node_id": 250,
+              "src": "1257:11:4"
+            },
+            "value": {
+              "ast_type": "BinOp",
+              "col_offset": 27,
+              "end_col_offset": 78,
+              "end_lineno": 46,
+              "left": {
+                "ast_type": "BinOp",
+                "col_offset": 28,
+                "end_col_offset": 66,
+                "end_lineno": 46,
+                "left": {
+                  "ast_type": "Attribute",
+                  "attr": "usdEntryFee",
+                  "col_offset": 28,
+                  "end_col_offset": 44,
+                  "end_lineno": 46,
+                  "lineno": 46,
+                  "node_id": 256,
+                  "src": "1281:16:4",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 28,
+                    "end_col_offset": 32,
+                    "end_lineno": 46,
+                    "id": "self",
+                    "lineno": 46,
+                    "node_id": 257,
+                    "src": "1281:4:4"
+                  }
+                },
+                "lineno": 46,
+                "node_id": 255,
+                "op": {
+                  "ast_type": "Mult",
+                  "col_offset": 28,
+                  "end_col_offset": 66,
+                  "end_lineno": 46,
+                  "lineno": 46,
+                  "node_id": 260,
+                  "src": "1281:38:4"
+                },
+                "right": {
+                  "ast_type": "Int",
+                  "col_offset": 47,
+                  "end_col_offset": 66,
+                  "end_lineno": 46,
+                  "lineno": 46,
+                  "node_id": 261,
+                  "src": "1300:19:4",
+                  "value": 1000000000000000000
+                },
+                "src": "1281:38:4"
+              },
+              "lineno": 46,
+              "node_id": 254,
+              "op": {
+                "ast_type": "Div",
+                "col_offset": 27,
+                "end_col_offset": 78,
+                "end_lineno": 46,
+                "lineno": 46,
+                "node_id": 262,
+                "src": "1280:51:4"
+              },
+              "right": {
+                "ast_type": "Name",
+                "col_offset": 70,
+                "end_col_offset": 78,
+                "end_lineno": 46,
+                "id": "ethPrice",
+                "lineno": 46,
+                "node_id": 263,
+                "src": "1323:8:4"
+              },
+              "src": "1280:51:4"
+            }
+          },
+          {
+            "ast_type": "Return",
+            "col_offset": 4,
+            "end_col_offset": 22,
+            "end_lineno": 47,
+            "lineno": 47,
+            "node_id": 265,
+            "src": "1336:18:4",
+            "value": {
+              "ast_type": "Name",
+              "col_offset": 11,
+              "end_col_offset": 22,
+              "end_lineno": 47,
+              "id": "costToEnter",
+              "lineno": 47,
+              "node_id": 266,
+              "src": "1343:11:4"
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 5,
+            "end_lineno": 41,
+            "id": "view",
+            "lineno": 41,
+            "node_id": 268,
+            "src": "1120:4:4"
+          },
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 42,
+            "id": "internal",
+            "lineno": 42,
+            "node_id": 270,
+            "src": "1126:8:4"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 22,
+        "end_lineno": 47,
+        "lineno": 43,
+        "name": "_getEntranceFee",
+        "node_id": 225,
+        "pos": null,
+        "returns": {
+          "ast_type": "Name",
+          "col_offset": 25,
+          "end_col_offset": 32,
+          "end_lineno": 43,
+          "id": "uint256",
+          "lineno": 43,
+          "node_id": 272,
+          "src": "1160:7:4"
+        },
+        "src": "1135:219:4"
+      },
+      {
+        "args": {
+          "args": [],
+          "ast_type": "arguments",
+          "col_offset": 0,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 3,
+          "end_lineno": 50,
+          "lineno": 50,
+          "node_id": 275,
+          "src": "1366:3:4"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "ast_type": "Expr",
+            "col_offset": 4,
+            "end_col_offset": 38,
+            "end_lineno": 51,
+            "lineno": 51,
+            "node_id": 276,
+            "src": "1393:34:4",
+            "value": {
+              "args": [],
+              "ast_type": "Call",
+              "col_offset": 4,
+              "end_col_offset": 38,
+              "end_lineno": 51,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "getRandomNumber",
+                "col_offset": 4,
+                "end_col_offset": 36,
+                "end_lineno": 51,
+                "lineno": 51,
+                "node_id": 278,
+                "src": "1393:32:4",
+                "value": {
+                  "ast_type": "Attribute",
+                  "attr": "VRFConsumer",
+                  "col_offset": 4,
+                  "end_col_offset": 20,
+                  "end_lineno": 51,
+                  "lineno": 51,
+                  "node_id": 279,
+                  "src": "1393:16:4",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 4,
+                    "end_col_offset": 8,
+                    "end_lineno": 51,
+                    "id": "self",
+                    "lineno": 51,
+                    "node_id": 280,
+                    "src": "1393:4:4"
+                  }
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 51,
+              "node_id": 277,
+              "src": "1393:34:4"
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 49,
+            "id": "internal",
+            "lineno": 49,
+            "node_id": 284,
+            "src": "1357:8:4"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 38,
+        "end_lineno": 51,
+        "lineno": 50,
+        "name": "_generateRandom",
+        "node_id": 274,
+        "pos": null,
+        "returns": null,
+        "src": "1366:61:4"
+      },
+      {
+        "args": {
+          "args": [],
+          "ast_type": "arguments",
+          "col_offset": 0,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 3,
+          "end_lineno": 54,
+          "lineno": 54,
+          "node_id": 287,
+          "src": "1439:3:4"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "ast_type": "Assert",
+            "col_offset": 4,
+            "end_col_offset": 71,
+            "end_lineno": 55,
+            "lineno": 55,
+            "msg": {
+              "ast_type": "Str",
+              "col_offset": 37,
+              "end_col_offset": 71,
+              "end_lineno": 55,
+              "lineno": 55,
+              "node_id": 299,
+              "src": "1496:34:4",
+              "value": "Only owner can start the lottery"
+            },
+            "node_id": 288,
+            "src": "1463:67:4",
+            "test": {
+              "ast_type": "Compare",
+              "col_offset": 11,
+              "end_col_offset": 35,
+              "end_lineno": 55,
+              "left": {
+                "ast_type": "Attribute",
+                "attr": "owner",
+                "col_offset": 11,
+                "end_col_offset": 21,
+                "end_lineno": 55,
+                "lineno": 55,
+                "node_id": 290,
+                "src": "1470:10:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 11,
+                  "end_col_offset": 15,
+                  "end_lineno": 55,
+                  "id": "self",
+                  "lineno": 55,
+                  "node_id": 291,
+                  "src": "1470:4:4"
+                }
+              },
+              "lineno": 55,
+              "node_id": 289,
+              "op": {
+                "ast_type": "Eq",
+                "col_offset": 11,
+                "end_col_offset": 35,
+                "end_lineno": 55,
+                "lineno": 55,
+                "node_id": 412,
+                "src": "1470:24:4"
+              },
+              "right": {
+                "ast_type": "Attribute",
+                "attr": "sender",
+                "col_offset": 25,
+                "end_col_offset": 35,
+                "end_lineno": 55,
+                "lineno": 55,
+                "node_id": 295,
+                "src": "1484:10:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 25,
+                  "end_col_offset": 28,
+                  "end_lineno": 55,
+                  "id": "msg",
+                  "lineno": 55,
+                  "node_id": 296,
+                  "src": "1484:3:4"
+                }
+              },
+              "src": "1470:24:4"
+            }
+          },
+          {
+            "ast_type": "Assert",
+            "col_offset": 4,
+            "end_col_offset": 68,
+            "end_lineno": 56,
+            "lineno": 56,
+            "msg": {
+              "ast_type": "Str",
+              "col_offset": 36,
+              "end_col_offset": 68,
+              "end_lineno": 56,
+              "lineno": 56,
+              "node_id": 308,
+              "src": "1567:32:4",
+              "value": "Can't start a new lottery yet!"
+            },
+            "node_id": 300,
+            "src": "1535:64:4",
+            "test": {
+              "ast_type": "Compare",
+              "col_offset": 11,
+              "end_col_offset": 34,
+              "end_lineno": 56,
+              "left": {
+                "ast_type": "Attribute",
+                "attr": "Lottery_State",
+                "col_offset": 11,
+                "end_col_offset": 29,
+                "end_lineno": 56,
+                "lineno": 56,
+                "node_id": 302,
+                "src": "1542:18:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 11,
+                  "end_col_offset": 15,
+                  "end_lineno": 56,
+                  "id": "self",
+                  "lineno": 56,
+                  "node_id": 303,
+                  "src": "1542:4:4"
+                }
+              },
+              "lineno": 56,
+              "node_id": 301,
+              "op": {
+                "ast_type": "Eq",
+                "col_offset": 11,
+                "end_col_offset": 34,
+                "end_lineno": 56,
+                "lineno": 56,
+                "node_id": 412,
+                "src": "1542:23:4"
+              },
+              "right": {
+                "ast_type": "Int",
+                "col_offset": 33,
+                "end_col_offset": 34,
+                "end_lineno": 56,
+                "lineno": 56,
+                "node_id": 307,
+                "src": "1564:1:4",
+                "value": 0
+              },
+              "src": "1542:23:4"
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 26,
+            "end_lineno": 57,
+            "lineno": 57,
+            "node_id": 309,
+            "src": "1604:22:4",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "Lottery_State",
+              "col_offset": 4,
+              "end_col_offset": 22,
+              "end_lineno": 57,
+              "lineno": 57,
+              "node_id": 310,
+              "src": "1604:18:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 57,
+                "id": "self",
+                "lineno": 57,
+                "node_id": 311,
+                "src": "1604:4:4"
+              }
+            },
+            "value": {
+              "ast_type": "Int",
+              "col_offset": 25,
+              "end_col_offset": 26,
+              "end_lineno": 57,
+              "lineno": 57,
+              "node_id": 314,
+              "src": "1625:1:4",
+              "value": 1
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 53,
+            "id": "external",
+            "lineno": 53,
+            "node_id": 315,
+            "src": "1430:8:4"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 26,
+        "end_lineno": 57,
+        "lineno": 54,
+        "name": "startLottery",
+        "node_id": 286,
+        "pos": null,
+        "returns": null,
+        "src": "1439:187:4"
+      },
+      {
+        "args": {
+          "args": [],
+          "ast_type": "arguments",
+          "col_offset": 0,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 3,
+          "end_lineno": 62,
+          "lineno": 62,
+          "node_id": 318,
+          "src": "1648:3:4"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "ast_type": "Assert",
+            "col_offset": 4,
+            "end_col_offset": 57,
+            "end_lineno": 63,
+            "lineno": 63,
+            "msg": {
+              "ast_type": "Str",
+              "col_offset": 36,
+              "end_col_offset": 57,
+              "end_lineno": 63,
+              "lineno": 63,
+              "node_id": 327,
+              "src": "1697:21:4",
+              "value": "Lottery not started"
+            },
+            "node_id": 319,
+            "src": "1665:53:4",
+            "test": {
+              "ast_type": "Compare",
+              "col_offset": 11,
+              "end_col_offset": 34,
+              "end_lineno": 63,
+              "left": {
+                "ast_type": "Attribute",
+                "attr": "Lottery_State",
+                "col_offset": 11,
+                "end_col_offset": 29,
+                "end_lineno": 63,
+                "lineno": 63,
+                "node_id": 321,
+                "src": "1672:18:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 11,
+                  "end_col_offset": 15,
+                  "end_lineno": 63,
+                  "id": "self",
+                  "lineno": 63,
+                  "node_id": 322,
+                  "src": "1672:4:4"
+                }
+              },
+              "lineno": 63,
+              "node_id": 320,
+              "op": {
+                "ast_type": "Eq",
+                "col_offset": 11,
+                "end_col_offset": 34,
+                "end_lineno": 63,
+                "lineno": 63,
+                "node_id": 412,
+                "src": "1672:23:4"
+              },
+              "right": {
+                "ast_type": "Int",
+                "col_offset": 33,
+                "end_col_offset": 34,
+                "end_lineno": 63,
+                "lineno": 63,
+                "node_id": 326,
+                "src": "1694:1:4",
+                "value": 1
+              },
+              "src": "1672:23:4"
+            }
+          },
+          {
+            "ast_type": "Assert",
+            "col_offset": 4,
+            "end_col_offset": 80,
+            "end_lineno": 64,
+            "lineno": 64,
+            "msg": {
+              "ast_type": "Str",
+              "col_offset": 48,
+              "end_col_offset": 80,
+              "end_lineno": 64,
+              "lineno": 64,
+              "node_id": 340,
+              "src": "1767:32:4",
+              "value": "Not enough fund to participate"
+            },
+            "node_id": 328,
+            "src": "1723:76:4",
+            "test": {
+              "ast_type": "Compare",
+              "col_offset": 11,
+              "end_col_offset": 46,
+              "end_lineno": 64,
+              "left": {
+                "ast_type": "Attribute",
+                "attr": "value",
+                "col_offset": 11,
+                "end_col_offset": 20,
+                "end_lineno": 64,
+                "lineno": 64,
+                "node_id": 330,
+                "src": "1730:9:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 11,
+                  "end_col_offset": 14,
+                  "end_lineno": 64,
+                  "id": "msg",
+                  "lineno": 64,
+                  "node_id": 331,
+                  "src": "1730:3:4"
+                }
+              },
+              "lineno": 64,
+              "node_id": 329,
+              "op": {
+                "ast_type": "GtE",
+                "col_offset": 11,
+                "end_col_offset": 46,
+                "end_lineno": 64,
+                "lineno": 64,
+                "node_id": 334,
+                "src": "1730:35:4"
+              },
+              "right": {
+                "args": [],
+                "ast_type": "Call",
+                "col_offset": 24,
+                "end_col_offset": 46,
+                "end_lineno": 64,
+                "func": {
+                  "ast_type": "Attribute",
+                  "attr": "_getEntranceFee",
+                  "col_offset": 24,
+                  "end_col_offset": 44,
+                  "end_lineno": 64,
+                  "lineno": 64,
+                  "node_id": 336,
+                  "src": "1743:20:4",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 24,
+                    "end_col_offset": 28,
+                    "end_lineno": 64,
+                    "id": "self",
+                    "lineno": 64,
+                    "node_id": 337,
+                    "src": "1743:4:4"
+                  }
+                },
+                "keyword": null,
+                "keywords": [],
+                "lineno": 64,
+                "node_id": 335,
+                "src": "1743:22:4"
+              },
+              "src": "1730:35:4"
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 41,
+            "end_lineno": 65,
+            "lineno": 65,
+            "node_id": 341,
+            "src": "1804:37:4",
+            "target": {
+              "ast_type": "Subscript",
+              "col_offset": 4,
+              "end_col_offset": 28,
+              "end_lineno": 65,
+              "lineno": 65,
+              "node_id": 342,
+              "slice": {
+                "ast_type": "Index",
+                "col_offset": 4,
+                "end_col_offset": 28,
+                "end_lineno": 65,
+                "lineno": 65,
+                "node_id": 352,
+                "src": "1804:24:4",
+                "value": {
+                  "ast_type": "Attribute",
+                  "attr": "Count",
+                  "col_offset": 17,
+                  "end_col_offset": 27,
+                  "end_lineno": 65,
+                  "lineno": 65,
+                  "node_id": 347,
+                  "src": "1817:10:4",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 17,
+                    "end_col_offset": 21,
+                    "end_lineno": 65,
+                    "id": "self",
+                    "lineno": 65,
+                    "node_id": 348,
+                    "src": "1817:4:4"
+                  }
+                }
+              },
+              "src": "1804:24:4",
+              "value": {
+                "ast_type": "Attribute",
+                "attr": "players",
+                "col_offset": 4,
+                "end_col_offset": 16,
+                "end_lineno": 65,
+                "lineno": 65,
+                "node_id": 343,
+                "src": "1804:12:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 4,
+                  "end_col_offset": 8,
+                  "end_lineno": 65,
+                  "id": "self",
+                  "lineno": 65,
+                  "node_id": 344,
+                  "src": "1804:4:4"
+                }
+              }
+            },
+            "value": {
+              "ast_type": "Attribute",
+              "attr": "sender",
+              "col_offset": 31,
+              "end_col_offset": 41,
+              "end_lineno": 65,
+              "lineno": 65,
+              "node_id": 353,
+              "src": "1831:10:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 31,
+                "end_col_offset": 34,
+                "end_lineno": 65,
+                "id": "msg",
+                "lineno": 65,
+                "node_id": 354,
+                "src": "1831:3:4"
+              }
+            }
+          },
+          {
+            "ast_type": "AugAssign",
+            "col_offset": 4,
+            "end_col_offset": 19,
+            "end_lineno": 66,
+            "lineno": 66,
+            "node_id": 357,
+            "op": {
+              "ast_type": "Add",
+              "col_offset": 4,
+              "end_col_offset": 19,
+              "end_lineno": 66,
+              "lineno": 66,
+              "node_id": 362,
+              "src": "1846:15:4"
+            },
+            "src": "1846:15:4",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "Count",
+              "col_offset": 4,
+              "end_col_offset": 14,
+              "end_lineno": 66,
+              "lineno": 66,
+              "node_id": 358,
+              "src": "1846:10:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 66,
+                "id": "self",
+                "lineno": 66,
+                "node_id": 359,
+                "src": "1846:4:4"
+              }
+            },
+            "value": {
+              "ast_type": "Int",
+              "col_offset": 18,
+              "end_col_offset": 19,
+              "end_lineno": 66,
+              "lineno": 66,
+              "node_id": 363,
+              "src": "1860:1:4",
+              "value": 1
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 8,
+            "end_lineno": 60,
+            "id": "payable",
+            "lineno": 60,
+            "node_id": 364,
+            "src": "1630:7:4"
+          },
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 61,
+            "id": "external",
+            "lineno": 61,
+            "node_id": 366,
+            "src": "1639:8:4"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 19,
+        "end_lineno": 66,
+        "lineno": 62,
+        "name": "enter",
+        "node_id": 317,
+        "pos": null,
+        "returns": null,
+        "src": "1648:213:4"
+      },
+      {
+        "args": {
+          "args": [],
+          "ast_type": "arguments",
+          "col_offset": 0,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 3,
+          "end_lineno": 69,
+          "lineno": 69,
+          "node_id": 369,
+          "src": "1874:3:4"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "ast_type": "Assert",
+            "col_offset": 4,
+            "end_col_offset": 35,
+            "end_lineno": 70,
+            "lineno": 70,
+            "msg": null,
+            "node_id": 370,
+            "src": "1896:31:4",
+            "test": {
+              "ast_type": "Compare",
+              "col_offset": 11,
+              "end_col_offset": 35,
+              "end_lineno": 70,
+              "left": {
+                "ast_type": "Attribute",
+                "attr": "sender",
+                "col_offset": 11,
+                "end_col_offset": 21,
+                "end_lineno": 70,
+                "lineno": 70,
+                "node_id": 372,
+                "src": "1903:10:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 11,
+                  "end_col_offset": 14,
+                  "end_lineno": 70,
+                  "id": "msg",
+                  "lineno": 70,
+                  "node_id": 373,
+                  "src": "1903:3:4"
+                }
+              },
+              "lineno": 70,
+              "node_id": 371,
+              "op": {
+                "ast_type": "Eq",
+                "col_offset": 11,
+                "end_col_offset": 35,
+                "end_lineno": 70,
+                "lineno": 70,
+                "node_id": 412,
+                "src": "1903:24:4"
+              },
+              "right": {
+                "ast_type": "Attribute",
+                "attr": "owner",
+                "col_offset": 25,
+                "end_col_offset": 35,
+                "end_lineno": 70,
+                "lineno": 70,
+                "node_id": 377,
+                "src": "1917:10:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 25,
+                  "end_col_offset": 29,
+                  "end_lineno": 70,
+                  "id": "self",
+                  "lineno": 70,
+                  "node_id": 378,
+                  "src": "1917:4:4"
+                }
+              },
+              "src": "1903:24:4"
+            }
+          },
+          {
+            "ast_type": "Assert",
+            "col_offset": 4,
+            "end_col_offset": 57,
+            "end_lineno": 71,
+            "lineno": 71,
+            "msg": {
+              "ast_type": "Str",
+              "col_offset": 36,
+              "end_col_offset": 57,
+              "end_lineno": 71,
+              "lineno": 71,
+              "node_id": 389,
+              "src": "1964:21:4",
+              "value": "Lottery is not open"
+            },
+            "node_id": 381,
+            "src": "1932:53:4",
+            "test": {
+              "ast_type": "Compare",
+              "col_offset": 11,
+              "end_col_offset": 34,
+              "end_lineno": 71,
+              "left": {
+                "ast_type": "Attribute",
+                "attr": "Lottery_State",
+                "col_offset": 11,
+                "end_col_offset": 29,
+                "end_lineno": 71,
+                "lineno": 71,
+                "node_id": 383,
+                "src": "1939:18:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 11,
+                  "end_col_offset": 15,
+                  "end_lineno": 71,
+                  "id": "self",
+                  "lineno": 71,
+                  "node_id": 384,
+                  "src": "1939:4:4"
+                }
+              },
+              "lineno": 71,
+              "node_id": 382,
+              "op": {
+                "ast_type": "Eq",
+                "col_offset": 11,
+                "end_col_offset": 34,
+                "end_lineno": 71,
+                "lineno": 71,
+                "node_id": 412,
+                "src": "1939:23:4"
+              },
+              "right": {
+                "ast_type": "Int",
+                "col_offset": 33,
+                "end_col_offset": 34,
+                "end_lineno": 71,
+                "lineno": 71,
+                "node_id": 388,
+                "src": "1961:1:4",
+                "value": 1
+              },
+              "src": "1939:23:4"
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 26,
+            "end_lineno": 72,
+            "lineno": 72,
+            "node_id": 390,
+            "src": "1990:22:4",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "Lottery_State",
+              "col_offset": 4,
+              "end_col_offset": 22,
+              "end_lineno": 72,
+              "lineno": 72,
+              "node_id": 391,
+              "src": "1990:18:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 72,
+                "id": "self",
+                "lineno": 72,
+                "node_id": 392,
+                "src": "1990:4:4"
+              }
+            },
+            "value": {
+              "ast_type": "Int",
+              "col_offset": 25,
+              "end_col_offset": 26,
+              "end_lineno": 72,
+              "lineno": 72,
+              "node_id": 395,
+              "src": "2011:1:4",
+              "value": 2
+            }
+          },
+          {
+            "ast_type": "Expr",
+            "col_offset": 4,
+            "end_col_offset": 26,
+            "end_lineno": 73,
+            "lineno": 73,
+            "node_id": 396,
+            "src": "2017:22:4",
+            "value": {
+              "args": [],
+              "ast_type": "Call",
+              "col_offset": 4,
+              "end_col_offset": 26,
+              "end_lineno": 73,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "_generateRandom",
+                "col_offset": 4,
+                "end_col_offset": 24,
+                "end_lineno": 73,
+                "lineno": 73,
+                "node_id": 398,
+                "src": "2017:20:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 4,
+                  "end_col_offset": 8,
+                  "end_lineno": 73,
+                  "id": "self",
+                  "lineno": 73,
+                  "node_id": 399,
+                  "src": "2017:4:4"
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 73,
+              "node_id": 397,
+              "src": "2017:22:4"
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 68,
+            "id": "external",
+            "lineno": 68,
+            "node_id": 402,
+            "src": "1865:8:4"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 26,
+        "end_lineno": 73,
+        "lineno": 69,
+        "name": "endLottery",
+        "node_id": 368,
+        "pos": null,
+        "returns": null,
+        "src": "1874:165:4"
+      },
+      {
+        "args": {
+          "args": [],
+          "ast_type": "arguments",
+          "col_offset": 0,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 3,
+          "end_lineno": 77,
+          "lineno": 77,
+          "node_id": 405,
+          "src": "2060:3:4"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "ast_type": "Assert",
+            "col_offset": 4,
+            "end_col_offset": 35,
+            "end_lineno": 78,
+            "lineno": 78,
+            "msg": null,
+            "node_id": 406,
+            "src": "2089:31:4",
+            "test": {
+              "ast_type": "Compare",
+              "col_offset": 11,
+              "end_col_offset": 35,
+              "end_lineno": 78,
+              "left": {
+                "ast_type": "Attribute",
+                "attr": "sender",
+                "col_offset": 11,
+                "end_col_offset": 21,
+                "end_lineno": 78,
+                "lineno": 78,
+                "node_id": 408,
+                "src": "2096:10:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 11,
+                  "end_col_offset": 14,
+                  "end_lineno": 78,
+                  "id": "msg",
+                  "lineno": 78,
+                  "node_id": 409,
+                  "src": "2096:3:4"
+                }
+              },
+              "lineno": 78,
+              "node_id": 407,
+              "op": {
+                "ast_type": "Eq",
+                "col_offset": 11,
+                "end_col_offset": 35,
+                "end_lineno": 78,
+                "lineno": 78,
+                "node_id": 412,
+                "src": "2096:24:4"
+              },
+              "right": {
+                "ast_type": "Attribute",
+                "attr": "owner",
+                "col_offset": 25,
+                "end_col_offset": 35,
+                "end_lineno": 78,
+                "lineno": 78,
+                "node_id": 413,
+                "src": "2110:10:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 25,
+                  "end_col_offset": 29,
+                  "end_lineno": 78,
+                  "id": "self",
+                  "lineno": 78,
+                  "node_id": 414,
+                  "src": "2110:4:4"
+                }
+              },
+              "src": "2096:24:4"
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 61,
+            "end_lineno": 79,
+            "lineno": 79,
+            "node_id": 417,
+            "src": "2125:57:4",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "randomNumber",
+              "col_offset": 4,
+              "end_col_offset": 21,
+              "end_lineno": 79,
+              "lineno": 79,
+              "node_id": 418,
+              "src": "2125:17:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 79,
+                "id": "self",
+                "lineno": 79,
+                "node_id": 419,
+                "src": "2125:4:4"
+              }
+            },
+            "value": {
+              "args": [],
+              "ast_type": "Call",
+              "col_offset": 24,
+              "end_col_offset": 61,
+              "end_lineno": 79,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "returnRandomNumber",
+                "col_offset": 24,
+                "end_col_offset": 59,
+                "end_lineno": 79,
+                "lineno": 79,
+                "node_id": 423,
+                "src": "2145:35:4",
+                "value": {
+                  "ast_type": "Attribute",
+                  "attr": "VRFConsumer",
+                  "col_offset": 24,
+                  "end_col_offset": 40,
+                  "end_lineno": 79,
+                  "lineno": 79,
+                  "node_id": 424,
+                  "src": "2145:16:4",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 24,
+                    "end_col_offset": 28,
+                    "end_lineno": 79,
+                    "id": "self",
+                    "lineno": 79,
+                    "node_id": 425,
+                    "src": "2145:4:4"
+                  }
+                }
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 79,
+              "node_id": 422,
+              "src": "2145:37:4"
+            }
+          },
+          {
+            "ast_type": "Assert",
+            "col_offset": 4,
+            "end_col_offset": 33,
+            "end_lineno": 80,
+            "lineno": 80,
+            "msg": null,
+            "node_id": 429,
+            "src": "2187:29:4",
+            "test": {
+              "ast_type": "Compare",
+              "col_offset": 11,
+              "end_col_offset": 33,
+              "end_lineno": 80,
+              "left": {
+                "ast_type": "Attribute",
+                "attr": "randomNumber",
+                "col_offset": 11,
+                "end_col_offset": 28,
+                "end_lineno": 80,
+                "lineno": 80,
+                "node_id": 431,
+                "src": "2194:17:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 11,
+                  "end_col_offset": 15,
+                  "end_lineno": 80,
+                  "id": "self",
+                  "lineno": 80,
+                  "node_id": 432,
+                  "src": "2194:4:4"
+                }
+              },
+              "lineno": 80,
+              "node_id": 430,
+              "op": {
+                "ast_type": "NotEq",
+                "col_offset": 11,
+                "end_col_offset": 33,
+                "end_lineno": 80,
+                "lineno": 80,
+                "node_id": 435,
+                "src": "2194:22:4"
+              },
+              "right": {
+                "ast_type": "Int",
+                "col_offset": 32,
+                "end_col_offset": 33,
+                "end_lineno": 80,
+                "lineno": 80,
+                "node_id": 436,
+                "src": "2215:1:4",
+                "value": 0
+              },
+              "src": "2194:22:4"
+            }
+          },
+          {
+            "annotation": {
+              "ast_type": "Name",
+              "col_offset": 19,
+              "end_col_offset": 26,
+              "end_lineno": 81,
+              "id": "uint256",
+              "lineno": 81,
+              "node_id": 440,
+              "src": "2236:7:4"
+            },
+            "ast_type": "AnnAssign",
+            "col_offset": 4,
+            "end_col_offset": 59,
+            "end_lineno": 81,
+            "lineno": 81,
+            "node_id": 437,
+            "simple": 1,
+            "src": "2221:55:4",
+            "target": {
+              "ast_type": "Name",
+              "col_offset": 4,
+              "end_col_offset": 17,
+              "end_lineno": 81,
+              "id": "indexOfWinner",
+              "lineno": 81,
+              "node_id": 438,
+              "src": "2221:13:4"
+            },
+            "value": {
+              "ast_type": "BinOp",
+              "col_offset": 29,
+              "end_col_offset": 59,
+              "end_lineno": 81,
+              "left": {
+                "ast_type": "Attribute",
+                "attr": "randomNumber",
+                "col_offset": 29,
+                "end_col_offset": 46,
+                "end_lineno": 81,
+                "lineno": 81,
+                "node_id": 443,
+                "src": "2246:17:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 29,
+                  "end_col_offset": 33,
+                  "end_lineno": 81,
+                  "id": "self",
+                  "lineno": 81,
+                  "node_id": 444,
+                  "src": "2246:4:4"
+                }
+              },
+              "lineno": 81,
+              "node_id": 442,
+              "op": {
+                "ast_type": "Mod",
+                "col_offset": 29,
+                "end_col_offset": 59,
+                "end_lineno": 81,
+                "lineno": 81,
+                "node_id": 447,
+                "src": "2246:30:4"
+              },
+              "right": {
+                "ast_type": "Attribute",
+                "attr": "Count",
+                "col_offset": 49,
+                "end_col_offset": 59,
+                "end_lineno": 81,
+                "lineno": 81,
+                "node_id": 448,
+                "src": "2266:10:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 49,
+                  "end_col_offset": 53,
+                  "end_lineno": 81,
+                  "id": "self",
+                  "lineno": 81,
+                  "node_id": 449,
+                  "src": "2266:4:4"
+                }
+              },
+              "src": "2246:30:4"
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 45,
+            "end_lineno": 82,
+            "lineno": 82,
+            "node_id": 452,
+            "src": "2281:41:4",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "winner",
+              "col_offset": 4,
+              "end_col_offset": 15,
+              "end_lineno": 82,
+              "lineno": 82,
+              "node_id": 453,
+              "src": "2281:11:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 82,
+                "id": "self",
+                "lineno": 82,
+                "node_id": 454,
+                "src": "2281:4:4"
+              }
+            },
+            "value": {
+              "ast_type": "Subscript",
+              "col_offset": 18,
+              "end_col_offset": 45,
+              "end_lineno": 82,
+              "lineno": 82,
+              "node_id": 457,
+              "slice": {
+                "ast_type": "Index",
+                "col_offset": 18,
+                "end_col_offset": 45,
+                "end_lineno": 82,
+                "lineno": 82,
+                "node_id": 465,
+                "src": "2295:27:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 31,
+                  "end_col_offset": 44,
+                  "end_lineno": 82,
+                  "id": "indexOfWinner",
+                  "lineno": 82,
+                  "node_id": 462,
+                  "src": "2308:13:4"
+                }
+              },
+              "src": "2295:27:4",
+              "value": {
+                "ast_type": "Attribute",
+                "attr": "players",
+                "col_offset": 18,
+                "end_col_offset": 30,
+                "end_lineno": 82,
+                "lineno": 82,
+                "node_id": 458,
+                "src": "2295:12:4",
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 18,
+                  "end_col_offset": 22,
+                  "end_lineno": 82,
+                  "id": "self",
+                  "lineno": 82,
+                  "node_id": 459,
+                  "src": "2295:4:4"
+                }
+              }
+            }
+          },
+          {
+            "ast_type": "Expr",
+            "col_offset": 4,
+            "end_col_offset": 50,
+            "end_lineno": 83,
+            "lineno": 83,
+            "node_id": 466,
+            "src": "2327:46:4",
+            "value": {
+              "args": [
+                {
+                  "ast_type": "Subscript",
+                  "col_offset": 9,
+                  "end_col_offset": 36,
+                  "end_lineno": 83,
+                  "lineno": 83,
+                  "node_id": 470,
+                  "slice": {
+                    "ast_type": "Index",
+                    "col_offset": 9,
+                    "end_col_offset": 36,
+                    "end_lineno": 83,
+                    "lineno": 83,
+                    "node_id": 478,
+                    "src": "2332:27:4",
+                    "value": {
+                      "ast_type": "Name",
+                      "col_offset": 22,
+                      "end_col_offset": 35,
+                      "end_lineno": 83,
+                      "id": "indexOfWinner",
+                      "lineno": 83,
+                      "node_id": 475,
+                      "src": "2345:13:4"
+                    }
+                  },
+                  "src": "2332:27:4",
+                  "value": {
+                    "ast_type": "Attribute",
+                    "attr": "players",
+                    "col_offset": 9,
+                    "end_col_offset": 21,
+                    "end_lineno": 83,
+                    "lineno": 83,
+                    "node_id": 471,
+                    "src": "2332:12:4",
+                    "value": {
+                      "ast_type": "Name",
+                      "col_offset": 9,
+                      "end_col_offset": 13,
+                      "end_lineno": 83,
+                      "id": "self",
+                      "lineno": 83,
+                      "node_id": 472,
+                      "src": "2332:4:4"
+                    }
+                  }
+                },
+                {
+                  "ast_type": "Attribute",
+                  "attr": "balance",
+                  "col_offset": 37,
+                  "end_col_offset": 49,
+                  "end_lineno": 83,
+                  "lineno": 83,
+                  "node_id": 479,
+                  "src": "2360:12:4",
+                  "value": {
+                    "ast_type": "Name",
+                    "col_offset": 37,
+                    "end_col_offset": 41,
+                    "end_lineno": 83,
+                    "id": "self",
+                    "lineno": 83,
+                    "node_id": 480,
+                    "src": "2360:4:4"
+                  }
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 4,
+              "end_col_offset": 50,
+              "end_lineno": 83,
+              "func": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 83,
+                "id": "send",
+                "lineno": 83,
+                "node_id": 468,
+                "src": "2327:4:4"
+              },
+              "keyword": null,
+              "keywords": [],
+              "lineno": 83,
+              "node_id": 467,
+              "src": "2327:46:4"
+            }
+          },
+          {
+            "ast_type": "Assign",
+            "col_offset": 4,
+            "end_col_offset": 26,
+            "end_lineno": 84,
+            "lineno": 84,
+            "node_id": 483,
+            "src": "2378:22:4",
+            "target": {
+              "ast_type": "Attribute",
+              "attr": "Lottery_State",
+              "col_offset": 4,
+              "end_col_offset": 22,
+              "end_lineno": 84,
+              "lineno": 84,
+              "node_id": 484,
+              "src": "2378:18:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 4,
+                "end_col_offset": 8,
+                "end_lineno": 84,
+                "id": "self",
+                "lineno": 84,
+                "node_id": 485,
+                "src": "2378:4:4"
+              }
+            },
+            "value": {
+              "ast_type": "Int",
+              "col_offset": 25,
+              "end_col_offset": 26,
+              "end_lineno": 84,
+              "lineno": 84,
+              "node_id": 488,
+              "src": "2399:1:4",
+              "value": 0
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 76,
+            "id": "external",
+            "lineno": 76,
+            "node_id": 489,
+            "src": "2051:8:4"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 26,
+        "end_lineno": 84,
+        "lineno": 77,
+        "name": "calculatingWinner",
+        "node_id": 404,
+        "pos": null,
+        "returns": null,
+        "src": "2060:340:4"
+      },
+      {
+        "args": {
+          "args": [],
+          "ast_type": "arguments",
+          "col_offset": 0,
+          "default": null,
+          "defaults": [],
+          "end_col_offset": 3,
+          "end_lineno": 89,
+          "lineno": 89,
+          "node_id": 492,
+          "src": "2460:3:4"
+        },
+        "ast_type": "FunctionDef",
+        "body": [
+          {
+            "ast_type": "Return",
+            "col_offset": 4,
+            "end_col_offset": 22,
+            "end_lineno": 90,
+            "lineno": 90,
+            "node_id": 493,
+            "src": "2492:18:4",
+            "value": {
+              "ast_type": "Attribute",
+              "attr": "winner",
+              "col_offset": 11,
+              "end_col_offset": 22,
+              "end_lineno": 90,
+              "lineno": 90,
+              "node_id": 494,
+              "src": "2499:11:4",
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 11,
+                "end_col_offset": 15,
+                "end_lineno": 90,
+                "id": "self",
+                "lineno": 90,
+                "node_id": 495,
+                "src": "2499:4:4"
+              }
+            }
+          }
+        ],
+        "col_offset": 0,
+        "decorator_list": [
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 5,
+            "end_lineno": 87,
+            "id": "view",
+            "lineno": 87,
+            "node_id": 498,
+            "src": "2445:4:4"
+          },
+          {
+            "ast_type": "Name",
+            "col_offset": 1,
+            "end_col_offset": 9,
+            "end_lineno": 88,
+            "id": "external",
+            "lineno": 88,
+            "node_id": 500,
+            "src": "2451:8:4"
+          }
+        ],
+        "doc_string": null,
+        "end_col_offset": 22,
+        "end_lineno": 90,
+        "lineno": 89,
+        "name": "getWinner",
+        "node_id": 491,
+        "pos": null,
+        "returns": {
+          "ast_type": "Name",
+          "col_offset": 19,
+          "end_col_offset": 26,
+          "end_lineno": 89,
+          "id": "address",
+          "lineno": 89,
+          "node_id": 502,
+          "src": "2479:7:4"
+        },
+        "src": "2460:50:4"
+      }
+    ],
+    "col_offset": 0,
+    "doc_string": null,
+    "end_col_offset": 22,
+    "end_lineno": 90,
+    "lineno": 1,
+    "name": "contracts/Lottery.vy",
+    "node_id": 0,
+    "src": "0:2510:4"
+  },
+  "bytecode": "0x60206105de6000396000518060a01c6105d95760405260206105fe6000396000518060a01c6105d957606052346105d9573360005560006002556040516001556802b5e3af16b188000060035560605160065561057461006461000039610574610000f36003361161000c5761044c565b60003560e01c63e97dcb62811861013957600436186105625760016002541815610096576013610200527f4c6f7474657279206e6f742073746172746564000000000000000000000000006102205261020050610200518061022001601f826000031636823750506308c379a06101c05260206101e052601f19601f6102005101166044016101dcfd5b6100a16102006104cf565b6102005134101561011257601e610220527f4e6f7420656e6f7567682066756e6420746f20706172746963697061746500006102405261022050610220518061024001601f826000031636823750506308c379a06101e052602061020052601f19601f6102205101166044016101fcfd5b33600460055460205260005260406000205560055460018101818110610562579050600555005b346105625763160344e281186102245760043618610562573360005418156101b85760206040527f4f6e6c79206f776e65722063616e20737461727420746865206c6f747465727960605260405060405180606001601f826000031636823750506308c379a06000526020602052601f19601f6040510116604401601cfd5b6002541561021d57601e6040527f43616e27742073746172742061206e6577206c6f74746572792079657421000060605260405060405180606001601f826000031636823750506308c379a06000526020602052601f19601f6040510116604401601cfd5b6001600255005b631593a8c781186102b7576004361861056257600054331861056257600160025418156102a85760136060527f4c6f7474657279206973206e6f74206f70656e0000000000000000000000000060805260605060605180608001601f826000031636823750506308c379a06020526020604052601f19601f6060510116604401603cfd5b60026002556102b5610531565b005b63dc2064a181186103635760043618610562576000543318610562576006546336376b4a604052602060406004605c845afa6102f8573d600060003e3d6000fd5b60203d10610562576040905051600755600754156105625760075460055480156105625780820690509050604052600460405160205260005260406000205460085560006000600060004760046040516020526000526040600020546000f115610562576000600255005b638e7ea5b2811861038257600436186105625760085460405260206040f35b63741bef1a81186103a157600436186105625760015460405260206040f35b6388ab139a81186103c057600436186105625760035460405260206040f35b63f71d96cb81186103ed576024361861056257600460043560205260005260406000205460405260206040f35b63068d4946811861040c57600436186105625760065460405260206040f35b63ccbac9f5811861042b57600436186105625760075460405260206040f35b63dfbf53ae811861044a57600436186105625760085460405260206040f35b505b60006000fd5b60a03660403760015463feaf968c60e05260a060e0600460fc845afa61047d573d600060003e3d6000fd5b60a03d106105625760e09050805160405260208101516060526040810151608052606081015160a052608081015160c052506060516402540be4008102816402540be400820518610562579050815250565b6104da6101c0610452565b6101c0516101a0526101a05160008112610562576101c052600354670de0b6b3a7640000810281670de0b6b3a76400008204186105625790506101c051801561056257808204905090506101e0526101e051815250565b60065463dbdff2c1604052803b1561056257600060406004605c6000855af161055f573d600060003e3d6000fd5b50565b600080fda165767970657283000306000b005b600080fd",
+  "bytecodeSha1": "628e35ff8b73682727b572c2ae887d3b23d4cbba",
+  "compiler": {
+    "evm_version": "istanbul",
+    "version": "0.3.6"
+  },
+  "contractName": "Lottery",
+  "coverageMap": {
+    "branches": {
+      "0": {
+        "Lottery.calculatingWinner": {
+          "18": [
+            2089,
+            2120,
+            true
+          ],
+          "21": [
+            2187,
+            2216,
+            true
+          ]
+        },
+        "Lottery.endLottery": {
+          "12": [
+            1896,
+            1927,
+            true
+          ],
+          "14": [
+            1932,
+            1985,
+            true
+          ]
+        },
+        "Lottery.enter": {
+          "1": [
+            1665,
+            1718,
+            true
+          ],
+          "3": [
+            1723,
+            1799,
+            true
+          ]
+        },
+        "Lottery.startLottery": {
+          "7": [
+            1463,
+            1530,
+            true
+          ],
+          "9": [
+            1535,
+            1599,
+            true
+          ]
+        }
+      }
+    },
+    "statements": {
+      "0": {
+        "Lottery._generateRandom": {
+          "34": [
+            1393,
+            1427
+          ]
+        },
+        "Lottery._getEntranceFee": {
+          "30": [
+            1173,
+            1205
+          ],
+          "31": [
+            1210,
+            1252
+          ],
+          "32": [
+            1257,
+            1331
+          ],
+          "33": [
+            1336,
+            1354
+          ]
+        },
+        "Lottery._getPrice": {
+          "27": [
+            937,
+            950
+          ],
+          "28": [
+            1033,
+            1083
+          ],
+          "29": [
+            1089,
+            1117
+          ]
+        },
+        "Lottery.calculatingWinner": {
+          "17": [
+            2089,
+            2120
+          ],
+          "19": [
+            2125,
+            2182
+          ],
+          "20": [
+            2187,
+            2216
+          ],
+          "22": [
+            2221,
+            2276
+          ],
+          "23": [
+            2281,
+            2322
+          ],
+          "24": [
+            2327,
+            2373
+          ],
+          "25": [
+            2378,
+            2400
+          ]
+        },
+        "Lottery.endLottery": {
+          "11": [
+            1896,
+            1927
+          ],
+          "13": [
+            1932,
+            1985
+          ],
+          "15": [
+            1990,
+            2012
+          ],
+          "16": [
+            2017,
+            2039
+          ]
+        },
+        "Lottery.enter": {
+          "0": [
+            1665,
+            1718
+          ],
+          "2": [
+            1723,
+            1799
+          ],
+          "4": [
+            1804,
+            1841
+          ],
+          "5": [
+            1846,
+            1861
+          ]
+        },
+        "Lottery.getWinner": {
+          "26": [
+            2492,
+            2510
+          ]
+        },
+        "Lottery.startLottery": {
+          "6": [
+            1463,
+            1530
+          ],
+          "8": [
+            1535,
+            1599
+          ],
+          "10": [
+            1604,
+            1626
+          ]
+        }
+      }
+    }
+  },
+  "dependencies": [],
+  "deployedBytecode": "0x6003361161000c5761044c565b60003560e01c63e97dcb62811861013957600436186105625760016002541815610096576013610200527f4c6f7474657279206e6f742073746172746564000000000000000000000000006102205261020050610200518061022001601f826000031636823750506308c379a06101c05260206101e052601f19601f6102005101166044016101dcfd5b6100a16102006104cf565b6102005134101561011257601e610220527f4e6f7420656e6f7567682066756e6420746f20706172746963697061746500006102405261022050610220518061024001601f826000031636823750506308c379a06101e052602061020052601f19601f6102205101166044016101fcfd5b33600460055460205260005260406000205560055460018101818110610562579050600555005b346105625763160344e281186102245760043618610562573360005418156101b85760206040527f4f6e6c79206f776e65722063616e20737461727420746865206c6f747465727960605260405060405180606001601f826000031636823750506308c379a06000526020602052601f19601f6040510116604401601cfd5b6002541561021d57601e6040527f43616e27742073746172742061206e6577206c6f74746572792079657421000060605260405060405180606001601f826000031636823750506308c379a06000526020602052601f19601f6040510116604401601cfd5b6001600255005b631593a8c781186102b7576004361861056257600054331861056257600160025418156102a85760136060527f4c6f7474657279206973206e6f74206f70656e0000000000000000000000000060805260605060605180608001601f826000031636823750506308c379a06020526020604052601f19601f6060510116604401603cfd5b60026002556102b5610531565b005b63dc2064a181186103635760043618610562576000543318610562576006546336376b4a604052602060406004605c845afa6102f8573d600060003e3d6000fd5b60203d10610562576040905051600755600754156105625760075460055480156105625780820690509050604052600460405160205260005260406000205460085560006000600060004760046040516020526000526040600020546000f115610562576000600255005b638e7ea5b2811861038257600436186105625760085460405260206040f35b63741bef1a81186103a157600436186105625760015460405260206040f35b6388ab139a81186103c057600436186105625760035460405260206040f35b63f71d96cb81186103ed576024361861056257600460043560205260005260406000205460405260206040f35b63068d4946811861040c57600436186105625760065460405260206040f35b63ccbac9f5811861042b57600436186105625760075460405260206040f35b63dfbf53ae811861044a57600436186105625760085460405260206040f35b505b60006000fd5b60a03660403760015463feaf968c60e05260a060e0600460fc845afa61047d573d600060003e3d6000fd5b60a03d106105625760e09050805160405260208101516060526040810151608052606081015160a052608081015160c052506060516402540be4008102816402540be400820518610562579050815250565b6104da6101c0610452565b6101c0516101a0526101a05160008112610562576101c052600354670de0b6b3a7640000810281670de0b6b3a76400008204186105625790506101c051801561056257808204905090506101e0526101e051815250565b60065463dbdff2c1604052803b1561056257600060406004605c6000855af161055f573d600060003e3d6000fd5b50565b600080fda165767970657283000306000b",
+  "deployedSourceMap": "-1:-1:4:-;;;;:::-;;:::-;:::-;;;;;;;;;:::-;;;;;:::-;1694:1;1672:18;:23;;;1665:53;:::-;-1:-1;;1697:21;-1:-1;;1697:21;;1665:53;-1:-1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1665:53::-;-1:-1;1743:22;;:::i;:::-;;1730:35;:9;-1:-1;1723:76;;:::-;-1:-1;;1767:32;-1:-1;;1767:32;;1723:76;-1:-1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1723:76::-;1831:10;1804:12;1817:10;-1:-1;1804:24;;;;;;;-1:-1;1846:10;-1:-1;1860:1;-1:-1;;;;;;:::-;1846:15;;:10;-1:-1;;:::-;;;:::-;;;;;:::-;;;;;:::-;1484:10;1470;:24;;;1463:67;:::-;-1:-1;;1496:34;-1:-1;;1496:34;;1463:67;-1:-1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1463:67::-;1542:18;:23;;1535:64;:::-;-1:-1;;1567:32;-1:-1;;1567:32;;1535:64;-1:-1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1535:64::-;1625:1;1604:18;-1:-1;;:::-;;;;;:::-;;;;;:::-;1917:10;1903:24;:10;:24;1896:31;:::-;1961:1;1939:18;:23;;;1932:53;:::-;-1:-1;;1964:21;-1:-1;;1964:21;;1932:53;-1:-1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1932:53::-;2011:1;1990:18;-1:-1;;2017:22;:::i;-1:-1::-;;:::-;;;;;:::-;;;;;:::-;2110:10;2096:24;:10;:24;2089:31;:::-;2145:16;:37;-1:-1;;;;;;;2145:37;-1:-1;;;:::-;;;;;;;;:::-;;;;;:::-;;2145:37;;-1:-1;2125:17;:57;2194:17;:22;;2187:29;:::-;2246:17;:30;2266:10;-1:-1;;;;:::-;;2246:30;-1:-1;2246:30;;;;2221:55;;2295:12;2308:13;-1:-1;2295:27;;;;;;;-1:-1;2281:11;-1:-1;;;;;2360:12;2332;2345:13;-1:-1;2332:27;;;;;;;-1:-1;;;2327:46;;:::-;2399:1;2378:18;-1:-1;;:::-;;;;;:::-;;;;;:::-;2499:11;-1:-1;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;;;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;;;;:::-;;;;;:::-;;;;;;;;:::-;;:::-;;;;906:211::-;937:13;;;;1051:14;:32;-1:-1;;;;;;;1051:32;-1:-1;;;:::-;;;;;;;;:::-;;;;;:::-;;1051:32;;1033:50;-1:-1;1034:1;-1:-1;;1033:50;-1:-1;;1036:5;-1:-1;;1033:50;-1:-1;;1042:1;-1:-1;;1033:50;-1:-1;;1044:1;-1:-1;;1033:50;-1:-1;;1046:1;-1:-1;1033:50;1097:5;:19;1105:11;1097:19;-1:-1;1097:19;1105:11;-1:-1;;;;:::-;1097:19;;-1:-1;1089:28;;-1:-1::-;1135:219::-;-1:-1;1189:16;;:::i;:::-;;1173:32;;;1238:5;-1:-1;;;;;:::-;;1210:42;1281:16;:38;1300:19;1281:38;-1:-1;1281:38;1300:19;-1:-1;;;;:::-;1281:38;;1323:8;-1:-1;;;;:::-;;1280:51;-1:-1;1280:51;;;;1257:74;;1343:11;-1:-1;;1336:18;;-1:-1::-;1366:61::-;1393:16;:34;-1:-1;;;1393:34;-1:-1;;;:::-;;;;;;1393:34;-1:-1;;;:::-;;;;;;;;:::-;1393:34;-1:-1::-;:::-;;;",
+  "language": "Vyper",
+  "natspec": {
+    "methods": {}
+  },
+  "offset": [
+    0,
+    2511
+  ],
+  "opcodes": "PUSH1 0x3 CALLDATASIZE GT PUSH2 0x0C JUMPI PUSH2 0x44C JUMP JUMPDEST PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR PUSH4 0xE97DCB62 DUP2 XOR PUSH2 0x139 JUMPI PUSH1 0x4 CALLDATASIZE XOR PUSH2 0x562 JUMPI PUSH1 0x1 PUSH1 0x2 SLOAD XOR ISZERO PUSH2 0x096 JUMPI PUSH1 0x13 PUSH2 0x20 MSTORE PUSH32 0x4C6F7474657279206E6F7420737461727465640000000000000 PUSH2 0x220 MSTORE PUSH2 0x20 POP PUSH2 0x20 MLOAD DUP1 PUSH2 0x220 ADD PUSH1 0x1F DUP3 PUSH1 0x0 SUB AND CALLDATASIZE DUP3 CALLDATACOPY POP POP PUSH4 0x8C379A0 PUSH2 0x1C0 MSTORE PUSH1 0x20 PUSH2 0x1E0 MSTORE PUSH1 0x1F NOT PUSH1 0x1F PUSH2 0x20 MLOAD ADD AND PUSH1 0x44 ADD PUSH2 0x1DC REVERT JUMPDEST PUSH2 0x0A1 PUSH2 0x20 PUSH2 0x4CF JUMP JUMPDEST PUSH2 0x20 MLOAD CALLVALUE LT ISZERO PUSH2 0x112 JUMPI PUSH1 0x1E PUSH2 0x220 MSTORE PUSH32 0x4E6F7420656E6F7567682066756E6420746F20706172746963697061746500 PUSH2 0x240 MSTORE PUSH2 0x220 POP PUSH2 0x220 MLOAD DUP1 PUSH2 0x240 ADD PUSH1 0x1F DUP3 PUSH1 0x0 SUB AND CALLDATASIZE DUP3 CALLDATACOPY POP POP PUSH4 0x8C379A0 PUSH2 0x1E0 MSTORE PUSH1 0x20 PUSH2 0x20 MSTORE PUSH1 0x1F NOT PUSH1 0x1F PUSH2 0x220 MLOAD ADD AND PUSH1 0x44 ADD PUSH2 0x1FC REVERT JUMPDEST CALLER PUSH1 0x4 PUSH1 0x5 SLOAD PUSH1 0x20 MSTORE PUSH1 0x0 MSTORE PUSH1 0x40 PUSH1 0x0 SHA3 SSTORE PUSH1 0x5 SLOAD PUSH1 0x1 DUP2 ADD DUP2 DUP2 LT PUSH2 0x562 JUMPI SWAP1 POP PUSH1 0x5 SSTORE STOP JUMPDEST CALLVALUE PUSH2 0x562 JUMPI PUSH4 0x16344E2 DUP2 XOR PUSH2 0x224 JUMPI PUSH1 0x4 CALLDATASIZE XOR PUSH2 0x562 JUMPI CALLER PUSH1 0x0 SLOAD XOR ISZERO PUSH2 0x1B8 JUMPI PUSH1 0x20 PUSH1 0x40 MSTORE PUSH32 0x4F6E6C79206F776E65722063616E20737461727420746865206C6F7474657279 PUSH1 0x60 MSTORE PUSH1 0x40 POP PUSH1 0x40 MLOAD DUP1 PUSH1 0x60 ADD PUSH1 0x1F DUP3 PUSH1 0x0 SUB AND CALLDATASIZE DUP3 CALLDATACOPY POP POP PUSH4 0x8C379A0 PUSH1 0x0 MSTORE PUSH1 0x20 PUSH1 0x20 MSTORE PUSH1 0x1F NOT PUSH1 0x1F PUSH1 0x40 MLOAD ADD AND PUSH1 0x44 ADD PUSH1 0x1C REVERT JUMPDEST PUSH1 0x2 SLOAD ISZERO PUSH2 0x21D JUMPI PUSH1 0x1E PUSH1 0x40 MSTORE PUSH32 0x43616E27742073746172742061206E6577206C6F7474657279207965742100 PUSH1 0x60 MSTORE PUSH1 0x40 POP PUSH1 0x40 MLOAD DUP1 PUSH1 0x60 ADD PUSH1 0x1F DUP3 PUSH1 0x0 SUB AND CALLDATASIZE DUP3 CALLDATACOPY POP POP PUSH4 0x8C379A0 PUSH1 0x0 MSTORE PUSH1 0x20 PUSH1 0x20 MSTORE PUSH1 0x1F NOT PUSH1 0x1F PUSH1 0x40 MLOAD ADD AND PUSH1 0x44 ADD PUSH1 0x1C REVERT JUMPDEST PUSH1 0x1 PUSH1 0x2 SSTORE STOP JUMPDEST PUSH4 0x1593A8C7 DUP2 XOR PUSH2 0x2B7 JUMPI PUSH1 0x4 CALLDATASIZE XOR PUSH2 0x562 JUMPI PUSH1 0x0 SLOAD CALLER XOR PUSH2 0x562 JUMPI PUSH1 0x1 PUSH1 0x2 SLOAD XOR ISZERO PUSH2 0x2A8 JUMPI PUSH1 0x13 PUSH1 0x60 MSTORE PUSH32 0x4C6F7474657279206973206E6F74206F70656E0000000000000 PUSH1 0x80 MSTORE PUSH1 0x60 POP PUSH1 0x60 MLOAD DUP1 PUSH1 0x80 ADD PUSH1 0x1F DUP3 PUSH1 0x0 SUB AND CALLDATASIZE DUP3 CALLDATACOPY POP POP PUSH4 0x8C379A0 PUSH1 0x20 MSTORE PUSH1 0x20 PUSH1 0x40 MSTORE PUSH1 0x1F NOT PUSH1 0x1F PUSH1 0x60 MLOAD ADD AND PUSH1 0x44 ADD PUSH1 0x3C REVERT JUMPDEST PUSH1 0x2 PUSH1 0x2 SSTORE PUSH2 0x2B5 PUSH2 0x531 JUMP JUMPDEST STOP JUMPDEST PUSH4 0xDC2064A1 DUP2 XOR PUSH2 0x363 JUMPI PUSH1 0x4 CALLDATASIZE XOR PUSH2 0x562 JUMPI PUSH1 0x0 SLOAD CALLER XOR PUSH2 0x562 JUMPI PUSH1 0x6 SLOAD PUSH4 0x36376B4A PUSH1 0x40 MSTORE PUSH1 0x20 PUSH1 0x40 PUSH1 0x4 PUSH1 0x5C DUP5 GAS STATICCALL PUSH2 0x2F8 JUMPI RETURNDATASIZE PUSH1 0x0 PUSH1 0x0 RETURNDATACOPY RETURNDATASIZE PUSH1 0x0 REVERT JUMPDEST PUSH1 0x20 RETURNDATASIZE LT PUSH2 0x562 JUMPI PUSH1 0x40 SWAP1 POP MLOAD PUSH1 0x7 SSTORE PUSH1 0x7 SLOAD ISZERO PUSH2 0x562 JUMPI PUSH1 0x7 SLOAD PUSH1 0x5 SLOAD DUP1 ISZERO PUSH2 0x562 JUMPI DUP1 DUP3 MOD SWAP1 POP SWAP1 POP PUSH1 0x40 MSTORE PUSH1 0x4 PUSH1 0x40 MLOAD PUSH1 0x20 MSTORE PUSH1 0x0 MSTORE PUSH1 0x40 PUSH1 0x0 SHA3 SLOAD PUSH1 0x8 SSTORE PUSH1 0x0 PUSH1 0x0 PUSH1 0x0 PUSH1 0x0 SELFBALANCE PUSH1 0x4 PUSH1 0x40 MLOAD PUSH1 0x20 MSTORE PUSH1 0x0 MSTORE PUSH1 0x40 PUSH1 0x0 SHA3 SLOAD PUSH1 0x0 CALL ISZERO PUSH2 0x562 JUMPI PUSH1 0x0 PUSH1 0x2 SSTORE STOP JUMPDEST PUSH4 0x8E7EA5B2 DUP2 XOR PUSH2 0x382 JUMPI PUSH1 0x4 CALLDATASIZE XOR PUSH2 0x562 JUMPI PUSH1 0x8 SLOAD PUSH1 0x40 MSTORE PUSH1 0x20 PUSH1 0x40 RETURN JUMPDEST PUSH4 0x741BEF1A DUP2 XOR PUSH2 0x3A1 JUMPI PUSH1 0x4 CALLDATASIZE XOR PUSH2 0x562 JUMPI PUSH1 0x1 SLOAD PUSH1 0x40 MSTORE PUSH1 0x20 PUSH1 0x40 RETURN JUMPDEST PUSH4 0x88AB139A DUP2 XOR PUSH2 0x3C0 JUMPI PUSH1 0x4 CALLDATASIZE XOR PUSH2 0x562 JUMPI PUSH1 0x3 SLOAD PUSH1 0x40 MSTORE PUSH1 0x20 PUSH1 0x40 RETURN JUMPDEST PUSH4 0xF71D96CB DUP2 XOR PUSH2 0x3ED JUMPI PUSH1 0x24 CALLDATASIZE XOR PUSH2 0x562 JUMPI PUSH1 0x4 PUSH1 0x4 CALLDATALOAD PUSH1 0x20 MSTORE PUSH1 0x0 MSTORE PUSH1 0x40 PUSH1 0x0 SHA3 SLOAD PUSH1 0x40 MSTORE PUSH1 0x20 PUSH1 0x40 RETURN JUMPDEST PUSH4 0x68D4946 DUP2 XOR PUSH2 0x4C JUMPI PUSH1 0x4 CALLDATASIZE XOR PUSH2 0x562 JUMPI PUSH1 0x6 SLOAD PUSH1 0x40 MSTORE PUSH1 0x20 PUSH1 0x40 RETURN JUMPDEST PUSH4 0xCCBAC9F5 DUP2 XOR PUSH2 0x42B JUMPI PUSH1 0x4 CALLDATASIZE XOR PUSH2 0x562 JUMPI PUSH1 0x7 SLOAD PUSH1 0x40 MSTORE PUSH1 0x20 PUSH1 0x40 RETURN JUMPDEST PUSH4 0xDFBF53AE DUP2 XOR PUSH2 0x44A JUMPI PUSH1 0x4 CALLDATASIZE XOR PUSH2 0x562 JUMPI PUSH1 0x8 SLOAD PUSH1 0x40 MSTORE PUSH1 0x20 PUSH1 0x40 RETURN JUMPDEST POP JUMPDEST PUSH1 0x0 PUSH1 0x0 REVERT JUMPDEST PUSH1 0xA0 CALLDATASIZE PUSH1 0x40 CALLDATACOPY PUSH1 0x1 SLOAD PUSH4 0xFEAF968C PUSH1 0xE0 MSTORE PUSH1 0xA0 PUSH1 0xE0 PUSH1 0x4 PUSH1 0xFC DUP5 GAS STATICCALL PUSH2 0x47D JUMPI RETURNDATASIZE PUSH1 0x0 PUSH1 0x0 RETURNDATACOPY RETURNDATASIZE PUSH1 0x0 REVERT JUMPDEST PUSH1 0xA0 RETURNDATASIZE LT PUSH2 0x562 JUMPI PUSH1 0xE0 SWAP1 POP DUP1 MLOAD PUSH1 0x40 MSTORE PUSH1 0x20 DUP2 ADD MLOAD PUSH1 0x60 MSTORE PUSH1 0x40 DUP2 ADD MLOAD PUSH1 0x80 MSTORE PUSH1 0x60 DUP2 ADD MLOAD PUSH1 0xA0 MSTORE PUSH1 0x80 DUP2 ADD MLOAD PUSH1 0xC0 MSTORE POP PUSH1 0x60 MLOAD PUSH5 0x254BE40 DUP2 MUL DUP2 PUSH5 0x254BE40 DUP3 SDIV XOR PUSH2 0x562 JUMPI SWAP1 POP DUP2 MSTORE POP JUMP JUMPDEST PUSH2 0x4DA PUSH2 0x1C0 PUSH2 0x452 JUMP JUMPDEST PUSH2 0x1C0 MLOAD PUSH2 0x1A0 MSTORE PUSH2 0x1A0 MLOAD PUSH1 0x0 DUP2 SLT PUSH2 0x562 JUMPI PUSH2 0x1C0 MSTORE PUSH1 0x3 SLOAD PUSH8 0xDE0B6B3A76400 DUP2 MUL DUP2 PUSH8 0xDE0B6B3A76400 DUP3 DIV XOR PUSH2 0x562 JUMPI SWAP1 POP PUSH2 0x1C0 MLOAD DUP1 ISZERO PUSH2 0x562 JUMPI DUP1 DUP3 DIV SWAP1 POP SWAP1 POP PUSH2 0x1E0 MSTORE PUSH2 0x1E0 MLOAD DUP2 MSTORE POP JUMP JUMPDEST PUSH1 0x6 SLOAD PUSH4 0xDBDFF2C1 PUSH1 0x40 MSTORE DUP1 EXTCODESIZE ISZERO PUSH2 0x562 JUMPI PUSH1 0x0 PUSH1 0x40 PUSH1 0x4 PUSH1 0x5C PUSH1 0x0 DUP6 GAS CALL PUSH2 0x55F JUMPI RETURNDATASIZE PUSH1 0x0 PUSH1 0x0 RETURNDATACOPY RETURNDATASIZE PUSH1 0x0 REVERT JUMPDEST POP JUMP JUMPDEST PUSH1 0x0 DUP1 REVERT LOG1 PUSH6 0x767970657283 STOP SUB MOD STOP SIGNEXTEND",
+  "pcMap": {
+    "0": {
+      "offset": [
+        0,
+        2510
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x3"
+    },
+    "2": {
+      "op": "CALLDATASIZE"
+    },
+    "3": {
+      "op": "GT"
+    },
+    "4": {
+      "op": "PUSH2",
+      "value": "0x0C"
+    },
+    "7": {
+      "op": "JUMPI"
+    },
+    "8": {
+      "op": "PUSH2",
+      "value": "0x44C"
+    },
+    "11": {
+      "op": "JUMP"
+    },
+    "12": {
+      "op": "JUMPDEST"
+    },
+    "13": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "15": {
+      "op": "CALLDATALOAD"
+    },
+    "16": {
+      "op": "PUSH1",
+      "value": "0xE0"
+    },
+    "18": {
+      "op": "SHR"
+    },
+    "19": {
+      "op": "PUSH4",
+      "value": "0xE97DCB62"
+    },
+    "24": {
+      "op": "DUP2"
+    },
+    "25": {
+      "op": "XOR"
+    },
+    "26": {
+      "op": "PUSH2",
+      "value": "0x139"
+    },
+    "29": {
+      "op": "JUMPI"
+    },
+    "30": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "32": {
+      "op": "CALLDATASIZE"
+    },
+    "33": {
+      "op": "XOR"
+    },
+    "34": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "37": {
+      "op": "JUMPI"
+    },
+    "38": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1694,
+        1695
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 0,
+      "value": "0x1"
+    },
+    "40": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1672,
+        1690
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x2"
+    },
+    "42": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1672,
+        1695
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "43": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1672,
+        1695
+      ],
+      "op": "XOR",
+      "path": "0"
+    },
+    "44": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1672,
+        1695
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "45": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1665,
+        1718
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x096"
+    },
+    "48": {
+      "branch": 1,
+      "fn": "Lottery.enter",
+      "offset": [
+        1665,
+        1718
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "49": {
+      "op": "PUSH1",
+      "value": "0x13"
+    },
+    "51": {
+      "op": "PUSH2",
+      "value": "0x20"
+    },
+    "54": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1697,
+        1718
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "55": {
+      "op": "PUSH32",
+      "value": "0x4C6F7474657279206E6F7420737461727465640000000000000"
+    },
+    "88": {
+      "op": "PUSH2",
+      "value": "0x220"
+    },
+    "91": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1697,
+        1718
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "92": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1697,
+        1718
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x20"
+    },
+    "95": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1665,
+        1718
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "96": {
+      "op": "PUSH2",
+      "value": "0x20"
+    },
+    "99": {
+      "op": "MLOAD"
+    },
+    "100": {
+      "op": "DUP1"
+    },
+    "101": {
+      "op": "PUSH2",
+      "value": "0x220"
+    },
+    "104": {
+      "op": "ADD"
+    },
+    "105": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "107": {
+      "op": "DUP3"
+    },
+    "108": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "110": {
+      "op": "SUB"
+    },
+    "111": {
+      "op": "AND"
+    },
+    "112": {
+      "op": "CALLDATASIZE"
+    },
+    "113": {
+      "op": "DUP3"
+    },
+    "114": {
+      "op": "CALLDATACOPY"
+    },
+    "115": {
+      "op": "POP"
+    },
+    "116": {
+      "op": "POP"
+    },
+    "117": {
+      "op": "PUSH4",
+      "value": "0x8C379A0"
+    },
+    "122": {
+      "op": "PUSH2",
+      "value": "0x1C0"
+    },
+    "125": {
+      "op": "MSTORE"
+    },
+    "126": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "128": {
+      "op": "PUSH2",
+      "value": "0x1E0"
+    },
+    "131": {
+      "op": "MSTORE"
+    },
+    "132": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "134": {
+      "op": "NOT"
+    },
+    "135": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "137": {
+      "op": "PUSH2",
+      "value": "0x20"
+    },
+    "140": {
+      "op": "MLOAD"
+    },
+    "141": {
+      "op": "ADD"
+    },
+    "142": {
+      "op": "AND"
+    },
+    "143": {
+      "op": "PUSH1",
+      "value": "0x44"
+    },
+    "145": {
+      "op": "ADD"
+    },
+    "146": {
+      "op": "PUSH2",
+      "value": "0x1DC"
+    },
+    "149": {
+      "op": "REVERT"
+    },
+    "150": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1665,
+        1718
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "151": {
+      "op": "PUSH2",
+      "value": "0x0A1"
+    },
+    "154": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1743,
+        1765
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 2,
+      "value": "0x20"
+    },
+    "157": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1743,
+        1765
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x4CF"
+    },
+    "160": {
+      "fn": "Lottery.enter",
+      "jump": "i",
+      "offset": [
+        1743,
+        1765
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "161": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1743,
+        1765
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "162": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1743,
+        1765
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x20"
+    },
+    "165": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1730,
+        1765
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "166": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1730,
+        1739
+      ],
+      "op": "CALLVALUE",
+      "path": "0"
+    },
+    "167": {
+      "op": "LT"
+    },
+    "168": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1723,
+        1799
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "169": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1723,
+        1799
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x112"
+    },
+    "172": {
+      "branch": 3,
+      "fn": "Lottery.enter",
+      "offset": [
+        1723,
+        1799
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "173": {
+      "op": "PUSH1",
+      "value": "0x1E"
+    },
+    "175": {
+      "op": "PUSH2",
+      "value": "0x220"
+    },
+    "178": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1767,
+        1799
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "179": {
+      "op": "PUSH32",
+      "value": "0x4E6F7420656E6F7567682066756E6420746F20706172746963697061746500"
+    },
+    "212": {
+      "op": "PUSH2",
+      "value": "0x240"
+    },
+    "215": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1767,
+        1799
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "216": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1767,
+        1799
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x220"
+    },
+    "219": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1723,
+        1799
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "220": {
+      "op": "PUSH2",
+      "value": "0x220"
+    },
+    "223": {
+      "op": "MLOAD"
+    },
+    "224": {
+      "op": "DUP1"
+    },
+    "225": {
+      "op": "PUSH2",
+      "value": "0x240"
+    },
+    "228": {
+      "op": "ADD"
+    },
+    "229": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "231": {
+      "op": "DUP3"
+    },
+    "232": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "234": {
+      "op": "SUB"
+    },
+    "235": {
+      "op": "AND"
+    },
+    "236": {
+      "op": "CALLDATASIZE"
+    },
+    "237": {
+      "op": "DUP3"
+    },
+    "238": {
+      "op": "CALLDATACOPY"
+    },
+    "239": {
+      "op": "POP"
+    },
+    "240": {
+      "op": "POP"
+    },
+    "241": {
+      "op": "PUSH4",
+      "value": "0x8C379A0"
+    },
+    "246": {
+      "op": "PUSH2",
+      "value": "0x1E0"
+    },
+    "249": {
+      "op": "MSTORE"
+    },
+    "250": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "252": {
+      "op": "PUSH2",
+      "value": "0x20"
+    },
+    "255": {
+      "op": "MSTORE"
+    },
+    "256": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "258": {
+      "op": "NOT"
+    },
+    "259": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "261": {
+      "op": "PUSH2",
+      "value": "0x220"
+    },
+    "264": {
+      "op": "MLOAD"
+    },
+    "265": {
+      "op": "ADD"
+    },
+    "266": {
+      "op": "AND"
+    },
+    "267": {
+      "op": "PUSH1",
+      "value": "0x44"
+    },
+    "269": {
+      "op": "ADD"
+    },
+    "270": {
+      "op": "PUSH2",
+      "value": "0x1FC"
+    },
+    "273": {
+      "op": "REVERT"
+    },
+    "274": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1723,
+        1799
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "275": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1831,
+        1841
+      ],
+      "op": "CALLER",
+      "path": "0",
+      "statement": 4
+    },
+    "276": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1804,
+        1816
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x4"
+    },
+    "278": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1817,
+        1827
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x5"
+    },
+    "280": {
+      "op": "SLOAD"
+    },
+    "281": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1804,
+        1828
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x20"
+    },
+    "283": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1804,
+        1828
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "284": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1804,
+        1828
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "286": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1804,
+        1828
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "287": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1804,
+        1828
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "289": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1804,
+        1828
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "291": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1804,
+        1828
+      ],
+      "op": "SHA3",
+      "path": "0"
+    },
+    "292": {
+      "op": "SSTORE"
+    },
+    "293": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1846,
+        1856
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 5,
+      "value": "0x5"
+    },
+    "295": {
+      "op": "SLOAD"
+    },
+    "296": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1860,
+        1861
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x1"
+    },
+    "298": {
+      "op": "DUP2"
+    },
+    "299": {
+      "op": "ADD"
+    },
+    "300": {
+      "op": "DUP2"
+    },
+    "301": {
+      "op": "DUP2"
+    },
+    "302": {
+      "op": "LT"
+    },
+    "303": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "306": {
+      "op": "JUMPI"
+    },
+    "307": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1846,
+        1861
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "308": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1846,
+        1861
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "309": {
+      "fn": "Lottery.enter",
+      "offset": [
+        1846,
+        1856
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x5"
+    },
+    "311": {
+      "op": "SSTORE"
+    },
+    "312": {
+      "op": "STOP"
+    },
+    "313": {
+      "op": "JUMPDEST"
+    },
+    "314": {
+      "op": "CALLVALUE"
+    },
+    "315": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "318": {
+      "op": "JUMPI"
+    },
+    "319": {
+      "op": "PUSH4",
+      "value": "0x16344E2"
+    },
+    "324": {
+      "op": "DUP2"
+    },
+    "325": {
+      "op": "XOR"
+    },
+    "326": {
+      "op": "PUSH2",
+      "value": "0x224"
+    },
+    "329": {
+      "op": "JUMPI"
+    },
+    "330": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "332": {
+      "op": "CALLDATASIZE"
+    },
+    "333": {
+      "op": "XOR"
+    },
+    "334": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "337": {
+      "op": "JUMPI"
+    },
+    "338": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1484,
+        1494
+      ],
+      "op": "CALLER",
+      "path": "0",
+      "statement": 6
+    },
+    "339": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1470,
+        1480
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "341": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1470,
+        1494
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "342": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1470,
+        1494
+      ],
+      "op": "XOR",
+      "path": "0"
+    },
+    "343": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1470,
+        1494
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "344": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1463,
+        1530
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x1B8"
+    },
+    "347": {
+      "branch": 7,
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1463,
+        1530
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "348": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "350": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "352": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1496,
+        1530
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "353": {
+      "op": "PUSH32",
+      "value": "0x4F6E6C79206F776E65722063616E20737461727420746865206C6F7474657279"
+    },
+    "386": {
+      "op": "PUSH1",
+      "value": "0x60"
+    },
+    "388": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1496,
+        1530
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "389": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1496,
+        1530
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "391": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1463,
+        1530
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "392": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "394": {
+      "op": "MLOAD"
+    },
+    "395": {
+      "op": "DUP1"
+    },
+    "396": {
+      "op": "PUSH1",
+      "value": "0x60"
+    },
+    "398": {
+      "op": "ADD"
+    },
+    "399": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "401": {
+      "op": "DUP3"
+    },
+    "402": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "404": {
+      "op": "SUB"
+    },
+    "405": {
+      "op": "AND"
+    },
+    "406": {
+      "op": "CALLDATASIZE"
+    },
+    "407": {
+      "op": "DUP3"
+    },
+    "408": {
+      "op": "CALLDATACOPY"
+    },
+    "409": {
+      "op": "POP"
+    },
+    "410": {
+      "op": "POP"
+    },
+    "411": {
+      "op": "PUSH4",
+      "value": "0x8C379A0"
+    },
+    "416": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "418": {
+      "op": "MSTORE"
+    },
+    "419": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "421": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "423": {
+      "op": "MSTORE"
+    },
+    "424": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "426": {
+      "op": "NOT"
+    },
+    "427": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "429": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "431": {
+      "op": "MLOAD"
+    },
+    "432": {
+      "op": "ADD"
+    },
+    "433": {
+      "op": "AND"
+    },
+    "434": {
+      "op": "PUSH1",
+      "value": "0x44"
+    },
+    "436": {
+      "op": "ADD"
+    },
+    "437": {
+      "op": "PUSH1",
+      "value": "0x1C"
+    },
+    "439": {
+      "op": "REVERT"
+    },
+    "440": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1463,
+        1530
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "441": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1542,
+        1560
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 8,
+      "value": "0x2"
+    },
+    "443": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1542,
+        1565
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "444": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1542,
+        1565
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "445": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1535,
+        1599
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x21D"
+    },
+    "448": {
+      "branch": 9,
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1535,
+        1599
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "449": {
+      "op": "PUSH1",
+      "value": "0x1E"
+    },
+    "451": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "453": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1567,
+        1599
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "454": {
+      "op": "PUSH32",
+      "value": "0x43616E27742073746172742061206E6577206C6F7474657279207965742100"
+    },
+    "487": {
+      "op": "PUSH1",
+      "value": "0x60"
+    },
+    "489": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1567,
+        1599
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "490": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1567,
+        1599
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "492": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1535,
+        1599
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "493": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "495": {
+      "op": "MLOAD"
+    },
+    "496": {
+      "op": "DUP1"
+    },
+    "497": {
+      "op": "PUSH1",
+      "value": "0x60"
+    },
+    "499": {
+      "op": "ADD"
+    },
+    "500": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "502": {
+      "op": "DUP3"
+    },
+    "503": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "505": {
+      "op": "SUB"
+    },
+    "506": {
+      "op": "AND"
+    },
+    "507": {
+      "op": "CALLDATASIZE"
+    },
+    "508": {
+      "op": "DUP3"
+    },
+    "509": {
+      "op": "CALLDATACOPY"
+    },
+    "510": {
+      "op": "POP"
+    },
+    "511": {
+      "op": "POP"
+    },
+    "512": {
+      "op": "PUSH4",
+      "value": "0x8C379A0"
+    },
+    "517": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "519": {
+      "op": "MSTORE"
+    },
+    "520": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "522": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "524": {
+      "op": "MSTORE"
+    },
+    "525": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "527": {
+      "op": "NOT"
+    },
+    "528": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "530": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "532": {
+      "op": "MLOAD"
+    },
+    "533": {
+      "op": "ADD"
+    },
+    "534": {
+      "op": "AND"
+    },
+    "535": {
+      "op": "PUSH1",
+      "value": "0x44"
+    },
+    "537": {
+      "op": "ADD"
+    },
+    "538": {
+      "op": "PUSH1",
+      "value": "0x1C"
+    },
+    "540": {
+      "op": "REVERT"
+    },
+    "541": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1535,
+        1599
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "542": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1625,
+        1626
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 10,
+      "value": "0x1"
+    },
+    "544": {
+      "fn": "Lottery.startLottery",
+      "offset": [
+        1604,
+        1622
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x2"
+    },
+    "546": {
+      "op": "SSTORE"
+    },
+    "547": {
+      "op": "STOP"
+    },
+    "548": {
+      "op": "JUMPDEST"
+    },
+    "549": {
+      "op": "PUSH4",
+      "value": "0x1593A8C7"
+    },
+    "554": {
+      "op": "DUP2"
+    },
+    "555": {
+      "op": "XOR"
+    },
+    "556": {
+      "op": "PUSH2",
+      "value": "0x2B7"
+    },
+    "559": {
+      "op": "JUMPI"
+    },
+    "560": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "562": {
+      "op": "CALLDATASIZE"
+    },
+    "563": {
+      "op": "XOR"
+    },
+    "564": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "567": {
+      "op": "JUMPI"
+    },
+    "568": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1917,
+        1927
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 11,
+      "value": "0x0"
+    },
+    "570": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1903,
+        1927
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "571": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1903,
+        1913
+      ],
+      "op": "CALLER",
+      "path": "0"
+    },
+    "572": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1903,
+        1927
+      ],
+      "op": "XOR",
+      "path": "0"
+    },
+    "573": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1896,
+        1927
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x562"
+    },
+    "576": {
+      "branch": 12,
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1896,
+        1927
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "577": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1961,
+        1962
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 13,
+      "value": "0x1"
+    },
+    "579": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1939,
+        1957
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x2"
+    },
+    "581": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1939,
+        1962
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "582": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1939,
+        1962
+      ],
+      "op": "XOR",
+      "path": "0"
+    },
+    "583": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1939,
+        1962
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "584": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1932,
+        1985
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x2A8"
+    },
+    "587": {
+      "branch": 14,
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1932,
+        1985
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "588": {
+      "op": "PUSH1",
+      "value": "0x13"
+    },
+    "590": {
+      "op": "PUSH1",
+      "value": "0x60"
+    },
+    "592": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1964,
+        1985
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "593": {
+      "op": "PUSH32",
+      "value": "0x4C6F7474657279206973206E6F74206F70656E0000000000000"
+    },
+    "626": {
+      "op": "PUSH1",
+      "value": "0x80"
+    },
+    "628": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1964,
+        1985
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "629": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1964,
+        1985
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x60"
+    },
+    "631": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1932,
+        1985
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "632": {
+      "op": "PUSH1",
+      "value": "0x60"
+    },
+    "634": {
+      "op": "MLOAD"
+    },
+    "635": {
+      "op": "DUP1"
+    },
+    "636": {
+      "op": "PUSH1",
+      "value": "0x80"
+    },
+    "638": {
+      "op": "ADD"
+    },
+    "639": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "641": {
+      "op": "DUP3"
+    },
+    "642": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "644": {
+      "op": "SUB"
+    },
+    "645": {
+      "op": "AND"
+    },
+    "646": {
+      "op": "CALLDATASIZE"
+    },
+    "647": {
+      "op": "DUP3"
+    },
+    "648": {
+      "op": "CALLDATACOPY"
+    },
+    "649": {
+      "op": "POP"
+    },
+    "650": {
+      "op": "POP"
+    },
+    "651": {
+      "op": "PUSH4",
+      "value": "0x8C379A0"
+    },
+    "656": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "658": {
+      "op": "MSTORE"
+    },
+    "659": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "661": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "663": {
+      "op": "MSTORE"
+    },
+    "664": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "666": {
+      "op": "NOT"
+    },
+    "667": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "669": {
+      "op": "PUSH1",
+      "value": "0x60"
+    },
+    "671": {
+      "op": "MLOAD"
+    },
+    "672": {
+      "op": "ADD"
+    },
+    "673": {
+      "op": "AND"
+    },
+    "674": {
+      "op": "PUSH1",
+      "value": "0x44"
+    },
+    "676": {
+      "op": "ADD"
+    },
+    "677": {
+      "op": "PUSH1",
+      "value": "0x3C"
+    },
+    "679": {
+      "op": "REVERT"
+    },
+    "680": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1932,
+        1985
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "681": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        2011,
+        2012
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 15,
+      "value": "0x2"
+    },
+    "683": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        1990,
+        2008
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x2"
+    },
+    "685": {
+      "op": "SSTORE"
+    },
+    "686": {
+      "op": "PUSH2",
+      "value": "0x2B5"
+    },
+    "689": {
+      "fn": "Lottery.endLottery",
+      "offset": [
+        2017,
+        2039
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 16,
+      "value": "0x531"
+    },
+    "692": {
+      "fn": "Lottery.endLottery",
+      "jump": "i",
+      "offset": [
+        2017,
+        2039
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "693": {
+      "op": "JUMPDEST"
+    },
+    "694": {
+      "op": "STOP"
+    },
+    "695": {
+      "op": "JUMPDEST"
+    },
+    "696": {
+      "op": "PUSH4",
+      "value": "0xDC2064A1"
+    },
+    "701": {
+      "op": "DUP2"
+    },
+    "702": {
+      "op": "XOR"
+    },
+    "703": {
+      "op": "PUSH2",
+      "value": "0x363"
+    },
+    "706": {
+      "op": "JUMPI"
+    },
+    "707": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "709": {
+      "op": "CALLDATASIZE"
+    },
+    "710": {
+      "op": "XOR"
+    },
+    "711": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "714": {
+      "op": "JUMPI"
+    },
+    "715": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2110,
+        2120
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 17,
+      "value": "0x0"
+    },
+    "717": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2096,
+        2120
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "718": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2096,
+        2106
+      ],
+      "op": "CALLER",
+      "path": "0"
+    },
+    "719": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2096,
+        2120
+      ],
+      "op": "XOR",
+      "path": "0"
+    },
+    "720": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2089,
+        2120
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x562"
+    },
+    "723": {
+      "branch": 18,
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2089,
+        2120
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "724": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2145,
+        2161
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 19,
+      "value": "0x6"
+    },
+    "726": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2145,
+        2182
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "727": {
+      "op": "PUSH4",
+      "value": "0x36376B4A"
+    },
+    "732": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "734": {
+      "op": "MSTORE"
+    },
+    "735": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "737": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "739": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "741": {
+      "op": "PUSH1",
+      "value": "0x5C"
+    },
+    "743": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2145,
+        2182
+      ],
+      "op": "DUP5",
+      "path": "0"
+    },
+    "744": {
+      "op": "GAS"
+    },
+    "745": {
+      "op": "STATICCALL"
+    },
+    "746": {
+      "op": "PUSH2",
+      "value": "0x2F8"
+    },
+    "749": {
+      "op": "JUMPI"
+    },
+    "750": {
+      "op": "RETURNDATASIZE"
+    },
+    "751": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "753": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "755": {
+      "op": "RETURNDATACOPY"
+    },
+    "756": {
+      "op": "RETURNDATASIZE"
+    },
+    "757": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "759": {
+      "op": "REVERT"
+    },
+    "760": {
+      "op": "JUMPDEST"
+    },
+    "761": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "763": {
+      "op": "RETURNDATASIZE"
+    },
+    "764": {
+      "op": "LT"
+    },
+    "765": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "768": {
+      "op": "JUMPI"
+    },
+    "769": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "771": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2145,
+        2182
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "772": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2145,
+        2182
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "773": {
+      "op": "MLOAD"
+    },
+    "774": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2125,
+        2142
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x7"
+    },
+    "776": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2125,
+        2182
+      ],
+      "op": "SSTORE",
+      "path": "0"
+    },
+    "777": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2194,
+        2211
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 20,
+      "value": "0x7"
+    },
+    "779": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2194,
+        2216
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "780": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2194,
+        2216
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "781": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2187,
+        2216
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x562"
+    },
+    "784": {
+      "branch": 21,
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2187,
+        2216
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "785": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2246,
+        2263
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 22,
+      "value": "0x7"
+    },
+    "787": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2246,
+        2276
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "788": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2266,
+        2276
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x5"
+    },
+    "790": {
+      "op": "SLOAD"
+    },
+    "791": {
+      "op": "DUP1"
+    },
+    "792": {
+      "op": "ISZERO"
+    },
+    "793": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "796": {
+      "op": "JUMPI"
+    },
+    "797": {
+      "op": "DUP1"
+    },
+    "798": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2246,
+        2276
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "799": {
+      "op": "MOD"
+    },
+    "800": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2246,
+        2276
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "801": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2246,
+        2276
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "802": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2246,
+        2276
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "803": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2246,
+        2276
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "804": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2221,
+        2276
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "806": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2221,
+        2276
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "807": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2295,
+        2307
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 23,
+      "value": "0x4"
+    },
+    "809": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2308,
+        2321
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "811": {
+      "op": "MLOAD"
+    },
+    "812": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2295,
+        2322
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x20"
+    },
+    "814": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2295,
+        2322
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "815": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2295,
+        2322
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "817": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2295,
+        2322
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "818": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2295,
+        2322
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "820": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2295,
+        2322
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "822": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2295,
+        2322
+      ],
+      "op": "SHA3",
+      "path": "0"
+    },
+    "823": {
+      "op": "SLOAD"
+    },
+    "824": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2281,
+        2292
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x8"
+    },
+    "826": {
+      "op": "SSTORE"
+    },
+    "827": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "829": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "831": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "833": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "835": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2360,
+        2372
+      ],
+      "op": "SELFBALANCE",
+      "path": "0",
+      "statement": 24
+    },
+    "836": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2332,
+        2344
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x4"
+    },
+    "838": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2345,
+        2358
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "840": {
+      "op": "MLOAD"
+    },
+    "841": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2332,
+        2359
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x20"
+    },
+    "843": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2332,
+        2359
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "844": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2332,
+        2359
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "846": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2332,
+        2359
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "847": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2332,
+        2359
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "849": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2332,
+        2359
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "851": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2332,
+        2359
+      ],
+      "op": "SHA3",
+      "path": "0"
+    },
+    "852": {
+      "op": "SLOAD"
+    },
+    "853": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "855": {
+      "op": "CALL"
+    },
+    "856": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2327,
+        2373
+      ],
+      "op": "ISZERO",
+      "path": "0"
+    },
+    "857": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2327,
+        2373
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x562"
+    },
+    "860": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2327,
+        2373
+      ],
+      "op": "JUMPI",
+      "path": "0"
+    },
+    "861": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2399,
+        2400
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 25,
+      "value": "0x0"
+    },
+    "863": {
+      "fn": "Lottery.calculatingWinner",
+      "offset": [
+        2378,
+        2396
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x2"
+    },
+    "865": {
+      "op": "SSTORE"
+    },
+    "866": {
+      "op": "STOP"
+    },
+    "867": {
+      "op": "JUMPDEST"
+    },
+    "868": {
+      "op": "PUSH4",
+      "value": "0x8E7EA5B2"
+    },
+    "873": {
+      "op": "DUP2"
+    },
+    "874": {
+      "op": "XOR"
+    },
+    "875": {
+      "op": "PUSH2",
+      "value": "0x382"
+    },
+    "878": {
+      "op": "JUMPI"
+    },
+    "879": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "881": {
+      "op": "CALLDATASIZE"
+    },
+    "882": {
+      "op": "XOR"
+    },
+    "883": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "886": {
+      "op": "JUMPI"
+    },
+    "887": {
+      "fn": "Lottery.getWinner",
+      "offset": [
+        2499,
+        2510
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 26,
+      "value": "0x8"
+    },
+    "889": {
+      "op": "SLOAD"
+    },
+    "890": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "892": {
+      "op": "MSTORE"
+    },
+    "893": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "895": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "897": {
+      "op": "RETURN"
+    },
+    "898": {
+      "op": "JUMPDEST"
+    },
+    "899": {
+      "op": "PUSH4",
+      "value": "0x741BEF1A"
+    },
+    "904": {
+      "op": "DUP2"
+    },
+    "905": {
+      "op": "XOR"
+    },
+    "906": {
+      "op": "PUSH2",
+      "value": "0x3A1"
+    },
+    "909": {
+      "op": "JUMPI"
+    },
+    "910": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "912": {
+      "op": "CALLDATASIZE"
+    },
+    "913": {
+      "op": "XOR"
+    },
+    "914": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "917": {
+      "op": "JUMPI"
+    },
+    "918": {
+      "op": "PUSH1",
+      "value": "0x1"
+    },
+    "920": {
+      "op": "SLOAD"
+    },
+    "921": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "923": {
+      "op": "MSTORE"
+    },
+    "924": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "926": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "928": {
+      "op": "RETURN"
+    },
+    "929": {
+      "op": "JUMPDEST"
+    },
+    "930": {
+      "op": "PUSH4",
+      "value": "0x88AB139A"
+    },
+    "935": {
+      "op": "DUP2"
+    },
+    "936": {
+      "op": "XOR"
+    },
+    "937": {
+      "op": "PUSH2",
+      "value": "0x3C0"
+    },
+    "940": {
+      "op": "JUMPI"
+    },
+    "941": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "943": {
+      "op": "CALLDATASIZE"
+    },
+    "944": {
+      "op": "XOR"
+    },
+    "945": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "948": {
+      "op": "JUMPI"
+    },
+    "949": {
+      "op": "PUSH1",
+      "value": "0x3"
+    },
+    "951": {
+      "op": "SLOAD"
+    },
+    "952": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "954": {
+      "op": "MSTORE"
+    },
+    "955": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "957": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "959": {
+      "op": "RETURN"
+    },
+    "960": {
+      "op": "JUMPDEST"
+    },
+    "961": {
+      "op": "PUSH4",
+      "value": "0xF71D96CB"
+    },
+    "966": {
+      "op": "DUP2"
+    },
+    "967": {
+      "op": "XOR"
+    },
+    "968": {
+      "op": "PUSH2",
+      "value": "0x3ED"
+    },
+    "971": {
+      "op": "JUMPI"
+    },
+    "972": {
+      "op": "PUSH1",
+      "value": "0x24"
+    },
+    "974": {
+      "op": "CALLDATASIZE"
+    },
+    "975": {
+      "op": "XOR"
+    },
+    "976": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "979": {
+      "op": "JUMPI"
+    },
+    "980": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "982": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "984": {
+      "op": "CALLDATALOAD"
+    },
+    "985": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "987": {
+      "op": "MSTORE"
+    },
+    "988": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "990": {
+      "op": "MSTORE"
+    },
+    "991": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "993": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "995": {
+      "op": "SHA3"
+    },
+    "996": {
+      "op": "SLOAD"
+    },
+    "997": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "999": {
+      "op": "MSTORE"
+    },
+    "1000": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "1002": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1004": {
+      "op": "RETURN"
+    },
+    "1005": {
+      "op": "JUMPDEST"
+    },
+    "1006": {
+      "op": "PUSH4",
+      "value": "0x68D4946"
+    },
+    "1011": {
+      "op": "DUP2"
+    },
+    "1012": {
+      "op": "XOR"
+    },
+    "1013": {
+      "op": "PUSH2",
+      "value": "0x4C"
+    },
+    "1016": {
+      "op": "JUMPI"
+    },
+    "1017": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "1019": {
+      "op": "CALLDATASIZE"
+    },
+    "1020": {
+      "op": "XOR"
+    },
+    "1021": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "1024": {
+      "op": "JUMPI"
+    },
+    "1025": {
+      "op": "PUSH1",
+      "value": "0x6"
+    },
+    "1027": {
+      "op": "SLOAD"
+    },
+    "1028": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1030": {
+      "op": "MSTORE"
+    },
+    "1031": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "1033": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1035": {
+      "op": "RETURN"
+    },
+    "1036": {
+      "op": "JUMPDEST"
+    },
+    "1037": {
+      "op": "PUSH4",
+      "value": "0xCCBAC9F5"
+    },
+    "1042": {
+      "op": "DUP2"
+    },
+    "1043": {
+      "op": "XOR"
+    },
+    "1044": {
+      "op": "PUSH2",
+      "value": "0x42B"
+    },
+    "1047": {
+      "op": "JUMPI"
+    },
+    "1048": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "1050": {
+      "op": "CALLDATASIZE"
+    },
+    "1051": {
+      "op": "XOR"
+    },
+    "1052": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "1055": {
+      "op": "JUMPI"
+    },
+    "1056": {
+      "op": "PUSH1",
+      "value": "0x7"
+    },
+    "1058": {
+      "op": "SLOAD"
+    },
+    "1059": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1061": {
+      "op": "MSTORE"
+    },
+    "1062": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "1064": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1066": {
+      "op": "RETURN"
+    },
+    "1067": {
+      "op": "JUMPDEST"
+    },
+    "1068": {
+      "op": "PUSH4",
+      "value": "0xDFBF53AE"
+    },
+    "1073": {
+      "op": "DUP2"
+    },
+    "1074": {
+      "op": "XOR"
+    },
+    "1075": {
+      "op": "PUSH2",
+      "value": "0x44A"
+    },
+    "1078": {
+      "op": "JUMPI"
+    },
+    "1079": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "1081": {
+      "op": "CALLDATASIZE"
+    },
+    "1082": {
+      "op": "XOR"
+    },
+    "1083": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "1086": {
+      "op": "JUMPI"
+    },
+    "1087": {
+      "op": "PUSH1",
+      "value": "0x8"
+    },
+    "1089": {
+      "op": "SLOAD"
+    },
+    "1090": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1092": {
+      "op": "MSTORE"
+    },
+    "1093": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "1095": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1097": {
+      "op": "RETURN"
+    },
+    "1098": {
+      "op": "JUMPDEST"
+    },
+    "1099": {
+      "op": "POP"
+    },
+    "1100": {
+      "op": "JUMPDEST"
+    },
+    "1101": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1103": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1105": {
+      "op": "REVERT"
+    },
+    "1106": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        906,
+        1117
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "1107": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        937,
+        950
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 27,
+      "value": "0xA0"
+    },
+    "1109": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        937,
+        950
+      ],
+      "op": "CALLDATASIZE",
+      "path": "0"
+    },
+    "1110": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        937,
+        950
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "1112": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        937,
+        950
+      ],
+      "op": "CALLDATACOPY",
+      "path": "0"
+    },
+    "1113": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1051,
+        1065
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 28,
+      "value": "0x1"
+    },
+    "1115": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1051,
+        1083
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "1116": {
+      "op": "PUSH4",
+      "value": "0xFEAF968C"
+    },
+    "1121": {
+      "op": "PUSH1",
+      "value": "0xE0"
+    },
+    "1123": {
+      "op": "MSTORE"
+    },
+    "1124": {
+      "op": "PUSH1",
+      "value": "0xA0"
+    },
+    "1126": {
+      "op": "PUSH1",
+      "value": "0xE0"
+    },
+    "1128": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "1130": {
+      "op": "PUSH1",
+      "value": "0xFC"
+    },
+    "1132": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1051,
+        1083
+      ],
+      "op": "DUP5",
+      "path": "0"
+    },
+    "1133": {
+      "op": "GAS"
+    },
+    "1134": {
+      "op": "STATICCALL"
+    },
+    "1135": {
+      "op": "PUSH2",
+      "value": "0x47D"
+    },
+    "1138": {
+      "op": "JUMPI"
+    },
+    "1139": {
+      "op": "RETURNDATASIZE"
+    },
+    "1140": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1142": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1144": {
+      "op": "RETURNDATACOPY"
+    },
+    "1145": {
+      "op": "RETURNDATASIZE"
+    },
+    "1146": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1148": {
+      "op": "REVERT"
+    },
+    "1149": {
+      "op": "JUMPDEST"
+    },
+    "1150": {
+      "op": "PUSH1",
+      "value": "0xA0"
+    },
+    "1152": {
+      "op": "RETURNDATASIZE"
+    },
+    "1153": {
+      "op": "LT"
+    },
+    "1154": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "1157": {
+      "op": "JUMPI"
+    },
+    "1158": {
+      "op": "PUSH1",
+      "value": "0xE0"
+    },
+    "1160": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1051,
+        1083
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "1161": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1051,
+        1083
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "1162": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1033,
+        1083
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "1163": {
+      "op": "MLOAD"
+    },
+    "1164": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1034,
+        1035
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "1166": {
+      "op": "MSTORE"
+    },
+    "1167": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "1169": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1033,
+        1083
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "1170": {
+      "op": "ADD"
+    },
+    "1171": {
+      "op": "MLOAD"
+    },
+    "1172": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1036,
+        1041
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x60"
+    },
+    "1174": {
+      "op": "MSTORE"
+    },
+    "1175": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1177": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1033,
+        1083
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "1178": {
+      "op": "ADD"
+    },
+    "1179": {
+      "op": "MLOAD"
+    },
+    "1180": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1042,
+        1043
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x80"
+    },
+    "1182": {
+      "op": "MSTORE"
+    },
+    "1183": {
+      "op": "PUSH1",
+      "value": "0x60"
+    },
+    "1185": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1033,
+        1083
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "1186": {
+      "op": "ADD"
+    },
+    "1187": {
+      "op": "MLOAD"
+    },
+    "1188": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1044,
+        1045
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0xA0"
+    },
+    "1190": {
+      "op": "MSTORE"
+    },
+    "1191": {
+      "op": "PUSH1",
+      "value": "0x80"
+    },
+    "1193": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1033,
+        1083
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "1194": {
+      "op": "ADD"
+    },
+    "1195": {
+      "op": "MLOAD"
+    },
+    "1196": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1046,
+        1047
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0xC0"
+    },
+    "1198": {
+      "op": "MSTORE"
+    },
+    "1199": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1033,
+        1083
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "1200": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1097,
+        1102
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 29,
+      "value": "0x60"
+    },
+    "1202": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1097,
+        1116
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "1203": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1105,
+        1116
+      ],
+      "op": "PUSH5",
+      "path": "0",
+      "value": "0x254BE40"
+    },
+    "1209": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1097,
+        1116
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "1210": {
+      "op": "MUL"
+    },
+    "1211": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1097,
+        1116
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "1212": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1105,
+        1116
+      ],
+      "op": "PUSH5",
+      "path": "0",
+      "value": "0x254BE40"
+    },
+    "1218": {
+      "op": "DUP3"
+    },
+    "1219": {
+      "op": "SDIV"
+    },
+    "1220": {
+      "op": "XOR"
+    },
+    "1221": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "1224": {
+      "op": "JUMPI"
+    },
+    "1225": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1097,
+        1116
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "1226": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1097,
+        1116
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "1227": {
+      "op": "DUP2"
+    },
+    "1228": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1089,
+        1117
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "1229": {
+      "fn": "Lottery._getPrice",
+      "offset": [
+        1089,
+        1117
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "1230": {
+      "op": "JUMP"
+    },
+    "1231": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1135,
+        1354
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "1232": {
+      "op": "PUSH2",
+      "value": "0x4DA"
+    },
+    "1235": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1189,
+        1205
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 30,
+      "value": "0x1C0"
+    },
+    "1238": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1189,
+        1205
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x452"
+    },
+    "1241": {
+      "fn": "Lottery._getEntranceFee",
+      "jump": "i",
+      "offset": [
+        1189,
+        1205
+      ],
+      "op": "JUMP",
+      "path": "0"
+    },
+    "1242": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1189,
+        1205
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "1243": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1189,
+        1205
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x1C0"
+    },
+    "1246": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1173,
+        1205
+      ],
+      "op": "MLOAD",
+      "path": "0"
+    },
+    "1247": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1173,
+        1205
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x1A0"
+    },
+    "1250": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1173,
+        1205
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "1251": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1238,
+        1243
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 31,
+      "value": "0x1A0"
+    },
+    "1254": {
+      "op": "MLOAD"
+    },
+    "1255": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1257": {
+      "op": "DUP2"
+    },
+    "1258": {
+      "op": "SLT"
+    },
+    "1259": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "1262": {
+      "op": "JUMPI"
+    },
+    "1263": {
+      "op": "PUSH2",
+      "value": "0x1C0"
+    },
+    "1266": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1210,
+        1252
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "1267": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1281,
+        1297
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 32,
+      "value": "0x3"
+    },
+    "1269": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1281,
+        1319
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "1270": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1300,
+        1319
+      ],
+      "op": "PUSH8",
+      "path": "0",
+      "value": "0xDE0B6B3A76400"
+    },
+    "1279": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1281,
+        1319
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "1280": {
+      "op": "MUL"
+    },
+    "1281": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1281,
+        1319
+      ],
+      "op": "DUP2",
+      "path": "0"
+    },
+    "1282": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1300,
+        1319
+      ],
+      "op": "PUSH8",
+      "path": "0",
+      "value": "0xDE0B6B3A76400"
+    },
+    "1291": {
+      "op": "DUP3"
+    },
+    "1292": {
+      "op": "DIV"
+    },
+    "1293": {
+      "op": "XOR"
+    },
+    "1294": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "1297": {
+      "op": "JUMPI"
+    },
+    "1298": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1281,
+        1319
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "1299": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1281,
+        1319
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "1300": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1323,
+        1331
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x1C0"
+    },
+    "1303": {
+      "op": "MLOAD"
+    },
+    "1304": {
+      "op": "DUP1"
+    },
+    "1305": {
+      "op": "ISZERO"
+    },
+    "1306": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "1309": {
+      "op": "JUMPI"
+    },
+    "1310": {
+      "op": "DUP1"
+    },
+    "1311": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1280,
+        1331
+      ],
+      "op": "DUP3",
+      "path": "0"
+    },
+    "1312": {
+      "op": "DIV"
+    },
+    "1313": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1280,
+        1331
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "1314": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1280,
+        1331
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "1315": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1280,
+        1331
+      ],
+      "op": "SWAP1",
+      "path": "0"
+    },
+    "1316": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1280,
+        1331
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "1317": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1257,
+        1331
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "value": "0x1E0"
+    },
+    "1320": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1257,
+        1331
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "1321": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1343,
+        1354
+      ],
+      "op": "PUSH2",
+      "path": "0",
+      "statement": 33,
+      "value": "0x1E0"
+    },
+    "1324": {
+      "op": "MLOAD"
+    },
+    "1325": {
+      "op": "DUP2"
+    },
+    "1326": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1336,
+        1354
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "1327": {
+      "fn": "Lottery._getEntranceFee",
+      "offset": [
+        1336,
+        1354
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "1328": {
+      "op": "JUMP"
+    },
+    "1329": {
+      "fn": "Lottery._generateRandom",
+      "offset": [
+        1366,
+        1427
+      ],
+      "op": "JUMPDEST",
+      "path": "0"
+    },
+    "1330": {
+      "fn": "Lottery._generateRandom",
+      "offset": [
+        1393,
+        1409
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "statement": 34,
+      "value": "0x6"
+    },
+    "1332": {
+      "fn": "Lottery._generateRandom",
+      "offset": [
+        1393,
+        1427
+      ],
+      "op": "SLOAD",
+      "path": "0"
+    },
+    "1333": {
+      "op": "PUSH4",
+      "value": "0xDBDFF2C1"
+    },
+    "1338": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1340": {
+      "op": "MSTORE"
+    },
+    "1341": {
+      "fn": "Lottery._generateRandom",
+      "offset": [
+        1393,
+        1427
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "1342": {
+      "op": "EXTCODESIZE"
+    },
+    "1343": {
+      "op": "ISZERO"
+    },
+    "1344": {
+      "op": "PUSH2",
+      "value": "0x562"
+    },
+    "1347": {
+      "op": "JUMPI"
+    },
+    "1348": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1350": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "1352": {
+      "op": "PUSH1",
+      "value": "0x4"
+    },
+    "1354": {
+      "op": "PUSH1",
+      "value": "0x5C"
+    },
+    "1356": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1358": {
+      "fn": "Lottery._generateRandom",
+      "offset": [
+        1393,
+        1427
+      ],
+      "op": "DUP6",
+      "path": "0"
+    },
+    "1359": {
+      "op": "GAS"
+    },
+    "1360": {
+      "op": "CALL"
+    },
+    "1361": {
+      "op": "PUSH2",
+      "value": "0x55F"
+    },
+    "1364": {
+      "op": "JUMPI"
+    },
+    "1365": {
+      "op": "RETURNDATASIZE"
+    },
+    "1366": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1368": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1370": {
+      "op": "RETURNDATACOPY"
+    },
+    "1371": {
+      "op": "RETURNDATASIZE"
+    },
+    "1372": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1374": {
+      "op": "REVERT"
+    },
+    "1375": {
+      "op": "JUMPDEST"
+    },
+    "1376": {
+      "fn": "Lottery._generateRandom",
+      "offset": [
+        1393,
+        1427
+      ],
+      "op": "POP",
+      "path": "0"
+    },
+    "1377": {
+      "op": "JUMP"
+    },
+    "1378": {
+      "op": "JUMPDEST"
+    },
+    "1379": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "1381": {
+      "op": "DUP1"
+    },
+    "1382": {
+      "op": "REVERT"
+    }
+  },
+  "sha1": "ab78e5b3e5600d22f6efa9070df97aa3ae645f2b",
+  "source": "# @version 0.3.6\n\ninterface AggregatorV3Interface:\n    def latestRoundData() -> (int256, int256,uint256,uint256,int256) : view \n\ninterface VRFConsumerInterface:\n    def getRandomNumber(): payable\n    def returnRandomNumber() -> uint256: view\n    \n\nowner: address\npriceFeed: public(AggregatorV3Interface)\nLottery_State: uint256 # 0: Closed, 1: Open, 2: Calculating winner\nusdEntryFee: public(uint256)\nplayers: public(HashMap[uint256,address])\nCount: uint256\nVRFConsumer: public(VRFConsumerInterface)\nrandomNumber: public(uint256)\nwinner: public(address)\n\n@external\ndef __init__(_priceFeed: address, _VRFConsumer_address: address):\n    self.owner = msg.sender\n    self.Lottery_State = 0 # Lottery closed at init, need to be started\n    self.priceFeed = AggregatorV3Interface(_priceFeed)\n    self.usdEntryFee = 50*10**18\n    self.VRFConsumer = VRFConsumerInterface(_VRFConsumer_address)\n    \n\n@view\n@internal\ndef _getPrice() -> int256:\n    a: int256 = 0\n    price: int256 = 0\n    b: uint256 = 0\n    c: uint256 = 0\n    d: int256 = 0\n    (a,price,b,c,d) = self.priceFeed.latestRoundData() \n    return (price * 10000000000)\n\n@view\n@internal\ndef _getEntranceFee() -> uint256:\n    price: int256 = self._getPrice()\n    ethPrice: uint256 = convert(price,uint256)\n    costToEnter: uint256 = (self.usdEntryFee * 1000000000000000000) / ethPrice\n    return costToEnter\n\n@internal\ndef _generateRandom():\n    self.VRFConsumer.getRandomNumber()\n\n@external\ndef startLottery():\n    assert self.owner == msg.sender, \"Only owner can start the lottery\"\n    assert self.Lottery_State == 0, \"Can't start a new lottery yet!\"\n    self.Lottery_State = 1\n\n\n@payable\n@external\ndef enter():\n    assert self.Lottery_State == 1, 'Lottery not started'\n    assert msg.value >= self._getEntranceFee(), \"Not enough fund to participate\"\n    self.players[self.Count] = msg.sender\n    self.Count += 1 \n\n@external\ndef endLottery():\n    assert msg.sender == self.owner\n    assert self.Lottery_State == 1, \"Lottery is not open\"\n    self.Lottery_State = 2\n    self._generateRandom()\n    \n    \n@external\ndef calculatingWinner():\n    assert msg.sender == self.owner\n    self.randomNumber = self.VRFConsumer.returnRandomNumber()\n    assert self.randomNumber != 0\n    indexOfWinner: uint256 = self.randomNumber % self.Count\n    self.winner = self.players[indexOfWinner]\n    send(self.players[indexOfWinner],self.balance)\n    self.Lottery_State = 0\n    # We should reset the players HashMap\n\n@view\n@external\ndef getWinner() -> address:\n    return self.winner\n",
+  "sourceMap": "",
+  "sourcePath": "contracts/Lottery.vy",
+  "type": "contract"
+}
