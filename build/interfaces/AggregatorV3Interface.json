@@ -1,0 +1,109 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "description",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_roundId",
+          "type": "uint80"
+        }
+      ],
+      "name": "getRoundData",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint80"
+        },
+        {
+          "name": "",
+          "type": "int256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint80"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "latestRoundData",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint80"
+        },
+        {
+          "name": "",
+          "type": "int256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint80"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "contractName": "AggregatorV3Interface",
+  "offset": [
+    0,
+    796
+  ],
+  "sha1": "81f0830e88fade92c53e80d7108b9ef16cd847e2",
+  "source": "# @version ^0.3.3\n\n\n@external\n@view\ndef decimals() -> uint8:\n    return 0\n\n\n@external\n@view\ndef description() -> String[1000]:\n    return \"\"\n\n\n@external\n@view\ndef version() -> uint256:\n    return 0\n\n\n@external\n@view\ndef getRoundData(_roundId: uint80) -> (uint80, int256, uint256, uint256, uint80):\n    return (0, 0, 0, 0, 0)\n\n\n@external\n@view\ndef latestRoundData() -> (uint80, int256, uint256, uint256, uint80):\n    return (0, 0, 0, 0, 0)\n\n\n# Inline interface example:\n# interface AggregatorV3Interface:\n#     def decimals() -> uint8: view\n#     def description() -> String[1000]: view\n#     def version() -> uint256: view\n#     def getRoundData(_roundId: uint80) -> (uint80, int256, uint256, uint256, uint80): view\n#     def latestRoundData() -> (uint80, int256, uint256, uint256, uint80): view\n",
+  "type": "interface"
+}

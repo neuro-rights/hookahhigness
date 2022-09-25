@@ -1,0 +1,77 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "getRequestConfig",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint16"
+        },
+        {
+          "name": "",
+          "type": "uint32"
+        },
+        {
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "keyHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "subId",
+          "type": "uint64"
+        },
+        {
+          "name": "minimumRequestConfirmations",
+          "type": "uint16"
+        },
+        {
+          "name": "callbackGasLimit",
+          "type": "uint32"
+        },
+        {
+          "name": "numWords",
+          "type": "uint32"
+        }
+      ],
+      "name": "requestRandomWords",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "createSubscription",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "contractName": "VRFCoordinatorV2",
+  "offset": [
+    0,
+    473
+  ],
+  "sha1": "8414da3cebbf8b956886d64a7a91d858d5011a1e",
+  "source": "\n# @version ^0.3.3\n# https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol\n\n\n@external\n@view\ndef getRequestConfig() -> (uint16, uint32, Bytes[1000]):\n    return (0, 0, b\"\\x00\")\n\n\n@external\ndef requestRandomWords(keyHash: bytes32, subId: uint64,minimumRequestConfirmations: uint16,callbackGasLimit: uint32,numWords: uint32) -> uint256:\n    return 0\n\n\n@external\ndef createSubscription() -> uint64:\n    return 0",
+  "type": "interface"
+}
