@@ -121,7 +121,7 @@ class ContractUtils:
     def __init__(self):
         """Class init"""
 
-    def load_json(self, path_to_json: str) -> Dict[str, Any]:
+    def load_json(self, contract_address: str) -> Dict[str, Any]:
         """
         Purpose:
             Load json files
@@ -130,10 +130,13 @@ class ContractUtils:
         Returns:
             Conf: JSON file if loaded, else None
         """
+
         try:
-            with open(path_to_json, "r") as config_file:
-                conf = json.load(config_file)
-                return conf
+            ABI_ENDPOINT = "https://api.etherscan.io/api?module=contract&action=getabi&address="
+            response = requests.get('%s%s'%(ABI_ENDPOINT, contract_address))
+            response_json = response.json()
+            conf = json.loads(response_json['result'])
+            return conf
 
         except Exception as error:
             logging.error(error)
@@ -169,7 +172,7 @@ class ContractUtils:
 
             RINK_API_URL = f"https://rinkeby.infura.io/v3/{INFURA_KEY}"
             w3 = Web3(Web3.HTTPProvider(RINK_API_URL))
-            ABI = load_json(abi_path)["abi"]  # get the ABI
+            ABI = load_json(config["auction_contract_address"])["abi"]  # get the ABI
             CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
             CHAIN_ID = 4
             open_sea_url = f"https://testnets.opensea.io/assets/{contract}/"
@@ -178,7 +181,7 @@ class ContractUtils:
         elif network == "mumbai":
             MUMBAI_API_URL = f"https://polygon-mumbai.infura.io/v3/{INFURA_KEY}"
             w3 = Web3(Web3.HTTPProvider(MUMBAI_API_URL))
-            ABI = load_json(abi_path)["abi"]  # get the ABI
+            ABI = load_json(config["auction_contract_address"])["abi"]  # get the ABI
             CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
             CHAIN_ID = 80001
             open_sea_url = f"https://testnets.opensea.io/assets/{contract}/"
@@ -187,7 +190,7 @@ class ContractUtils:
         elif network == "matic_main":
             POLYGON_API_URL = f"https://polygon-mainnet.infura.io/v3/{INFURA_KEY}"
             w3 = Web3(Web3.HTTPProvider(POLYGON_API_URL))
-            ABI = load_json(abi_path)["abi"]  # get the ABI
+            ABI = load_json(config["auction_contract_address"])["abi"]  # get the ABI
             CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
             CHAIN_ID = 137
             open_sea_url = f"https://opensea.io/assets/matic/{contract}/"
