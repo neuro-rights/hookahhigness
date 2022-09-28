@@ -2,13 +2,6 @@ import boto3
 import time
 import uuid
 
-from web3 import Web3, HTTPProvider
-
-human_0 = '0x6A48A50A53462A22D2c30F5138c4970a3020b30a'
-human_address_1 = "0x92e320aE601BC8235D605d38D03142C3FE28Ba92"
-foggy = '0xa456c84CC005100B277D4637896456F99a59A290'
-sarit = '0xB795518Ee574c2a55B513D2C1319e8e6e40F6c04'
-
 # Import the login_required decorator
 from django.contrib.auth.decorators import login_required
 
@@ -27,39 +20,6 @@ from ...models import Asset, Auction, Nft
 
 #
 from ..utils.pagination import *
-
-
-def mint_nft(request, nft_uuid):
-    """ """
-    
-    nft = Nft.objects.get(uuid=nft_uuid)
-
-    w3 = Web3(HTTPProvider('http://localhost:8545'))  # web3 must be called locally
-    assert True is w3.isConnected()
-    print('Network connected')
-
-    # should be in auction model
-    contract_address = "0x3194cBDC3dbcd3E11a07892e7bA5c3394048Cc87"
-    
-    # To get ABI vyper -f abi contracts/ERC721.vy
-    ABI_ENDPOINT = "https://api.etherscan.io/api?module=contract&action=getabi&address="
-    response = requests.get('%s%s'%(ABI_ENDPOINT, contract_address))
-    response_json = response.json()
-    abi_json = json.loads(response_json['result'])
-    contract_instance = w3.eth.contract(address=address, abi=abi_json)
-
-    buyer = request.user.ethereum_wallet_address
-    seller = nft.creator.ethereum_wallet_address
-    # Both raise error
-    seller_balance = contract_instance.functions.balanceOf(seller).call({'from': buyer})
-    buyer_balance = contract_instance.functions.balanceOf(buyer).call({'from': seller})
-    
-    # Change tokenId to avoid error
-    result = contract_instance.functions.mint(seller, nft.token_id).transact({'from': seller})
-
-    time.sleep(60)
-    new_seller_balance = contract_instance.functions.balanceOf(seller).call({'from': buyer})
-    assert new_human_0_balance == human_0_balance + 1
 
 
 def search_result(request):

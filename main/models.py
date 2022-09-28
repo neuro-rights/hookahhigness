@@ -222,19 +222,21 @@ class Auction(models.Model):
     )
     #
     BLOCKCHAIN_TYPES = (
-        ("Ethereum", "Ethereum Network"),
-        ("Eth2", "Eth2 Blockchain Netwok"),
-        ("Celo", "Celo 3d Blockchain Network"),
+        ("matic_main", "matic_main"),
+        ("mumbay", "mumbay"),
+        ("rinkeby", "rinkeby"),
     )
     id = models.AutoField(primary_key=True)
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     #
     assets = models.ManyToManyField(Asset, related_name="assets")
-    blockchain = models.CharField(
-        max_length=32, choices=BLOCKCHAIN_TYPES, default="Ethereum"
+    network = models.CharField(
+        max_length=32, choices=BLOCKCHAIN_TYPES, default="rinkeby"
     )
     description = models.TextField(blank=True)
+    contract_address = models.TextField(blank=True)
+    contract_abi = models.TextField(blank=True)
     #
     datetime_start = models.DateTimeField(default=now)
     datetime_end = models.DateTimeField(default=now_plus_30)

@@ -331,7 +331,9 @@ class AuctionForm(forms.ModelForm):
         model = Auction
         fields = [
             "assets",
-            "blockchain",
+            "network",
+            "contract_address",
+            "contract_abi",
             "description",
             "datetime_start",
             "datetime_end",
