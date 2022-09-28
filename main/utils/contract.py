@@ -3,7 +3,7 @@ import os
 from typing import Dict, Any
 from web3 import Web3
 from pathlib import Path
-
+import requests
 import vyper
 import os, json
 
@@ -121,7 +121,7 @@ class ContractUtils:
     def __init__(self):
         """Class init"""
 
-    def load_json(self, contract_address: str) -> Dict[str, Any]:
+    def load_json(self, contract_address):
         """
         Purpose:
             Load json files
@@ -142,12 +142,12 @@ class ContractUtils:
             logging.error(error)
             raise TypeError("Invalid JSON file")
 
-    def set_up_blockchain(self, config: dict):
+    def set_up_blockchain(self, config):
         """
         Purpose:
         Setup all blockchain items
         Args:
-            path_to_json (String): Path to  json file
+            config
         Returns:
             Conf: JSON file if loaded, else None
         """
@@ -168,6 +168,7 @@ class ContractUtils:
         scan_url = ""
         eth_json = {}
         #
+        print(config)
         if network == "rinkeby":
 
             RINK_API_URL = f"https://rinkeby.infura.io/v3/{INFURA_KEY}"
@@ -212,7 +213,7 @@ class ContractUtils:
         #
         return eth_json
 
-    def web3_mint(self, userAddress: str, tokenURI: str, eth_json: Dict[str, Any]) -> str:
+    def web3_mint(self, userAddress, tokenURI, eth_json):
         """
         Purpose:
             mint a token for user on blockchain
