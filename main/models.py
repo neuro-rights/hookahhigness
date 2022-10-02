@@ -236,8 +236,7 @@ class Auction(models.Model):
         max_length=32, choices=BLOCKCHAIN_TYPES, default="rinkeby"
     )
     description = models.TextField(blank=True)
-    contract_address = models.TextField(blank=True)
-    contract_abi = models.TextField(blank=True)
+    contract_address = models.CharField(max_length=100, blank=True, null=True)
     #
     datetime_start = models.DateTimeField(default=now)
     datetime_end = models.DateTimeField(default=now_plus_30)

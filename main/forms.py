@@ -333,7 +333,6 @@ class AuctionForm(forms.ModelForm):
             "assets",
             "network",
             "contract_address",
-            "contract_abi",
             "description",
             "datetime_start",
             "datetime_end",
