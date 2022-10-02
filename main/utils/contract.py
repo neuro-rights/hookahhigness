@@ -133,13 +133,22 @@ class ContractUtils:
         """
 
         try:
-            ABI_ENDPOINT = "https://api-goerli.etherscan.io/api?module=contract&action=getabi&address=0x923604edF1463a5a87eE9158b09bb86c05f41dc0&apiKey=CC5D165SJ3ITQ5NXF1ZBZ8MY5NGN61YZ63"
-
             import urllib3
+            import urllib.parse
             import json
 
+            ETHERSCAN_ENDPOINT = "https://api-goerli.etherscan.io/api"
+
+            params = {
+                'module': 'contract',
+                'action': 'getabi',
+                'address': contract_address,
+                'apiKey': 'CC5D165SJ3ITQ5NXF1ZBZ8MY5NGN61YZ63'
+            }
+
+            print(ETHERSCAN_ENDPOINT)
             http = urllib3.PoolManager()
-            r = http.request('GET', ABI_ENDPOINT)
+            r = http.request('GET', ETHERSCAN_ENDPOINT, fields=params)
             conf = json.loads(r.data.decode('utf-8'))['result']
             print(conf)
             return conf
