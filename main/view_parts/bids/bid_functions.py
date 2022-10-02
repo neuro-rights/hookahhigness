@@ -57,16 +57,16 @@ def bid_accept(request, bid_uuid):
             for nft in asset.nfts.all():
                 print(nft)
                 #mint_nft(request=request, nft_uuid=nft.uuid)
-                wallet_address = "0x2BBF135e8E7D2aA3eF1Ab949548f4E4d8Fa7db16" #request.user.ethereum_wallet_address
-                tx_hash, tx_token = contractutils.web3_mint(
+                wallet_address = bid.buyer.ethereum_wallet_address
+                tx_hash, tx_id = contractutils.web3_mint(
                     userAddress=wallet_address,
                     tokenURI=nft.token_id,
                     eth_json=bc_setup,
                 )
-                new_purchase = Purchase(commit=False)
-                #new_purchase.bid_id = bid_id
-                #new_purchase.tx_hash = tx_hash
-                #new_purchase.tx_token = tx_token
+                new_purchase = Purchase()
+                new_purchase.bid = bid
+                new_purchase.tx_hash = tx_hash
+                new_purchase.tx_token = tx_id
                 new_purchase.save()
         #
     except Exception as err:

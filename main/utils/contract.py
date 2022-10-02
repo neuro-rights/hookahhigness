@@ -274,9 +274,10 @@ class ContractUtils:
         print(f"mint txn hash: {hash} ")
         receipt = w3.eth.wait_for_transaction_receipt(hash)  # hmmm have to wait...
         print(receipt)
-        hex_tokenid = receipt["logs"][0]["topics"][3].hex()  # this is token id in hex
+        #hex_tokenid = receipt["logs"][0]["topics"][3].hex()  # this is token id in hex
         # convert from hex to decmial
-        tokenid = int(hex_tokenid, 16)
-        print(f"Got tokenid: {tokenid}")
+        #tokenid = int(hex_tokenid, 16)
+        tx_id = receipt["transactionIndex"]
+        print(f"Got tx_id: {tx_id}")
         #
-        return hash, tokenid
+        return hash, tx_id
