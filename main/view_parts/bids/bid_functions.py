@@ -93,18 +93,3 @@ def bid_reject(request, bid_id):
     #
     return redirect("nft_detail", nft_id=bid_nft_id)
 
-
-@login_required
-def dafuq(request, bid_id):
-    #
-    bid = Bid.objects.get(id=bid_id)
-    form = PurchaseForm(request.POST)
-    #
-    if form.is_valid():
-        new_purchase = form.save(commit=False)
-        new_purchase.bid_id = bid_id
-        new_purchase.save()
-        return redirect("auction_detail", auction_id=bid.auction_id)
-    #
-    context = {"bid": bid_id, "form": form}
-    return render(request, "main/purchase_form.html", context)
