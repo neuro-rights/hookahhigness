@@ -223,7 +223,8 @@ class Auction(models.Model):
     #
     BLOCKCHAIN_TYPES = (
         ("matic_main", "matic_main"),
-        ("mumbay", "mumbay"),
+        ("mumbai", "mumbai"),
+        ("goerli", "goerli"),
         ("rinkeby", "rinkeby"),
     )
     id = models.AutoField(primary_key=True)

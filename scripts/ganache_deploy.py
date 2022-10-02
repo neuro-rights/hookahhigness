@@ -2,4 +2,7 @@ from brownie import *
 import logging
 
 def main():
-    t = accounts[0].deploy(ERC721)
+    acct = accounts.load('development')
+    print(acct)
+    #ERC721.deploy("My Real Token", "RLT", 18, 1e28, {'from': acct})
+    t = acct.deploy(ERC721)
