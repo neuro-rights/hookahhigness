@@ -68,6 +68,7 @@
 
                 <span class="card-title"></span>
                 <hr>
+                {% if auction.status == "unsold" %}
                 <form action="{% url 'auction_add_bid' auction.uuid %}" class='bidprice' method="post">
                     {% csrf_token %} {{ bid_form }}
                     <input type="submit" class="btn text-white" value="Add Bid">
@@ -98,7 +99,7 @@
                                     class="bidprice">
                                     {% csrf_token %}
                                     <button type="submit"
-                                        class="btn-floating btn-small waves-effect waves-light circle green pulse"><i
+                                        class="btn text-white"><i
                                             class="material-icons">check</i>
                                     </button>
                                 </form>
@@ -108,6 +109,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                {% endif %}
             </div>
         </div>
     </div>

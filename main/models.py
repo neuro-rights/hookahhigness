@@ -270,12 +270,22 @@ class Auction(models.Model):
 class Bid(models.Model):
     """ """
 
+    BID_STATUS = (
+        ("unsold", "Unsold"),
+        ("sold", "Sold"),
+    )
     id = models.AutoField(primary_key=True)
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     buyer = models.ForeignKey(User, on_delete=models.CASCADE)
     auction = models.ForeignKey(Auction, blank=True, null=True, on_delete=models.CASCADE)
     bid_time = models.DateTimeField(auto_now_add=True, editable=False)
     value = models.FloatField()
+
+    status = models.CharField(
+        max_length=32,
+        choices=BID_STATUS,
+        default="unsold",
+    )
 
     def __str__(self):
         return f"{self.get_value_display()} on {self.bid_time}"

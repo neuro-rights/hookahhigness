@@ -35,7 +35,6 @@ def bid_accept(request, bid_uuid):
     try:
         #
         contract_address = bid.auction.contract_address
-        contract_abi = bid.auction.contract_abi 
         #
         user_wallet = request.user.ethereum_wallet_address 
         #
@@ -56,13 +55,19 @@ def bid_accept(request, bid_uuid):
             print(asset)
             for nft in asset.nfts.all():
                 print(nft)
-                #mint_nft(request=request, nft_uuid=nft.uuid)
+
                 wallet_address = bid.buyer.ethereum_wallet_address
                 tx_hash, tx_id = contractutils.web3_mint(
                     userAddress=wallet_address,
                     tokenURI=nft.token_id,
                     eth_json=bc_setup,
                 )
+
+                bid.status = "sold"
+                bid.auction.status="sold"
+                bid.auction.save()
+                bid.save()
+
                 new_purchase = Purchase()
                 new_purchase.bid = bid
                 new_purchase.tx_hash = tx_hash
