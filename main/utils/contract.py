@@ -12,101 +12,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def compile_contract(contract_file):
-    """
-    You need a Vyper file, the name that you want to give to your smart contract, and the output JSON file.
-    The following code will do this task:
-    """
-    filename = contract_file
-    contract_name = Path(contract_file).stem
-    contract_json_file = open('compiled.json'.format(contract_name), 'w')
-
-    # Use the following lines of code to get the content of the Vyper file:
-    with open(filename, 'r') as f:
-        content = f.read()
-
-    # Then you create a dictionary object where the key is a path to your Vyper
-    # file and the value is the content of the Vyper file, as follows:
-    current_directory = os.curdir
-    smart_contract = {}
-    smart_contract[current_directory] = content
-
-    # To compile the Vyper code, all you need to do is use the compile_codes method from the vyper module, as follows:
-    format = ['abi', 'bytecode']
-    compiled_code = vyper.compile_codes(smart_contract, format, 'dict')
-
-    smart_contract_json = {
-        'contractName': contract_name,
-        'abi': compiled_code[current_directory]['abi'],
-        'bytecode': compiled_code[current_directory]['bytecode']
-    }
-
-    # The last code is used to write the result to an output JSON file:
-    json.dump(smart_contract_json, contract_json_file)
-    contract_json_file.close()
-
-
-def deploy_contract():
-    """ """
-
-    # 1. Import the ABI and bytecode
-    from .compiled import abi, bytecode
-
-    # 2. Add the Web3 provider logic here:
-    web3 = Web3(Web3.HTTPProvider(RPC_API_URL))
-    # {...}
-
-    # 3. Create address variable
-    account_from = {
-        'private_key': request.user.ethereum_wallet_private_key,
-        'address': request.user.ethereum_wallet_address,
-    }
-
-    print(f'Attempting to deploy from account: { account_from["address"] }')
-
-    # 4. Create contract instance
-    Incrementer = web3.eth.contract(abi=abi, bytecode=bytecode)
-
-    # 5. Build constructor tx
-    construct_txn = Incrementer.constructor(5).buildTransaction(
-        {
-            'from': account_from['address'],
-            'nonce': web3.eth.get_transaction_count(account_from['address']),
-        }
-    )
-
-    # 6. Sign tx with PK
-    tx_create = web3.eth.account.sign_transaction(construct_txn, account_from['private_key'])
-
-    # 7. Send tx and wait for receipt
-    tx_hash = web3.eth.send_raw_transaction(tx_create.rawTransaction)
-    tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
-
-    print(f'Contract deployed at address: { tx_receipt.contractAddress }')
-    return tx_receipt.contractAddress
-
-
-def deploy_contract_2():
-    """ """
-
-    w3 = Web3(HTTPProvider("https://ropsten.infura.io/v3/YOUR_PROJECT_ID"))
-
-    contract_ = w3.eth.contract(
-        abi=contract_interface['abi'],
-        bytecode=contract_interface['bin'])
-
-    acct = w3.eth.account.privateKeyToAccount(privateKey)
-
-    construct_txn = contract_.constructor().buildTransaction({
-        'from': acct.address,
-        'nonce': w3.eth.getTransactionCount(acct.address),
-        'gas': 1728712,
-        'gasPrice': w3.toWei('21', 'gwei')})
-
-    signed = acct.signTransaction(construct_txn)
-
-    w3.eth.sendRawTransaction(signed.rawTransaction)
-
 
 
 class ContractUtils:
@@ -157,6 +62,7 @@ class ContractUtils:
             print(error)
             raise TypeError("Invalid JSON file")
 
+
     def set_up_blockchain(self, config):
         """
         Purpose:
@@ -201,7 +107,7 @@ class ContractUtils:
             CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
             CHAIN_ID = 5 
             open_sea_url = f"https://testnets.opensea.io/assets/{contract}/"
-            scan_url = "https://rinkeby.etherscan.io/tx/"
+            scan_url = "https://goerli.etherscan.io/tx/"
         #
         elif network == "mumbai":
             MUMBAI_API_URL = f"https://polygon-mumbai.infura.io/v3/{INFURA_KEY}"
@@ -236,6 +142,38 @@ class ContractUtils:
         eth_json["private_key"] = PRIVATE_KEY
         #
         return eth_json
+
+
+    def transfer(self, config):
+        """ """
+
+        PUBLIC_KEY = config["seller_ethereum_wallet_address"]
+        PRIVATE_KEY = Web3.toBytes(hexstr=config["seller_ethereum_wallet_private_key"])
+        INFURA_KEY = config["seller_infura_ethereum_project_id"]
+        GOERLI_API_URL = f"https://goerli.infura.io/v3/{INFURA_KEY}"
+        web3 = Web3(Web3.HTTPProvider(GOERLI_API_URL))
+        #
+        buyer_wallet_address = config["buyer_ethereum_wallet_address"]
+        amount_to_transfer = config["amount_to_transfer"]
+        #get the nonce.  Prevents one from sending the transaction twice
+        nonce = web3.eth.getTransactionCount(PUBLIC_KEY)
+
+        #build a transaction in a dictionary
+        tx = {
+            'nonce': nonce,
+            'to': buyer_wallet_address,
+            'value': web3.toWei(amount_to_transfer, 'ether'),
+            'gas': 2000000,
+            'gasPrice': web3.toWei('50', 'gwei')
+        }
+
+        #sign the transaction
+        signed_tx = web3.eth.account.sign_transaction(tx, PRIVATE_KEY)
+        #send transaction
+        tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        #get transaction hash
+        print(web3.toHex(tx_hash))
+
 
     def web3_mint(self, userAddress, tokenURI, eth_json):
         """
@@ -281,3 +219,100 @@ class ContractUtils:
         print(f"Got tx_id: {tx_id}")
         #
         return hash, tx_id
+
+
+    def compile_contract(contract_file):
+        """
+        You need a Vyper file, the name that you want to give to your smart contract, and the output JSON file.
+        The following code will do this task:
+        """
+        filename = contract_file
+        contract_name = Path(contract_file).stem
+        contract_json_file = open('compiled.json'.format(contract_name), 'w')
+
+        # Use the following lines of code to get the content of the Vyper file:
+        with open(filename, 'r') as f:
+            content = f.read()
+
+        # Then you create a dictionary object where the key is a path to your Vyper
+        # file and the value is the content of the Vyper file, as follows:
+        current_directory = os.curdir
+        smart_contract = {}
+        smart_contract[current_directory] = content
+
+        # To compile the Vyper code, all you need to do is use the compile_codes method from the vyper module, as follows:
+        format = ['abi', 'bytecode']
+        compiled_code = vyper.compile_codes(smart_contract, format, 'dict')
+
+        smart_contract_json = {
+            'contractName': contract_name,
+            'abi': compiled_code[current_directory]['abi'],
+            'bytecode': compiled_code[current_directory]['bytecode']
+        }
+
+        # The last code is used to write the result to an output JSON file:
+        json.dump(smart_contract_json, contract_json_file)
+        contract_json_file.close()
+
+
+    def deploy_contract():
+        """ """
+
+        # 1. Import the ABI and bytecode
+        from .compiled import abi, bytecode
+
+        # 2. Add the Web3 provider logic here:
+        web3 = Web3(Web3.HTTPProvider(RPC_API_URL))
+        # {...}
+
+        # 3. Create address variable
+        account_from = {
+            'private_key': request.user.ethereum_wallet_private_key,
+            'address': request.user.ethereum_wallet_address,
+        }
+
+        print(f'Attempting to deploy from account: { account_from["address"] }')
+
+        # 4. Create contract instance
+        Incrementer = web3.eth.contract(abi=abi, bytecode=bytecode)
+
+        # 5. Build constructor tx
+        construct_txn = Incrementer.constructor(5).buildTransaction(
+            {
+                'from': account_from['address'],
+                'nonce': web3.eth.get_transaction_count(account_from['address']),
+            }
+        )
+
+        # 6. Sign tx with PK
+        tx_create = web3.eth.account.sign_transaction(construct_txn, account_from['private_key'])
+
+        # 7. Send tx and wait for receipt
+        tx_hash = web3.eth.send_raw_transaction(tx_create.rawTransaction)
+        tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
+
+        print(f'Contract deployed at address: { tx_receipt.contractAddress }')
+        return tx_receipt.contractAddress
+
+
+    def deploy_contract_2():
+        """ """
+
+        w3 = Web3(HTTPProvider("https://ropsten.infura.io/v3/YOUR_PROJECT_ID"))
+
+        contract_ = w3.eth.contract(
+            abi=contract_interface['abi'],
+            bytecode=contract_interface['bin'])
+
+        acct = w3.eth.account.privateKeyToAccount(privateKey)
+
+        construct_txn = contract_.constructor().buildTransaction({
+            'from': acct.address,
+            'nonce': w3.eth.getTransactionCount(acct.address),
+            'gas': 1728712,
+            'gasPrice': w3.toWei('21', 'gwei')})
+
+        signed = acct.signTransaction(construct_txn)
+
+        w3.eth.sendRawTransaction(signed.rawTransaction)
+
