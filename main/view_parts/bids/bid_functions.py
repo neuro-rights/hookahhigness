@@ -40,10 +40,13 @@ def bid_accept(request, bid_uuid):
         #
 
         config={
-                'seller_infura_ethereum_project_id':bid.auction.seller.infura_ethereum_project_id,
+                'buyer_ethereum_wallet_address':bid.buyer.ethereum_wallet_address,
+                'buyer_ethereum_wallet_private_key':bid.buyer.ethereum_wallet_private_key,
+                'infura_ethereum_project_id':bid.auction.seller.infura_ethereum_project_id,
                 'seller_ethereum_wallet_address':bid.auction.seller.ethereum_wallet_address,
                 'seller_ethereum_wallet_private_key':bid.auction.seller.ethereum_wallet_private_key,
                 'network':bid.auction.network, 
+                'ethereum_token':bid.auction.seller.etherscan_token,
                 'auction_contract_address':bid.auction.contract_address, 
             }
         #
@@ -55,9 +58,9 @@ def bid_accept(request, bid_uuid):
             print(asset)
             for nft in asset.nfts.all():
                 print(nft)
-
+                #transfer_tx_hash, transfer_tx_id = contractutils.transfer(bid.buyer.ethereum_wallet_address, bid.value, config)
                 wallet_address = bid.buyer.ethereum_wallet_address
-                tx_hash, tx_id = contractutils.web3_mint(
+                mint_tx_hash, mint_tx_id = contractutils.web3_mint(
                     userAddress=wallet_address,
                     tokenURI=nft.token_id,
                     eth_json=bc_setup,
@@ -70,8 +73,10 @@ def bid_accept(request, bid_uuid):
 
                 new_purchase = Purchase()
                 new_purchase.bid = bid
-                new_purchase.tx_hash = tx_hash
-                new_purchase.tx_token = tx_id
+                new_purchase.mint_tx_hash = mint_tx_hash
+                new_purchase.mint_tx_token = mint_tx_id
+                #new_purchase.transfer_tx_hash = transfer_tx_hash
+                #new_purchase.transfer_tx_token = transfer_tx_id
                 new_purchase.save()
         #
     except Exception as err:

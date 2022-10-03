@@ -76,7 +76,7 @@ class ContractUtils:
         ############ Ethereum Setup ############
         PUBLIC_KEY = config["seller_ethereum_wallet_address"]
         PRIVATE_KEY = Web3.toBytes(hexstr=config["seller_ethereum_wallet_private_key"])
-        INFURA_KEY = config["seller_infura_ethereum_project_id"]
+        INFURA_KEY = config["infura_ethereum_project_id"]
         #
         contract = config["auction_contract_address"]
         network = config["network"]
@@ -144,27 +144,26 @@ class ContractUtils:
         return eth_json
 
 
-    def transfer(self, config):
+    def transfer(self, buyer_wallet_address, amount_to_transfer, config):
         """ """
 
-        PUBLIC_KEY = config["seller_ethereum_wallet_address"]
-        PRIVATE_KEY = Web3.toBytes(hexstr=config["seller_ethereum_wallet_private_key"])
-        INFURA_KEY = config["seller_infura_ethereum_project_id"]
+        PUBLIC_KEY = config["buyer_ethereum_wallet_address"]
+        PRIVATE_KEY = Web3.toBytes(hexstr=config["buyer_ethereum_wallet_private_key"])
+        INFURA_KEY = config["infura_ethereum_project_id"]
         GOERLI_API_URL = f"https://goerli.infura.io/v3/{INFURA_KEY}"
         web3 = Web3(Web3.HTTPProvider(GOERLI_API_URL))
         #
-        buyer_wallet_address = config["buyer_ethereum_wallet_address"]
-        amount_to_transfer = config["amount_to_transfer"]
         #get the nonce.  Prevents one from sending the transaction twice
         nonce = web3.eth.getTransactionCount(PUBLIC_KEY)
 
         #build a transaction in a dictionary
         tx = {
             'nonce': nonce,
-            'to': buyer_wallet_address,
+            'to': config["seller_ethereum_wallet_address"],
             'value': web3.toWei(amount_to_transfer, 'ether'),
-            'gas': 2000000,
-            'gasPrice': web3.toWei('50', 'gwei')
+            "gas": 10000000,
+            #'gas': 2000000,
+            'gasPrice': web3.toWei('1', 'gwei')
         }
 
         #sign the transaction
@@ -172,7 +171,19 @@ class ContractUtils:
         #send transaction
         tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
         #get transaction hash
-        print(web3.toHex(tx_hash))
+        #print(web3.toHex(tx_hash))
+        hash = w3.toHex(w3.keccak(signed_txn.rawTransaction))
+        #
+        print(f"transfer txn hash: {hash} ")
+        transfer_receipt = w3.eth.wait_for_transaction_receipt(hash)  # hmmm have to wait...
+        print(transfer_receipt)
+        #hex_tokenid = receipt["logs"][0]["topics"][3].hex()  # this is token id in hex
+        # convert from hex to decmial
+        #tokenid = int(hex_tokenid, 16)
+        tx_id = 1 #transfer_receipt["transactionIndex"]
+        print(f"Got transfer_tx_id: {transfer_tx_id}")
+        #
+        return hash, tx_id
 
 
     def web3_mint(self, userAddress, tokenURI, eth_json):
@@ -221,7 +232,7 @@ class ContractUtils:
         return hash, tx_id
 
 
-    def compile_contract(contract_file):
+    def compile_contract(self, contract_file):
         """
         You need a Vyper file, the name that you want to give to your smart contract, and the output JSON file.
         The following code will do this task:
@@ -255,7 +266,7 @@ class ContractUtils:
         contract_json_file.close()
 
 
-    def deploy_contract():
+    def deploy_contract(self):
         """ """
 
         # 1. Import the ABI and bytecode
@@ -295,7 +306,7 @@ class ContractUtils:
         return tx_receipt.contractAddress
 
 
-    def deploy_contract_2():
+    def deploy_contract_2(self):
         """ """
 
         w3 = Web3(HTTPProvider("https://ropsten.infura.io/v3/YOUR_PROJECT_ID"))
