@@ -7,6 +7,7 @@ from django.db.models import Count
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.timezone import now
+from taggit.managers import TaggableManager
 
 from datetime import datetime, timedelta
 import random
@@ -133,6 +134,8 @@ class Nft(models.Model):
     uri_metadata = models.URLField(max_length=200)
     uri_preview = models.URLField(max_length=200)
 
+    tags = TaggableManager()
+
     class Meta:
         ordering = ["-id"]
     #
@@ -182,6 +185,7 @@ class Asset(models.Model):
     metadata_uri = models.URLField(max_length=200)
     uri_preview = models.URLField(max_length=200, blank=True, null=True)
     #
+    tags = TaggableManager()
     status = models.CharField(
         max_length=32, choices=ASSET_STATUS, default="unsold"
     )
@@ -246,6 +250,7 @@ class Auction(models.Model):
     #
     uri_preview = models.URLField(max_length=200, blank=True, null=True)
 
+    tags = TaggableManager()
     status = models.CharField(
         max_length=32,
         choices=AUCTION_STATUS,

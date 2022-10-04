@@ -12,6 +12,7 @@ django-datatables-view
 django-environ
 django-heroku
 django-mathfilters
+django-taggit
 eth-brownie
 fontawesomefree
 gunicorn

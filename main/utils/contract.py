@@ -181,7 +181,6 @@ class ContractUtils:
         # convert from hex to decmial
         #tokenid = int(hex_tokenid, 16)
         tx_id = 1 #transfer_receipt["transactionIndex"]
-        print(f"Got transfer_tx_id: {transfer_tx_id}")
         #
         return hash, tx_id
 
