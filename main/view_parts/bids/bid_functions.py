@@ -54,11 +54,12 @@ def bid_accept(request, bid_uuid):
         bc_setup = contractutils.set_up_blockchain(config)
         print(bc_setup)
         #
+        print(bid.buyer.ethereum_wallet_address)
+        transfer_tx_hash, transfer_tx_id = contractutils.transfer(bid.buyer.ethereum_wallet_address, bid.value, config)
         for asset in bid.auction.assets.all():
             print(asset)
             for nft in asset.nfts.all():
                 print(nft)
-                #transfer_tx_hash, transfer_tx_id = contractutils.transfer(bid.buyer.ethereum_wallet_address, bid.value, config)
                 wallet_address = bid.buyer.ethereum_wallet_address
                 mint_tx_hash, mint_tx_id = contractutils.web3_mint(
                     userAddress=wallet_address,

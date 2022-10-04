@@ -171,11 +171,11 @@ class ContractUtils:
         #send transaction
         tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
         #get transaction hash
-        #print(web3.toHex(tx_hash))
-        hash = w3.toHex(w3.keccak(signed_txn.rawTransaction))
+        print(web3.toHex(tx_hash))
+        hash = web3.toHex(web3.keccak(signed_tx.rawTransaction))
         #
         print(f"transfer txn hash: {hash} ")
-        transfer_receipt = w3.eth.wait_for_transaction_receipt(hash)  # hmmm have to wait...
+        transfer_receipt = web3.eth.wait_for_transaction_receipt(hash)  # hmmm have to wait...
         print(transfer_receipt)
         #hex_tokenid = receipt["logs"][0]["topics"][3].hex()  # this is token id in hex
         # convert from hex to decmial
