@@ -39,6 +39,7 @@ urlpatterns = [
     path("asset/<uuid:asset_uuid>/", views.asset_detail, name="asset_detail"),
     path("asset/<uuid:asset_uuid>/add_auction/", views.asset_add_auction, name="asset_add_auction"),
     path("asset/<uuid:asset_uuid>/add_nfts/", views.asset_add_nfts, name="asset_add_nfts"),
+    path("asset/<uuid:asset_uuid>/asset_add_files_to_s3/", views.asset_add_files_to_s3, name="asset_add_files_to_s3"),
     path("asset/<uuid:asset_uuid>/add_raffle/", views.asset_add_raffle, name="asset_add_raffle"),
     path("asset/<uuid:asset_uuid>/add_asset_metadata/", views.asset_add_metadata, name="add_asset_metadata"),
     path("asset/<uuid:asset_uuid>/edit/", views.AssetEdit.as_view(), name="asset_edit"),

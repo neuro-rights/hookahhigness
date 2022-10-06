@@ -31,6 +31,14 @@
                     </div>
                 </div>
                 {% endfor %}
+
+                <form action="{% url 'asset_add_files_to_s3' asset.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
+                    {% csrf_token %}
+                    <input type="file" name="files-field" multiple>
+                    <br><br>
+                    <input type="submit" class="btn" value="Upload Files">
+                </form>
+
                 {% if asset.seller == request.user %}
                 <div class="card-action">
                     <a href="{% url 'asset_edit' asset.uuid %}" class="waves-effect waves-light btn-small">Edit</a>
