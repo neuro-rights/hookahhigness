@@ -263,6 +263,11 @@ class Auction(models.Model):
     def bids(self):
         return Bid.objects.filter(auction=self)
 
+    def get_random_nfts(self):
+        nfts = [nft.preview_uri for nft in self.assets.nfts]
+        print("My NFTS: " + nfts)
+        return nfts
+
     @property
     def total_bids(self):
         return self.bids.count()

@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta, time
+
 from django.shortcuts import render
 
 from .models import Asset
@@ -23,11 +25,21 @@ from .view_parts.market.market_functions import *
 
 
 
+class HomeView(PassArgumentsToForm, ListView):
+    paginate_by = 25
+    model = Auction
+    form_class = AuctionForm
+    template_name = "home.html"
+
+    def get_queryset(self):
+        now = datetime.now()
+        return Auction.objects.filter(datetime_start__lte=now, datetime_end__gte=now)
+
 def home(request):
     #
     auctions_list = Auction.objects.order_by("-id").all()
     context = {"page_obj": get_page_obj(request, auctions_list, 25)}
-    return render(request, "market/list.html", context)
+    return render(request, "home.html", context)
 
 
 def opensea(request):

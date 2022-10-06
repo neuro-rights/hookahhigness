@@ -4,20 +4,42 @@
 
 <h2>MARKET {{ page_obj|length }}</h2>
 {% if page_obj|length > 0 %}
-<ul class="collection">
-    {% for auction in page_obj %}
-    <li class="collection-item">
-        {{ auction }}
-        <div class="carousel teal darken-4">
-            {% for nft in auction.get_random_nfts %}
-            <a href="{% url 'nft_detail' nft.id %}" class="carousel-item">
-                <img class="responsive-img" src="{{ nft.preview_uri }}" loading="lazy"> {% empty %}
+{% for auction in page_obj %}
+<div class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        {% for asset in auction.assets.all %}
+        <link rel="preload" href="{{ asset.uri_preview }}" as="image" crossorigin>
+        <div class="carousel-item active">
+            {% if asset.asset_type == 'audio' %}
+            <audio controls>
+                <source src="{{ asset.uri_preview }}" type="audio/mp3">
+            </audio>
+            {% elif asset.asset_type == 'video' %}
+            <video width="100%" controls>
+                <source src="{{ asset.uri_preview }}" type="video/mp4">
+            </video> 
+            {% elif asset.asset_type == 'image' %}
+            <img width="100%" align="center"  src="{{ asset.uri_preview }}"/>
+            {% else %}
+            <a href="{{ asset.uri_preview }}">File link</a>
+            {% endif %}
+            <a href="{% url 'auction_detail' auction.uuid %}">
+                {% for field in auction.get_all_fields %}
+                <div class="row">
+                    <div class="col-4">
+                        {{ field.label }}
+                    </div>
+                    <div class="col-8">
+                        {{ field.value|truncatechars:50 }}
+                    </div>
+                </div>
+                {% endfor %}
             </a>
-            {% endfor %}
         </div>
-    </li>
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
 {% endif %}
 
 {% if page_obj %}
