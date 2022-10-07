@@ -1,14 +1,14 @@
 # Django #
-*.log
-*.pot
-*.pyc
-__pycache__
+**.log
+**.pot
+**.pyc
+**/__pycache__
 db.sqlite3
 media
-*.DS_Store
+**.DS_Store
 
 # Backup files #
-*.bak
+**.bak
 
 # If you are using PyCharm #
 # User-specific stuff
