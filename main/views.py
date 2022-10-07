@@ -4,24 +4,24 @@ from django.shortcuts import render
 
 from .models import Asset
 
-from .view_parts.utils.pagination import *
-from .view_parts.utils.form_kwargs import *
-from .view_parts.auth.auth_functions import *
-from .view_parts.nfts.nft_classes import *
-from .view_parts.nfts.nft_functions import *
-from .view_parts.assets.asset_classes import *
-from .view_parts.assets.asset_functions import *
-from .view_parts.bids.bid_classes import *
-from .view_parts.bids.bid_functions import *
-from .view_parts.auctions.auction_classes import *
-from .view_parts.auctions.auction_functions import *
-from .view_parts.purchases.purchase_classes import *
-from .view_parts.raffles.raffle_classes import *
-from .view_parts.raffles.raffle_functions import *
+from .parts.utils.pagination import *
+from .parts.utils.form_kwargs import *
+from .parts.auth.auth_functions import *
+from .parts.nfts.nft_classes import *
+from .parts.nfts.nft_functions import *
+from .parts.assets.asset_classes import *
+from .parts.assets.asset_functions import *
+from .parts.bids.bid_classes import *
+from .parts.bids.bid_functions import *
+from .parts.auctions.auction_classes import *
+from .parts.auctions.auction_functions import *
+from .parts.purchases.purchase_classes import *
+from .parts.raffles.raffle_classes import *
+from .parts.raffles.raffle_functions import *
 
 # from .view_parts.opensea.opensea import *
-from .view_parts.market.market_classes import *
-from .view_parts.market.market_functions import *
+from .parts.market.market_classes import *
+from .parts.market.market_functions import *
 
 
 
