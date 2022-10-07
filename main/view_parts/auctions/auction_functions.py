@@ -8,12 +8,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.core import serializers
 #
+from ...utils.contract import ContractUtils
+
 from ...forms import BidForm
 from ...models import Auction
 
 #
 from ..utils.pagination import *
 
+from web3 import Web3
 
 @login_required
 def auction_detail(request, auction_uuid):
@@ -48,6 +51,18 @@ def auctions_own_ended(request):
 def auction_add_assets(request, auction_uuid):
     pass
 
+def auction_deploy_contract(request, auction_uuid):
+    """ """
+
+    auction = Auction.objects.get(uuid=auction_uuid)
+     # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        contract_utils = ContractUtils()
+        contract_utils.compile_contract()
+        contract_utils.deploy_contract()
+        contract_utils.verify_contract()
+        return redirect(auction)
+
 
 @login_required
 def auction_add_bid(request, auction_uuid):
@@ -67,9 +82,7 @@ def auction_add_bid(request, auction_uuid):
             # process the data in form.cleaned_data as required
             new_bid = form.save(commit=False)
             if new_bid.value <= auction.bid_current_value:
-                return render(
-                    request, "auctions/detail.html", {"auction": auction, "bid_form": form}
-                )
+                return redirect(auction)
             #
             new_bid.value = float(request.POST["value"])
             new_bid.buyer = request.user
@@ -79,19 +92,13 @@ def auction_add_bid(request, auction_uuid):
             auction.bid_current_value = new_bid.value
             auction.save()
             # redirect to a new URL:
-            return render(
-                request, "auctions/detail.html", {"auction": auction, "bid_form": form}
-            )
-            # ...
+            return redirect(auction)
         else:
             print(form.errors)
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = BidForm()
-        return render(
-            request, "auctions/detail.html", {"auction": auction, "bid_form": bid_form}
-        )
+        return redirect(auction)
 
 
 def auction_bids(request):

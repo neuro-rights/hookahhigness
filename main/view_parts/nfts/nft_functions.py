@@ -144,6 +144,7 @@ def nft_add_file_to_s3(request, nft_uuid):
     """ """
 
     nft_file = request.FILES.get('photo-file', None)
+    nft = Nft.objects.get(uuid=nft_uuid)
 
     S3_BASE_URL = 'https://s3.'+request.user.aws_s3_region+'.amazonaws.com/'
     BUCKET = request.user.aws_s3_bucket
@@ -163,23 +164,23 @@ def nft_add_file_to_s3(request, nft_uuid):
             s3.upload_fileobj(nft_file, request.user.aws_s3_bucket, key, ExtraArgs={'ACL': 'public-read'})
             # build the full url string
             url = f"{S3_BASE_URL}/{BUCKET}/{key}"
-            nft = Nft.objects.get(uuid=nft_uuid)
             nft.uri_preview = url
             nft.save()
-            return render(
-                request, "nfts/detail.html", {"nft": nft}
-            )
         except:
             print("An error occurred uploading file to S3")
+        
+        return redirect(nft)
 
 
 @login_required
-def nft_ipfs_upload_asset(asset_file):
+def nft_ipfs_upload_file(request, nft_uuid):
+    """ """
+
+    nft = Nft.objects.get(uuid=nft_uuid)
     if asset_file:
         try:
             ipfsutils = IPFSUtils()
             url = ipfsutils.ipfs_upload(asset_file)
-            nft = Nft.objects.get(uuid=nft_uuid)
             nft.preview_image = url
             nft.asset_uri = url
             # TODO
@@ -189,5 +190,5 @@ def nft_ipfs_upload_asset(asset_file):
         except:
             print("An error occurred uploading file to IPFS")
         #
-        return redirect("nft_detail", uuid=nft_uuid)
+        return redirect(nft)
 

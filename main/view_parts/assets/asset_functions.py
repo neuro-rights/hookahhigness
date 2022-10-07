@@ -48,7 +48,7 @@ def assets_own(request):
 
 @login_required
 def asset_add_raffle(request, auction_uuid):
-    pass
+    return redirect(asset)
 
 
 @login_required
@@ -65,17 +65,14 @@ def asset_add_auction(request, asset_uuid):
     #
     auction.save()
     auction.assets.add(asset)
-    context = {"auction": auction, "bid_form": form}
-    return render(request, "auctions/detail.html", context)
+    return redirect(auction)
 
 
 @login_required
 def asset_add_metadata(request, auction_id):
     #
     asset = Asset.objects.filter(creator=request.user)
-    #
-    context = {"asset": asset}
-    return render(request, "assets/detail.html", context)
+    return redirect(asset)
 
 
 @login_required
@@ -105,8 +102,7 @@ def asset_add_nfts(request, asset_uuid):
             print(e)
         counter += 1
 
-    context = {"asset": asset}
-    return render(request, "assets/detail.html", context)
+    return redirect(asset)
 
 
 @login_required
@@ -154,9 +150,7 @@ def asset_add_files_to_s3(request, asset_uuid):
             except Exception as e:
                 print("An error occurred uploading file to S3 - {}".format(e))
 
-    return render(
-        request, "assets/detail.html", {"asset": asset}
-    )
+    return redirect(asset)
 
 
 

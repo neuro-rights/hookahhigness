@@ -21,6 +21,7 @@ jmespath
 libgravatar
 jedi
 matplotlib-inline
+opensea-api
 parso
 pexpect
 Pillow>=9.0.1

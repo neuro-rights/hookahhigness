@@ -238,7 +238,7 @@ class ContractUtils:
         """
         filename = contract_file
         contract_name = Path(contract_file).stem
-        contract_json_file = open('compiled.json'.format(contract_name), 'w')
+        contract_json_file = open('{}.json'.format(contract_name), 'w')
 
         # Use the following lines of code to get the content of the Vyper file:
         with open(filename, 'r') as f:

@@ -29,15 +29,12 @@ def bid_accept(request, bid_uuid):
     """ """
 
     bid = Bid.objects.get(uuid=bid_uuid)
-    print(bid.uuid)
     bid_form = BidForm()
     #
     try:
         #
         contract_address = bid.auction.contract_address
-        #
         user_wallet = request.user.ethereum_wallet_address 
-        #
 
         config={
                 'buyer_ethereum_wallet_address':bid.buyer.ethereum_wallet_address,
@@ -84,16 +81,13 @@ def bid_accept(request, bid_uuid):
         #
         print("Purchase of NFT failed: {}".format(err))
     #
-    return render(
-        request, "auctions/detail.html", {"auction": bid.auction, "bid_form": bid_form}
-    )
+    return redirect(auction)
 
 
 @login_required
 def bid_reject(request, bid_id):
     #
     bid = Bid.objects.get(id=bid_id)
-    bid_nft_id = bid.nft.id
     try:
         #
         bid.delete()
@@ -102,5 +96,5 @@ def bid_reject(request, bid_id):
         #
         print("Failed to delete Bid: {}".format(err))
     #
-    return redirect("nft_detail", nft_id=bid_nft_id)
+    return redirect(auction)
 
