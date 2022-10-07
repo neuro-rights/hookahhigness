@@ -294,3 +294,33 @@ class ContractUtils:
         print(f'Contract deployed at address: { tx_receipt.contractAddress }')
         return tx_receipt.contractAddress
 
+
+    def verify_contract():
+        """ """
+        networks = {
+            "main": "https://api.etherscan.io/",
+            "goerli": "https://api-goerli.etherscan.io/",
+            "kovan": "https://api-kovan.etherscan.io/",
+            "rinkeby": "https://api-rinkeby.etherscan.io/",
+            "ropsten": "https://api-ropsten.etherscan.io/",
+            "sepolia": "https://api-sepolia.etherscan.io/"
+        }
+
+        req = {
+            "apikey": "",
+            "module": "contract",
+            "action": "verifysourcecode",
+            "contractaddress": "",
+            "sourceCode": "",
+            "codeformat": "",
+            "contractname": "",
+            "compilerversion": "",
+            "optimizationUsed": "",
+            "runs": 200,
+            "constructorArguements": "",
+            "evmversion": "",
+            "licenseType": ""
+        }
+
+        network_endpoint = networks["goerli"]
+        x = requests.post(network_endpoint, data=req)
