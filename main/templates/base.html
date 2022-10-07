@@ -146,19 +146,19 @@
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
-                                <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Digital Assets</a>
+                                <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Bundles</a>
                                 <div id='assets' class='dropdown-menu dropdown-menu-end'>
-                                    <a class="dropdown-item" href="{% url 'asset_create' %}">NEW ASSET</a>
-                                    <a class="dropdown-item" href="{% url 'asset_create_from_files' %}">NEW ASSETS FROM FILES</a>
-                                    <a class="dropdown-item" href="{% url 'asset_create_from_metadata_url' %}">NEW ASSETS FROM METADATA</a>
+                                    <a class="dropdown-item" href="{% url 'asset_create' %}">NEW BUNDLE</a>
+                                    <a class="dropdown-item" href="{% url 'asset_create_from_files' %}">NEW BUNDLE FROM FILES</a>
+                                    <a class="dropdown-item" href="{% url 'asset_create_from_metadata_url' %}">NEW BUNDLE FROM METADATA</a>
                                     {% comment %}
                                     <a class="dropdown-item" href="{% url 'asset_create_from_nfts' %}">NEW FROM NFTS</a>
                                     {% endcomment %}
-                                    <a class="dropdown-item" href="{% url 'assets_own' %}">LIST ASSETS</a>
+                                    <a class="dropdown-item" href="{% url 'assets_own' %}">LIST OWN BUNDLES</a>
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
-                                <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">NFT's</a>
+                                <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">ASSETS</a>
                                 <div id='nfts' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'nft_create' %}">NEW</a>
                                     <a class="dropdown-item" href="{% url 'nfts_own' %}">LIST</a>
