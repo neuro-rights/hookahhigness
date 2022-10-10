@@ -9,7 +9,7 @@ from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.utils.html import escape
 
 #
-from ...utils.nft import NFTUtils
+from ...utils.asset import NFTUtils
 from ...utils.contract import ContractUtils
 
 #

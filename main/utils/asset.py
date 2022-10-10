@@ -28,7 +28,7 @@ class NFTUtils:
     def __init__(self):
         """Class init"""
 
-    def create_nft_image(self, all_images, config):
+    def create_asset_image(self, all_images, config):
         """ """
         new_image = {}
         for layer in config["layers"]:
@@ -44,7 +44,7 @@ class NFTUtils:
         else:
             return new_image
 
-    def generate_unique_images(self, amount, config, nft_art_output_directory_path):
+    def generate_unique_images(self, amount, config, asset_art_output_directory_path):
         """ """
         print("Generating {} unique NFTs...".format(amount))
         pad_amount = len(str(amount))
@@ -100,13 +100,13 @@ class NFTUtils:
             if len(layers) == 1:
                 rgb_im = layers[0].convert("RGBA")
                 file_name = str(item["tokenId"]) + ".png"
-                rgb_im.save(nft_art_output_directory_path + file_name)
+                rgb_im.save(asset_art_output_directory_path + file_name)
             #
             elif len(layers) == 2:
                 main_composite = Image.alpha_composite(layers[0], layers[1])
                 rgb_im = main_composite.convert("RGBA")
                 file_name = str(item["tokenId"]) + ".png"
-                rgb_im.save(nft_art_output_directory_path + file_name)
+                rgb_im.save(asset_art_output_directory_path + file_name)
             #
             elif len(layers) >= 3:
                 main_composite = Image.alpha_composite(layers[0], layers[1])
@@ -117,14 +117,14 @@ class NFTUtils:
                 main_composite = Image.alpha_composite(main_composite, remaining)
                 rgb_im = main_composite.convert("RGBA")
                 file_name = str(item["tokenId"]) + ".png"
-                rgb_im.save(nft_art_output_directory_path + file_name)
+                rgb_im.save(asset_art_output_directory_path + file_name)
 
         # v1.0.2 addition
         print(
             "\nUnique NFT's generated. After uploading images to IPFS, please paste the CID below.\nYou may hit ENTER or CTRL+C to quit."
         )
         # cid = input("IPFS Image CID (): ")
-        cid = self.upload_directory_to_ipfs(nft_art_output_directory_path)
+        cid = self.upload_directory_to_ipfs(asset_art_output_directory_path)
         #
         if len(cid) > 0:
             #

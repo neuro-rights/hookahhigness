@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from bootstrap_datepicker_plus.widgets import DateTimePickerInput
-from .models import User, Nft, Asset, Raffle, Auction, Bid, Purchase
+from .models import User, Asset, Collection, Raffle, Auction, Bid, Purchase
 
 from datetime import datetime, timedelta
 from libgravatar import Gravatar
@@ -140,13 +140,13 @@ class UserEditForm(forms.ModelForm):
         ]
 
 
-class NftForm(forms.ModelForm):
+class AssetForm(forms.ModelForm):
     """ """
 
     def __init__(self, request, *args, **kwargs):
         """Grants access to the request object so that only members of the current user
         are given as options"""
-        super(NftForm, self).__init__(*args, **kwargs)
+        super(AssetForm, self).__init__(*args, **kwargs)
         self.request = request
 
     def save(self, commit=True):
@@ -161,23 +161,23 @@ class NftForm(forms.ModelForm):
     class Meta:
         """ """
 
-        model = Nft
+        model = Asset
         fields = [
             "name",
             "description",
-            "nft_type",
+            "asset_type",
         ]
 
 
-class AssetForm(forms.ModelForm):
+class CollectionForm(forms.ModelForm):
     """ """
     def __init__(self, request, *args, **kwargs):
         """Grants access to the request object so that only members of the current user
         are given as options"""
-        super(AssetForm, self).__init__(*args, **kwargs)
+        super(CollectionForm, self).__init__(*args, **kwargs)
         self.request = request
         """
-        self.fields["nfts"].queryset = Nft.objects.filter(
+        self.fields["assets"].queryset = Asset.objects.filter(
             creator=self.request.user
         )
         """
@@ -194,11 +194,11 @@ class AssetForm(forms.ModelForm):
     class Meta:
         """ """
 
-        model = Asset
+        model = Collection
         fields = [
-            "asset_type",
+            "collection_type",
             #"seller",
-            "nfts",
+            "assets",
             "name",
             "description",
             #"token_id",
@@ -207,7 +207,7 @@ class AssetForm(forms.ModelForm):
         ]
 
 
-class AssetFromFilesForm(forms.ModelForm):
+class CollectionFromFilesForm(forms.ModelForm):
     """ """
 
     image_files = forms.FileField(
@@ -217,7 +217,7 @@ class AssetFromFilesForm(forms.ModelForm):
     def __init__(self, request, *args, **kwargs):
         """Grants access to the request object so that only members of the current user
         are given as options"""
-        super(AssetFromFilesForm, self).__init__(*args, **kwargs)
+        super(CollectionFromFilesForm, self).__init__(*args, **kwargs)
         self.request = request
 
     def save(self, commit=True):
@@ -232,24 +232,24 @@ class AssetFromFilesForm(forms.ModelForm):
     class Meta:
         """ """
 
-        model = Asset
+        model = Collection
         fields = [
         ]
 
 
-class AssetFromNftsForm(forms.ModelForm):
+class CollectionFromAssetsForm(forms.ModelForm):
     """ """
 
-    nfts = forms.ModelMultipleChoiceField(
+    assets = forms.ModelMultipleChoiceField(
         queryset=None, widget=forms.SelectMultiple
     )
 
     def __init__(self, request, *args, **kwargs):
         """Grants access to the request object so that only members of the current user
         are given as options"""
-        super(AssetFromNftsForm, self).__init__(*args, **kwargs)
+        super(CollectionFromAssetsForm, self).__init__(*args, **kwargs)
         self.request = request
-        self.fields["nfts"].queryset = Nft.objects.filter(
+        self.fields["assets"].queryset = Asset.objects.filter(
             creator=self.request.user
         )
 
@@ -265,13 +265,13 @@ class AssetFromNftsForm(forms.ModelForm):
     class Meta:
         """ """
 
-        model = Asset
+        model = Collection
         fields = [
-            "nfts",
+            "assets",
         ]
 
 
-class AssetFromMetadataURLForm(forms.ModelForm):
+class CollectionFromMetadataURLForm(forms.ModelForm):
     """ """
 
     metadata_file = forms.FileField(widget=forms.ClearableFileInput())
@@ -279,7 +279,7 @@ class AssetFromMetadataURLForm(forms.ModelForm):
     def __init__(self, request, *args, **kwargs):
         """Grants access to the request object so that only members of the current user
         are given as options"""
-        super(AssetFromMetadataURLForm, self).__init__(*args, **kwargs)
+        super(CollectionFromMetadataURLForm, self).__init__(*args, **kwargs)
         self.request = request
 
     def save(self, commit=True):
@@ -294,7 +294,7 @@ class AssetFromMetadataURLForm(forms.ModelForm):
     class Meta:
         """ """
 
-        model = Asset
+        model = Collection
         fields = [
             "metadata_uri",
         ]
@@ -303,7 +303,7 @@ class AssetFromMetadataURLForm(forms.ModelForm):
 class AuctionForm(forms.ModelForm):
     """ """
 
-    assets = forms.ModelMultipleChoiceField(
+    collections = forms.ModelMultipleChoiceField(
         queryset=None, widget=forms.SelectMultiple
     )
 
@@ -312,7 +312,7 @@ class AuctionForm(forms.ModelForm):
         are given as options"""
         super(AuctionForm, self).__init__(*args, **kwargs)
         self.request = request
-        self.fields["assets"].queryset = Asset.objects.filter(
+        self.fields["collections"].queryset = Collection.objects.filter(
             seller=self.request.user
         )
 
@@ -330,7 +330,7 @@ class AuctionForm(forms.ModelForm):
 
         model = Auction
         fields = [
-            "assets",
+            "collections",
             "network",
             "contract_address",
             "description",
@@ -381,14 +381,14 @@ class PurchaseForm(forms.ModelForm):
 class RaffleForm(forms.ModelForm):
     """ """
 
-    asset = forms.ModelChoiceField(queryset=None, widget=forms.Select)
+    collection = forms.ModelChoiceField(queryset=None, widget=forms.Select)
 
     def __init__(self, request, *args, **kwargs):
         """Grants access to the request object so that only members of the current user
         are given as options"""
         super(RaffleForm, self).__init__(*args, **kwargs)
         self.request = request
-        self.fields["asset"].queryset = Asset.objects.filter(
+        self.fields["collection"].queryset = Collection.objects.filter(
             seller=self.request.user
         )
 
@@ -397,7 +397,7 @@ class RaffleForm(forms.ModelForm):
 
         model = Raffle
         fields = [
-            "asset",
+            "collection",
             "datetime_start",
             "datetime_end",
             "price_entry",

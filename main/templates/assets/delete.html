@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>DELETE ASSET</h2>
-<h4 class="header-text">Are you sure you want to delete <span class="teal-text">'{{ asset.name|upper }}'</span> ¿ⓧ_ⓧﮌ
-</h4>
+<h2>DELETE NFT</h2>
+
+<h4 class="header-text">Are you sure you want to delete <span class="teal-text">'{{ asset.uuid|upper }}'</span> ¿ⓧ_ⓧﮌ</h4>
 
 <form action="" method="POST">
     {% csrf_token %}

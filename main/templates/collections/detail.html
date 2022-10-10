@@ -1,46 +1,48 @@
 {% extends 'base.html' %} {% load mathfilters %}
 {% block content %}
 
-<h5>{{asset.uuid|upper}}</h5>
+<h5>{{collection.uuid|upper}}</h5>
 <div class="row">
     <div class="col-6">
         <div class="card bg-dark">
             <div class="card-body">
                 <span class="card-title"></span>
-                <link rel="preload" class="responsive-img card-panel" href="{{ asset.uri_preview }}" as="image" crossorigin>
-                {% if asset.asset_type == 'audio' %}
+                <link rel="preload" class="responsive-img card-panel" href="{{ collection.uri_preview }}" as="image" crossorigin>
+                {% if collection.collection_type == 'audio' %}
                 <audio controls>
-                    <source src="{{ asset.uri_preview }}" type="audio/mp3">
+                    <source src="{{ collection.uri_preview }}" type="audio/mp3">
                 </audio>
-                {% elif asset.asset_type == 'video' %}
+                {% elif collection.collection_type == 'video' %}
                 <video width="100%" controls>
-                    <source src="{{ asset.uri_preview }}" type="video/mp4">
+                    <source src="{{ collection.uri_preview }}" type="video/mp4">
                 </video> 
-                {% elif asset.asset_type == 'image' %}
-                <img width="100%" align="center"  src="{{ asset.uri_preview }}"/>
+                {% elif collection.collection_type == 'image' %}
+                <img width="100%" align="center"  src="{{ collection.uri_preview }}"/>
                 {% else %}
-                <a href="{{ asset.uri_preview }}">File link</a>
+                <a href="{{ collection.uri_preview }}">File link</a>
                 {% endif %}
-                <form action="{% url 'asset_add_file_to_s3' asset.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
-                    {% csrf_token %}
-                    <input type="file" name="photo-file">
-                    <br><br>
-                    <input type="submit" class="btn" value="Upload File">
-                </form>
-                {% for field in asset.get_all_fields %}
+                {% for field in collection.get_all_fields %}
                 <div class="row">
                     <div class="col-4">
                         {{ field.label }}
                     </div>
                     <div class="col-8">
-                        {{ field.value|truncatechars:100 }}
+                        {{ field.value|truncatechars:50 }}
                     </div>
                 </div>
                 {% endfor %}
-                {% if asset.creator == request.user %}
+
+                <form action="{% url 'collection_add_files_to_s3' collection.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
+                    {% csrf_token %}
+                    <input type="file" name="files-field" multiple>
+                    <br><br>
+                    <input type="submit" class="btn" value="Upload Files">
+                </form>
+
+                {% if collection.seller == request.user %}
                 <div class="card-action">
-                    <a href="{% url 'asset_edit' asset.uuid %}" class="waves-effect waves-light btn-small">Edit</a>
-                    <a href="{% url 'asset_delete' asset.uuid %}" class="waves-effect waves-light btn-small red darken-4">Delete</a>
+                    <a href="{% url 'collection_edit' collection.uuid %}" class="waves-effect waves-light btn-small">Edit</a>
+                    <a href="{% url 'collection_delete' collection.uuid %}" class="waves-effect waves-light btn-small red darken-4">Delete</a>
                     {% comment %}
                     <form action="{% url 'like_asset' asset.uuid %}" method="POST" class="right">
                         {% csrf_token %}
@@ -63,12 +65,12 @@
     <div class="col-6">
         <div class="card bg-dark">
             <div class="card-body">
-                {% if asset.creator == request.user %}
+                {% if collection.seller == request.user %}
                 <div class="sellbutton">
-                <h3 class = "center-align">READY TO AUCTION YOUR NFT?</h3>
+                <h3 class = "center-align">READY TO AUCTION YOUR ASSET?</h3>
                 <br>   
                 <div class = "center-align">
-                <a href="{% url 'asset_add_auction' asset.uuid %}" class="waves-effect waves-light btn-large">Auction</a>
+                <a href="{% url 'collection_add_auction' collection.uuid %}" class="waves-effect waves-light btn-large">Auction</a>
                 </div>
                 {% endif %}
             </div>

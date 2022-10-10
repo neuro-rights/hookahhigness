@@ -48,7 +48,7 @@ def auctions_own_ended(request):
 
 
 @login_required
-def auction_add_assets(request, auction_uuid):
+def auction_add_collections(request, auction_uuid):
     pass
 
 

@@ -147,27 +147,27 @@
                             </div>
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">COLLECTIONS</a>
-                                <div id='assets' class='dropdown-menu dropdown-menu-end'>
-                                    <a class="dropdown-item" href="{% url 'asset_create' %}">NEW COLLECTION</a>
-                                    <a class="dropdown-item" href="{% url 'asset_create_from_files' %}">NEW COLLECTION FROM FILES</a>
-                                    <a class="dropdown-item" href="{% url 'asset_create_from_metadata_url' %}">NEW COLLECTION FROM METADATA</a>
+                                <div id='collections' class='dropdown-menu dropdown-menu-end'>
+                                    <a class="dropdown-item" href="{% url 'collection_create' %}">NEW COLLECTION</a>
+                                    <a class="dropdown-item" href="{% url 'collection_create_from_files' %}">NEW COLLECTION FROM FILES</a>
+                                    <a class="dropdown-item" href="{% url 'collection_create_from_metadata_url' %}">NEW COLLECTION FROM METADATA</a>
                                     {% comment %}
-                                    <a class="dropdown-item" href="{% url 'asset_create_from_nfts' %}">NEW FROM NFTS</a>
+                                    <a class="dropdown-item" href="{% url 'collection_create_from_assets' %}">NEW FROM NFTS</a>
                                     {% endcomment %}
-                                    <a class="dropdown-item" href="{% url 'assets_own' %}">LIST OWN COLLECTIONS</a>
+                                    <a class="dropdown-item" href="{% url 'collections_own' %}">LIST OWN COLLECTIONS</a>
                                 </div>
                             </div>
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">ASSETS</a>
-                                <div id='nfts' class='dropdown-menu dropdown-menu-end'>
-                                    <a class="dropdown-item" href="{% url 'nft_create' %}">NEW</a>
-                                    <a class="dropdown-item" href="{% url 'nfts_own' %}">LIST</a>
+                                <div id='assets' class='dropdown-menu dropdown-menu-end'>
+                                    <a class="dropdown-item" href="{% url 'asset_create' %}">NEW</a>
+                                    <a class="dropdown-item" href="{% url 'assets_own' %}">LIST</a>
                                 </div>
                             </div>
                             {% comment %}
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">Opensea</a>
-                                <div id='nfts' class='dropdown-menu dropdown-menu-end'>
+                                <div id='assets' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'opensea' %}">TODO</a>
                                 </div>
                             </div>

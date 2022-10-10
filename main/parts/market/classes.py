@@ -22,7 +22,7 @@ class MarketList(ListView):
     model = Auction
     fields = [
         "description",
-        "assets",
+        "collections",
         "blockchain",
         "time_start",
         "time_end",

@@ -2,26 +2,26 @@ from datetime import datetime, timedelta, time
 
 from django.shortcuts import render
 
-from .models import Asset
+from .models import Collection
 
 from .parts.utils.pagination import *
 from .parts.utils.form_kwargs import *
-from .parts.auth.auth_functions import *
-from .parts.nfts.nft_classes import *
-from .parts.nfts.nft_functions import *
-from .parts.assets.asset_classes import *
-from .parts.assets.asset_functions import *
-from .parts.bids.bid_classes import *
-from .parts.bids.bid_functions import *
-from .parts.auctions.auction_classes import *
-from .parts.auctions.auction_functions import *
-from .parts.purchases.purchase_classes import *
-from .parts.raffles.raffle_classes import *
-from .parts.raffles.raffle_functions import *
+from .parts.auth.functions import *
+from .parts.assets.classes import *
+from .parts.assets.functions import *
+from .parts.collections.classes import *
+from .parts.collections.functions import *
+from .parts.bids.classes import *
+from .parts.bids.functions import *
+from .parts.auctions.classes import *
+from .parts.auctions.functions import *
+from .parts.purchases.classes import *
+from .parts.raffles.classes import *
+from .parts.raffles.functions import *
 
 # from .view_parts.opensea.opensea import *
-from .parts.market.market_classes import *
-from .parts.market.market_functions import *
+from .parts.market.classes import *
+from .parts.market.functions import *
 
 
 

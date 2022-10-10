@@ -107,7 +107,7 @@ class User(AbstractUser):
 
 
 @model_decorator
-class Nft(models.Model):
+class Asset(models.Model):
     #
     NFT_TYPES = (
         ("image", "Image File"),
@@ -118,7 +118,7 @@ class Nft(models.Model):
     )
     id = models.AutoField(primary_key=True)
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    nft_type = models.CharField(
+    asset_type = models.CharField(
         max_length=32,
         choices=NFT_TYPES,
         default="2d",
@@ -130,7 +130,7 @@ class Nft(models.Model):
     likes = models.ManyToManyField(User, related_name="likes")
     token_id = models.IntegerField(default=random_token)
     #
-    uri_asset = models.URLField(max_length=200)
+    uri_collection = models.URLField(max_length=200)
     uri_metadata = models.URLField(max_length=200)
     uri_preview = models.URLField(max_length=200)
 
@@ -146,15 +146,15 @@ class Nft(models.Model):
     def __str__(self):
         return self.name
     #
-    def get_asset_uri(self):
-        return self.uri_asset
+    def get_collection_uri(self):
+        return self.uri_collection
     #
     def get_absolute_url(self):
-        return reverse("nft_detail", kwargs={"nft_uuid": self.uuid})
+        return reverse("asset_detail", kwargs={"asset_uuid": self.uuid})
 
 
 @model_decorator
-class Asset(models.Model):
+class Collection(models.Model):
     #
     ASSET_TYPES = (
         ("image", "Image File"),
@@ -171,12 +171,12 @@ class Asset(models.Model):
     #
     id = models.AutoField(primary_key=True)
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    asset_type = models.CharField(
+    collection_type = models.CharField(
         max_length=32, choices=ASSET_TYPES, default="2d"
     )
     #
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
-    nfts = models.ManyToManyField(Nft, related_name="nfts")
+    assets = models.ManyToManyField(Asset, related_name="assets")
     #
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
@@ -197,24 +197,24 @@ class Asset(models.Model):
         return self.name
 
     @property
-    def get_random_nft(self):
-        return self.nfts.order_by("?").first()
+    def get_random_asset(self):
+        return self.assets.order_by("?").first()
 
     @property
-    def get_random_nfts(self):
-        return self.nfts.all()[:18][::-1]
+    def get_random_assets(self):
+        return self.assets.all()[:18][::-1]
 
     @property
-    def num_nfts(self):
-        return self.nfts.all().count()
+    def num_assets(self):
+        return self.assets.all().count()
 
     @property
     def total_likes(self):
-        return self.nfts.aggregate(Count("likes"))["likes__count"]
+        return self.assets.aggregate(Count("likes"))["likes__count"]
 
     #
     def get_absolute_url(self):
-        return reverse("asset_detail", kwargs={"asset_uuid": self.uuid})
+        return reverse("collection_detail", kwargs={"collection_uuid": self.uuid})
 
 
 @model_decorator
@@ -235,7 +235,7 @@ class Auction(models.Model):
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     #
-    assets = models.ManyToManyField(Asset, related_name="assets")
+    collections = models.ManyToManyField(Collection, related_name="collections")
     network = models.CharField(
         max_length=32, choices=BLOCKCHAIN_TYPES, default="rinkeby"
     )
@@ -263,10 +263,10 @@ class Auction(models.Model):
     def bids(self):
         return Bid.objects.filter(auction=self)
 
-    def get_random_nfts(self):
-        nfts = [nft.preview_uri for nft in self.assets.nfts]
-        print("My NFTS: " + nfts)
-        return nfts
+    def get_random_assets(self):
+        assets = [asset.preview_uri for asset in self.collections.assets]
+        print("My NFTS: " + assets)
+        return assets
 
     @property
     def total_bids(self):
@@ -317,7 +317,7 @@ class Raffle(models.Model):
     #
     id = models.AutoField(primary_key=True)
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    asset = models.ForeignKey(Asset, on_delete=models.CASCADE, null=True, blank=True)
+    collection = models.ForeignKey(Collection, on_delete=models.CASCADE, null=True, blank=True)
     #
     participants = models.ManyToManyField(User, related_name="participants")
     winner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)

@@ -13,7 +13,7 @@
                             <p>Total ASSETS:</p>
                         </div>
                         <div class="col">
-                            <p>{{ auction.fields.assets|length }}</p>
+                            <p>{{ auction.fields.collections|length }}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -53,9 +53,9 @@
             </div>
         </a>
         <div class="carousel teal darken-4">
-            {% for nft in asset.get_random_nfts %}
-            <a href="{% url 'nft_detail' nft.uuid %}" class="carousel-item">
-                <img class="responsive-img" src="{{ nft.preview_url }}" loading="lazy"> {% empty %}
+            {% for asset in collection.get_random_assets %}
+            <a href="{% url 'asset_detail' asset.uuid %}" class="carousel-item">
+                <img class="responsive-img" src="{{ asset.preview_url }}" loading="lazy"> {% empty %}
             </a>
             {% endfor %}
         </div>

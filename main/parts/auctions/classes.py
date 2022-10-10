@@ -21,7 +21,7 @@ from ..utils.pagination import *
 from ..utils.form_kwargs import PassArgumentsToForm
 
 #
-from ...utils.nft import NFTUtils
+from ...utils.asset import NFTUtils
 from ...utils.contract import ContractUtils
 
 
@@ -84,8 +84,8 @@ class AuctionDelete(LoginRequiredMixin, DeleteView):
 
 
 class AuctionOwnRunningListJson(BaseDatatableView):
-    columns = ['uuid', 'seller', 'assets', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
-    order_columns = ['uuid', 'seller', 'assets', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
+    columns = ['uuid', 'seller', 'collections', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
+    order_columns = ['uuid', 'seller', 'collections', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
 
     def get_initial_queryset(self):
         now = datetime.now()
@@ -93,8 +93,8 @@ class AuctionOwnRunningListJson(BaseDatatableView):
 
 
 class AuctionOwnScheduledListJson(BaseDatatableView):
-    columns = ['uuid', 'seller', 'assets', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
-    order_columns = ['uuid', 'seller', 'assets', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
+    columns = ['uuid', 'seller', 'collections', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
+    order_columns = ['uuid', 'seller', 'collections', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
 
     def get_initial_queryset(self):
         now = datetime.now()
@@ -102,8 +102,8 @@ class AuctionOwnScheduledListJson(BaseDatatableView):
 
 
 class AuctionOwnEndedListJson(BaseDatatableView):
-    columns = ['uuid', 'seller', 'assets', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
-    order_columns = ['uuid', 'seller', 'assets', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
+    columns = ['uuid', 'seller', 'collections', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
+    order_columns = ['uuid', 'seller', 'collections', 'blockchain', 'datetime_start', 'datetime_end', 'bid_start_value', 'bid_current_value']
 
     def get_initial_queryset(self):
         now = datetime.now()

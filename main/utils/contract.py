@@ -94,7 +94,7 @@ class ContractUtils:
             ABI = self.load_json(config["auction_contract_address"])["abi"]  # get the ABI
             CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
             CHAIN_ID = 4
-            open_sea_url = f"https://testnets.opensea.io/assets/{contract}/"
+            open_sea_url = f"https://testnets.opensea.io/collections/{contract}/"
             scan_url = "https://rinkeby.etherscan.io/tx/"
         #
         elif network == "goerli":
@@ -104,7 +104,7 @@ class ContractUtils:
             ABI = self.load_json(config["auction_contract_address"])  # get the ABI
             CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
             CHAIN_ID = 5 
-            open_sea_url = f"https://testnets.opensea.io/assets/{contract}/"
+            open_sea_url = f"https://testnets.opensea.io/collections/{contract}/"
             scan_url = "https://goerli.etherscan.io/tx/"
         #
         elif network == "mumbai":
@@ -113,7 +113,7 @@ class ContractUtils:
             ABI = self.load_json(config["auction_contract_address"])["abi"]  # get the ABI
             CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
             CHAIN_ID = 80001
-            open_sea_url = f"https://testnets.opensea.io/assets/{contract}/"
+            open_sea_url = f"https://testnets.opensea.io/collections/{contract}/"
             scan_url = "https://explorer-mumbai.maticvigil.com/tx/"
         #
         elif network == "matic_main":
@@ -122,7 +122,7 @@ class ContractUtils:
             ABI = self.load_json(config["auction_contract_address"])["abi"]  # get the ABI
             CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
             CHAIN_ID = 137
-            open_sea_url = f"https://opensea.io/assets/matic/{contract}/"
+            open_sea_url = f"https://opensea.io/collections/matic/{contract}/"
             scan_url = "https://polygonscan.com/tx/"
         #
         else:

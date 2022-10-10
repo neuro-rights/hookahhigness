@@ -11,7 +11,7 @@ import glob
 from pathlib import Path
 
 
-# from modules import utils, mint_nft, pinata_api
+# from modules import utils, mint_asset, pinata_api
 # import streamlit.components.v1 as components
 
 
@@ -123,7 +123,7 @@ def create_item():
     ext_url = st.text_input(
         "External URL",
         "",
-        help="This is the URL that will appear below the asset's image on OpenSea and will allow users to leave OpenSea and view the item on your site.",
+        help="This is the URL that will appear below the collection's image on OpenSea and will allow users to leave OpenSea and view the item on your site.",
     )
     item_desc = st.text_input(
         "Description",
@@ -329,7 +329,7 @@ def mint() -> None:
 
             if st.button(f"Mint token"):
                 with st.spinner("Minting..."):
-                    eth_json = mint_nft.set_up_blockchain(
+                    eth_json = mint_asset.set_up_blockchain(
                         contract,
                         abi_path,
                         public_key,
@@ -338,7 +338,7 @@ def mint() -> None:
                         network,
                     )
 
-                    txn_hash = mint_nft.web3_mint(token_address, token_uri, eth_json)
+                    txn_hash = mint_asset.web3_mint(token_address, token_uri, eth_json)
 
                     if network == "mumbai":
                         scan_url = "https://mumbai.polygonscan.com/tx/"
@@ -393,8 +393,8 @@ def deploy() -> None:
     st.subheader("NFT Name")
 
     st.write("Enter in the name and Symbol for your NFT")
-    nft_name = st.text_input("NFT Name", "MyNFT")
-    nft_symbol = st.text_input("NFT Symbol", "MyNFT")
+    asset_name = st.text_input("NFT Name", "MyNFT")
+    asset_symbol = st.text_input("NFT Symbol", "MyNFT")
 
     st.subheader("API Keys")
     st.write("Enter in your infura.io API KEY")
@@ -406,29 +406,29 @@ def deploy() -> None:
     public_key = st.text_input("Public Key", "")
     mnemonic = st.text_input("mnemonic", "", type="password")
 
-    if st.button(f"Deploy {nft_name} Smart Contract"):
+    if st.button(f"Deploy {asset_name} Smart Contract"):
         with st.spinner("Deploying..."):
 
             # TODO do we want to check for invalid chars
-            nft_name = nft_name.replace(" ", "_")
+            asset_name = asset_name.replace(" ", "_")
 
             # Do a find and replace in the for the Contrant Name
-            contracts_dir = f"contracts_{nft_name}"
-            contracts_build = f"./build/contracts_{nft_name}"
+            contracts_dir = f"contracts_{asset_name}"
+            contracts_build = f"./build/contracts_{asset_name}"
 
             #  Replace contract code
             copy_command = f"cp -r contracts_temp {contracts_dir}"
             os.system(copy_command)
             file_data = utils.read_from_file(f"{contracts_dir}/MyNFT.sol")
-            file_data = file_data.replace("REPLACE_NAME", f"{nft_name}")
-            file_data = file_data.replace("REPLACE_SYM", f"{nft_symbol}")
+            file_data = file_data.replace("REPLACE_NAME", f"{asset_name}")
+            file_data = file_data.replace("REPLACE_SYM", f"{asset_symbol}")
             utils.write_to_file(f"{contracts_dir}/MyNFT.sol", file_data)
 
             # Replace migrations file
             copy_command = f"cp migrations_temp/2_deploy_contracts.js migrations/2_deploy_contracts.js"
             os.system(copy_command)
             con_data = utils.read_from_file(f"migrations/2_deploy_contracts.js")
-            con_data = con_data.replace("REPLACE_NAME", f"{nft_name}")
+            con_data = con_data.replace("REPLACE_NAME", f"{asset_name}")
             utils.write_to_file(f"migrations/2_deploy_contracts.js", con_data)
 
             # Get all env vars
@@ -467,21 +467,21 @@ def deploy() -> None:
 
             # Contract metadata
             contract_json = {}
-            contract_json["token_name"] = nft_name
-            contract_json["token_symbol"] = nft_symbol
+            contract_json["token_name"] = asset_name
+            contract_json["token_symbol"] = asset_symbol
             contract_json["contract_address"] = contract_address
             contract_json["network"] = network
             contract_json["scan_url"] = f"{scan_url}{contract_address}"
-            contract_json["abi_path"] = f"{contracts_build}/{nft_name}.json"
+            contract_json["abi_path"] = f"{contracts_build}/{asset_name}.json"
 
             # do we want to check for duplicates?
 
-            file_name = f"highwind_jsons/contracts/{nft_name}.json"
+            file_name = f"highwind_jsons/contracts/{asset_name}.json"
             if os.path.exists(file_name):
                 # loop until we find a free file name
                 counter = 1
                 while True:
-                    file_name = f"highwind_jsons/contracts/{nft_name}_{counter}.json"
+                    file_name = f"highwind_jsons/contracts/{asset_name}_{counter}.json"
 
                     if os.path.exists(file_name):
                         counter += 1

@@ -17,7 +17,7 @@ from ..utils.form_kwargs import PassArgumentsToForm
 
 #
 from ...forms import RaffleForm
-from ...models import Nft, Asset, Auction, Raffle
+from ...models import Asset, Collection, Auction, Raffle
 
 
 class RaffleCreate(PassArgumentsToForm, CreateView):
@@ -61,7 +61,7 @@ class RaffleEdit(PassArgumentsToForm, UpdateView):
         )
     #
     def form_valid(self, form):
-        form.instance.asset.seller = self.request.user
+        form.instance.collection.seller = self.request.user
         return super().form_valid(form)
 
 
@@ -88,30 +88,30 @@ class RaffleList(PassArgumentsToForm, ListView):
 
 
 class RaffleOwnRunningListJson(BaseDatatableView):
-    columns = ['uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
-    order_columns = ['uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
+    columns = ['uuid', 'collection', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
+    order_columns = ['uuid', 'collection', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
 
     def get_initial_queryset(self):
         now = datetime.now()
-        return Raffle.objects.filter(asset__seller=self.request.user, datetime_start__lte=now, datetime_end__gte=now)
+        return Raffle.objects.filter(collection__seller=self.request.user, datetime_start__lte=now, datetime_end__gte=now)
 
 
 class RaffleOwnScheduledListJson(BaseDatatableView):
-    columns = ['uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
-    order_columns = ['uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
+    columns = ['uuid', 'collection', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
+    order_columns = ['uuid', 'collection', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
 
     def get_initial_queryset(self):
         now = datetime.now()
-        return Raffle.objects.filter(asset__seller=self.request.user, datetime_start__gt=now)
+        return Raffle.objects.filter(collection__seller=self.request.user, datetime_start__gt=now)
 
 
 class RaffleOwnEndedListJson(BaseDatatableView):
-    columns = ['uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
-    order_columns = ['uuid', 'asset', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
+    columns = ['uuid', 'collection', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
+    order_columns = ['uuid', 'collection', 'participants', 'winner', 'datetime_start', 'datetime_end', 'price_entry', 'status']
 
     def get_initial_queryset(self):
         now = datetime.now()
-        return Raffle.objects.filter(asset__seller=self.request.user, datetime_end__lt=now)
+        return Raffle.objects.filter(collection__seller=self.request.user, datetime_end__lt=now)
 
 
 class RaffleDetailView(PassArgumentsToForm, DetailView):

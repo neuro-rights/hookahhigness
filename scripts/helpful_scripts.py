@@ -17,7 +17,7 @@ import time
 # Set a default gas price
 from brownie.network import priority_fee
 
-OPENSEA_FORMAT = "https://testnets.opensea.io/assets/{}/{}"
+OPENSEA_FORMAT = "https://testnets.opensea.io/collections/{}/{}"
 NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["hardhat", "development", "ganache"]
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS + [
     "mainnet-fork",

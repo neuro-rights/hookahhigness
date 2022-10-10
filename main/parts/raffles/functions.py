@@ -54,7 +54,7 @@ def raffle_detail(request, raffle_uuid):
 
 
 @login_required
-def raffle_add_assets(request, raffle_uuid):
+def raffle_add_collections(request, raffle_uuid):
     pass
 
 

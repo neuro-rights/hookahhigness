@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.core import serializers
 #
-from ...utils.nft import NFTUtils
+from ...utils.asset import NFTUtils
 from ...utils.contract import ContractUtils
 
 #
@@ -16,7 +16,7 @@ from ..utils.pagination import *
 
 #
 from ...forms import PurchaseForm, BidForm
-from ...models import User, Bid, Purchase, Nft
+from ...models import User, Bid, Purchase, Asset
 
 from web3 import Web3
 import requests
@@ -59,14 +59,14 @@ def bid_accept(request, bid_uuid):
             bid.value, 
             bc_setup
         )
-        for asset in bid.auction.assets.all():
-            print(asset)
-            for nft in asset.nfts.all():
-                print(nft)
+        for collection in bid.auction.collections.all():
+            print(collection)
+            for asset in collection.assets.all():
+                print(asset)
                 wallet_address = bid.buyer.ethereum_wallet_address
                 mint_tx_hash, mint_tx_id = contractutils.web3_mint(
                     wallet_address,
-                    nft.token_id,
+                    asset.token_id,
                     bc_setup,
                 )
 

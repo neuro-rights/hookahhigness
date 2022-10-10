@@ -7,21 +7,21 @@
 {% for auction in page_obj %}
 <div class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-        {% for asset in auction.assets.all %}
-        <link rel="preload" href="{{ asset.uri_preview }}" as="image" crossorigin>
+        {% for collection in auction.collections.all %}
+        <link rel="preload" href="{{ collection.uri_preview }}" as="image" crossorigin>
         <div class="carousel-item active">
-            {% if asset.asset_type == 'audio' %}
+            {% if collection.collection_type == 'audio' %}
             <audio controls>
-                <source src="{{ asset.uri_preview }}" type="audio/mp3">
+                <source src="{{ collection.uri_preview }}" type="audio/mp3">
             </audio>
-            {% elif asset.asset_type == 'video' %}
+            {% elif collection.collection_type == 'video' %}
             <video width="100%" controls>
-                <source src="{{ asset.uri_preview }}" type="video/mp4">
+                <source src="{{ collection.uri_preview }}" type="video/mp4">
             </video> 
-            {% elif asset.asset_type == 'image' %}
-            <img width="100%" align="center"  src="{{ asset.uri_preview }}"/>
+            {% elif collection.collection_type == 'image' %}
+            <img width="100%" align="center"  src="{{ collection.uri_preview }}"/>
             {% else %}
-            <a href="{{ asset.uri_preview }}">File link</a>
+            <a href="{{ collection.uri_preview }}">File link</a>
             {% endif %}
             <a href="{% url 'auction_detail' auction.uuid %}">
                 {% for field in auction.get_all_fields %}

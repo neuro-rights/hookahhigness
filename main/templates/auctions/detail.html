@@ -23,15 +23,15 @@
                     <a href="{% url 'auction_edit' auction.uuid %}" class="waves-effect waves-light btn-small">Edit</a>
                     <a href="{% url 'auction_delete' auction.uuid %}" class="waves-effect waves-light btn-small red darken-4">Delete</a>
                     {% comment %}
-                    <form action="{% url 'like_nft' nft.uuid %}" method="POST" class="right">
+                    <form action="{% url 'like_asset' asset.uuid %}" method="POST" class="right">
                         {% csrf_token %}
-                        <button type="submit" , name="nft_id" , value="{{ post.id }}"
+                        <button type="submit" , name="asset_id" , value="{{ post.id }}"
                             class="waves-effect waves-light btn-small">
                             Like <i class="material-icons">favorite</i></button>
                         <br>
                         <p class="secondary-content">
-                            {% if nft.total_likes > 0 %}<i class="material-icons">grade</i>
-                            {{ nft.total_likes }}
+                            {% if asset.total_likes > 0 %}<i class="material-icons">grade</i>
+                            {{ asset.total_likes }}
                             {% endif %}
                         </p>
                     </form>
