@@ -146,7 +146,7 @@ def asset_add_file_to_s3(request, asset_uuid):
     asset_file = request.FILES.get('photo-file', None)
     asset = Asset.objects.get(uuid=asset_uuid)
 
-    S3_BASE_URL = 'https://s3.'+request.user.aws_s3_region+'.amazonaws.com/'
+    S3_BASE_URL = 'https://s3.'+request.user.aws_s3_region+'.amazonaws.com'
     BUCKET = request.user.aws_s3_bucket
 
     # photo-file will be the "name" attribute on the <input type="file">
