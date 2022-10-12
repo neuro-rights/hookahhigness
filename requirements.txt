@@ -14,6 +14,7 @@ django-heroku
 django-mathfilters
 django-taggit
 git+https://github.com/neuro-rights/django-metamask-auth.git@main
+djangorestframework
 eth-brownie
 fontawesomefree
 gunicorn

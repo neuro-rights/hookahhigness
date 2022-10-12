@@ -77,6 +77,8 @@
                             <a href="{% url 'signup' %}" class="nav-link"><i class="fa fa-user-lock"></i> signup</a>
                             <a href="{% url 'login' %}" class="nav-link"><i class="fa fa-fingerprint"></i> login</a>
                             <a href="{% url 'about' %}" class="nav-link"><i class="fa fa-question-circle"></i> about</a>
+                            <button class="enableEthereumButton">Enable Ethereum</button>
+                            <h2>Account: <span class="showAccount"></span></h2>
                         </div>
                     </div>
                 </div>
@@ -188,6 +190,44 @@
         <div class="right">&copy; 2022 NFT Market &nbsp; \(ᵔᵕᵔ)/</div>
     </footer>
  
+    <script>
+        $( document ).ready(function() {
+            console.log( "document loaded" );
+            const ethereumButton = document.querySelector('.enableEthereumButton');
+            const showAccount = document.querySelector('.showAccount');
+
+            ethereumButton.addEventListener('click', () => {
+                getAccount();
+            });
+
+            async function getAccount() {
+                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                const account = accounts[0];
+                showAccount.innerHTML = account;
+
+                $.ajax({
+                    type: 'POST',
+                    url: "/metamask/",
+                    headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        public_address: account,
+                        user: {
+                            email: "",
+                            username: account
+                        }
+                    }),
+                    dataType: 'json',
+                    success: function(res){
+                        console.log(res)
+                    },
+                    error: function(err) {
+                        console.log(err)
+                    }
+                })
+            }
+        });
+    </script>
     {% block javascript %} {% endblock %}
 </body>
 
