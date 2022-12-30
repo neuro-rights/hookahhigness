@@ -22,7 +22,7 @@ from ..utils.pagination import *
 def signup(request):
     #
     if request.method == "POST":
-        form = UserCreateForm(request.POST)
+        form = UserCreate(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)

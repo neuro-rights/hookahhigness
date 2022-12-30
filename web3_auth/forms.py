@@ -4,7 +4,36 @@ from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 from .models import User, Asset, Collection, Raffle, Auction, Bid, Purchase
 
 from datetime import datetime, timedelta
-from libgravatar import Gravatar
+#from libgravatar import Gravatar
+
+
+
+class UserCreateForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(UserCreate, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update(
+                {
+                    "class": "input-field",
+                    "placeholder": "{}".format(field)
+                    .replace("_", " ")
+                    .capitalize(),
+                }
+            )
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        print(self)
+        self.date_joined = datetime.today()
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+        return user
+
+    class Meta:
+        model = User
+        fields = ["username", "email"]
 
 
 class UserCreateForm(forms.ModelForm):
@@ -60,7 +89,7 @@ class UserCreateForm(forms.ModelForm):
         self.date_joined = datetime.today()
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password1"])
-        user.profile_image_url = Gravatar(user.email).get_image()
+        #user.profile_image_url = Gravatar(user.email).get_image()
         if commit:
             user.save()
         return user

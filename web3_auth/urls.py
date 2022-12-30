@@ -1,12 +1,17 @@
 from django.urls import path
+
 from . import views
 
-
 urlpatterns = [
-    path("", views.HomeView.as_view(), name="home"),
-    path("help", views.home, name="help"),
+    path('', views.moralis_auth, name='moralis_auth'),
+    path('request_message', views.request_message, name='request_message'),
+    path('my_profile', views.my_profile, name='my_profile'),
+    path('verify_message', views.verify_message, name='verify_message'),
+
+    #path("", views.home, name="home"),
+    #path("help", views.home, name="help"),
     #path('chat/<str:room_name>/', views.room, name='room'),
-    path("about", views.home, name="about"),
+    #path("about", views.home, name="about"),
     path("accounts/signup/", views.signup, name="signup"),
     path("accounts/profile/", views.profile, name="profile"),
     path("accounts/followers/", views.profile, name="followers"),

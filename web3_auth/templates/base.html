@@ -26,6 +26,8 @@
     {% block extrajs %}
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
     <script src="https://unpkg.com/ipfs-http-client/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
     {% endblock  %}
 
     {% bootstrap_javascript %}
@@ -60,10 +62,8 @@
                     </div>
                     <div class="row d-grid gap-3">
                         <div class="col d-flex align-items-center justify-content-end nav-item">
-                            <a href="{% url 'home' %}" class="nav-link" ><i class="fa fa-cart-shopping"></i> home</a>
                             <a href="{% url 'profile' %}" class="nav-link"><i class="fa fa-user-pen"></i> settings</a>
                             <a href="{% url 'logout' %}" class="nav-link"><i class="fa fa-person-running"></i> logout</a>
-                            <a href="{% url 'help' %}" class="nav-link"><i class="fa fa-ambulance"></i> help</a>
                         </div>
                     </div>
                 </div>
@@ -74,9 +74,10 @@
                     </div>
                     <div class="row d-grid gap-3">
                         <div class="col ml-auto d-flex align-items-center justify-content-end nav-item">
+                            <!--
                             <button class="nav-link enableSignupButton"><i class="fa fa-user-lock"></i> signup</button>
-                            <button class="nav-link enableLoginButton"><i class="fa fa-fingerprint"></i> login</button>
-                            <a href="{% url 'about' %}" class="nav-link"><i class="fa fa-question-circle"></i> about</a>
+                            -->
+                            <button class="nav-link enableLoginButton" id="auth-metamask"><i class="fa fa-fingerprint"></i> login</button>
                             <h2>Account: <span class="showAccount"></span></h2>
                         </div>
                     </div>
@@ -188,7 +189,88 @@
     <footer class="footer mt-auto">
         <div class="right">&copy; 2022 NFT Market &nbsp; \(ᵔᵕᵔ)/</div>
     </footer>
+
+    {% if user.is_authenticated %}
+    {% else %}
+    <script>
+    const elBtnMetamask = document.getElementById('auth-metamask');
+
+    const handleApiPost = async (endpoint, params) => {
+      const result = await axios.post(`${endpoint}`, params, {
+        headers: {
+          'content-type': 'application/json',
+          "X-CSRFToken": '{{ csrf_token }}'
+        },
+      });
+    
+      return result.data;
+    };
+
+    const requestMessage = (account, chain) =>
+      handleApiPost('{% url 'request_message' %}', {
+        address: account,
+        chain: chain,
+        network: 'evm',
+      });
+
+    const verifyMessage = (message, signature) =>
+      handleApiPost('{% url 'verify_message' %}', {
+        message,
+        signature,
+        network: 'evm',
+      });
+
+    const connectToMetamask = async () => {
+      const provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
+    
+      const [accounts, chainId] = await Promise.all([
+        provider.send('eth_requestAccounts', []),
+        provider.send('eth_chainId', []),
+      ]);
+
+      const signer = provider.getSigner();
+      return { signer, chain: chainId, account: accounts[0] };
+    };
+
+    const handleAuth = async () => {
+      // Connect to Metamask
+      const { signer, chain, account } = await connectToMetamask();
+      console.log("account", account, "chain", chain)
+
+      if (!account) {
+        throw new Error('No account found');
+      }
+      if (!chain) {
+        throw new Error('No chain found');
+      }
+
+      const { message } = await requestMessage(account, chain);
+      const signature = await signer.signMessage(message);
+      const { user } = await verifyMessage(message, signature);
+      console.log(user)
+      if (user) {
+        location.reload();
+      }
+      else{
+        alert("authentication error")
+      }
+    };
+
+
+    function init() {
+      elBtnMetamask.addEventListener('click', async () => {
+        handleAuth().catch((error) => console.log(error));
+      });
+    }
+
+    window.addEventListener('load', () => {
+      init();
+    });
+
+    </script>
+    {% endif %}
  
+    <!--
     <script>
         $( document ).ready(function() {
             console.log( "document loaded" );
@@ -215,15 +297,15 @@
                     headers: {'X-CSRFToken': '{{ csrf_token }}'},
                     contentType: 'application/json',
                     data: JSON.stringify({
-                        public_address: account,
-                        user: {
-                            email: "",
-                            username: account
-                        }
+                        "user": {
+                            "username": "test1",
+                        },
+                        "public_address": "1231#!@312jbwi12y3br",
                     }),
                     dataType: 'json',
                     success: function(res){
                         console.log(res)
+                        login();
                     },
                     error: function(err) {
                         console.log(err)
@@ -252,7 +334,18 @@
                     }),
                     dataType: 'json',
                     success: function(res){
-                        console.log(res)
+                        console.log(res["access"])
+                        $.ajax({
+                            type: 'GET',
+                            url: "/",
+                            headers: {'Authorization': 'Bearer '+res["access"]},
+                            success: function(data){
+                                console.log(data)
+                            },
+                            error: function(err) {
+                                console.log(err)
+                            }
+                        })
                     },
                     error: function(err) {
                         console.log(err)
@@ -261,6 +354,7 @@
             }
         });
     </script>
+    -->
     {% block javascript %} {% endblock %}
 </body>
 
