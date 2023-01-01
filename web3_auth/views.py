@@ -103,7 +103,7 @@ def request_message(request):
       "address": data['address'],
       "statement": "Please confirm",
       "uri": "https://defi.finance/",
-      "expirationTime": "25-01-01T00:00:00.000Z",
+      "expirationTime": "2025-01-01T00:00:00.000Z",
       "notBefore": "2020-01-01T00:00:00.000Z",
       "timeout": 15
     }
