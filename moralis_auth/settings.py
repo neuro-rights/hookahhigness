@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import django_heroku
 from pathlib import Path
 
 AUTH_USER_MODEL = "web3_auth.User"
@@ -130,7 +130,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -146,4 +146,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #LOGIN_REDIRECT_URL = "/"
 #LOGOUT_REDIRECT_URL = "/"
 
-#django_heroku.settings(locals())
+django_heroku.settings(locals())
