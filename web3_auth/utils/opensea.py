@@ -31,7 +31,7 @@ def get_items() -> List:
     """
     items = {}
 
-    json_files = glob.glob("highwind_jsons/items/*.json")
+    json_files = glob.glob("build/items/*.json")
 
     for json_file in json_files:
 
@@ -54,7 +54,7 @@ def load_contracts() -> List:
     """
     contracts = {}
 
-    json_files = glob.glob("highwind_jsons/contracts/*.json")
+    json_files = glob.glob("build/contracts/*.json")
 
     for json_file in json_files:
 
@@ -306,7 +306,7 @@ def mint() -> None:
             item_final_json["url"] = f"https://gateway.pinata.cloud/ipfs/{ipfs_hash}"
             item_final_json["ipfs_url"] = f"ipfs://{ipfs_hash}"
 
-            utils.save_json(f"highwind_jsons/items/{ipfs_hash}.json", item_final_json)
+            utils.save_json(f"build/items/{ipfs_hash}.json", item_final_json)
 
             st.write(item_final_json["url"])
 
@@ -476,12 +476,12 @@ def deploy() -> None:
 
             # do we want to check for duplicates?
 
-            file_name = f"highwind_jsons/contracts/{asset_name}.json"
+            file_name = f"build/contracts/{asset_name}.json"
             if os.path.exists(file_name):
                 # loop until we find a free file name
                 counter = 1
                 while True:
-                    file_name = f"highwind_jsons/contracts/{asset_name}_{counter}.json"
+                    file_name = f"build/contracts/{asset_name}_{counter}.json"
 
                     if os.path.exists(file_name):
                         counter += 1
