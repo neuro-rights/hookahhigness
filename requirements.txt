@@ -16,6 +16,7 @@ django-taggit
 eth-brownie
 fontawesomefree
 gunicorn
+ipfshttpclient
 libgravatar
 matplotlib-inline
 opensea-api

@@ -36,6 +36,8 @@ urlpatterns = [
     path("asset/<uuid:asset_uuid>/add_auction", views.asset_add_auction, name="asset_add_auction"),
     # Add File to NFT
     path("asset/<uuid:asset_uuid>/asset_add_file_to_s3", views.asset_add_file_to_s3, name="asset_add_file_to_s3"),
+    # Add File to NFT
+    path("asset/<uuid:asset_uuid>/asset_ipfs_upload_file", views.asset_ipfs_upload_file, name="asset_ipfs_upload_file"),
     # LIKES
     path("asset/<uuid:asset_uuid>/like", views.like_asset, name="like_asset"),
     # ASSETS
@@ -47,8 +49,9 @@ urlpatterns = [
     path("collection/create_from_metadata_url/", views.CollectionFromMetadataURLCreate.as_view(), name="collection_create_from_metadata_url"),
     path("collection/<uuid:collection_uuid>/", views.collection_detail, name="collection_detail"),
     path("collection/<uuid:collection_uuid>/add_auction/", views.collection_add_auction, name="collection_add_auction"),
-    path("collection/<uuid:collection_uuid>/add_assets/", views.collection_add_assets, name="collection_add_assets"),
+    #path("collection/<uuid:collection_uuid>/add_assets/", views.collection_add_assets, name="collection_add_assets"),
     path("collection/<uuid:collection_uuid>/collection_add_files_to_s3/", views.collection_add_files_to_s3, name="collection_add_files_to_s3"),
+    path("collection/<uuid:collection_uuid>/collection_ipfs_upload_files/", views.collection_ipfs_upload_files, name="collection_ipfs_upload_files"),
     path("collection/<uuid:collection_uuid>/add_raffle/", views.collection_add_raffle, name="collection_add_raffle"),
     path("collection/<uuid:collection_uuid>/add_collection_metadata/", views.collection_add_metadata, name="add_collection_metadata"),
     path("collection/<uuid:collection_uuid>/edit/", views.CollectionEdit.as_view(), name="collection_edit"),

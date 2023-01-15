@@ -47,11 +47,11 @@ class IPFSUtils:
         response = requests.post(
             "https://ipfs.infura.io:5001/api/v0/add",
             files=files,
-            auth=(os.environ["INFURA_IPFS_PROJECT_ID"], os.environ["INFURA_IPFS_SECRET_KEY"]),
+            auth=("2KN9CtrbdIOZbSK5hwj93w0TPcn", "011fec263ec57b8b9c47788389738d53"),
         )
         #
         res = json.loads(response.text)
-        url = "https://ipfs.infura.io/ipfs/" + res["Hash"]
+        url = "https://ipfs.io/ipfs/" + res["Hash"]
         print("url: " + url)
         return url
 

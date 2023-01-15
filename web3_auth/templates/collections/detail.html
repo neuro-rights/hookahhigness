@@ -32,9 +32,9 @@
                 </div>
                 {% endfor %}
 
-                <form action="{% url 'collection_add_files_to_s3' collection.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
+                <form action="{% url 'collection_ipfs_upload_files' collection.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
                     {% csrf_token %}
-                    <input type="file" name="files-field" multiple>
+                    <input type="file" name="photo-files" multiple>
                     <br><br>
                     <input type="submit" class="btn" value="Upload Files">
                 </form>
@@ -67,7 +67,7 @@
             <div class="card-body">
                 {% if collection.seller == request.user %}
                 <div class="sellbutton">
-                <h3 class = "center-align">READY TO AUCTION YOUR ASSET?</h3>
+                <h3 class = "center-align">READY TO AUCTION YOUR COLLECTION?</h3>
                 <br>   
                 <div class = "center-align">
                 <a href="{% url 'collection_add_auction' collection.uuid %}" class="waves-effect waves-light btn-large">Auction</a>

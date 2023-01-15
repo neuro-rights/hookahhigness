@@ -175,14 +175,14 @@ def asset_add_file_to_s3(request, asset_uuid):
 @login_required
 def asset_ipfs_upload_file(request, asset_uuid):
     """ """
-
+    asset_file = request.FILES.get('photo-file', None)
     asset = Asset.objects.get(uuid=asset_uuid)
-    if collection_file:
+    if asset_file:
         try:
             ipfsutils = IPFSUtils()
-            url = ipfsutils.ipfs_upload(collection_file)
-            asset.preview_image = url
-            asset.collection_uri = url
+            url = ipfsutils.infura_ipfs_upload(asset_file)
+            asset.uri_preview = url
+            asset.uri_asset = url
             # TODO
             # asset.metadata_uri = ""
             asset.save()

@@ -121,7 +121,7 @@ class Asset(models.Model):
     asset_type = models.CharField(
         max_length=32,
         choices=NFT_TYPES,
-        default="2d",
+        default="image",
     )
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     #
@@ -130,7 +130,7 @@ class Asset(models.Model):
     likes = models.ManyToManyField(User, related_name="likes")
     token_id = models.IntegerField(default=random_token)
     #
-    uri_collection = models.URLField(max_length=200)
+    uri_asset = models.URLField(max_length=200)
     uri_metadata = models.URLField(max_length=200)
     uri_preview = models.URLField(max_length=200)
 
@@ -172,7 +172,7 @@ class Collection(models.Model):
     id = models.AutoField(primary_key=True)
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     collection_type = models.CharField(
-        max_length=32, choices=ASSET_TYPES, default="2d"
+        max_length=32, choices=ASSET_TYPES, default="image"
     )
     #
     seller = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -21,7 +21,7 @@
                 {% else %}
                 <a href="{{ asset.uri_preview }}">File link</a>
                 {% endif %}
-                <form action="{% url 'asset_add_file_to_s3' asset.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
+                <form action="{% url 'asset_ipfs_upload_file' asset.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
                     {% csrf_token %}
                     <input type="file" name="photo-file">
                     <br><br>

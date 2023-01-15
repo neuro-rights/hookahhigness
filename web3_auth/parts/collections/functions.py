@@ -13,7 +13,8 @@ from django.core import serializers
 #
 from ...forms import BidForm, PurchaseForm
 from ...models import User, Collection, Bid, Auction, Purchase, Asset
-
+#
+from ...utils.ipfs import IPFSUtils
 #
 from ..utils.pagination import *
 
@@ -76,28 +77,33 @@ def collection_add_metadata(request, auction_id):
 
 
 @login_required
-def collection_add_assets(request, collection_uuid):
+def collection_ipfs_upload_files(request, collection_uuid):
     #
-    files = request.FILES.getlist("file_field")
+    files = request.FILES.getlist("photo-files")
     collection = Collection.objects.get(uuid=collection_uuid)
     counter = 0
     ipfsutils = IPFSUtils()
     #
     for f in files:
-        url = ipfsutils.ipfs_upload(f)
-        # TODO generate metadata
+        url = ipfsutils.infura_ipfs_upload(f)
+        # TODO - generate metadata
         try:
             asset = Asset(
-                asset_name="{}_{}".format(collection.name, counter),
+                name="{}_{}".format(collection.name, counter),
                 description=collection.description,
                 creator=request.user,
                 uri_preview=url,
-                uri_metadata="",
-                uri_collection=url,
+                #uri_metadata="",
+                uri_asset=url,
+                asset_type=collection.collection_type
             )
             asset.save()
+            collection.uri_preview = asset.uri_preview
+            #collection.uri_metadata
             collection.assets.add(asset)
-            print(asset.id)
+            collection.save()
+            print("asset uri"+asset.uri_preview)
+            print("collection uri"+collection.uri_preview)
         except Exception as e:
             print(e)
         counter += 1
