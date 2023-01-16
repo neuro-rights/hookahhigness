@@ -227,7 +227,7 @@ class CollectionForm(forms.ModelForm):
         fields = [
             "collection_type",
             #"seller",
-            "assets",
+            #"assets",
             "name",
             "description",
             #"token_id",

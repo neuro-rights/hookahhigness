@@ -161,18 +161,19 @@ def collection_add_files_to_s3(request, collection_uuid):
 
 
 def collection_metadata_file(request, collection_uuid):
+    """
+    """
     counter = 0
     collection = Collection.objects.get(uuid=collection_uuid)
     f = request.FILES.get('json-file', None)
-    #print(f)
-    #data = f.read()
-    #print(data)
     metadata = json.load(f)
     print(metadata)
     for asset_metadata in metadata:
         try:
             url = asset_metadata["image"]
             print(url)
+            collection.uri_preview = url
+            collection.uri_metadata = url
             asset = Asset(
                 name="{}_{}".format(collection.name, counter),
                 description=collection.description,
@@ -183,13 +184,13 @@ def collection_metadata_file(request, collection_uuid):
             )
             asset.save()
             collection.assets.add(asset)
+            collection.save()
             print("Adding new NFT to collection: {}".format(asset.uuid))
+            counter += 1
         except Exception as e:
             print(e)
-        #
-        counter += 1
-    #
-    return redirect(collection)
+    
+    return redirect('/')
 
 
 
