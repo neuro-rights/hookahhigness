@@ -80,7 +80,7 @@ def collection_add_metadata(request, auction_id):
 @login_required
 def collection_ipfs_upload_files(request, collection_uuid):
     #
-    files = request.FILES.getlist("photo-files")
+    files = request.FILES.getlist("asset-files")
     collection = Collection.objects.get(uuid=collection_uuid)
     counter = 0
     ipfsutils = IPFSUtils()
@@ -159,6 +159,9 @@ def collection_add_files_to_s3(request, collection_uuid):
 
     return redirect(collection)
 
+def collection_asset_files(request, collection_uuid):
+    collection = Collection.objects.get(uuid=collection_uuid)
+    f = request.FILES.get('asset-files', None)
 
 def collection_metadata_file(request, collection_uuid):
     """

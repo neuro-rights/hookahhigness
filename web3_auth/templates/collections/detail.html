@@ -39,6 +39,13 @@
                     <input type="submit" class="btn" value="Upload Metadata Files">
                 </form>
 
+                <form action="{% url 'collection_ipfs_upload_files' collection.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
+                    {% csrf_token %}
+                    <input type="file" name="asset-files" multiple>
+                    <br><br>
+                    <input type="submit" class="btn" value="Upload Asset Files">
+                </form>
+
                 {% if collection.seller == request.user %}
                 <div class="card-action">
                     <a href="{% url 'collection_edit' collection.uuid %}" class="waves-effect waves-light btn-small">Edit</a>
