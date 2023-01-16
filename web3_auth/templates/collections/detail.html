@@ -32,11 +32,11 @@
                 </div>
                 {% endfor %}
 
-                <form action="{% url 'collection_ipfs_upload_files' collection.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
+                <form action="{% url 'collection_metadata_file' collection.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
                     {% csrf_token %}
-                    <input type="file" name="photo-files" multiple>
+                    <input type="file" name="json-file">
                     <br><br>
-                    <input type="submit" class="btn" value="Upload Files">
+                    <input type="submit" class="btn" value="Upload Metadata Files">
                 </form>
 
                 {% if collection.seller == request.user %}

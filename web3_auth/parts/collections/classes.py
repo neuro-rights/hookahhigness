@@ -9,6 +9,9 @@ from django.urls import reverse
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.utils.html import escape
 
+import json
+import requests
+
 
 #
 from ...forms import (
@@ -123,41 +126,43 @@ class CollectionFromMetadataURLCreate(PassArgumentsToForm, CreateView):
         collection = form.save(commit=False)
         collection.creator = request.user
         collection.save()
-        print(collection.__dict__)
+        #print(collection.__dict__)
         #
         # https://gateway.pinata.cloud/ipfs/QmX232ULoePr7nRBndq5Vj5kSmjAjuhdv5Gks2Uisnc3qc/_metadata.json
         #
         counter = 0
         print("Loading Metadata: ")
-        collection_metadata = requests.get(collection.uri_metadata).json()
-        print("Loaded Metadata: {}".format(metadata))
-        asset_metadata_dir = Path(collection.uri_metadata).resolve().parent
-        for asset_metadata in collection_metadata:
-            asset_collection_uri = asset_metadata["image"]
-            asset_collection_filename = "{}.json".format(
-                Path(collection.uri_metadata).resolve().stem
-            )
-            asset_metadata_uri = os.path.join(
-                asset_metadata_dir, asset_collection_filename
-            )
-            #
-            try:
-                asset = Asset(
-                    name="{}_{}".format(collection.name, counter),
-                    description=collection.description,
-                    creator=request.user,
-                    asset_type=collection.collection_type,
-                    uri_metadata=asset_metadata_uri,
-                    uri_collection=asset_collection_uri,
-                    uri_preview=asset_collection_uri,
-                )
-                asset.save()
-                collection.assets.add(asset)
-                print("Adding new NFT to collection: {}".format(asset.uuid))
-            except Exception as e:
-                print(e)
-            #
-            counter += 1
+
+        for f in request.FILES.getlist('json-file'):
+            with open(f, "r") as read_file:
+                f_content = read_file.read()
+                metadata = json.load(f_content)
+                #print("Loaded Metadata:{}".format(metadata))
+                #asset_metadata_dir = Path(collection.uri_metadata).resolve().parent
+                for asset_metadata in metadata:
+                    print(asset_metadata['image'])
+                    asset_collection_uri = asset_metadata["image"]
+                    asset_collection_filename = "{}.json".format(
+                        Path(collection.uri_metadata).resolve().stem
+                    )
+                    #
+                    try:
+                        asset = Asset(
+                            name="{}_{}".format(collection.name, counter),
+                            description=collection.description,
+                            creator=request.user,
+                            asset_type=collection.collection_type,
+                            uri_metadata=collection.uri_metadata,
+                            uri_collection=asset_collection_uri,
+                            uri_preview=asset_collection_uri,
+                        )
+                        asset.save()
+                        collection.assets.add(asset)
+                        print("Adding new NFT to collection: {}".format(asset.uuid))
+                    except Exception as e:
+                        print(e)
+                    #
+                    counter += 1
         #
         return redirect("/collections/own/")
 

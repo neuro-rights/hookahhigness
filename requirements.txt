@@ -24,6 +24,7 @@ Pillow>=9.0.1
 psycopg2-binary
 psycopg2
 python-dateutil
+requests
 streamlit
 urllib3
 vyper

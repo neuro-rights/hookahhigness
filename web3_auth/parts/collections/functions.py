@@ -1,4 +1,5 @@
 import boto3
+import json
 import uuid
 
 # Import the login_required decorator
@@ -156,6 +157,38 @@ def collection_add_files_to_s3(request, collection_uuid):
             except Exception as e:
                 print("An error occurred uploading file to S3 - {}".format(e))
 
+    return redirect(collection)
+
+
+def collection_metadata_file(request, collection_uuid):
+    counter = 0
+    collection = Collection.objects.get(uuid=collection_uuid)
+    f = request.FILES.get('json-file', None)
+    #print(f)
+    #data = f.read()
+    #print(data)
+    metadata = json.load(f)
+    print(metadata)
+    for asset_metadata in metadata:
+        try:
+            url = asset_metadata["image"]
+            print(url)
+            asset = Asset(
+                name="{}_{}".format(collection.name, counter),
+                description=collection.description,
+                creator=request.user,
+                asset_type=collection.collection_type,
+                uri_metadata=url,
+                uri_preview=url,
+            )
+            asset.save()
+            collection.assets.add(asset)
+            print("Adding new NFT to collection: {}".format(asset.uuid))
+        except Exception as e:
+            print(e)
+        #
+        counter += 1
+    #
     return redirect(collection)
 
 

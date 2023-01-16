@@ -52,6 +52,7 @@ urlpatterns = [
     #path("collection/<uuid:collection_uuid>/add_assets/", views.collection_add_assets, name="collection_add_assets"),
     path("collection/<uuid:collection_uuid>/collection_add_files_to_s3/", views.collection_add_files_to_s3, name="collection_add_files_to_s3"),
     path("collection/<uuid:collection_uuid>/collection_ipfs_upload_files/", views.collection_ipfs_upload_files, name="collection_ipfs_upload_files"),
+    path("collection/<uuid:collection_uuid>/collection_metadata_file", views.collection_metadata_file, name="collection_metadata_file"),
     path("collection/<uuid:collection_uuid>/add_raffle/", views.collection_add_raffle, name="collection_add_raffle"),
     path("collection/<uuid:collection_uuid>/add_collection_metadata/", views.collection_add_metadata, name="add_collection_metadata"),
     path("collection/<uuid:collection_uuid>/edit/", views.CollectionEdit.as_view(), name="collection_edit"),

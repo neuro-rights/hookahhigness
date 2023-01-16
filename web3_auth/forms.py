@@ -325,7 +325,6 @@ class CollectionFromMetadataURLForm(forms.ModelForm):
 
         model = Collection
         fields = [
-            "metadata_uri",
         ]
 
 

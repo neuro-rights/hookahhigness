@@ -182,7 +182,7 @@ class Collection(models.Model):
     description = models.TextField(blank=True)
     token_id = models.IntegerField(default=random_token)
     #
-    metadata_uri = models.URLField(max_length=200)
+    uri_metadata = models.URLField(max_length=200)
     uri_preview = models.URLField(max_length=200, blank=True, null=True)
     #
     tags = TaggableManager()
