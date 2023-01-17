@@ -1,67 +1,70 @@
-{% extends 'base.html' %} {% load mathfilters %}
-{% block content %}
+{% extends 'base.html' %} 
 
-<h5>ALL {{ page_obj|length }} AUCTIONS</h5>
-<ul class="collection">
-    {% for auction in page_obj %}
-    <li class="collection-item">
-        <a href="{% url 'auction_detail' auction.fields.uuid %}">
-            <div class="row" style="box-sizing:border-box;">
-                <div class="col" style="padding:20px 50px;">
-                    <div class="row">
-                        <div class="col">
-                            <p>Total ASSETS:</p>
-                        </div>
-                        <div class="col">
-                            <p>{{ auction.fields.collections|length }}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p>Blockchain:</p>
-                        </div>
-                        <div class="col">
-                            <p>{{ auction.fields.blockchain }}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p>Description:</p>
-                        </div>
-                        <div class="col">
-                            <p>{{ auction.fields.description|truncatechars:25 }}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p>Seller:</p>
-                        </div>
-                        <div class="col">
-                            <p>{{ auction.fields.seller }}</p>
-                        </div>
-                    </div>
-                </div>
-                <!--
-                <div class="col s2" style="padding:20px;">
-                    <p class="secondary-content">
-                        {% if auction.fields.total_likes > 0 %}<i class="material-icons">grade</i>
-                        {{ auction.fields.total_likes }}
-                        {% endif %}
-                    </p>
-                </div>
-                -->
+{% block content %} {% load mathfilters %}
+
+<h2>AUCTIONS {{ auctions|length }}</h2>
+<div class="row">
+    <div class="col-6">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <ul class="collection">
+                    {% for auction in auctions %}
+                    <li class="collection-item">
+                        {{ auction.fields.collections }}
+                        <a href="{% url 'auction_detail' auction.fields.uuid %}">
+                            <div class="row" style="box-sizing:border-box;">
+                                <div class="col" style="padding:20px 50px;">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p>Total ASSETS:</p>
+                                        </div>
+                                        <div class="col">
+                                            <p>{{ auction.fields.collections|length }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p>Blockchain:</p>
+                                        </div>
+                                        <div class="col">
+                                            <p>{{ auction.fields.blockchain }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p>Description:</p>
+                                        </div>
+                                        <div class="col">
+                                            <p>{{ auction.fields.description|truncatechars:25 }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p>Seller:</p>
+                                        </div>
+                                        <div class="col">
+                                            <p>{{ auction.fields.seller }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--
+                                <div class="col s2" style="padding:20px;">
+                                    <p class="secondary-content">
+                                        {% if auction.fields.total_likes > 0 %}<i class="material-icons">grade</i>
+                                        {{ auction.fields.total_likes }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                -->
+                            </div>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
-        </a>
-        <div class="carousel teal darken-4">
-            {% for asset in collection.get_random_assets %}
-            <a href="{% url 'asset_detail' asset.uuid %}" class="carousel-item">
-                <img class="responsive-img" src="{{ asset.preview_url }}" loading="lazy"> {% empty %}
-            </a>
-            {% endfor %}
         </div>
-    </li>
-    {% endfor %}
-</ul>
+    </div>
+</div>
 {% if page_obj %}
 <div class="container pagination">
     <span class="step-links">

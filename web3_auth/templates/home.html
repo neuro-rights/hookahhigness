@@ -2,41 +2,56 @@
 
 {% block content %} {% load mathfilters %}
 
-<h2>MARKET {{ page_obj|length }}</h2>
-{% if page_obj|length > 0 %}
-{% for auction in page_obj %}
-<div class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        {% for collection in auction.collections.all %}
-        <link rel="preload" href="{{ collection.uri_preview }}" as="image" crossorigin>
-        <div class="carousel-item active">
-            {% if collection.collection_type == 'audio' %}
-            <audio controls>
-                <source src="{{ collection.uri_preview }}" type="audio/mp3">
-            </audio>
-            {% elif collection.collection_type == 'video' %}
-            <video width="100%" controls>
-                <source src="{{ collection.uri_preview }}" type="video/mp4">
-            </video> 
-            {% elif collection.collection_type == 'image' %}
-            <img width="100%" align="center"  src="{{ collection.uri_preview }}"/>
-            {% else %}
-            <a href="{{ collection.uri_preview }}">File link</a>
-            {% endif %}
-            <a href="{% url 'auction_detail' auction.uuid %}">
-                {% for field in auction.get_all_fields %}
-                <div class="row">
-                    <div class="col-4">
-                        {{ field.label }}
-                    </div>
-                    <div class="col-8">
-                        {{ field.value|truncatechars:50 }}
+<h2>MARKET {{ auctions|length }}</h2>
+{% if auctions|length > 0 %}
+{% for auction in auctions %}
+<div class="row">
+    <div class="col-6">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <div class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for collection in auction.collections.all %}
+                        <link rel="preload" href="{{ collection.uri_preview }}" as="image" crossorigin>
+                        <div class="carousel-item active">
+                            {% if collection.collection_type == 'audio' %}
+                            <audio controls>
+                                <source src="{{ collection.uri_preview }}" type="audio/mp3">
+                            </audio>
+                            {% elif collection.collection_type == 'video' %}
+                            <video width="100%" class="d-block w-100" controls>
+                                <source src="{{ collection.uri_preview }}" type="video/mp4">
+                            </video> 
+                            {% elif collection.collection_type == 'image' %}
+                            <img width="100%" align="center" class="d-block w-100" src="{{ collection.uri_preview }}"/>
+                            {% else %}
+                            <a href="{{ collection.uri_preview }}">File link</a>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
-                {% endfor %}
-            </a>
+                
+            </div>
         </div>
-        {% endfor %}
+    </div>
+    <div class="col-6">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <a href="{% url 'auction_detail' auction.uuid %}">
+                    {% for field in auction.get_all_fields %}
+                    <div class="row">
+                        <div class="col-4">
+                            {{ field.label }}
+                        </div>
+                        <div class="col-8">
+                            {{ field.value|truncatechars:50 }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 {% endfor %}

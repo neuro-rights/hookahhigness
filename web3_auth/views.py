@@ -57,9 +57,9 @@ class HomeView(PassArgumentsToForm, generics.ListCreateAPIView):
 def home(request):
     #
     now = datetime.now()
-    auctions_list = Auction.objects.filter(datetime_start__lte=now, datetime_end__gte=now)
+    auctions_list = Auction.objects.all()
     context = {"page_obj": get_page_obj(request, auctions_list, 25)}
-    return render(request, "home.html", context)
+    return render(request, "market/list.html", context)
 
 
 def opensea(request):
@@ -84,10 +84,10 @@ def room(request, room_name):
 
 def moralis_auth(request):
     now = datetime.now()
-    auctions_list = Auction.objects.filter(datetime_start__lte=now, datetime_end__gte=now)
-    context = {"page_obj": get_page_obj(request, auctions_list, 25)}
+    auctions_list = Auction.objects.all()
+    context = {"auctions": auctions_list}
     return render(request, "home.html", context)
-    #return render(request, 'login.html', {})
+    #return render(request, 'market/list.html', context)
 
 def my_profile(request):
     return render(request, 'profile.html', {})
