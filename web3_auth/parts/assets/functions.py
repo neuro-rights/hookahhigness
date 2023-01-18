@@ -13,6 +13,7 @@ from django.urls import reverse
 from django.core import serializers
 #
 from ...utils.ipfs import IPFSUtils
+from ...utils.contract import ContractUtils
 
 #
 from ...forms import BidForm, AssetForm
@@ -135,7 +136,25 @@ def asset_add_auction(request, asset_uuid):
             bid_start_value=0, 
             uri_preview=asset.uri_preview
     )
+    auction.save()
     auction.collections.add(collection)
+    contract_utils = ContractUtils()
+    config={
+        'buyer_ethereum_wallet_address':auction.seller.ethereum_wallet_address,
+        'buyer_ethereum_wallet_private_key':auction.seller.ethereum_wallet_private_key,
+        'infura_ethereum_project_id':auction.seller.infura_ethereum_project_id,
+        'seller_ethereum_wallet_address':auction.seller.ethereum_wallet_address,
+        'seller_ethereum_wallet_private_key':auction.seller.ethereum_wallet_private_key,
+        'network':auction.network, 
+        'ethereum_token':auction.seller.etherscan_token,
+        'auction_contract_address':auction.contract_address, 
+    }
+    bc_setup = contract_utils.set_up_blockchain(config)
+    smart_contract_json = contract_utils.compile_contract("contracts/ERC721.vy", bc_setup)
+    contract_address = contract_utils.deploy_contract(bc_setup)
+    #contract_utils.verify_contract(contract_address)
+    auction.contract_address = contract_address
+    auction.save()
     return HttpResponseRedirect(reverse("auction_detail", args=[str(auction.uuid)]))
 
 

@@ -1,7 +1,11 @@
 import json
+import web3
+from web3 import Web3, HTTPProvider
+#from solc import compile_source
+from web3.contract import ConciseContract
+
 import os
 from typing import Dict, Any
-from web3 import Web3
 from pathlib import Path
 import requests
 import vyper
@@ -76,7 +80,7 @@ class ContractUtils:
         PRIVATE_KEY = Web3.toBytes(hexstr=config["seller_ethereum_wallet_private_key"])
         INFURA_KEY = config["infura_ethereum_project_id"]
         #
-        contract = config["auction_contract_address"]
+        #contract = config["auction_contract_address"]
         network = config["network"]
         ABI = None
         CODE_NFT = None
@@ -87,42 +91,32 @@ class ContractUtils:
         eth_json = {}
         #
         print(config)
-        if network == "rinkeby":
-
-            RINK_API_URL = f"https://rinkeby.infura.io/v3/{INFURA_KEY}"
-            w3 = Web3(Web3.HTTPProvider(RINK_API_URL))
-            ABI = self.load_json(config["auction_contract_address"])["abi"]  # get the ABI
-            CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
-            CHAIN_ID = 4
-            open_sea_url = f"https://testnets.opensea.io/collections/{contract}/"
-            scan_url = "https://rinkeby.etherscan.io/tx/"
-        #
-        elif network == "goerli":
+        if network == "goerli":
 
             GOERLI_API_URL = f"https://goerli.infura.io/v3/{INFURA_KEY}"
             w3 = Web3(Web3.HTTPProvider(GOERLI_API_URL))
-            ABI = self.load_json(config["auction_contract_address"])  # get the ABI
-            CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
+            #ABI = self.load_json(config["auction_contract_address"])  # get the ABI
+            #CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
             CHAIN_ID = 5 
-            open_sea_url = f"https://testnets.opensea.io/collections/{contract}/"
+            #open_sea_url = f"https://testnets.opensea.io/collections/{contract}/"
             scan_url = "https://goerli.etherscan.io/tx/"
         #
         elif network == "mumbai":
             MUMBAI_API_URL = f"https://polygon-mumbai.infura.io/v3/{INFURA_KEY}"
             w3 = Web3(Web3.HTTPProvider(MUMBAI_API_URL))
-            ABI = self.load_json(config["auction_contract_address"])["abi"]  # get the ABI
-            CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
+            #ABI = self.load_json(config["auction_contract_address"])["abi"]  # get the ABI
+            #CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
             CHAIN_ID = 80001
-            open_sea_url = f"https://testnets.opensea.io/collections/{contract}/"
+            #open_sea_url = f"https://testnets.opensea.io/collections/{contract}/"
             scan_url = "https://explorer-mumbai.maticvigil.com/tx/"
         #
         elif network == "matic_main":
             POLYGON_API_URL = f"https://polygon-mainnet.infura.io/v3/{INFURA_KEY}"
             w3 = Web3(Web3.HTTPProvider(POLYGON_API_URL))
-            ABI = self.load_json(config["auction_contract_address"])["abi"]  # get the ABI
-            CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
+            #ABI = self.load_json(config["auction_contract_address"])["abi"]  # get the ABI
+            #CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
             CHAIN_ID = 137
-            open_sea_url = f"https://opensea.io/collections/matic/{contract}/"
+            #open_sea_url = f"https://opensea.io/collections/matic/{contract}/"
             scan_url = "https://polygonscan.com/tx/"
         #
         else:
@@ -257,42 +251,28 @@ class ContractUtils:
         eth_json["contract"] = smart_contract_json['bytecode']
         eth_json["abi"] = smart_contract_json['abi']
 
+        return smart_contract_json
+
 
     def deploy_contract(self, eth_json):
         """ """
-        web3 = eth_json["w3"]
-        PUBLIC_KEY = eth_json["public_key"]
-        PRIVATE_KEY = eth_json["private_key"]
+        w3 = eth_json["w3"]
+        contract_ = w3.eth.contract(abi=eth_json['abi'], bytecode=eth_json['contract'])
+        acct = w3.eth.account.privateKeyToAccount(eth_json["private_key"])
 
+        construct_txn = contract_.constructor().buildTransaction({
+            'from': acct.address,
+            'nonce': w3.eth.getTransactionCount(acct.address),
+            'gas': 1728712,
+            'gasPrice': w3.toWei('21', 'gwei')})
 
-        # 3. Create address variable
-        account_from = {
-            'private_key': PRIVATE_KEY,
-            'address': PUBLIC_KEY,
-        }
-
-        print(f'Attempting to deploy from account: { account_from["address"] }')
-
-        # 4. Create contract instance
-        Incrementer = web3.eth.contract(abi=eth_json["abi"], bytecode=eth_json["bytecode"])
-
-        # 5. Build constructor tx
-        construct_txn = Incrementer.constructor(5).buildTransaction(
-            {
-                'from': account_from['address'],
-                'nonce': web3.eth.get_transaction_count(account_from['address']),
-            }
-        )
-
-        # 6. Sign tx with PK
-        tx_create = web3.eth.account.sign_transaction(construct_txn, account_from['private_key'])
-
-        # 7. Send tx and wait for receipt
-        tx_hash = web3.eth.send_raw_transaction(tx_create.rawTransaction)
-        tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
-
-        print(f'Contract deployed at address: { tx_receipt.contractAddress }')
-        return tx_receipt.contractAddress
+        signed = acct.signTransaction(construct_txn)
+        tx_hash = w3.eth.sendRawTransaction(signed.rawTransaction)
+        # Wait for the transaction to be mined, and get the transaction receipt
+        print("Waiting for transaction to finish...")
+        transaction_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        print(f"Done! Contract deployed to {transaction_receipt.contractAddress}")
+        return transaction_receipt.contractAddress
 
 
     def verify_contract():
@@ -301,7 +281,6 @@ class ContractUtils:
             "main": "https://api.etherscan.io/",
             "goerli": "https://api-goerli.etherscan.io/",
             "kovan": "https://api-kovan.etherscan.io/",
-            "rinkeby": "https://api-rinkeby.etherscan.io/",
             "ropsten": "https://api-ropsten.etherscan.io/",
             "sepolia": "https://api-sepolia.etherscan.io/"
         }

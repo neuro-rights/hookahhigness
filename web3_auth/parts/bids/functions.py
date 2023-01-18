@@ -52,6 +52,7 @@ def bid_accept(request, bid_uuid):
         print(bc_setup)
         #
         print(bid.buyer.ethereum_wallet_address)
+        """
         transfer_tx_hash, transfer_tx_id = contractutils.transfer(
             bid.buyer.ethereum_wallet_address, 
             bid.buyer.ethereum_wallet_private_key, 
@@ -59,6 +60,7 @@ def bid_accept(request, bid_uuid):
             bid.value, 
             bc_setup
         )
+   
         for collection in bid.auction.collections.all():
             print(collection)
             for asset in collection.assets.all():
@@ -69,19 +71,19 @@ def bid_accept(request, bid_uuid):
                     asset.token_id,
                     bc_setup,
                 )
+        """
+        bid.status = "sold"
+        bid.auction.status="sold"
+        bid.auction.save()
+        bid.save()
 
-                bid.status = "sold"
-                bid.auction.status="sold"
-                bid.auction.save()
-                bid.save()
-
-                new_purchase = Purchase()
-                new_purchase.bid = bid
-                new_purchase.mint_tx_hash = mint_tx_hash
-                new_purchase.mint_tx_token = mint_tx_id
-                #new_purchase.transfer_tx_hash = transfer_tx_hash
-                #new_purchase.transfer_tx_token = transfer_tx_id
-                new_purchase.save()
+        new_purchase = Purchase()
+        new_purchase.bid = bid
+        new_purchase.mint_tx_hash = mint_tx_hash
+        new_purchase.mint_tx_token = mint_tx_id
+        #new_purchase.transfer_tx_hash = transfer_tx_hash
+        #new_purchase.transfer_tx_token = transfer_tx_id
+        new_purchase.save()
         #
     except Exception as err:
         #

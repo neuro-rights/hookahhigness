@@ -229,7 +229,6 @@ class Auction(models.Model):
         ("matic_main", "matic_main"),
         ("mumbai", "mumbai"),
         ("goerli", "goerli"),
-        ("rinkeby", "rinkeby"),
     )
     id = models.AutoField(primary_key=True)
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
@@ -237,7 +236,7 @@ class Auction(models.Model):
     #
     collections = models.ManyToManyField(Collection, related_name="collections")
     network = models.CharField(
-        max_length=32, choices=BLOCKCHAIN_TYPES, default="rinkeby"
+        max_length=32, choices=BLOCKCHAIN_TYPES, default="goerli"
     )
     description = models.TextField(blank=True)
     contract_address = models.CharField(max_length=100, blank=True, null=True)
