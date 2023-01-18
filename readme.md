@@ -1,4 +1,7 @@
 
-# Moralis Auth Django Demo App
+brownie compile
 
-Documentation available at https://docs.moralis.io/docs/python-django-web3-auth
+brownie run scripts/ganache_deploy.py --network goerli
+
+add contract address to auction
+
