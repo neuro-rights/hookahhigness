@@ -9,6 +9,6 @@
 
 5. python3 manage.py makemigrations
 
-python3 manage.py migrate
+6. python3 manage.py migrate
 
-python3 manage.py runserver
+7. python3 manage.py runserver
