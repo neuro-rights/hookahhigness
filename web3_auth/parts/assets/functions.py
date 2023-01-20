@@ -150,8 +150,8 @@ def asset_add_auction(request, asset_uuid):
         'auction_contract_address':auction.contract_address, 
     }
     bc_setup = contract_utils.set_up_blockchain(config)
-    smart_contract_json = contract_utils.compile_contract("contracts/ERC721.vy", bc_setup)
-    contract_address = contract_utils.deploy_contract(bc_setup)
+    smart_contract_json = contract_utils.compile_contract("contracts/ERC721.vy")
+    contract_address = contract_utils.deploy_contract()
     #contract_utils.verify_contract(contract_address)
     auction.contract_address = contract_address
     auction.save()

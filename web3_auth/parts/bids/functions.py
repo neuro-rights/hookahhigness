@@ -33,9 +33,6 @@ def bid_accept(request, bid_uuid):
     #
     try:
         #
-        contract_address = bid.auction.contract_address
-        user_wallet = request.user.ethereum_wallet_address 
-
         config={
             'buyer_ethereum_wallet_address':bid.buyer.ethereum_wallet_address,
             'buyer_ethereum_wallet_private_key':bid.buyer.ethereum_wallet_private_key,
@@ -48,30 +45,28 @@ def bid_accept(request, bid_uuid):
         }
         #
         contractutils = ContractUtils()
-        bc_setup = contractutils.set_up_blockchain(config)
-        print(bc_setup)
-        #
-        print(bid.buyer.ethereum_wallet_address)
+        contractutils.set_up_blockchain(config)
+        print(bid.auction.contract_address)
+ 
         """
         transfer_tx_hash, transfer_tx_id = contractutils.transfer(
-            bid.buyer.ethereum_wallet_address, 
-            bid.buyer.ethereum_wallet_private_key, 
+            bid.buyer.ethereum_wallet_address,
+            bid.buyer.ethereum_wallet_private_key,
             bid.auction.seller.ethereum_wallet_address,
             bid.value, 
-            bc_setup
         )
-   
+        """  
         for collection in bid.auction.collections.all():
-            print(collection)
-            for asset in collection.assets.all():
-                print(asset)
-                wallet_address = bid.buyer.ethereum_wallet_address
-                mint_tx_hash, mint_tx_id = contractutils.web3_mint(
-                    wallet_address,
-                    asset.token_id,
-                    bc_setup,
-                )
-        """
+            #print(collection)
+            mint_tx_hash = contractutils.web3_mint(
+                bid.auction.contract_address,
+                bid.auction.seller.ethereum_wallet_address, 
+                bid.auction.seller.ethereum_wallet_private_key, 
+                bid.buyer.ethereum_wallet_address, 
+                bid.buyer.ethereum_wallet_private_key,
+                collection.token_id
+            )
+        #
         bid.status = "sold"
         bid.auction.status="sold"
         bid.auction.save()
@@ -79,10 +74,6 @@ def bid_accept(request, bid_uuid):
 
         new_purchase = Purchase()
         new_purchase.bid = bid
-        new_purchase.mint_tx_hash = mint_tx_hash
-        new_purchase.mint_tx_token = mint_tx_id
-        #new_purchase.transfer_tx_hash = transfer_tx_hash
-        #new_purchase.transfer_tx_token = transfer_tx_id
         new_purchase.save()
         #
     except Exception as err:

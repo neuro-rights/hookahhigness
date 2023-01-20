@@ -21,15 +21,30 @@ class ContractUtils:
 
     Attributes
     ----------
-
+    """
+    """
     Methods
     -------
     """
 
     def __init__(self):
-        """Class init"""
+        """
+        Class init
+        """
+        
+        self.INFURA_KEY = None #config["infura_ethereum_project_id"]
+        #
+        self.contract_address = None #config["auction_contract_address"]
+        self.network = None #config["network"]
+        self.ABI = None
+        self.BYTECODE = None
+        self.CODE_NFT = None
+        self.CHAIN_ID = None
+        self.w3 = None
+        self.open_sea_url = ""
+        self.scan_url = ""
 
-    def load_json(self, contract_address):
+    def load_json_etherscan(self, contract_address):
         """
         Purpose:
             Load json files
@@ -53,7 +68,7 @@ class ContractUtils:
                 'apiKey': 'CC5D165SJ3ITQ5NXF1ZBZ8MY5NGN61YZ63'
             }
 
-            print(ETHERSCAN_ENDPOINT)
+            #print(ETHERSCAN_ENDPOINT)
             http = urllib3.PoolManager()
             r = http.request('GET', ETHERSCAN_ENDPOINT, fields=params)
             conf = json.loads(r.data.decode('utf-8'))['result']
@@ -64,6 +79,16 @@ class ContractUtils:
             print(error)
             raise TypeError("Invalid JSON file")
 
+
+    def fetch_abi(self, address):
+        """
+        """
+        ABI_ENDPOINT = 'https://api-goerli.etherscan.io/api?module=contract&action=getabi&address='
+        response = requests.get('%s%s'%(ABI_ENDPOINT, address))
+        response_json = response.json()
+        abi_json = json.loads(response_json['result'])
+        result = json.dumps(abi_json) 
+        return result
 
     def set_up_blockchain(self, config):
         """
@@ -76,78 +101,53 @@ class ContractUtils:
         """
         #
         ############ Ethereum Setup ############
-        PUBLIC_KEY = config["seller_ethereum_wallet_address"]
-        PRIVATE_KEY = Web3.toBytes(hexstr=config["seller_ethereum_wallet_private_key"])
-        INFURA_KEY = config["infura_ethereum_project_id"]
         #
-        #contract = config["auction_contract_address"]
-        network = config["network"]
-        ABI = None
-        CODE_NFT = None
-        CHAIN_ID = None
-        w3 = None
-        open_sea_url = ""
-        scan_url = ""
-        eth_json = {}
-        #
-        print(config)
-        if network == "goerli":
+        self.INFURA_KEY = config["infura_ethereum_project_id"]
+        self.contract_address = config["auction_contract_address"]
+        self.network = config["network"]
+        self.PUBLIC_KEY = config["seller_ethereum_wallet_address"]
+        self.PRIVATE_KEY = config["buyer_ethereum_wallet_private_key"]
 
-            GOERLI_API_URL = f"https://goerli.infura.io/v3/{INFURA_KEY}"
-            w3 = Web3(Web3.HTTPProvider(GOERLI_API_URL))
-            #ABI = self.load_json(config["auction_contract_address"])  # get the ABI
-            #CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
-            CHAIN_ID = 5 
-            #open_sea_url = f"https://testnets.opensea.io/collections/{contract}/"
-            scan_url = "https://goerli.etherscan.io/tx/"
+        if self.network == "goerli":
+
+            GOERLI_API_URL = f"https://goerli.infura.io/v3/{self.INFURA_KEY}"
+            self.w3 = Web3(Web3.HTTPProvider(GOERLI_API_URL))
+            self.CHAIN_ID = 5 
+            self.open_sea_url = f"https://testnets.opensea.io/collections/{self.contract_address}/"
+            self.scan_url = "https://goerli.etherscan.io/tx/"
         #
-        elif network == "mumbai":
-            MUMBAI_API_URL = f"https://polygon-mumbai.infura.io/v3/{INFURA_KEY}"
-            w3 = Web3(Web3.HTTPProvider(MUMBAI_API_URL))
-            #ABI = self.load_json(config["auction_contract_address"])["abi"]  # get the ABI
-            #CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
-            CHAIN_ID = 80001
-            #open_sea_url = f"https://testnets.opensea.io/collections/{contract}/"
-            scan_url = "https://explorer-mumbai.maticvigil.com/tx/"
+        elif self.network == "mumbai":
+            MUMBAI_API_URL = f"https://polygon-mumbai.infura.io/v3/{self.INFURA_KEY}"
+            self.w3 = Web3(Web3.HTTPProvider(MUMBAI_API_URL))
+            self.CHAIN_ID = 80001
+            self.open_sea_url = f"https://testnets.opensea.io/collections/{self.contract_address}/"
+            self.scan_url = "https://explorer-mumbai.maticvigil.com/tx/"
         #
-        elif network == "matic_main":
-            POLYGON_API_URL = f"https://polygon-mainnet.infura.io/v3/{INFURA_KEY}"
-            w3 = Web3(Web3.HTTPProvider(POLYGON_API_URL))
-            #ABI = self.load_json(config["auction_contract_address"])["abi"]  # get the ABI
-            #CODE_NFT = w3.eth.contract(address=contract, abi=ABI)  # The contract
-            CHAIN_ID = 137
-            #open_sea_url = f"https://opensea.io/collections/matic/{contract}/"
-            scan_url = "https://polygonscan.com/tx/"
+        elif self.network == "matic_main":
+            POLYGON_API_URL = f"https://polygon-mainnet.infura.io/v3/{self.INFURA_KEY}"
+            self.w3 = Web3(Web3.HTTPProvider(POLYGON_API_URL))
+            self.CHAIN_ID = 137
+            self.open_sea_url = f"https://opensea.io/collections/matic/{self.contract_address}/"
+            self.scan_url = "https://polygonscan.com/tx/"
         #
         else:
             print("Invalid network")
             raise ValueError(f"Invalid {network}")
         #
-        print(f"checking if connected to infura...{w3.isConnected()}")
-        #
-        eth_json["w3"] = w3
-        eth_json["contract"] = CODE_NFT
-        eth_json["abi"] = ABI
-        eth_json["chain_id"] = CHAIN_ID
-        eth_json["open_sea_url"] = open_sea_url
-        eth_json["scan_url"] = scan_url
-        eth_json["public_key"] = PUBLIC_KEY
-        eth_json["private_key"] = PRIVATE_KEY
-        #
-        return eth_json
+        print(f"checking if connected to infura...{self.w3.isConnected()}")
+        
 
 
-    def transfer(self, sender_public_key, sender_private_key, recipient_public_key, amount_to_transfer, eth_json):
+    def transfer(self, sender_public_key, sender_private_key, recipient_public_key, amount_to_transfer):
         """ """
-
-        web3 = eth_json["w3"]
         #
         #get the nonce.  Prevents one from sending the transaction twice
-        nonce = web3.eth.getTransactionCount(sender_public_key)
-
+        nonce = self.w3.eth.getTransactionCount(sender_public_key)
+        acct = self.w3.eth.account.privateKeyToAccount(self.PRIVATE_KEY)
         #build a transaction in a dictionary
         tx = {
             'nonce': nonce,
+            'from': acct.address,
             'to': recipient_public_key,
             'value': web3.toWei(amount_to_transfer, 'ether'),
             "gas": 10000000,
@@ -156,15 +156,15 @@ class ContractUtils:
         }
 
         #sign the transaction
-        signed_tx = web3.eth.account.sign_transaction(tx, sender_private_key)
+        signed_tx = self.w3.eth.account.sign_transaction(tx, sender_private_key)
         #send transaction
-        tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        tx_hash = self.w3.eth.sendRawTransaction(signed_tx.rawTransaction)
         #get transaction hash
-        print(web3.toHex(tx_hash))
-        hash = web3.toHex(web3.keccak(signed_tx.rawTransaction))
+        print(self.w3.toHex(tx_hash))
+        hash = self.w3.toHex(web3.keccak(signed_tx.rawTransaction))
         #
         print(f"transfer txn hash: {hash} ")
-        transfer_receipt = web3.eth.wait_for_transaction_receipt(hash)  # hmmm have to wait...
+        transfer_receipt = self.w3.eth.wait_for_transaction_receipt(hash)  # hmmm have to wait...
         print(transfer_receipt)
         #hex_tokenid = receipt["logs"][0]["topics"][3].hex()  # this is token id in hex
         # convert from hex to decmial
@@ -174,7 +174,7 @@ class ContractUtils:
         return hash, tx_id
 
 
-    def web3_mint(self, buyer_public_key, tokenURI, eth_json):
+    def web3_mint(self, contract_address, contract_owner_address, contract_owner_private_key, buyer_address, buyer_private_key, token_id):
         """
         Purpose:
             mint a token for user on blockchain
@@ -186,41 +186,40 @@ class ContractUtils:
             hash - txn of mint
             tokenid - token minted
         """
+        print(contract_address)
+        self.ABI = self.fetch_abi(contract_address)
+        self.CODE_NFT = self.w3.eth.contract(address=contract_address, abi=self.ABI)
+        acct = self.w3.eth.account.privateKeyToAccount(buyer_private_key)
+        print(acct.address)
+        # get the nonce
+        nonce = self.w3.eth.getTransactionCount(acct.address)
+        print("Nonce:", nonce)
 
-        PUBLIC_KEY = eth_json["public_key"]
-        CHAIN_ID = eth_json["chain_id"]
-        w3 = eth_json["w3"]
-        CODE_NFT = eth_json["contract"]
-        PRIVATE_KEY = eth_json["private_key"]
-        #
-        nonce = w3.eth.get_transaction_count(PUBLIC_KEY)
-        # Create the contracrt
-        mint_txn = CODE_NFT.functions.mint(buyer_public_key, tokenURI).buildTransaction(
-            {
-                "chainId": CHAIN_ID,
-                "gas": 10000000,
-                "gasPrice": w3.toWei("1", "gwei"),
-                "nonce": nonce,
-            }
-        )
-        #
-        signed_txn = w3.eth.account.sign_transaction(mint_txn, private_key=PRIVATE_KEY)
-        w3.eth.send_raw_transaction(signed_txn.rawTransaction)
-        hash = w3.toHex(w3.keccak(signed_txn.rawTransaction))
-        #
-        print(f"mint txn hash: {hash} ")
-        receipt = w3.eth.wait_for_transaction_receipt(hash)  # hmmm have to wait...
-        print(receipt)
-        #hex_tokenid = receipt["logs"][0]["topics"][3].hex()  # this is token id in hex
-        # convert from hex to decmial
-        #tokenid = int(hex_tokenid, 16)
-        tx_id = receipt["transactionIndex"]
-        print(f"Got tx_id: {tx_id}")
-        #
-        return hash, tx_id
+        #tokenUri = "https://gateway.pinata.cloud/ipfs/QmYueiuRNmL4MiA2GwtVMm6ZagknXnSpQnB3z2gWbz36hP"
+        # Build the transaction
+        # 'gas' is the gas fee you pay in Wei (in this case, 1,000,000 Wei = 0.000000000001 ETH)
+        # 'value' is the amount you pay to mint the token (in this case, 10 Finney = 0.01 ETH)
+        tx = self.CODE_NFT.functions.mint(acct.address, token_id).buildTransaction({
+            'gas': 1000000,
+            'gasPrice': self.w3.toWei('1', 'gwei'),
+            'from': contract_owner_address,
+            'nonce': nonce,
+            'value': self.w3.toWei('10', 'finney'),
+        })
+
+        # Sign the transaction
+        print("Signing transaction")
+        signed_txn = self.w3.eth.account.signTransaction(tx, private_key=contract_owner_private_key)
+        # Process the transaction
+        print("Sending transaction")
+        txn_hash = self.w3.eth.sendRawTransaction(signed_txn.rawTransaction)
+        # Print the confirmed transaction hash
+        print("Transaction Successful!\nTransaction Hash:")
+        print(self.w3.toHex(txn_hash))
+        return self.w3.toHex(txn_hash)
 
 
-    def compile_contract(self, contract_file, eth_json):
+    def compile_contract(self, contract_file):
         """
         You need a Vyper file, the name that you want to give to your smart contract, and the output JSON file.
         The following code will do this task:
@@ -247,35 +246,31 @@ class ContractUtils:
             'abi': compiled_code[current_directory]['abi'],
             'bytecode': compiled_code[current_directory]['bytecode']
         }
-
-        eth_json["contract"] = smart_contract_json['bytecode']
-        eth_json["abi"] = smart_contract_json['abi']
-
-        return smart_contract_json
+        self.ABI = smart_contract_json['abi']
+        self.BYTECODE = smart_contract_json['bytecode']
 
 
-    def deploy_contract(self, eth_json):
+    def deploy_contract(self):
         """ """
-        w3 = eth_json["w3"]
-        contract_ = w3.eth.contract(abi=eth_json['abi'], bytecode=eth_json['contract'])
-        acct = w3.eth.account.privateKeyToAccount(eth_json["private_key"])
-
-        construct_txn = contract_.constructor().buildTransaction({
+        acct = self.w3.eth.account.privateKeyToAccount(self.PRIVATE_KEY)
+        print(acct.address)
+        self.CODE_NFT = self.w3.eth.contract(abi=self.ABI, bytecode=self.BYTECODE)
+        construct_txn = self.CODE_NFT.constructor().buildTransaction({
             'from': acct.address,
-            'nonce': w3.eth.getTransactionCount(acct.address),
+            'nonce': self.w3.eth.getTransactionCount(acct.address),
             'gas': 1728712,
-            'gasPrice': w3.toWei('21', 'gwei')})
+            'gasPrice': self.w3.toWei('21', 'gwei')})
 
         signed = acct.signTransaction(construct_txn)
-        tx_hash = w3.eth.sendRawTransaction(signed.rawTransaction)
+        tx_hash = self.w3.eth.sendRawTransaction(signed.rawTransaction)
         # Wait for the transaction to be mined, and get the transaction receipt
         print("Waiting for transaction to finish...")
-        transaction_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        transaction_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
         print(f"Done! Contract deployed to {transaction_receipt.contractAddress}")
         return transaction_receipt.contractAddress
 
 
-    def verify_contract():
+    def verify_contract(self):
         """ """
         networks = {
             "main": "https://api.etherscan.io/",
