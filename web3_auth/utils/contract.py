@@ -149,10 +149,10 @@ class ContractUtils:
             'nonce': nonce,
             'from': acct.address,
             'to': recipient_public_key,
-            'value': web3.toWei(amount_to_transfer, 'ether'),
+            'value': self.w3.toWei(amount_to_transfer, 'ether'),
             "gas": 10000000,
             #'gas': 2000000,
-            'gasPrice': web3.toWei('1', 'gwei')
+            'gasPrice': self.w3.toWei('1', 'gwei')
         }
 
         #sign the transaction
@@ -161,7 +161,7 @@ class ContractUtils:
         tx_hash = self.w3.eth.sendRawTransaction(signed_tx.rawTransaction)
         #get transaction hash
         print(self.w3.toHex(tx_hash))
-        hash = self.w3.toHex(web3.keccak(signed_tx.rawTransaction))
+        hash = self.w3.toHex(self.w3.keccak(signed_tx.rawTransaction))
         #
         print(f"transfer txn hash: {hash} ")
         transfer_receipt = self.w3.eth.wait_for_transaction_receipt(hash)  # hmmm have to wait...
@@ -174,7 +174,7 @@ class ContractUtils:
         return hash, tx_id
 
 
-    def web3_mint(self, contract_address, contract_owner_address, contract_owner_private_key, buyer_address, buyer_private_key, token_id):
+    def web3_mint(self, contract_address, contract_owner_address, contract_owner_private_key, buyer_address, buyer_private_key, amount_to_transfer, token_id):
         """
         Purpose:
             mint a token for user on blockchain
@@ -204,7 +204,7 @@ class ContractUtils:
             'gasPrice': self.w3.toWei('1', 'gwei'),
             'from': contract_owner_address,
             'nonce': nonce,
-            'value': self.w3.toWei('10', 'finney'),
+            'value': self.w3.toWei(amount_to_transfer, 'ether'),
         })
 
         # Sign the transaction
