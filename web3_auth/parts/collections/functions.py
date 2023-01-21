@@ -32,20 +32,12 @@ def collection_detail(request, collection_uuid):
 
 @login_required
 def collections_list(request):
-    #
-    collections_list = Collection.objects.order_by("-id").all()
-    #
-    context = {"page_obj": get_page_obj(request, collections_list, 25)}
-    return render(request, "collections/list.html", context)
+    return render(request, "collections/list.html")
 
 
 @login_required
 def collections_own(request):
-    #
-    collections_own = Collection.objects.filter(seller=request.user)
-    #
-    context = {"page_obj": get_page_obj(request, collections_own, 25)}
-    return render(request, "collections/list.html", context)
+    return render(request, "collections/list.html")
 
 
 @login_required

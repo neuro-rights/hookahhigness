@@ -15,15 +15,9 @@ from ...models import Auction
 
 
 def market_list(request):
-    #
-    auctions_list = Auction.objects.order_by("-id").all()
-    context = {"page_obj": get_page_obj(request, auctions_list, 25)}
-    return render(request, "market/list.html", context)
+    return render(request, "market/list.html")
 
 
 @login_required
 def market_own(request):
-    #
-    auctions_own = Auction.objects.order_by("-id").filter(creator=request.user)
-    context = {"page_obj": get_page_obj(request, auctions_own, 25)}
-    return render(request, "market/list.html", context)
+    return render(request, "market/list.html")

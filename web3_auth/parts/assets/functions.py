@@ -66,56 +66,32 @@ def asset_detail(request, asset_uuid):
 
 @login_required
 def assets_own(request):
-    #
-    assets_list = Asset.objects.filter(creator=request.user)
-    #
-    context = {"page_obj": get_page_obj(request, assets_list, 25)}
-    return render(request, "assets/list.html", context)
+    return render(request, "assets/list.html")
 
 
 @login_required
 def assets_own_2d(request):
-    #
-    assets_list = Asset.objects.filter(creator=request.user, asset_type="2d")
-    #
-    context = {"page_obj": get_page_obj(request, assets_list, 25)}
-    return render(request, "assets/list.html", context)
+    return render(request, "assets/list.html")
 
 
 @login_required
 def assets_own_3d(request):
-    #
-    assets_list = Asset.objects.filter(creator=request.user, asset_type="3d")
-    #
-    context = {"page_obj": get_page_obj(request, assets_list, 25)}
-    return render(request, "assets/list.html", context)
+    return render(request, "assets/list.html")
 
 
 @login_required
 def assets_own_music(request):
-    #
-    assets_list = Asset.objects.filter(creator=request.user, asset_type="music")
-    #
-    context = {"page_obj": get_page_obj(request, assets_list, 25)}
-    return render(request, "assets/list.html", context)
+    return render(request, "assets/list.html")
 
 
 @login_required
 def assets_own_video(request):
-    #
-    assets_list = Asset.objects.filter(creator=request.user, asset_type="video")
-    #
-    context = {"page_obj": get_page_obj(request, assets_list, 25)}
-    return render(request, "assets/list.html", context)
+    return render(request, "assets/list.html")
 
 
 @login_required
 def assets_own_doc(request):
-    #
-    assets_list = Asset.objects.filter(creator=request.user, asset_type="doc")
-    #
-    context = {"page_obj": get_page_obj(request, assets_list, 25)}
-    return render(request, "assets/list.html", context)
+    return render(request, "assets/list.html")
 
 
 def asset_add_auction(request, asset_uuid):
