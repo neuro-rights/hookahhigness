@@ -210,7 +210,7 @@ def collection_metadata_file(request, collection_uuid):
         except Exception as e:
             print(e)
     
-    return redirect('/')
+    return redirect(collection)
 
 
 

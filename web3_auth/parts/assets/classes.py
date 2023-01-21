@@ -55,6 +55,7 @@ class AssetDelete(LoginRequiredMixin, DeleteView):
 
 
 class AssetListJson(BaseDatatableView):
+    paginate_by = 25
     model = Asset
     columns = ['uuid', 'asset_type', 'creator', 'name']
     order_columns = ['asset_type', 'uuid', 'creator', 'name']

@@ -134,6 +134,7 @@ def verify_message(request):
             user = User.objects.get(username=eth_address)
         except User.DoesNotExist:
             user = User(username=eth_address)
+            user.ethereum_wallet_address = eth_address
             user.is_staff = False
             user.is_superuser = False
             user.save()
