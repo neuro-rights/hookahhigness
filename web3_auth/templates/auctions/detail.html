@@ -71,7 +71,7 @@
                 {% if auction.status == "unsold" %}
                 <form action="{% url 'auction_add_bid' auction.uuid %}" class='bidprice' method="post">
                     {% csrf_token %} {{ bid_form }}
-                    <input type="submit" class="btn text-white" value="Add Bid">
+                    <input type="submit" class="btn btn-outline-light" value="Add Bid">
                 </form>
 
                 <table class="striped">
@@ -99,7 +99,7 @@
                                     class="bidprice">
                                     {% csrf_token %}
                                     <button type="submit"
-                                        class="btn text-white"><i
+                                        class="btn btn-outline-light"><i
                                             class="material-icons">check</i>
                                     </button>
                                 </form>
