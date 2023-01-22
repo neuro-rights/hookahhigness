@@ -1,2 +1,2 @@
 release: python manage.py migrate --noinput
-web: gunicorn nftmarket.wsgi
+web: gunicorn moralis_auth.wsgi --preload
