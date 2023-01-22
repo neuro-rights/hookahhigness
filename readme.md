@@ -13,3 +13,8 @@
 7. python3 manage.py migrate
 
 8. python3 manage.py runserver
+
+9. heroku db commands
+heroku logs --tail
+heroku pg:reset DATABASE
+heroku run python manage.py migrate
