@@ -7,19 +7,21 @@
         <div class="card bg-dark">
             <div class="card-body">
                 <span class="card-title"></span>
-                <link rel="preload" class="responsive-img card-panel" href="{{ asset.uri_preview }}" as="image" crossorigin>
-                {% if asset.asset_type == 'audio' %}
-                <audio controls>
-                    <source src="{{ asset.uri_preview }}" type="audio/mp3">
-                </audio>
-                {% elif asset.asset_type == 'video' %}
-                <video width="100%" controls>
-                    <source src="{{ asset.uri_preview }}" type="video/mp4">
-                </video> 
-                {% elif asset.asset_type == 'image' %}
-                <img width="100%" align="center"  src="{{ asset.uri_preview }}"/>
-                {% else %}
-                <a href="{{ asset.uri_preview }}">File link</a>
+                {% if asset.uri_preview %}
+                    <link rel="preload" class="responsive-img card-panel" href="{{ asset.uri_preview }}" as="image" crossorigin>
+                    {% if asset.asset_type == 'audio' %}
+                    <audio controls>
+                        <source src="{{ asset.uri_preview }}" type="audio/mp3">
+                    </audio>
+                    {% elif asset.asset_type == 'video' %}
+                    <video width="100%" controls>
+                        <source src="{{ asset.uri_preview }}" type="video/mp4">
+                    </video> 
+                    {% elif asset.asset_type == 'image' %}
+                    <img width="100%" align="center"  src="{{ asset.uri_preview }}"/>
+                    {% else %}
+                    <a href="{{ asset.uri_preview }}">File link</a>
+                    {% endif %}
                 {% endif %}
                 <form action="{% url 'asset_ipfs_upload_file' asset.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
                     {% csrf_token %}

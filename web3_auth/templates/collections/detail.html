@@ -7,19 +7,21 @@
         <div class="card bg-dark">
             <div class="card-body">
                 <span class="card-title"></span>
-                <link rel="preload" class="responsive-img card-panel" href="{{ collection.uri_preview }}" as="image" crossorigin>
-                {% if collection.collection_type == 'audio' %}
-                <audio controls>
-                    <source src="{{ collection.uri_preview }}" type="audio/mp3">
-                </audio>
-                {% elif collection.collection_type == 'video' %}
-                <video width="100%" controls>
-                    <source src="{{ collection.uri_preview }}" type="video/mp4">
-                </video> 
-                {% elif collection.collection_type == 'image' %}
-                <img width="100%" align="center"  src="{{ collection.uri_preview }}"/>
-                {% else %}
-                <a href="{{ collection.uri_preview }}">File link</a>
+                {% if asset.uri_preview %}
+                    <link rel="preload" class="responsive-img card-panel" href="{{ collection.uri_preview }}" as="image" crossorigin>
+                    {% if collection.collection_type == 'audio' %}
+                    <audio controls>
+                        <source src="{{ collection.uri_preview }}" type="audio/mp3">
+                    </audio>
+                    {% elif collection.collection_type == 'video' %}
+                    <video width="100%" controls>
+                        <source src="{{ collection.uri_preview }}" type="video/mp4">
+                    </video> 
+                    {% elif collection.collection_type == 'image' %}
+                    <img width="100%" align="center"  src="{{ collection.uri_preview }}"/>
+                    {% else %}
+                    <a href="{{ collection.uri_preview }}">File link</a>
+                    {% endif %}
                 {% endif %}
                 {% for field in collection.get_all_fields %}
                 <div class="row">
