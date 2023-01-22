@@ -8,18 +8,20 @@
             <div class="card-body">
                 <span class="card-title"></span>
                 {% if asset.uri_preview %}
-                    <link rel="preload" class="responsive-img card-panel" href="{{ auction.preview_uri }}" as="image" crossorigin>
-                    {% for field in auction.get_all_fields %}
-                    <div class="row">
-                        <div class="col-4">
-                            {{ field.label }}
-                        </div>
-                        <div class="col-8">
-                            {{ field.value|truncatechars:50 }}
-                        </div>
-                    </div>
-                    {% endfor %}
+                <link rel="preload" class="responsive-img card-panel" href="{{ auction.preview_uri }}" as="image" crossorigin>
                 {% endif %}
+                
+                {% for field in auction.get_all_fields %}
+                <div class="row">
+                    <div class="col-4">
+                        {{ field.label }}
+                    </div>
+                    <div class="col-8">
+                        {{ field.value|truncatechars:50 }}
+                    </div>
+                </div>
+                {% endfor %}
+                
                 {% if auction.seller == request.user %}
                 <div class="card-action">
                     <a href="{% url 'auction_edit' auction.uuid %}" class="waves-effect waves-light btn-small">Edit</a>
