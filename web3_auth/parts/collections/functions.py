@@ -181,27 +181,28 @@ def collection_metadata_file(request, collection_uuid):
     metadata = json.load(f)
     print(metadata)
     for asset_metadata in metadata:
-        if counter < 5000:
-            try: 
-                url = asset_metadata["image"]
-                print(url)
-                collection.uri_preview = url
-                collection.uri_metadata = url
-                asset = Asset(
-                    name="{}_{}".format(collection.name, counter),
-                    description=collection.description,
-                    creator=request.user,
-                    asset_type=collection.collection_type,
-                    uri_metadata=url,
-                    uri_preview=url,
-                )
-                asset.save()
-                collection.assets.add(asset)
-                collection.save()
-                print("Adding new NFT to collection: {}".format(asset.uuid))
-                counter += 1
-            except Exception as e:
-                print(e)
+        if counter > 3000:
+            break
+        try: 
+            url = asset_metadata["image"]
+            print(url)
+            collection.uri_preview = url
+            collection.uri_metadata = url
+            asset = Asset(
+                name="{}_{}".format(collection.name, counter),
+                description=collection.description,
+                creator=request.user,
+                asset_type=collection.collection_type,
+                uri_metadata=url,
+                uri_preview=url,
+            )
+            asset.save()
+            collection.assets.add(asset)
+            collection.save()
+            print("Adding new NFT to collection: {}".format(asset.uuid))
+            counter += 1
+        except Exception as e:
+            print(e)
     
     return redirect(collection)
 
