@@ -6,7 +6,7 @@
 {% if auctions|length > 0 %}
 {% for auction in auctions %}
 <div class="row">
-    <div class="col-3">
+    <div class="col-4">
         <div class="card bg-dark">
             <div class="card-body">
                 <div class="carousel slide" data-ride="carousel">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="col-9">
+    <div class="col-8">
         <div class="card bg-dark">
             <div class="card-body">
                 <a href="{% url 'auction_detail' auction.uuid %}">
