@@ -161,6 +161,7 @@ def collection_add_files_to_s3(request, collection_uuid):
                 asset.save()
                 # add asset to collection
                 collection.assets.add(asset)
+                collection.save()
                 counter += 1
 
             except Exception as e:
