@@ -66,7 +66,7 @@ class User(AbstractUser):
     # WALLET
     ethereum_wallet_address = models.CharField(max_length=42)
     ethereum_wallet_private_key = models.CharField(
-        max_length=64
+        max_length=64, blank=True, null=True
     )
     # PINATA
     pinata_ipfs_api_key = models.CharField(max_length=20, blank=True, null=True)
@@ -82,10 +82,10 @@ class User(AbstractUser):
     )
     # INFURA ETHEREUM
     infura_ethereum_project_id = models.CharField(
-        max_length=100
+        max_length=100, blank=True, null=True
     )
     infura_ethereum_secret_key = models.CharField(
-        max_length=100
+        max_length=100, blank=True, null=True
     )
     # AWS S3
     aws_s3_bucket = models.CharField(max_length=100, blank=True, null=True)
@@ -97,7 +97,7 @@ class User(AbstractUser):
         max_length=100, blank=True, null=True
     )
     #
-    etherscan_token = models.CharField(max_length=100)
+    etherscan_token = models.CharField(max_length=100, blank=True, null=True)
     #
     class Meta:
         ordering = ["-id"]
