@@ -47,7 +47,7 @@ else:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if not IS_HEROKU:
-    DEBUG = Tru
+    DEBUG = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
