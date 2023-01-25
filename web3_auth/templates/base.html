@@ -101,15 +101,15 @@
                     {% if user.is_authenticated %}
                     <div class="col ml-auto d-flex justify-content-end">
                         <div class="row">
+                            {% comment %}
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">PURCHASES</a>
                                 <div id='purchases' class='dropdown-menu dropdown-menu-end'>
                                     <a class="dropdown-item" href="{% url 'purchases_bought_list' %}">LIST BOUGHT PURCHASES</a>
-                                    {% comment %}
                                     <a class="dropdown-item" href="{% url 'purchases_sold_list' %}">LIST SOLD PURCHASES</a>
-                                    {% endcomment %}
                                 </div>
                             </div>
+                            {% endcomment %}
                             {% comment %}
                             <div class="col nav-item dropdown">
                                 <a class="nav-link dropdown-toggle btn btn-lg" data-bs-toggle="dropdown" href="#">BIDS</a>

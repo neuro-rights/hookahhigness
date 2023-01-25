@@ -13,37 +13,44 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                    Home
+                <a href="#ethereum" class="nav-link active" aria-current="page">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#ethereum"></use></svg>
+                    Ethereum
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                    Dashboard
+                <a href="#infura_ipfs" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#infura_ipfs"></use></svg>
+                    Infura IPFS
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                    Orders
+                <a href="#infura_ethereum" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="infura_ethereum"></use></svg>
+                    Infura Ethereum
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                    Products
+                <a href="#pinata" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#pinata"></use></svg>
+                    Pinata
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                    Customers
+                <a href="#awss3" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#awss3"></use></svg>
+                    AWS S3
+                </a>
+            </li>
+            <li>
+                <a href="#etherscan" class="nav-link text-white">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#etherscan"></use></svg>
+                    Etherscan
                 </a>
             </li>
         </ul>
         <hr>
+        <!--
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="" class="rounded-circle me-2" width="32" height="32">
@@ -57,6 +64,7 @@
                 <li><a class="dropdown-item" href="#">Sign out</a></li>
             </ul>
         </div>
+        -->
     </div>
     <div class="col">
         {% if messages %}
@@ -69,10 +77,45 @@
         </section>
         {% endif %}
 
-        <section>
+        <section id="ethereum">
             <form method="post" action="{% url 'profile' %}">
                 {% csrf_token %}
-                {% bootstrap_form form layout='horizontal' %}
+                {% bootstrap_form form_ethereum layout='horizontal' %}
+                <input type="submit" class="btn btn-outline-light" value="update profile">
+            </form>
+        </section>
+        <section id="infura_ethereum">
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {% bootstrap_form form_infura_ethereum layout='horizontal' %}
+                <input type="submit" class="btn btn-outline-light" value="update profile">
+            </form>
+        </section>
+        <section id="infura_ipfs">
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {% bootstrap_form form_infura_ipfs layout='horizontal' %}
+                <input type="submit" class="btn btn-outline-light" value="update profile">
+            </form>
+        </section>
+        <section id="pinata">
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {% bootstrap_form form_pinata layout='horizontal' %}
+                <input type="submit" class="btn btn-outline-light" value="update profile">
+            </form>
+        </section>
+        <section id="awss3">
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {% bootstrap_form form_aws_s3 layout='horizontal' %}
+                <input type="submit" class="btn btn-outline-light" value="update profile">
+            </form>
+        </section>
+        <section id="etherscan">
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {% bootstrap_form form_etherscan layout='horizontal' %}
                 <input type="submit" class="btn btn-outline-light" value="update profile">
             </form>
         </section>

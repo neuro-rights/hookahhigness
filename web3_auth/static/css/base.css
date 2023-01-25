@@ -14,6 +14,13 @@ body {
     padding: 0.4em 0.2em;
 }
 
+section {
+    display: grid;
+    align-items: stretch;
+    height: 300px;
+    grid-template-rows: min-content auto 60px;
+  }
+
 footer {
     text-align: right;
     background-color: maroon;

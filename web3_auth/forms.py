@@ -141,6 +141,366 @@ class UserEditForm(forms.ModelForm):
         self.fields["aws_s3_region"].widget.attrs[
             "placeholder"
         ] = "your aws s3 region"
+        self.fields["etherscan_token"].widget.attrs[
+            "placeholder"
+        ] = "your etherscan API key"
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+        return user
+
+    class Meta:
+        model = User
+        fields = [
+            "profile_image_url",
+            "ethereum_wallet_address",
+            "ethereum_wallet_private_key",
+            "pinata_ipfs_api_key",
+            "pinata_ipfs_api_secret",
+            "infura_ipfs_project_id",
+            "infura_ipfs_secret_key",
+            "infura_ethereum_project_id",
+            "infura_ethereum_secret_key",
+            "aws_s3_bucket",
+            "aws_s3_region",
+            "aws_access_key_id_value",
+            "aws_secret_access_key_value",
+            "etherscan_token",
+        ]
+
+
+class UserEditEthereumForm(forms.ModelForm):
+    """ """
+
+    def __init__(self, *args, **kwargs):
+        super(UserEditEthereumForm, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update(
+                {
+                    "class": "input-field",
+                    "placeholder": "{}".format(field)
+                    .replace("_", " ")
+                    .capitalize(),
+                }
+            )
+        self.fields["profile_image_url"].widget = forms.HiddenInput()
+        self.fields["pinata_ipfs_api_key"].widget = forms.HiddenInput()
+        self.fields["pinata_ipfs_api_secret"].widget = forms.HiddenInput()
+        self.fields["infura_ipfs_project_id"].widget = forms.HiddenInput()
+        self.fields["infura_ipfs_secret_key"].widget = forms.HiddenInput()
+        self.fields["infura_ethereum_project_id"].widget = forms.HiddenInput()
+        self.fields["infura_ethereum_secret_key"].widget = forms.HiddenInput()
+        self.fields["aws_s3_bucket"].widget = forms.HiddenInput()
+        self.fields["aws_s3_region"].widget = forms.HiddenInput()
+        self.fields["aws_access_key_id_value"].widget = forms.HiddenInput()
+        self.fields["aws_secret_access_key_value"].widget = forms.HiddenInput()
+        self.fields["ethereum_wallet_address"].widget.attrs[
+            "placeholder"
+        ] = "0x 40 hex characters"
+        self.fields["ethereum_wallet_private_key"].widget.attrs[
+            "placeholder"
+        ]
+        self.fields["etherscan_token"].widget = forms.HiddenInput()
+        
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+        return user
+
+    class Meta:
+        model = User
+        fields = [
+            "profile_image_url",
+            "ethereum_wallet_address",
+            "ethereum_wallet_private_key",
+            "pinata_ipfs_api_key",
+            "pinata_ipfs_api_secret",
+            "infura_ipfs_project_id",
+            "infura_ipfs_secret_key",
+            "infura_ethereum_project_id",
+            "infura_ethereum_secret_key",
+            "aws_s3_bucket",
+            "aws_s3_region",
+            "aws_access_key_id_value",
+            "aws_secret_access_key_value",
+            "etherscan_token",
+        ]
+
+
+class UserEditPinataForm(forms.ModelForm):
+    """ """
+
+    def __init__(self, *args, **kwargs):
+        super(UserEditPinataForm, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update(
+                {
+                    "class": "input-field",
+                    "placeholder": "{}".format(field)
+                    .replace("_", " ")
+                    .capitalize(),
+                }
+            )
+        #
+        self.fields["profile_image_url"].widget = forms.HiddenInput()
+        self.fields["ethereum_wallet_address"].widget = forms.HiddenInput()
+        self.fields["ethereum_wallet_private_key"].widget = forms.HiddenInput()
+        self.fields["infura_ipfs_project_id"].widget = forms.HiddenInput()
+        self.fields["infura_ipfs_secret_key"].widget = forms.HiddenInput()
+        self.fields["infura_ethereum_project_id"].widget = forms.HiddenInput()
+        self.fields["infura_ethereum_secret_key"].widget = forms.HiddenInput()
+        self.fields["aws_s3_bucket"].widget = forms.HiddenInput()
+        self.fields["aws_s3_region"].widget = forms.HiddenInput()
+        self.fields["aws_access_key_id_value"].widget = forms.HiddenInput()
+        self.fields["aws_secret_access_key_value"].widget = forms.HiddenInput()
+        self.fields["pinata_ipfs_api_key"].widget.attrs[
+            "placeholder"
+        ] = "20 hex characters"
+        self.fields["pinata_ipfs_api_secret"].widget.attrs[
+            "placeholder"
+        ] = "64 hex characters"
+        self.fields["etherscan_token"].widget = forms.HiddenInput()
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+        return user
+
+    class Meta:
+        model = User
+        fields = [
+            "profile_image_url",
+            "ethereum_wallet_address",
+            "ethereum_wallet_private_key",
+            "pinata_ipfs_api_key",
+            "pinata_ipfs_api_secret",
+            "infura_ipfs_project_id",
+            "infura_ipfs_secret_key",
+            "infura_ethereum_project_id",
+            "infura_ethereum_secret_key",
+            "aws_s3_bucket",
+            "aws_s3_region",
+            "aws_access_key_id_value",
+            "aws_secret_access_key_value",
+            "etherscan_token",
+        ]
+
+
+class UserEditInfuraEthereumForm(forms.ModelForm):
+    """ """
+
+    def __init__(self, *args, **kwargs):
+        super(UserEditInfuraEthereumForm, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update(
+                {
+                    "class": "input-field",
+                    "placeholder": "{}".format(field)
+                    .replace("_", " ")
+                    .capitalize(),
+                }
+            )
+        self.fields["profile_image_url"].widget = forms.HiddenInput()
+        self.fields["ethereum_wallet_address"].widget = forms.HiddenInput()
+        self.fields["ethereum_wallet_private_key"].widget = forms.HiddenInput()
+        self.fields["pinata_ipfs_api_key"].widget = forms.HiddenInput()
+        self.fields["pinata_ipfs_api_secret"].widget = forms.HiddenInput()
+        self.fields["infura_ipfs_project_id"].widget = forms.HiddenInput()
+        self.fields["infura_ipfs_secret_key"].widget = forms.HiddenInput()
+        self.fields["aws_s3_bucket"].widget = forms.HiddenInput()
+        self.fields["aws_s3_region"].widget = forms.HiddenInput()
+        self.fields["aws_access_key_id_value"].widget = forms.HiddenInput()
+        self.fields["aws_secret_access_key_value"].widget = forms.HiddenInput()
+        self.fields["infura_ethereum_project_id"].widget.attrs[
+            "placeholder"
+        ] = "27 characters"
+        self.fields["infura_ethereum_secret_key"].widget.attrs[
+            "placeholder"
+        ] = "32 hex characters"
+        self.fields["etherscan_token"].widget = forms.HiddenInput()
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+        return user
+
+    class Meta:
+        model = User
+        fields = [
+            "profile_image_url",
+            "ethereum_wallet_address",
+            "ethereum_wallet_private_key",
+            "pinata_ipfs_api_key",
+            "pinata_ipfs_api_secret",
+            "infura_ipfs_project_id",
+            "infura_ipfs_secret_key",
+            "infura_ethereum_project_id",
+            "infura_ethereum_secret_key",
+            "aws_s3_bucket",
+            "aws_s3_region",
+            "aws_access_key_id_value",
+            "aws_secret_access_key_value",
+            "etherscan_token",
+        ]
+
+
+class UserEditInfuraIPFSForm(forms.ModelForm):
+    """ """
+
+    def __init__(self, *args, **kwargs):
+        super(UserEditInfuraIPFSForm, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update(
+                {
+                    "class": "input-field",
+                    "placeholder": "{}".format(field)
+                    .replace("_", " ")
+                    .capitalize(),
+                }
+            )
+        self.fields["profile_image_url"].widget = forms.HiddenInput()
+        self.fields["ethereum_wallet_address"].widget = forms.HiddenInput()
+        self.fields["ethereum_wallet_private_key"].widget = forms.HiddenInput()
+        self.fields["pinata_ipfs_api_key"].widget = forms.HiddenInput()
+        self.fields["pinata_ipfs_api_secret"].widget = forms.HiddenInput()
+        self.fields["infura_ethereum_project_id"].widget = forms.HiddenInput()
+        self.fields["infura_ethereum_secret_key"].widget = forms.HiddenInput()
+        self.fields["aws_s3_bucket"].widget = forms.HiddenInput()
+        self.fields["aws_s3_region"].widget = forms.HiddenInput()
+        self.fields["aws_access_key_id_value"].widget = forms.HiddenInput()
+        self.fields["aws_secret_access_key_value"].widget = forms.HiddenInput()
+        self.fields["infura_ipfs_project_id"].widget.attrs[
+            "placeholder"
+        ] = "27 characters"
+        self.fields["infura_ipfs_secret_key"].widget.attrs[
+            "placeholder"
+        ]
+        self.fields["etherscan_token"].widget = forms.HiddenInput()
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+        return user
+
+    class Meta:
+        model = User
+        fields = [
+            "profile_image_url",
+            "ethereum_wallet_address",
+            "ethereum_wallet_private_key",
+            "pinata_ipfs_api_key",
+            "pinata_ipfs_api_secret",
+            "infura_ipfs_project_id",
+            "infura_ipfs_secret_key",
+            "infura_ethereum_project_id",
+            "infura_ethereum_secret_key",
+            "aws_s3_bucket",
+            "aws_s3_region",
+            "aws_access_key_id_value",
+            "aws_secret_access_key_value",
+            "etherscan_token",
+        ]
+
+class UserEditAWSS3Form(forms.ModelForm):
+    """ """
+
+    def __init__(self, *args, **kwargs):
+        super(UserEditAWSS3Form, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update(
+                {
+                    "class": "input-field",
+                    "placeholder": "{}".format(field)
+                    .replace("_", " ")
+                    .capitalize(),
+                }
+            )
+        self.fields["profile_image_url"].widget = forms.HiddenInput()
+        self.fields["ethereum_wallet_address"].widget = forms.HiddenInput()
+        self.fields["ethereum_wallet_private_key"].widget = forms.HiddenInput()
+        self.fields["pinata_ipfs_api_key"].widget = forms.HiddenInput()
+        self.fields["pinata_ipfs_api_secret"].widget = forms.HiddenInput()
+        self.fields["infura_ipfs_project_id"].widget = forms.HiddenInput()
+        self.fields["infura_ipfs_secret_key"].widget = forms.HiddenInput()
+        self.fields["infura_ethereum_project_id"].widget = forms.HiddenInput()
+        self.fields["infura_ethereum_secret_key"].widget = forms.HiddenInput()
+        self.fields["etherscan_token"].widget = forms.HiddenInput()
+        
+        self.fields["aws_s3_bucket"].widget.attrs[
+            "placeholder"
+        ] = "your aws s3 bucket name"
+        self.fields["aws_s3_region"].widget.attrs[
+            "placeholder"
+        ] = "your aws s3 region"
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+        return user
+
+    class Meta:
+        model = User
+        fields = [
+            "profile_image_url",
+            "ethereum_wallet_address",
+            "ethereum_wallet_private_key",
+            "pinata_ipfs_api_key",
+            "pinata_ipfs_api_secret",
+            "infura_ipfs_project_id",
+            "infura_ipfs_secret_key",
+            "infura_ethereum_project_id",
+            "infura_ethereum_secret_key",
+            "aws_s3_bucket",
+            "aws_s3_region",
+            "aws_access_key_id_value",
+            "aws_secret_access_key_value",
+            "etherscan_token",
+        ]
+
+class UserEditEtherscanForm(forms.ModelForm):
+    """ """
+
+    def __init__(self, *args, **kwargs):
+        super(UserEditEtherscanForm, self).__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update(
+                {
+                    "class": "input-field",
+                    "placeholder": "{}".format(field)
+                    .replace("_", " ")
+                    .capitalize(),
+                }
+            )
+        self.fields["profile_image_url"].widget = forms.HiddenInput()
+        self.fields["ethereum_wallet_address"].widget = forms.HiddenInput()
+        self.fields["ethereum_wallet_private_key"].widget = forms.HiddenInput()
+        self.fields["pinata_ipfs_api_key"].widget = forms.HiddenInput()
+        self.fields["pinata_ipfs_api_secret"].widget = forms.HiddenInput()
+        self.fields["infura_ipfs_project_id"].widget = forms.HiddenInput()
+        self.fields["infura_ipfs_secret_key"].widget = forms.HiddenInput()
+        self.fields["infura_ethereum_project_id"].widget = forms.HiddenInput()
+        self.fields["infura_ethereum_secret_key"].widget = forms.HiddenInput()
+        self.fields["aws_s3_bucket"].widget = forms.HiddenInput()
+        self.fields["aws_s3_region"].widget = forms.HiddenInput()
+        self.fields["aws_access_key_id_value"].widget = forms.HiddenInput()
+        self.fields["aws_secret_access_key_value"].widget = forms.HiddenInput()
+
+        self.fields["etherscan_token"].widget.attrs[
+            "placeholder"
+        ] = "your etherscan token"
 
     def save(self, commit=True):
         # Save the provided password in hashed format

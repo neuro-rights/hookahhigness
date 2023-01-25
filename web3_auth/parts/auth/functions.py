@@ -14,7 +14,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
 #
-from ...forms import UserCreateForm, UserEditForm
+from ...forms import *
 from ...models import User
 
 #
@@ -76,16 +76,43 @@ def custom_logout(request):
 @login_required
 def profile(request):
     #
+    form_ethereum = UserEditEthereumForm(instance=request.user)
+    form_infura_ethereum = UserEditInfuraEthereumForm(instance=request.user)
+    form_infura_ipfs = UserEditInfuraIPFSForm(instance=request.user)
+    form_pinata = UserEditPinataForm(instance=request.user)
+    form_aws_s3 = UserEditAWSS3Form(instance=request.user)
+    form_etherscan = UserEditEtherscanForm(instance=request.user)
+
     if request.method == "POST":
-        form = UserEditForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "User upated successfully")
-            context = {"form": form}
-            return render(request, "registration/profile.html", context)
+        form_ethereum = UserEditEthereumForm(request.POST, instance=request.user)
+        if form_ethereum.is_valid():
+            form_ethereum.save()
+        form_infura_ethereum = UserEditInfuraEthereumForm(request.POST, instance=request.user)
+        if form_infura_ethereum.is_valid():
+            form_infura_ethereum.save()
+        form_infura_ipfs = UserEditInfuraIPFSForm(request.POST, instance=request.user)
+        if form_infura_ipfs.is_valid():
+            form_infura_ipfs.save()
+        form_pinata = UserEditPinataForm(request.POST, instance=request.user)
+        if form_pinata.is_valid():
+            form_pinata.save()
+        form_aws_s3 = UserEditAWSS3Form(request.POST, instance=request.user)
+        if form_aws_s3.is_valid():
+            form_aws_s3.save()
+        form_etherscan = UserEditEtherscanForm(request.POST, instance=request.user)
+        if form_etherscan.is_valid():
+            form_etherscan.save()
+
+        messages.success(request, "User upated successfully")
     #
-    form = UserEditForm(instance=request.user)
-    context = {"form": form}
+    context = {
+        "form_ethereum": form_ethereum,
+        "form_infura_ethereum": form_infura_ethereum,
+        "form_infura_ipfs": form_infura_ipfs,
+        "form_pinata": form_pinata,
+        "form_aws_s3": form_aws_s3,
+        "form_etherscan": form_etherscan
+    }
     return render(request, "registration/profile.html", context)
 
 
