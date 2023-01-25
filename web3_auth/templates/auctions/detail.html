@@ -8,7 +8,7 @@
             <div class="card-body">
                 <span class="card-title"></span>
                 {% if auction.uri_preview %}
-                <link rel="preload" class="responsive-img card-panel" href="{{ auction.preview_uri }}" as="image" crossorigin>
+                <link rel="preload" class="responsive-img card-panel" href="{{ auction.uri_preview }}" as="image" crossorigin>
                 {% endif %}
                 
                 {% for field in auction.get_all_fields %}
