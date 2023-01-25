@@ -7,7 +7,7 @@
         <div class="card bg-dark">
             <div class="card-body">
                 <span class="card-title"></span>
-                {% if asset.uri_preview %}
+                {% if collection.uri_preview %}
                     <link rel="preload" class="responsive-img card-panel" href="{{ collection.uri_preview }}" as="image" crossorigin>
                     {% if collection.collection_type == 'audio' %}
                     <audio controls>
