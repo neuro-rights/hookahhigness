@@ -2,13 +2,28 @@
 {% block content %}
 
 <h5>{{auction.uuid|upper}}</h5>
+
 <div class="row">
-    <div class="col-6">
+    {% for collection in auction.collections.all %}
+    <div class="col">
         <div class="card bg-dark">
             <div class="card-body">
                 <span class="card-title"></span>
-                {% if auction.uri_preview %}
-                <link rel="preload" class="responsive-img card-panel" href="{{ auction.uri_preview }}" as="image" crossorigin>
+                {% if collection.uri_preview %}
+                <link rel="preload" class="responsive-img card-panel" href="{{ collection.uri_preview }}" as="image" crossorigin>
+                    {% if collection.asset_type == 'audio' %}
+                    <audio controls>
+                        <source src="{{ collection.uri_preview }}" type="audio/mp3">
+                    </audio>
+                    {% elif collection.asset_type == 'video' %}
+                    <video width="100%" controls>
+                        <source src="{{ collection.uri_preview }}" type="video/mp4">
+                    </video> 
+                    {% elif collection.asset_type == 'image' %}
+                    <img width="100%" align="center"  src="{{ collection.uri_preview }}"/>
+                    {% else %}
+                    <a href="{{ collection.uri_preview }}">File link</a>
+                    {% endif %}
                 {% endif %}
                 
                 {% for field in auction.get_all_fields %}
@@ -45,7 +60,8 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    {% endfor %}
+    <div class="col">
         <div class="card bg-dark">
             <div class="card-body">
                 <table class="striped">

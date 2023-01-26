@@ -36,16 +36,28 @@
 
                 <form action="{% url 'collection_metadata_file' collection.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
                     {% csrf_token %}
-                    <input type="file" name="json-file">
-                    <br><br>
-                    <input type="submit" class="btn btn-outline-light" value="Upload Metadata Files">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <input type="submit" value="Upload">
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" name="json-file">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose metadata file</label>
+                        </div>
+                    </div>
                 </form>
 
                 <form action="{% url 'collection_ipfs_upload_files' collection.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
                     {% csrf_token %}
-                    <input type="file" name="asset-files" multiple>
-                    <br><br>
-                    <input type="submit" class="btn btn-outline-light" value="Upload Asset Files">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <input type="submit" value="Upload">
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" name="asset-files" multiple>
+                            <label class="custom-file-label" for="inputGroupFile01">Choose asset files</label>
+                        </div>
+                    </div>
                 </form>
 
                 {% if collection.seller == request.user %}
