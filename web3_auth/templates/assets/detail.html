@@ -17,9 +17,8 @@
                     <video width="100%" controls>
                         <source src="{{ asset.uri_preview }}" type="video/mp4">
                     </video> 
-                    {% elif asset.asset_type == 'image' %}
-                    <img width="100%" align="center"  src="{{ asset.uri_preview }}"/>
                     {% else %}
+                    <img width="100%" align="center"  src="{{ asset.uri_preview }}"/>
                     <a href="{{ asset.uri_preview }}">File link</a>
                     {% endif %}
                 {% endif %}

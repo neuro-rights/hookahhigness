@@ -17,9 +17,8 @@
                     <video width="100%" controls>
                         <source src="{{ collection.uri_preview }}" type="video/mp4">
                     </video> 
-                    {% elif collection.collection_type == 'image' %}
-                    <img width="100%" align="center"  src="{{ collection.uri_preview }}"/>
                     {% else %}
+                    <img width="100%" align="center"  src="{{ collection.uri_preview }}"/>
                     <a href="{{ collection.uri_preview }}">File link</a>
                     {% endif %}
                 {% endif %}
