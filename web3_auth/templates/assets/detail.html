@@ -23,12 +23,20 @@
                     <a href="{{ asset.uri_preview }}">File link</a>
                     {% endif %}
                 {% endif %}
+
                 <form action="{% url 'asset_ipfs_upload_file' asset.uuid %}" enctype="multipart/form-data" method="POST" class="card-panel">
                     {% csrf_token %}
-                    <input type="file" name="photo-file">
-                    <br><br>
-                    <input type="submit" class="btn" value="Upload File">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <input type="submit" value="Upload">
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" name="asset-file">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose asset file</label>
+                        </div>
+                    </div>
                 </form>
+
                 {% for field in asset.get_all_fields %}
                 <div class="row">
                     <div class="col-4">
