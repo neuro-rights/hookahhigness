@@ -103,7 +103,7 @@ class ContractUtils:
         ############ Ethereum Setup ############
         #
         self.INFURA_KEY = config["infura_ethereum_project_id"]
-        self.contract_address = config["auction_contract_address"]
+        self.contract_address = config["contract_address"]
         self.network = config["network"]
         self.PUBLIC_KEY = config["seller_ethereum_wallet_address"]
         self.PRIVATE_KEY = config["buyer_ethereum_wallet_private_key"]
@@ -269,6 +269,33 @@ class ContractUtils:
         print(f"Done! Contract deployed to {transaction_receipt.contractAddress}")
         return transaction_receipt.contractAddress
 
+
+    def deploy_lottery(self):
+        """ """
+        acct = self.w3.eth.account.privateKeyToAccount(self.PRIVATE_KEY)
+        print(acct.address)
+        self.CODE_NFT = self.w3.eth.contract(abi=self.ABI, bytecode=self.BYTECODE)
+            
+        smart_contract_json = self.compile_contract("contracts/interfaces/AggregatorV3Interface.vy")
+        aggregator_contract_address = self.deploy_contract()
+
+        smart_contract_json = self.compile_contract("contracts/interfaces/VRFCoordinatorV2Interface.vy")
+        vrf_coordinator_contract_address = self.deploy_contract()
+
+        smart_contract_json = self.compile_contract("contracts/Lottery.vy")
+        construct_txn = self.CODE_NFT.constructor(aggregator_contract_address, vrf_coordinator_contract_address).buildTransaction({
+            'from': acct.address,
+            'nonce': self.w3.eth.getTransactionCount(acct.address),
+            'gas': 1728712,
+            'gasPrice': self.w3.toWei('21', 'gwei')})
+
+        signed = acct.signTransaction(construct_txn)
+        tx_hash = self.w3.eth.sendRawTransaction(signed.rawTransaction)
+        # Wait for the transaction to be mined, and get the transaction receipt
+        print("Waiting for transaction to finish...")
+        transaction_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
+        print(f"Done! Contract deployed to {transaction_receipt.contractAddress}")
+        return transaction_receipt.contractAddress
 
     def verify_contract(self):
         """ """

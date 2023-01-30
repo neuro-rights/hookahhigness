@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.core import serializers
 #
 from ...forms import BidForm, PurchaseForm
-from ...models import User, Collection, Bid, Auction, Purchase, Asset
+from ...models import User, Collection, Bid, Auction, Raffle, Purchase, Asset
 #
 from ...utils.ipfs import IPFSUtils
 from ...utils.contract import ContractUtils
@@ -41,9 +41,30 @@ def collections_own(request):
 
 
 @login_required
-def collection_add_raffle(request, auction_uuid):
-    return redirect(collection)
+def collection_add_raffle(request, collection_uuid):
+    #
+    collection = Collection.objects.get(uuid=collection_uuid)
+    raffle = Raffle(price_entry=0)
+    raffle.collection = collection
+    #
+    contract_utils = ContractUtils()
+    config={
+        'buyer_ethereum_wallet_address':raffle.collection.seller.ethereum_wallet_address,
+        'buyer_ethereum_wallet_private_key':raffle.collection.seller.ethereum_wallet_private_key,
+        'infura_ethereum_project_id':raffle.collection.seller.infura_ethereum_project_id,
+        'seller_ethereum_wallet_address':raffle.collection.seller.ethereum_wallet_address,
+        'seller_ethereum_wallet_private_key':raffle.collection.seller.ethereum_wallet_private_key,
+        'network':raffle.network, 
+        'ethereum_token':raffle.collection.seller.etherscan_token,
+        'contract_address':raffle.contract_address, 
+    }
+    #
+    bc_setup = contract_utils.set_up_blockchain(config)
+    smart_contract_json = contract_utils.compile_contract("contracts/Lottery.vy")
+    raffle.contract_address = contract_utils.deploy_lottery()
 
+    raffle.save()
+    return redirect(raffle)
 
 @login_required
 def collection_add_auction(request, collection_uuid):
@@ -68,10 +89,10 @@ def collection_add_auction(request, collection_uuid):
         'seller_ethereum_wallet_private_key':auction.seller.ethereum_wallet_private_key,
         'network':auction.network, 
         'ethereum_token':auction.seller.etherscan_token,
-        'auction_contract_address':auction.contract_address, 
+        'contract_address':auction.contract_address, 
     }
     bc_setup = contract_utils.set_up_blockchain(config)
-    smart_contract_json = contract_utils.compile_contract("contracts/ERC721.vy")
+    smart_contract_json = contract_utils.compile_contract("contracts/ERC1155ownable.vy")
     contract_address = contract_utils.deploy_contract()
     #contract_utils.verify_contract(contract_address)
     auction.contract_address = contract_address

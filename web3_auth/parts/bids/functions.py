@@ -48,13 +48,15 @@ def bid_accept(request, bid_uuid):
         contractutils.set_up_blockchain(config)
         print(bid.auction.contract_address)
  
+        """
         transfer_tx_hash, transfer_tx_id = contractutils.transfer(
             bid.buyer.ethereum_wallet_address,
             bid.buyer.ethereum_wallet_private_key,
             bid.auction.seller.ethereum_wallet_address,
             bid.value, 
         )
- 
+        """
+        
         for collection in bid.auction.collections.all():
             #print(collection)
             mint_tx_hash = contractutils.web3_mint(

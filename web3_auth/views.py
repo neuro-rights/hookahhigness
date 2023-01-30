@@ -89,10 +89,12 @@ def moralis_auth(request):
     return render(request, "home.html", context)
     #return render(request, 'market/list.html', context)
 
+"""
 def my_profile(request):
     form = UserEditForm(instance=request.user)
     context = {"form": form}
     return render(request, 'registration/profile.html', context)
+"""
 
 def request_message(request):
     data = json.loads(request.body)

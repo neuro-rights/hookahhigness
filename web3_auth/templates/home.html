@@ -2,7 +2,7 @@
 
 {% block content %} {% load mathfilters %}
 
-<h2>MARKET {{ auctions|length }}</h2>
+<h2>{{ auctions|length }} Auctions</h2>
 {% if auctions|length > 0 %}
 {% for auction in auctions %}
 <div class="row">

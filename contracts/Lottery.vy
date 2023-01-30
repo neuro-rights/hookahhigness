@@ -1,4 +1,4 @@
-# @version 0.3.6
+# @version 0.3.7
 
 interface AggregatorV3Interface:
     def latestRoundData() -> (int256, int256,uint256,uint256,int256) : view 

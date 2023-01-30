@@ -313,10 +313,17 @@ class Raffle(models.Model):
         ("not_won", "raffle ended without winners"),
         ("won", "raffle ended with winners"),
     )
+    BLOCKCHAIN_TYPES = (
+        ("matic_main", "matic_main"),
+        ("mumbai", "mumbai"),
+        ("goerli", "goerli"),
+    )
     #
     id = models.AutoField(primary_key=True)
     uuid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     collection = models.ForeignKey(Collection, on_delete=models.CASCADE, null=True, blank=True)
+    contract_address = models.CharField(max_length=100)
+    network = models.CharField(max_length=32, choices=BLOCKCHAIN_TYPES, default="goerli")
     #
     participants = models.ManyToManyField(User, related_name="participants")
     winner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)

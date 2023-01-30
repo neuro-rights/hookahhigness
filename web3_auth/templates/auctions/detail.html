@@ -45,7 +45,7 @@
                         {% csrf_token %}
                         <button type="submit" , name="asset_id" , value="{{ post.id }}"
                             class="waves-effect waves-light btn-small">
-                            Like <i class="material-icons">favorite</i></button>
+                            Like <i class="fa fa-star"></i></button>
                         <br>
                         <p class="secondary-content">
                             {% if asset.total_likes > 0 %}<i class="material-icons">grade</i>
@@ -118,8 +118,7 @@
                                     class="bidprice">
                                     {% csrf_token %}
                                     <button type="submit"
-                                        class="btn btn-outline-light"><i
-                                            class="material-icons">check</i>
+                                        class="btn btn-outline-light"><i class="fa fa-check">/i>
                                     </button>
                                 </form>
                             </td>

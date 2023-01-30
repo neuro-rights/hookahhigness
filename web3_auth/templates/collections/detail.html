@@ -86,12 +86,18 @@
         <div class="card bg-dark">
             <div class="card-body">
                 {% if collection.seller == request.user %}
-                <div class="sellbutton">
-                <h3 class = "center-align">READY TO AUCTION YOUR COLLECTION?</h3>
-                <br>   
-                <div class = "center-align">
-                <a href="{% url 'collection_add_auction' collection.uuid %}" class="waves-effect waves-light btn-large">Auction</a>
+                <div class="auctionbutton">
+                    <h3 class = "center-align">READY TO AUCTION YOUR COLLECTION?</h3>
+                    <br>   
+                    <div class = "center-align">
+                    <a href="{% url 'collection_add_auction' collection.uuid %}" class="waves-effect waves-light btn-large">Auction</a>
                 </div>
+                <div class="auctionbutton">
+                    <h3 class = "center-align">READY TO RAFFLE YOUR COLLECTION?</h3>
+                    <br>   
+                    <div class = "center-align">
+                    <a href="{% url 'collection_add_raffle' collection.uuid %}" class="waves-effect waves-light btn-large">Raffle</a>
+                    </div>
                 {% endif %}
             </div>
         </div>
