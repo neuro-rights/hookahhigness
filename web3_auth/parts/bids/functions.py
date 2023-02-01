@@ -41,11 +41,11 @@ def bid_accept(request, bid_uuid):
             'seller_ethereum_wallet_private_key':bid.auction.seller.ethereum_wallet_private_key,
             'network':bid.auction.network, 
             'ethereum_token':bid.auction.seller.etherscan_token,
-            'auction_contract_address':bid.auction.contract_address, 
+            'contract_address':bid.auction.contract_address, 
         }
         #
-        contractutils = ContractUtils()
-        contractutils.set_up_blockchain(config)
+        contract_utils = ContractUtils()
+        contract_utils.set_up_blockchain(config)
         print(bid.auction.contract_address)
  
         """
@@ -58,8 +58,8 @@ def bid_accept(request, bid_uuid):
         """
         
         for collection in bid.auction.collections.all():
-            #print(collection)
-            mint_tx_hash = contractutils.web3_mint(
+            print(collection)
+            mint_tx_hash = contract_utils.web3_mint(
                 bid.auction.contract_address,
                 bid.auction.seller.ethereum_wallet_address, 
                 bid.auction.seller.ethereum_wallet_private_key, 
@@ -68,6 +68,7 @@ def bid_accept(request, bid_uuid):
                 bid.value,
                 collection.token_id
             )
+
         #
         bid.status = "sold"
         bid.auction.status="sold"

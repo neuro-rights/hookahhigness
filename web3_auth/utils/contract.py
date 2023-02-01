@@ -87,7 +87,8 @@ class ContractUtils:
         response = requests.get('%s%s'%(ABI_ENDPOINT, address))
         response_json = response.json()
         abi_json = json.loads(response_json['result'])
-        result = json.dumps(abi_json) 
+        result = json.dumps(abi_json)
+        print("result: "+result)
         return result
 
     def set_up_blockchain(self, config):
@@ -186,8 +187,9 @@ class ContractUtils:
             hash - txn of mint
             tokenid - token minted
         """
-        print(contract_address)
-        self.ABI = self.fetch_abi(contract_address)
+        
+        self.ABI = self.load_json_etherscan(contract_address)
+        print(self.ABI)
         self.CODE_NFT = self.w3.eth.contract(address=contract_address, abi=self.ABI)
         acct = self.w3.eth.account.privateKeyToAccount(buyer_private_key)
         print(acct.address)
