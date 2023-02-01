@@ -60,7 +60,6 @@ def collection_add_raffle(request, collection_uuid):
     }
     #
     bc_setup = contract_utils.set_up_blockchain(config)
-    smart_contract_json = contract_utils.compile_contract("contracts/Lottery.vy")
     raffle.contract_address = contract_utils.deploy_lottery()
 
     raffle.save()

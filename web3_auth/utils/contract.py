@@ -274,7 +274,7 @@ class ContractUtils:
         """ """
         acct = self.w3.eth.account.privateKeyToAccount(self.PRIVATE_KEY)
         print(acct.address)
-        self.CODE_NFT = self.w3.eth.contract(abi=self.ABI, bytecode=self.BYTECODE)
+        
             
         smart_contract_json = self.compile_contract("contracts/interfaces/AggregatorV3Interface.vy")
         aggregator_contract_address = self.deploy_contract()
@@ -283,6 +283,8 @@ class ContractUtils:
         vrf_coordinator_contract_address = self.deploy_contract()
 
         smart_contract_json = self.compile_contract("contracts/Lottery.vy")
+
+        self.CODE_NFT = self.w3.eth.contract(abi=self.ABI, bytecode=self.BYTECODE)
         construct_txn = self.CODE_NFT.constructor(aggregator_contract_address, vrf_coordinator_contract_address).buildTransaction({
             'from': acct.address,
             'nonce': self.w3.eth.getTransactionCount(acct.address),
@@ -295,6 +297,9 @@ class ContractUtils:
         print("Waiting for transaction to finish...")
         transaction_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
         print(f"Done! Contract deployed to {transaction_receipt.contractAddress}")
+
+        self.CODE_NFT = self.w3.eth.contract(address=transaction_receipt.contractAddress, abi=self.ABI)
+        self.CODE_NFT.functions.startLottery().call({"from": acct.address})
         return transaction_receipt.contractAddress
 
     def verify_contract(self):
