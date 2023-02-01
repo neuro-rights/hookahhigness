@@ -69,7 +69,7 @@ class RaffleDelete(LoginRequiredMixin, DeleteView):
     """ """
 
     model = Raffle
-    success_url = "/raffles/own/"
+    success_url = "raffles/running/"
     template_name = "raffles/delete.html"
 
     def get_object(self, queryset=None):
