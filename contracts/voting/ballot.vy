@@ -1,6 +1,4 @@
-# @version ^0.3.0
-#
-# # Voting with delegation.
+# Voting with delegation.
 
 # Information about voters
 struct Voter:

@@ -1,6 +1,4 @@
-# @version ^0.3.0
-#
-# # Setup private variables (only callable from within the contract)
+# Setup private variables (only callable from within the contract)
 
 funders: HashMap[address, uint256]
 beneficiary: address

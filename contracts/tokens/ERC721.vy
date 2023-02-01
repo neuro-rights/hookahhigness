@@ -1,5 +1,3 @@
-# @version ^0.3.0
-
 # @dev Implementation of ERC-721 non-fungible token standard.
 # @author Ryuya Nakamura (@nrryuya)
 # Modified from: https://github.com/vyperlang/vyper/blob/de74722bf2d8718cca46902be165f9fe0e3641dd/examples/tokens/ERC721.vy

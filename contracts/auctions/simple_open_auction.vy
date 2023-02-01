@@ -1,6 +1,4 @@
-# @version ^0.3.0
-#
-# # Open Auction
+# Open Auction
 
 # Auction params
 # Beneficiary receives money from the highest bidder

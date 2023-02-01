@@ -1,6 +1,4 @@
-# @version ^0.3.0
-#
-# # Safe Remote Purchase
+# Safe Remote Purchase
 # Originally from
 # https://github.com/ethereum/solidity/blob/develop/docs/solidity-by-example.rst
 # Ported to vyper and optimized.

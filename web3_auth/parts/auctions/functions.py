@@ -71,7 +71,7 @@ def auction_deploy_contract(request, auction_uuid):
             'auction_contract_address':auction.contract_address, 
         }
         bc_setup = contract_utils.set_up_blockchain(config)
-        contract_utils.compile_contract("contracts/ERC721.vy", bc_setup)
+        contract_utils.compile_contract("contracts/tokens/ERC721.vy")
         contract_address = contract_utils.deploy_contract(bc_setup)
         #contract_utils.verify_contract(contract_address)
         auction.contract_address = contract_address

@@ -1,5 +1,3 @@
-# @version ^0.3.0
-#
 # Financial events the contract logs
 
 event Transfer:
