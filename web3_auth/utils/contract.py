@@ -202,8 +202,8 @@ class ContractUtils:
         # 'gas' is the gas fee you pay in Wei (in this case, 1,000,000 Wei = 0.000000000001 ETH)
         # 'value' is the amount you pay to mint the token (in this case, 10 Finney = 0.01 ETH)
         tx = self.CODE_NFT.functions.mint(acct.address, token_id).buildTransaction({
-            'gas': 1000000,
-            'gasPrice': self.w3.toWei('1', 'gwei'),
+            'gas': 2000000,
+            'gasPrice': self.w3.toWei('21', 'gwei'),
             'from': contract_owner_address,
             'nonce': nonce,
             'value': self.w3.toWei(amount_to_transfer, 'ether'),
@@ -260,7 +260,8 @@ class ContractUtils:
         construct_txn = self.CODE_NFT.constructor().buildTransaction({
             'from': acct.address,
             'nonce': self.w3.eth.getTransactionCount(acct.address),
-            'gas': 1728712,
+            'gas': 2000000,
+            #'gas': 1728712,
             'gasPrice': self.w3.toWei('21', 'gwei')})
 
         signed = acct.signTransaction(construct_txn)
@@ -290,7 +291,8 @@ class ContractUtils:
         construct_txn = self.CODE_NFT.constructor(aggregator_contract_address, vrf_coordinator_contract_address).buildTransaction({
             'from': acct.address,
             'nonce': self.w3.eth.getTransactionCount(acct.address),
-            'gas': 1728712,
+            #'gas': 1728712,
+            'gas': 2000000,
             'gasPrice': self.w3.toWei('21', 'gwei')})
 
         signed = acct.signTransaction(construct_txn)
