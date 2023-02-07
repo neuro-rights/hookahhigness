@@ -11,11 +11,11 @@
                 <span class="card-title"></span>
                 {% if collection.uri_preview %}
                 <link rel="preload" class="responsive-img card-panel" href="{{ collection.uri_preview }}" as="image" crossorigin>
-                    {% if collection.asset_type == 'audio' %}
+                    {% if collection.collection_type == 'audio' %}
                     <audio controls>
                         <source src="{{ collection.uri_preview }}" type="audio/mp3">
                     </audio>
-                    {% elif collection.asset_type == 'video' %}
+                    {% elif collection.collection_type == 'video' %}
                     <video width="100%" controls>
                         <source src="{{ collection.uri_preview }}" type="video/mp4">
                     </video> 
