@@ -19,6 +19,8 @@
             class="text-white btn btn-success">Edit</a>
         <a href="{% url 'raffle_delete' raffle.uuid %}"
             class="text-white btn btn-danger">Delete</a>
+        <a href="{% url 'raffle_end' raffle.uuid %}"
+            class="text-white btn btn-danger">Delete</a>
     </div>
 </div>
 {% endif %}

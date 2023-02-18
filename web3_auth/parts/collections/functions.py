@@ -62,6 +62,13 @@ def collection_add_raffle(request, collection_uuid):
     bc_setup = contract_utils.set_up_blockchain(config)
     raffle.contract_address = contract_utils.deploy_lottery()
 
+    """
+    VRF = check_deployedVRF()
+    if VRF == 0:
+        exit(0)
+    deployLottery(VRF)
+    startingLottery()
+    """
     raffle.save()
     return redirect(raffle)
 

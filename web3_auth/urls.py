@@ -70,9 +70,10 @@ urlpatterns = [
     path("raffle/<uuid:raffle_uuid>/", views.raffle_detail, name="raffle_detail"),
     path("raffle/<uuid:raffle_uuid>/add_collections/", views.raffle_add_collections, name="raffle_add_collections"),
     path("raffle/<uuid:raffle_uuid>/participants", views.raffle_list_participants, name="raffle_list_participants"),
-    path("raffle/<uuid:raffle_uuid>/add_participants", views.raffle_add_participants, name="raffle_add_participants"),
+    path("raffle/<uuid:raffle_uuid>/add_participant", views.raffle_add_participant, name="raffle_add_participant"),
     path("raffle/<uuid:raffle_uuid>/edit/", views.RaffleEdit.as_view(), name="raffle_edit"),
     path("raffle/<uuid:raffle_uuid>/delete/", views.RaffleDelete.as_view(), name="raffle_delete"),
+    path("raffle/<uuid:raffle_uuid>/end/", views.RaffleDelete.as_view(), name="raffle_delete"),
     # AUCTIONS
     path("auctions/scheduled/", views.auctions_own_scheduled, name="auctions_own_scheduled"),
     path("auctions/running/", views.auctions_own_running, name="auctions_own_running"),
