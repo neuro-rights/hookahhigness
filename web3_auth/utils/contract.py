@@ -270,8 +270,35 @@ class ContractUtils:
         print("Waiting for transaction to finish...")
         transaction_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
         print(f"Done! Contract deployed to {transaction_receipt.contractAddress}")
+
+        """
+        VRF = check_deployedVRF()
+        if VRF == 0:
+            exit(0)
+        deployLottery(VRF)
+        startingLottery()
+        """
+
         return transaction_receipt.contractAddress
 
+
+    def add_participant_to_lottery(self):
+        """
+        VRF = check_deployedVRF()
+        if VRF == 0:
+            exit(0)
+        enterInLottery(0.1)
+        """
+        pass
+
+    def end_lottery(self):
+        """
+        endLottery()
+        time.sleep(60)
+        calculatingWinner()
+        print(getWinner())
+        """
+        pass
 
     def deploy_lottery(self):
         """ """

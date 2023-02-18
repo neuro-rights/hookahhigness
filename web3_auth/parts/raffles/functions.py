@@ -58,12 +58,7 @@ def raffle_end(request, raffle_uuid):
     #
     raffle = Raffle.objects.get(uuid=raffle_uuid)
     contract_utils = ContractUtils()
-    """
-    endLottery()
-    time.sleep(60)
-    calculatingWinner()
-    print(getWinner())
-    """
+    contract_utils.end_lottery()
     raffle.save()
     #
     return render(
@@ -82,10 +77,7 @@ def raffle_list_participants(request, raffle_uuid):
 
 @login_required
 def raffle_add_participant(request, raffle_uuid):
-    """
-    VRF = check_deployedVRF()
-    if VRF == 0:
-        exit(0)
-    enterInLottery(0.1)
-    """
+    raffle = Raffle.objects.get(uuid=raffle_uuid)
+    contract_utils = ContractUtils()
+    contract_utils.add_participant_to_lottery()
     pass
