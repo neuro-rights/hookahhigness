@@ -253,7 +253,13 @@ class ContractUtils:
 
 
     def deploy_contract(self):
-        """ """
+        """
+        VRF = check_deployedVRF()
+        if VRF == 0:
+            exit(0)
+        deployLottery(VRF)
+        startingLottery()
+        """
         acct = self.w3.eth.account.privateKeyToAccount(self.PRIVATE_KEY)
         print(acct.address)
         self.CODE_NFT = self.w3.eth.contract(abi=self.ABI, bytecode=self.BYTECODE)
@@ -271,14 +277,23 @@ class ContractUtils:
         transaction_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
         print(f"Done! Contract deployed to {transaction_receipt.contractAddress}")
 
-        """
-        VRF = check_deployedVRF()
-        if VRF == 0:
-            exit(0)
-        deployLottery(VRF)
-        startingLottery()
-        """
-
+        tx_start_lottery = self.CODE_NFT.functions.startLottery().buildTransaction({
+            'gas': 2000000,
+            'gasPrice': self.w3.toWei('26', 'gwei'),
+            'from': contract_owner_address,
+            'nonce': nonce,
+            'value': self.w3.toWei(amount_to_transfer, 'ether'),
+        })
+        # Sign the transaction
+        print("Signing start lottery transaction")
+        signed_txn_start_lottery = self.w3.eth.account.signTransaction(tx, private_key=contract_owner_private_key)
+        # Process the transaction
+        print("Sending transaction")
+        txn_hash_start_lottery = self.w3.eth.sendRawTransaction(signed_txn_start_lottery.rawTransaction)
+        # Print the confirmed transaction hash
+        print("start lottery Successful!\nTransaction Hash:")
+        print(self.w3.toHex(txn_hash_start_lottery))
+        #
         return transaction_receipt.contractAddress
 
 
@@ -289,7 +304,35 @@ class ContractUtils:
             exit(0)
         enterInLottery(0.1)
         """
-        pass
+        self.ABI = self.load_json_etherscan(contract_address)
+        print(self.ABI)
+        self.CODE_NFT = self.w3.eth.contract(address=contract_address, abi=self.ABI)
+        acct = self.w3.eth.account.privateKeyToAccount(buyer_private_key)
+        print(acct.address)
+        # get the nonce
+        nonce = self.w3.eth.getTransactionCount(acct.address)
+        print("Nonce:", nonce)
+
+        # Build the transaction
+        # 'gas' is the gas fee you pay in Wei (in this case, 1,000,000 Wei = 0.000000000001 ETH)
+        # 'value' is the amount you pay to mint the token (in this case, 10 Finney = 0.01 ETH)
+        tx_add_participant = self.CODE_NFT.functions.enterInLottery(0.1).buildTransaction({
+            'gas': 2000000,
+            'gasPrice': self.w3.toWei('26', 'gwei'),
+            'from': contract_owner_address,
+            'nonce': nonce,
+            'value': self.w3.toWei(amount_to_transfer, 'ether'),
+        })
+        # Sign the transaction
+        print("Signing add participant transaction")
+        signed_txn_add_participant = self.w3.eth.account.signTransaction(tx_add_participant, private_key=contract_owner_private_key)
+        # Process the transaction
+        print("Sending transaction")
+        txn_hash_add_participant = self.w3.eth.sendRawTransaction(signed_txn_add_participant.rawTransaction)
+        # Print the confirmed transaction hash
+        print("add participant Successful!\nTransaction Hash:")
+        print(self.w3.toHex(txn_hash_add_participant))
+        return self.w3.toHex(txn_hash_add_participant)
 
     def end_lottery(self):
         """
@@ -298,7 +341,70 @@ class ContractUtils:
         calculatingWinner()
         print(getWinner())
         """
+        self.ABI = self.load_json_etherscan(contract_address)
+        print(self.ABI)
+        self.CODE_NFT = self.w3.eth.contract(address=contract_address, abi=self.ABI)
+        acct = self.w3.eth.account.privateKeyToAccount(buyer_private_key)
+        print(acct.address)
+        # get the nonce
+        nonce = self.w3.eth.getTransactionCount(acct.address)
+        print("Nonce:", nonce)
+
+        # Build the transaction
+        # 'gas' is the gas fee you pay in Wei (in this case, 1,000,000 Wei = 0.000000000001 ETH)
+        # 'value' is the amount you pay to mint the token (in this case, 10 Finney = 0.01 ETH)
+        tx_end_lottery = self.CODE_NFT.functions.endLottery().buildTransaction({
+            'gas': 2000000,
+            'gasPrice': self.w3.toWei('26', 'gwei'),
+            'from': contract_owner_address,
+            'nonce': nonce,
+            'value': self.w3.toWei(amount_to_transfer, 'ether'),
+        })
+        # Sign the transaction
+        print("Signing end lottery transaction")
+        signed_txn_send_lottery = self.w3.eth.account.signTransaction(tx_end_lottery, private_key=contract_owner_private_key)
+        # Process the transaction
+        print("Sending transaction")
+        txn_hash_end_lottery = self.w3.eth.sendRawTransaction(signed_txn_end_lottery.rawTransaction)
+        # Print the confirmed transaction hash
+        print("start lottery Successful!\nTransaction Hash:")
+        print(self.w3.toHex(txn_hash_end_lottery))
+        #
+        tx_calculating_winner = self.CODE_NFT.functions.calculatingWinner().buildTransaction({
+            'gas': 2000000,
+            'gasPrice': self.w3.toWei('26', 'gwei'),
+            'from': contract_owner_address,
+            'nonce': nonce,
+            'value': self.w3.toWei(amount_to_transfer, 'ether'),
+        })
+        # Sign the transaction
+        print("Signing end lottery transaction")
+        signed_txn_calculating_winner_lottery = self.w3.eth.account.signTransaction(tx_calculating_winner, private_key=contract_owner_private_key)
+        # Process the transaction
+        print("Sending transaction")
+        txn_hash_calculating_winner = self.w3.eth.sendRawTransaction(signed_txn_calculating_winner.rawTransaction)
+        # Print the confirmed transaction hash
+        print("start lottery Successful!\nTransaction Hash:")
+        print(self.w3.toHex(txn_hash_calculating_winner))
+        #
+        tx_get_winner = self.CODE_NFT.functions.getWinner().buildTransaction({
+            'gas': 2000000,
+            'gasPrice': self.w3.toWei('26', 'gwei'),
+            'from': contract_owner_address,
+            'nonce': nonce,
+            'value': self.w3.toWei(amount_to_transfer, 'ether'),
+        })
+        # Sign the transaction
+        print("Signing get Winner")
+        signed_txn_get_winner = self.w3.eth.account.signTransaction(tx_get_winner, private_key=contract_owner_private_key)
+        # Process the transaction
+        print("Sending transaction")
+        txn_hash_calculating_winner = self.w3.eth.sendRawTransaction(signed_txn_get_winner.rawTransaction)
+        # Print the confirmed transaction hash
+        print("start lottery Successful!\nTransaction Hash:")
+        print(self.w3.toHex(txn_hash_get_winner))
         pass
+
 
     def deploy_lottery(self):
         """ """
